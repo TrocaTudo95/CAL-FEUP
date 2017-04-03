@@ -63,6 +63,7 @@ public:
 	void dijkstraShortestPath(const int &s);
 	vector<Node*> getCloseNodes(int max_dist, Node * n_source);
 	vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
+	void dijkstraShortestPath_distance(const int & s);
 };
 
 

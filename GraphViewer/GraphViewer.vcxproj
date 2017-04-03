@@ -11,11 +11,18 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\project\Source Files\edge.cpp" />
+    <ClCompile Include="..\project\Source Files\graph.cpp" />
+    <ClCompile Include="..\project\Source Files\node.cpp" />
+    <ClCompile Include="..\project\Source Files\test.cpp" />
     <ClCompile Include="src\connection.cpp" />
     <ClCompile Include="src\FichaJUNG.cpp" />
     <ClCompile Include="src\graphviewer.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="..\project\Source Files\edge.hpp" />
+    <ClInclude Include="..\project\Source Files\graph.hpp" />
+    <ClInclude Include="..\project\Source Files\node.hpp" />
     <ClInclude Include="src\connection.h" />
     <ClInclude Include="src\edgetype.h" />
     <ClInclude Include="src\graphviewer.h" />

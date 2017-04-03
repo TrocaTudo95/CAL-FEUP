@@ -10,8 +10,3 @@ void createGraph() {
 }
 
 
-
-int main() {
-	createGraph();
-
-}

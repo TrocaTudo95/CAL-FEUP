@@ -24,6 +24,18 @@
     <ClCompile Include="src\FichaJUNG.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\project\Source Files\edge.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\project\Source Files\graph.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\project\Source Files\node.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\project\Source Files\test.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="src\graphviewer.h">
@@ -34,6 +46,15 @@
     </ClInclude>
     <ClInclude Include="src\edgetype.h">
       <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\project\Source Files\edge.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\project\Source Files\graph.hpp">
+      <Filter>Source Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\project\Source Files\node.hpp">
+      <Filter>Source Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

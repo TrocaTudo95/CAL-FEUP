@@ -419,6 +419,34 @@ void Graph::dijkstraShortestPath(const int & s)
 	}
 }
 
+void Graph::dijkstraShortestPath_distance(const int & s)
+{
+	for (unsigned int i = 0; i < NodeSet.size(); i++) {
+		NodeSet[i]->path = NULL;
+		NodeSet[i]->dist = INT_INFINITY;
+	}
+	Node* v = getNode(s);
+	v->dist = 0;
+	vector<Node *> pq;
+	pq.push_back(v);
+
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
+	while (!pq.empty()) {
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
+		pq.pop_back();
+		for (unsigned int i = 0; i < v->adj.size(); i++) {
+			Node* w = v->adj[i].dest;
+			if (w->dist > v->dist + v->adj[i].weight) {
+				w->dist = v->dist + v->adj[i].weight;
+				w->path = v;
+				pq.push_back(w);
+				push_heap(pq.begin(), pq.end(), Node_greater_than());
+			}
+		}
+	}
+}
+
 
 vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 	float dist;
