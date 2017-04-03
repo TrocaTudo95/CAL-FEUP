@@ -1,18 +1,27 @@
 #include <cstdio>
 #include "graphviewer.h"
-#include <fstream>
-#include <iostream>
-#include <sstream>
+#include "readFiles.cpp"
 
+/* CONSTANTS */
+
+#define EDGE_COLOR_DEFAULT "blue"
+#define VERTEX_COLOR_DEFAULT "yellow"
+
+const int WIDTHOFGRAPH = 1920;
+const int HEIGHTOFGRAPH = 1080;
+
+
+
+void initGV(GraphViewer *gv) {
+	gv->createWindow(WIDTHOFGRAPH, HEIGHTOFGRAPH);
+	gv->defineEdgeColor(EDGE_COLOR_DEFAULT);
+	gv->defineVertexColor(VERTEX_COLOR_DEFAULT);
+}
 
 void run()
 {
-	GraphViewer *gv = new GraphViewer(1920, 1080, false);
-
-	gv->createWindow(1920, 1080);
-
-	gv->defineEdgeColor("blue");
-	gv->defineVertexColor("yellow");
+	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
+	initGV(gv);
 
 	ifstream inFile;
 

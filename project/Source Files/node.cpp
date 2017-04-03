@@ -22,7 +22,13 @@ bool Node::removeEdgeTo(Node *d) {
 }
 
 //atualizado pelo exercício 5
-Node::Node(int in) : info(in), visited(false), processing(false), indegree(0), dist(0) {
+Node::Node(int in, Point coords){
+	this->info = in;
+	this->coords = coords;
+	this->visited = false;
+	this->processing = false;
+	this->indegree = 0;
+	this->dist = 0;
 	path = NULL;
 }
 
@@ -53,4 +59,12 @@ void Node::setInfo(int info) {
 
 int Node::getIndegree() const {
 	return this->indegree;
+}
+
+void Node::setCoords(Point coords) {
+	this->coords = coords;
+}
+
+Point Node::getCoords() const {
+	return this->coords;
 }

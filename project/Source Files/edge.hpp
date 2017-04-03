@@ -1,4 +1,7 @@
-#pragma once;
+#ifndef EDGE_HPP_
+#define EDGE_HPP_
+
+#pragma once
 
 class Node;
 class Graph;
@@ -16,3 +19,5 @@ public:
 	friend class Graph;
 	friend class Node;
 };
+
+#endif /* EGDE_HPP_ */

@@ -15,13 +15,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="src\graphviewer.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\connection.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
-    <ClCompile Include="src\FichaJUNG.cpp">
+    <ClCompile Include="..\project\Source Files\connection.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\project\Source Files\edge.cpp">
@@ -30,31 +24,40 @@
     <ClCompile Include="..\project\Source Files\graph.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\project\Source Files\graphviewer.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
     <ClCompile Include="..\project\Source Files\node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\project\Source Files\test.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\project\Source Files\source.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\project\Source Files\readFiles.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="src\graphviewer.h">
+    <ClInclude Include="..\project\Source Files\connection.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\connection.h">
+    <ClInclude Include="..\project\Source Files\edgetype.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="src\edgetype.h">
+    <ClInclude Include="..\project\Source Files\graphviewer.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\project\Source Files\edge.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\project\Source Files\graph.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\project\Source Files\node.hpp">
-      <Filter>Source Files</Filter>
+      <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

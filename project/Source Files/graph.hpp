@@ -4,6 +4,8 @@
 #ifndef GRAPH_H_
 #define GRAPH_H_
 
+#pragma once
+
 #include <vector>
 #include <queue>
 #include <list>
@@ -29,7 +31,7 @@ const int INT_INFINITY = INT_MAX;
 */
 
 class Graph {
-	vector<Node *> NodeSet;
+	vector<Node *> nodeSet;
 	void dfs(Node *v, vector<int> &res) const;
 
 	//exercicio 5
@@ -39,14 +41,14 @@ class Graph {
 	//void getPathTo(Node *origin, list<int> &res);
 
 public:
-	bool addNode(const int &in);
-	bool addEdge(const int &sourc, const int &dest, double w);
+	bool addNode(const int &in, Point coords);
+	bool addEdge(const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
 	vector<int> dfs() const;
 	vector<int> bfs(Node *v) const;
 	int maxNewChildren(Node *v, int &inf) const;
-	vector<Node * > getNodeSet() const;
+	vector<Node * > getnodeSet() const;
 	int getNumNode() const;
 
 	//exercicio 5
@@ -61,13 +63,10 @@ public:
 	//exercicio 6
 	void bellmanFordShortestPath(const int &v);
 	void dijkstraShortestPath(const int &s);
-	vector<Node*> getCloseNodes(int max_dist, Node * n_source);
-	vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
+	vector<Node *> getCloseNodes(int max_dist, Node * n_source);
+	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
 	void dijkstraShortestPath_distance(const int & s);
 };
-
-
-
 
 
 #endif /* GRAPH_H_ */
