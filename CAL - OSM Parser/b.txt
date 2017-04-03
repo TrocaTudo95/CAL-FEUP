@@ -1,0 +1,113 @@
+1;Rua de Ramalho Ortigão;False
+3;Rua da Conceição;False
+5;Rua de José Falcão;False
+10;Rua de Avis;False
+13;Praça da República;False
+21;Rua Álvares Cabral;False
+24;Rua dos Bragas;False
+29;Rua da Boavista;False
+38;Rua da Regeneração;False
+40;Rua do Alferes Malheiro;False
+43;Rua do Bonjardim;False
+66;;False
+71;Rua Heróis e Mártires de Angola;False
+78;Rua Cândido dos Reis;False
+87;Rua da Galeria de Paris;False
+92;Túnel dos Almadas;False
+93;Rua Elísio de Melo;False
+96;Rua de Dom João I;False
+101;Rua de Gonçalo Cristóvão;False
+108;Rua do Almada;False
+119;Praça da República;False
+122;Rua de Fonseca Cardoso;False
+126;Rua de Camões;False
+132;;False
+135;Rua de João das Regras;False
+136;Rua da Trindade;False
+149;Rua de Gonçalo Cristóvão;False
+151;Rua de Gonçalo Cristóvão;False
+155;;False
+158;Praça da República;False
+160;;False
+161;Rua de Ricardo Jorge;False
+168;Rua da Picaria;False
+172;Rua Doutor António Luís Gomes;False
+182;Rua do Clube dos Fenianos;False
+194;Rua de Camões;False
+197;Viaduto de Gonçalo Cristóvão;True
+198;Praça da República;False
+231;Praça Gen. Humberto Delgado;False
+236;Rua Formosa;False
+244;Rua de Ceuta;False
+252;Rua do Pinheiro;False
+255;Rua dos Mártires da Liberdade;False
+258;Travessa de São Carlos;False
+260;;False
+262;;False
+271;;False
+279;Rua de Camões;False
+282;Rua de Gonçalo Cristóvão;False
+285;Rua Doutor Magalhães Lemos;False
+291;Rua de Santa Teresa;False
+292;;False
+294;Rua de Fernandes Tomás;False
+304;Túnel dos Almadas;False
+308;Pátio do Bonjardim;True
+317;Rua Rodrigues Sampaio;False
+319;Rua de Gonçalo Cristóvão;False
+323;Rua de Camões;False
+325;Rua de João das Regras;False
+326;Praça da República;False
+331;Praça da República;False
+334;;False
+336;Rua da Fábrica;False
+338;Praça Dona Filipa de Lencastre;False
+341;;False
+349;Avenida dos Aliados;False
+356;;False
+360;Rua do Doutor Alfredo de Magalhães;False
+363;Rua do Doutor Alfredo Magalhães;False
+368;Rua de Gonçalo Cristóvão;False
+369;Rua de Rodrigues Sampaio;True
+370;;True
+375;;True
+379;;True
+380;;False
+383;Rua Guilherme da Costa Carvalho;False
+387;;False
+394;;False
+395;;True
+403;;True
+409;;True
+415;;True
+425;;False
+429;Rua do Estêvão;False
+437;;False
+442;Largo de Mompilher;False
+443;Largo de Mompilher;False
+447;;False
+454;;False
+456;;False
+458;;True
+460;;True
+467;;False
+480;;False
+488;;False
+491;;False
+493;;False
+498;;False
+504;;False
+510;Rua de Camões;True
+511;;True
+515;;True
+517;;False
+519;;False
+525;;False
+526;Largo do Pinheiro;False
+527;Largo do Pinheiro;False
+529;;False
+532;Avenida dos Aliados;False
+542;Rua de Camões;False
+543;Rua de Camões;False
+546;Rua de Gonçalo Cristóvão;False
+558;Rua de João das Regras;False
