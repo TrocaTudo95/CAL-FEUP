@@ -1,9 +1,0 @@
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\bin\Debug\OpenStreetMapsParser.exe
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\bin\Debug\OpenStreetMapsParser.pdb
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\obj\x86\Debug\ResolveAssemblyReference.cache
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\obj\x86\Debug\OpenStreetMapsParser.Form1.resources
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\obj\x86\Debug\OpenStreetMapsParser.Properties.Resources.resources
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\obj\x86\Debug\GenerateResource.read.1.tlog
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\obj\x86\Debug\GenerateResource.write.1.tlog
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\obj\x86\Debug\OpenStreetMapsParser.exe
-Z:\Dropbox\Dropbox\Meus Projectos\OpenStreetMapsParser\OpenStreetMapsParser\OpenStreetMapsParser\obj\x86\Debug\OpenStreetMapsParser.pdb

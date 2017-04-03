@@ -43,7 +43,6 @@ void run()
 		std::getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		linestream >> Y;
 		gv->addNode(idNo, X, Y);
-
 	}
 
 	inFile.close();

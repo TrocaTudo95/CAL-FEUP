@@ -654,22 +654,27 @@ namespace OpenStreetMapsParser
                 if (listID.Capacity != 0)
                 {
                     string linesNames = "";
+                    string tempLinesNames = "";
                     string linesTypes = "";
                     foreach (long lineID in listID)
                     {
-                        linesNames += lineNames[lineID];
-                        if (lineID != e.Value.getLine().Last())
-                            linesNames += ",";
-                        if(linesTypes.IndexOf(lineTypes[lineID]) == -1)
+                        tempLinesNames = lineNames[lineID];
+                        if (tempLinesNames != "")
                         {
-                            linesTypes += lineTypes[lineID];
+                            linesNames += tempLinesNames;
+                            if (lineID != e.Value.getLine().Last())
+                                linesNames += ",";
+                            if (linesTypes.IndexOf(lineTypes[lineID]) == -1)
+                            {
+                                linesTypes += lineTypes[lineID];
+                            }
                         }
                     }
                     file.WriteLine(hashRoads[e.Value.getId()].ToString() + ";" + e.Value.getName() + ";" + e.Value.isTwoWay() + ";" + linesNames + ";" + linesTypes);
                 }
                 else
                 {
-                    file.WriteLine(hashRoads[e.Value.getId()].ToString() + ";" + e.Value.getName() + ";" + e.Value.isTwoWay() + ";-1" + ";-1");
+                    file.WriteLine(hashRoads[e.Value.getId()].ToString() + ";" + e.Value.getName() + ";" + e.Value.isTwoWay() + ";" + ";");
                 }
             }
             file.Close();
