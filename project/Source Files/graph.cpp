@@ -418,3 +418,13 @@ void Graph::dijkstraShortestPath(const int & s)
 		}
 	}
 }
+
+
+vector<Node> Graph::getCloseNodes(int max_dist, Node n_source) {
+	float dist;
+
+
+	for (size_t i = 0; i < NodeSet.size(); i++) {
+
+	}
+}

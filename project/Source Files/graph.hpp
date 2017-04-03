@@ -61,6 +61,7 @@ public:
 	//exercicio 6
 	void bellmanFordShortestPath(const int &v);
 	void dijkstraShortestPath(const int &s);
+	vector<Node> getCloseNodes(int max_dist, Node n_source);
 };
 
 

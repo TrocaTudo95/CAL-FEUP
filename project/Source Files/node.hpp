@@ -7,6 +7,11 @@ using namespace std;
 class Graph;
 
 
+typedef struct {
+	int x;
+	int y;
+}Point;
+
 /*
 * ================================================================================================
 * Class Node
@@ -19,6 +24,9 @@ class Node {
 	bool processing;
 	int indegree;
 	int dist;
+	Point coords;
+	
+
 public:
 
 	Node(int info);
@@ -32,6 +40,7 @@ public:
 
 	int getDist() const;
 	int getIndegree() const;
+	Point getCoords()const { return coords; };
 
 	Node* path;
 };
