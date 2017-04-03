@@ -1,67 +1,5 @@
 #include "graph.hpp"
 
-/*
-* ================================================================================================
-* Class Node
-* ================================================================================================
-*/
-
-bool Node::removeEdgeTo(Node *d) {
-	d->indegree--; //adicionado do exercicio 5
-	typename vector<Edge>::iterator it = adj.begin();
-	typename vector<Edge>::iterator ite = adj.end();
-	while (it != ite) {
-		if (it->dest == d) {
-			adj.erase(it);
-			return true;
-		}
-		else it++;
-	}
-	return false;
-}
-
-//atualizado pelo exercício 5
-Node::Node(int in) : info(in), visited(false), processing(false), indegree(0), dist(0) {
-	path = NULL;
-}
-
-
-
-void Node::addEdge(Node *dest, double w) {
-	Edge edgeD(dest, w);
-	adj.push_back(edgeD);
-}
-
-
-
-int Node::getInfo() const {
-	return this->info;
-}
-
-
-int Node::getDist() const {
-	return this->dist;
-}
-
-
-
-void Node::setInfo(int info) {
-	this->info = info;
-}
-
-
-int Node::getIndegree() const {
-	return this->indegree;
-}
-
-
-/* ================================================================================================
-* Class Edge
-* ================================================================================================
-*/
-Edge::Edge(Node *d, double w) : dest(d), weight(w) {}
-
-
 
 
 /* ================================================================================================
@@ -134,7 +72,7 @@ bool Graph::addEdge(const int &sourc, const int &dest, double w) {
 	typename vector<Node*>::iterator it = NodeSet.begin();
 	typename vector<Node*>::iterator ite = NodeSet.end();
 	int found = 0;
-	Node *vS, *vD;
+	Node *vS = nullptr, *vD = nullptr;
 	while (found != 2 && it != ite) {
 		if ((*it)->info == sourc)
 		{
@@ -158,7 +96,7 @@ bool Graph::removeEdge(const int &sourc, const int &dest) {
 	typename vector<Node*>::iterator it = NodeSet.begin();
 	typename vector<Node*>::iterator ite = NodeSet.end();
 	int found = 0;
-	Node *vS, *vD;
+	Node *vS = nullptr, *vD = nullptr;
 	while (found != 2 && it != ite) {
 		if ((*it)->info == sourc)
 		{
@@ -274,7 +212,7 @@ Node* Graph::getNode(const int &v) const {
 	return NULL;
 }
 
-template<class T>
+
 void Graph::resetIndegrees() {
 	//colocar todos os indegree em 0;
 	for (unsigned int i = 0; i < NodeSet.size(); i++) NodeSet[i]->indegree = 0;
@@ -289,7 +227,7 @@ void Graph::resetIndegrees() {
 }
 
 
-template<class T>
+
 vector<Node*> Graph::getSources() const {
 	vector< Node* > buffer;
 	for (unsigned int i = 0; i < NodeSet.size(); i++) {
@@ -326,10 +264,10 @@ void Graph::dfsVisit(Node *v) {
 	v->processing = false;
 }
 
-template<class T>
-vector Graph::topologicalOrder() {
+
+vector<int> Graph::topologicalOrder() {
 	//vector com o resultado da ordenacao
-	vector res;
+	vector<int> res;
 
 	//verificar se é um DAG
 	if (getNumCycles() > 0) {
@@ -374,10 +312,10 @@ vector Graph::topologicalOrder() {
 
 
 
-template<class T>
-vector Graph::getPath(const int &origin, const int &dest) {
 
-	list buffer;
+vector<int> Graph::getPath(const int &origin, const int &dest) {
+
+	list<int> buffer;
 	Node* v = getNode(dest);
 
 	//cout << v->info << " ";
@@ -390,7 +328,7 @@ vector Graph::getPath(const int &origin, const int &dest) {
 		buffer.push_front(v->path->info);
 
 
-	vector res;
+	vector<int> res;
 	while (!buffer.empty()) {
 		res.push_back(buffer.front());
 		buffer.pop_front();
@@ -399,7 +337,7 @@ vector Graph::getPath(const int &origin, const int &dest) {
 }
 
 
-template<class T>
+
 void Graph::unweightedShortestPath(const int &s) {
 
 	for (unsigned int i = 0; i < NodeSet.size(); i++) {
@@ -426,7 +364,7 @@ void Graph::unweightedShortestPath(const int &s) {
 }
 
 
-template<class T>
+
 void Graph::bellmanFordShortestPath(const int & s)
 {
 	for (unsigned int i = 0; i < NodeSet.size(); i++) {
@@ -452,7 +390,7 @@ void Graph::bellmanFordShortestPath(const int & s)
 	}
 }
 
-template<class T>
+
 void Graph::dijkstraShortestPath(const int & s)
 {
 	for (unsigned int i = 0; i < NodeSet.size(); i++) {
@@ -464,10 +402,10 @@ void Graph::dijkstraShortestPath(const int & s)
 	vector<Node *> pq;
 	pq.push_back(v);
 
-	make_heap(pq.begin(), pq.end(), Node_greater_than<int>());
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	while (!pq.empty()) {
 		v = pq.front();
-		pop_heap(pq.begin(), pq.end(), Node_greater_than<int>());
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		for (unsigned int i = 0; i < v->adj.size(); i++) {
 			Node* w = v->adj[i].dest;
@@ -475,7 +413,7 @@ void Graph::dijkstraShortestPath(const int & s)
 				w->dist = v->dist + v->adj[i].weight;
 				w->path = v;
 				pq.push_back(w);
-				push_heap(pq.begin(), pq.end(), Node_greater_than<int>());
+				push_heap(pq.begin(), pq.end(), Node_greater_than());
 			}
 		}
 	}
