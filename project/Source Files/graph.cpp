@@ -420,11 +420,22 @@ void Graph::dijkstraShortestPath(const int & s)
 }
 
 
-vector<Node> Graph::getCloseNodes(int max_dist, Node n_source) {
+vector<Node*> Graph::getCloseNodes(int max_dist, Node n_source) {
 	float dist;
-
+	int x_dest;
+	int y_dest;
+	int x_src=n_source.getCoords().x;
+	int y_src= n_source.getCoords().y;
+	vector<Node*> closeNodes;
 
 	for (size_t i = 0; i < NodeSet.size(); i++) {
+		x_dest = NodeSet[i]->getCoords().x;
+		y_dest = NodeSet[i]->getCoords().y;
+		dist = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
+		if (dist <= max_dist) {
+			closeNodes.push_back(NodeSet[i]);
+		}
 
 	}
+	return closeNodes;
 }
