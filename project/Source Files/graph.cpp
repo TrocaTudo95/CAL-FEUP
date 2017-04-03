@@ -420,12 +420,12 @@ void Graph::dijkstraShortestPath(const int & s)
 }
 
 
-vector<Node*> Graph::getCloseNodes(int max_dist, Node n_source) {
+vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 	float dist;
 	int x_dest;
 	int y_dest;
-	int x_src=n_source.getCoords().x;
-	int y_src= n_source.getCoords().y;
+	int x_src=n_source->getCoords().x;
+	int y_src= n_source->getCoords().y;
 	vector<Node*> closeNodes;
 
 	for (size_t i = 0; i < NodeSet.size(); i++) {
@@ -438,4 +438,24 @@ vector<Node*> Graph::getCloseNodes(int max_dist, Node n_source) {
 
 	}
 	return closeNodes;
+}
+
+
+vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_source) {
+	vector<Edge *> closeEdges;
+	double weight;
+	int x_dest;
+	int y_dest;
+	int x_src = n_source->getCoords().x;
+	int y_src = n_source->getCoords().y;
+
+	for (size_t i = 0; i < closeNodes.size(); i++) {
+		x_dest = NodeSet[i]->getCoords().x;
+		y_dest = NodeSet[i]->getCoords().y;
+		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
+		Edge * e = new Edge(closeNodes[i], weight);
+		closeEdges.push_back(e);
+	}
+	return closeEdges;
+
 }

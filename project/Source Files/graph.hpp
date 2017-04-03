@@ -61,7 +61,8 @@ public:
 	//exercicio 6
 	void bellmanFordShortestPath(const int &v);
 	void dijkstraShortestPath(const int &s);
-	vector<Node*> getCloseNodes(int max_dist, Node n_source);
+	vector<Node*> getCloseNodes(int max_dist, Node * n_source);
+	vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
 };
 
 
