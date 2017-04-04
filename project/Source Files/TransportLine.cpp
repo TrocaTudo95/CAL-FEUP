@@ -22,15 +22,12 @@ bool TransportLine::operator==(const TransportLine & b) const
 }
 
 void TransportLine::addLines(string lines)
-{	//Problem here when there is more than 1 line;
-	char separator = ',';
-	size_t nextSeparatorPos = lines.find(separator);
-	while (nextSeparatorPos != string::npos) {
-		this->lines.insert(lines.substr(0, nextSeparatorPos));
-		lines = lines.substr(nextSeparatorPos+1);
-		nextSeparatorPos = lines.find(separator);
+{
+	stringstream lineStream(lines);
+	string line;
+	while (getline(lineStream, line, ',')) {
+		this->lines.insert(line);
 	}
-	this->lines.insert(lines);
 }
 
 void TransportLine::setType(string type)

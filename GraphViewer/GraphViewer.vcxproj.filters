@@ -30,10 +30,10 @@
     <ClCompile Include="..\project\Source Files\node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\project\Source Files\test.cpp">
+    <ClCompile Include="..\project\Source Files\source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\project\Source Files\source.cpp">
+    <ClCompile Include="..\project\Source Files\TransportLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -54,6 +54,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\project\Source Files\node.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\project\Source Files\TransportLine.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

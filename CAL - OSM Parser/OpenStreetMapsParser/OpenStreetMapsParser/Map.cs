@@ -661,9 +661,7 @@ namespace OpenStreetMapsParser
                         tempLinesNames = lineNames[lineID];
                         if (tempLinesNames != "")
                         {
-                            linesNames += tempLinesNames;
-                            if (lineID != e.Value.getLine().Last())
-                                linesNames += ",";
+                            linesNames += tempLinesNames + ",";
                             if (linesTypes.IndexOf(lineTypes[lineID]) == -1)
                             {
                                 linesTypes += lineTypes[lineID];
