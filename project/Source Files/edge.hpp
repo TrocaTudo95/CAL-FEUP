@@ -19,6 +19,7 @@ typedef std::unordered_set<TransportLine> linesSet;
 class Edge {
 	Node * dest;
 	double weight;
+	int id;
 public:
 	Edge(Node *d, double w);
 	friend class Graph;

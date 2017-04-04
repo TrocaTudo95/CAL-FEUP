@@ -33,7 +33,7 @@ typedef unordered_map<int, Node *> hashNodes;
 */
 
 class Graph {
-	hashNodes nodeSet;
+	hashNodes nodeMap;
 	void dfs(Node *v, vector<int> &res) const;
 
 	//exercicio 5
@@ -50,7 +50,7 @@ public:
 	vector<int> dfs() const;
 	vector<int> bfs(Node *v) const;
 	int maxNewChildren(Node *v, int &inf) const;
-	hashNodes getnodeSet() const;
+	hashNodes getNodeMap() const;
 	int getNumNode() const;
 
 	//exercicio 5

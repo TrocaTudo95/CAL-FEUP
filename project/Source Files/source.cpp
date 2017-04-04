@@ -13,6 +13,7 @@
 #define VERTEX_COLOR_DEFAULT "yellow"
 #define NODES_FILENAME "nos.txt"
 #define EDGES_FILENAME "arestas.txt"
+#define LINES_FILENAME "names.txt"
 
 const int WIDTHOFGRAPH = 1920;
 const int HEIGHTOFGRAPH = 1080;
