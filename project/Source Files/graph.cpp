@@ -543,8 +543,9 @@ vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_so
 	int y_src = n_source->getCoords().y;
 
 	for (size_t i = 0; i < closeNodes.size(); i++) {
-		x_dest = nodeMap[i]->getCoords().x;
-		y_dest = nodeMap[i]->getCoords().y;
+		Node *dest = nodeMap[closeNodes.at(i)->info];
+		x_dest = dest->getCoords().x;
+		y_dest = dest->getCoords().y;
 		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
 		int nextId = highestEdgeId++;
 		highestEdgeId = nextId;
