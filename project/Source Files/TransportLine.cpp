@@ -62,4 +62,9 @@ int TransportLine::getFinalEdgeId() const
 	return finalEdgeId;
 }
 
+unordered_set<string>& TransportLine::getLines()
+{
+	return lines;
+}
+
 

@@ -590,14 +590,63 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		it->second->path = NULL;
 		it->second->processing = false;
 		it->second->dist = INT_INFINITY;
+		it->second->linesPath.clear();
 	}
 
 	Node* v = getNode(s);
 	v->dist = 0;
 	vector<Node *> pq;
 	pq.push_back(v);
-
+	vector<Edge > adja;
+	vector<Edge *> onFoot;
+	vector<Node *> temp;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
+	while (!pq.empty()) {
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
+		pq.pop_back();
+		adja = v->adj;
+		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		onFoot = getCloseEdges(temp, v);
+		addEdgesFoot(adja, onFoot);
+		for (unsigned int i = 0; i < adja.size(); i++) {
+			int weight = 0;
+			Node* w = adja[i].dest;
+			unordered_set<string> edgeLines = adja.at(i).line->getLines();
+			if (isChangingTransport(edgeLines,v->linesPath)) {
+				weight = 1;
+			}
+			if (w->dist > v->dist + adja[i].weight) {
+				w->dist = v->dist + adja[i].weight;
+				w->path = v;
+				w->linesPath = edgeLines;
+				if (!w->processing) {
+					w->processing = true;
+					pq.push_back(w);
+				}
+				make_heap(pq.begin(), pq.end(), Node_greater_than()); 
+			}
+		}
+	}
+}
+
+
+bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines) {
+	unordered_set<string>::iterator itEdge = edgeLines.begin();
+	unordered_set<string>::iterator itEdgeFinal = edgeLines.end();
+
+	
+	unordered_set<string>::iterator itVPathFinal = vPathLines.end();
+
+	for (; itEdge != itEdgeFinal; itEdge++) {
+		string actualLine = *(itEdge);
+		for (unordered_set<string>::iterator itVPath = vPathLines.begin(); itVPath != itVPathFinal; itVPath++) {
+			if (actualLine == *(itVPath)) {
+				return false;
+			}
+		}
+	}
+	return true;
 }
 
 

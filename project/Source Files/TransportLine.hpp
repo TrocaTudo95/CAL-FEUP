@@ -25,6 +25,7 @@ public:
 	string toString() const;
 	int getInitialEdgeId() const;
 	int getFinalEdgeId() const;
+	unordered_set<string>& getLines();
 	char getType() { return type; };
 	int getWaitTime() { return avg_wait_time; };
 };
