@@ -13,6 +13,7 @@
 #include <cmath>
 #include <algorithm>
 #include <iostream>
+#include <unordered_map>
 #include "node.hpp"
 
 using namespace std;
@@ -23,6 +24,7 @@ const int BEING_VISITED = 1;
 const int DONE_VISITED = 2;
 const int INT_INFINITY = INT_MAX;
 
+typedef unordered_map<int, Node *> hashNodes;
 
 
 /* ================================================================================================
@@ -31,7 +33,7 @@ const int INT_INFINITY = INT_MAX;
 */
 
 class Graph {
-	vector<Node *> nodeSet;
+	hashNodes nodeSet;
 	void dfs(Node *v, vector<int> &res) const;
 
 	//exercicio 5
@@ -48,7 +50,7 @@ public:
 	vector<int> dfs() const;
 	vector<int> bfs(Node *v) const;
 	int maxNewChildren(Node *v, int &inf) const;
-	vector<Node * > getnodeSet() const;
+	hashNodes getnodeSet() const;
 	int getNumNode() const;
 
 	//exercicio 5

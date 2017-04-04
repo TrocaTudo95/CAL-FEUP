@@ -18,10 +18,6 @@ const int WIDTHOFGRAPH = 1920;
 const int HEIGHTOFGRAPH = 1080;
 
 
-void addNodeToGraph(Graph &graph, int ID, Point &coords) {
-	graph.addNode(ID, coords);
-}
-
 bool openFile(ifstream &inFile, const string filename) {
 	//Ler o ficheiro arestas.txt
 	inFile.open(filename);
@@ -85,7 +81,7 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 		std::getline(linestream, coords, ';');  // read up-to the first ; (discard ;).
 		linestream >> point.y;
 		gv->addNode(idNo, point.x, point.y);
-		addNodeToGraph(graph, idNo, point);
+		graph.addNode(idNo, point);
 	}
 	inFile.close();
 }

@@ -13,7 +13,7 @@ int Graph::getNumNode() const {
 	return nodeSet.size();
 }
 
-vector<Node * > Graph::getnodeSet() const {
+hashNodes Graph::getnodeSet() const {
 	return nodeSet;
 }
 
@@ -32,59 +32,45 @@ bool Graph::isDAG() {
 
 
 bool Graph::addNode(const int &in, Point coords) {
-	typename vector<Node*>::iterator it = nodeSet.begin();
-	typename vector<Node*>::iterator ite = nodeSet.end();
-	for (; it != ite; it++)
-		if ((*it)->info == in) return false;
 	Node *v1 = new Node(in, coords);
-	nodeSet.push_back(v1);
-	return true;
+	pair<hashNodes::iterator, bool> insertResponse = nodeSet.insert(make_pair(in, v1));
+	return insertResponse.second;
 }
 
 
 bool Graph::removeNode(const int &in) {
-	typename vector<Node*>::iterator it = nodeSet.begin();
-	typename vector<Node*>::iterator ite = nodeSet.end();
-	for (; it != ite; it++) {
-		if ((*it)->info == in) {
-			Node * v = *it;
-			nodeSet.erase(it);
-			typename vector<Node*>::iterator it1 = nodeSet.begin();
-			typename vector<Node*>::iterator it1e = nodeSet.end();
-			for (; it1 != it1e; it1++) {
-				(*it1)->removeEdgeTo(v);
-			}
-
-			typename vector<Edge >::iterator itAdj = v->adj.begin();
-			typename vector<Edge >::iterator itAdje = v->adj.end();
-			for (; itAdj != itAdje; itAdj++) {
-				itAdj->dest->indegree--;
-			}
-			delete v;
-			return true;
+	typename hashNodes::iterator it = nodeSet.find(in);
+	if (it != nodeSet.end())
+	{
+		Node * v = it->second;
+		nodeSet.erase(it);
+		typename hashNodes::iterator it1 = nodeSet.begin();
+		typename hashNodes::iterator it1e = nodeSet.end();
+		for (; it1 != it1e; it1++)
+		{
+			it1->second->removeEdgeTo(v);
 		}
+
+		typename vector<Edge >::iterator itAdj = v->adj.begin();
+		typename vector<Edge >::iterator itAdje = v->adj.end();
+		for (; itAdj != itAdje; itAdj++)
+		{
+			itAdj->dest->indegree--;
+		}
+		delete v;
+		return true;
 	}
 	return false;
 }
 
 
 bool Graph::addEdge(const int &sourc, const int &dest) {
-	typename vector<Node*>::iterator it = nodeSet.begin();
-	typename vector<Node*>::iterator ite = nodeSet.end();
-	int found = 0;
-	Node *vS = nullptr, *vD = nullptr;
-	while (found != 2 && it != ite) {
-		if ((*it)->info == sourc)
-		{
-			vS = *it; found++;
-		}
-		if ((*it)->info == dest)
-		{
-			vD = *it; found++;
-		}
-		it++;
-	}
-	if (found != 2) return false;
+	typename hashNodes::iterator it = nodeSet.find(sourc);
+	typename hashNodes::iterator ite = nodeSet.find(dest);
+	if (it == nodeSet.end() || ite == nodeSet.end())
+		return false;
+	Node *vS = it->second;
+	Node *vD = ite->second;
 	vD->indegree++;
 	double w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
 	vS->addEdge(vD, w);
@@ -94,26 +80,14 @@ bool Graph::addEdge(const int &sourc, const int &dest) {
 
 
 bool Graph::removeEdge(const int &sourc, const int &dest) {
-	typename vector<Node*>::iterator it = nodeSet.begin();
-	typename vector<Node*>::iterator ite = nodeSet.end();
-	int found = 0;
-	Node *vS = nullptr, *vD = nullptr;
-	while (found != 2 && it != ite) {
-		if ((*it)->info == sourc)
-		{
-			vS = *it; found++;
-		}
-		if ((*it)->info == dest)
-		{
-			vD = *it; found++;
-		}
-		it++;
-	}
-	if (found != 2)
+	typename hashNodes::iterator it = nodeSet.find(sourc);
+	typename hashNodes::iterator ite = nodeSet.find(dest);
+	if (it == nodeSet.end() || ite == nodeSet.end())
 		return false;
+	Node *vS = it->second;
+	Node *vD = ite->second;
 
 	vD->indegree--;
-
 	return vS->removeEdgeTo(vD);
 }
 
@@ -122,15 +96,15 @@ bool Graph::removeEdge(const int &sourc, const int &dest) {
 
 
 vector<int> Graph::dfs() const {
-	typename vector<Node*>::const_iterator it = nodeSet.begin();
-	typename vector<Node*>::const_iterator ite = nodeSet.end();
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
 	for (; it != ite; it++)
-		(*it)->visited = false;
+		it->second->visited = false;
 	vector<int> res;
 	it = nodeSet.begin();
 	for (; it != ite; it++)
-		if ((*it)->visited == false)
-			dfs(*it, res);
+		if (it->second->visited == false)
+			dfs(it->second, res);
 	return res;
 }
 
@@ -208,9 +182,10 @@ int Graph::maxNewChildren(Node *v, int &inf) const {
 
 
 Node* Graph::getNode(const int &v) const {
-	for (unsigned int i = 0; i < nodeSet.size(); i++)
-		if (nodeSet[i]->info == v) return nodeSet[i];
-	return NULL;
+	typename hashNodes::const_iterator it = nodeSet.find(v);
+	if (it == nodeSet.end())
+		return NULL;
+	return it->second;
 }
 
 
@@ -231,23 +206,27 @@ void Graph::resetIndegrees() {
 
 vector<Node*> Graph::getSources() const {
 	vector< Node* > buffer;
-	for (unsigned int i = 0; i < nodeSet.size(); i++) {
-		if (nodeSet[i]->indegree == 0) buffer.push_back(nodeSet[i]);
-	}
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
+	for (; it != ite; it++)
+		if (it->second->indegree == 0)
+		{
+			buffer.push_back(it->second);
+		}
 	return buffer;
 }
 
 
 
 void Graph::dfsVisit() {
-	typename vector<Node*>::const_iterator it = nodeSet.begin();
-	typename vector<Node*>::const_iterator ite = nodeSet.end();
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
 	for (; it != ite; it++)
-		(*it)->visited = false;
+		it->second->visited = false;
 	it = nodeSet.begin();
 	for (; it != ite; it++)
-		if ((*it)->visited == false)
-			dfsVisit(*it);
+		if (it->second->visited == false)
+			dfsVisit(it->second);
 }
 
 
