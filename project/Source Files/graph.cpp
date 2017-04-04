@@ -7,8 +7,6 @@
 * ================================================================================================
 */
 
-#define SEARCH_RADIUS 50
-
 
 int Graph::getNumNode() const {
 	return nodeMap.size();
@@ -283,7 +281,7 @@ vector<int> Graph::topologicalOrder() {
 	//vector com o resultado da ordenacao
 	vector<int> res;
 
-	//verificar se é um DAG
+	//verificar se ï¿½ um DAG
 	if (getNumCycles() > 0) {
 		cout << "Ordenacao Impossivel!" << endl;
 		return res;
@@ -562,8 +560,23 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 
 void Graph::addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot) {
 	for (size_t i = 0; i < onFoot.size(); i++) {
-		if (!alreadyExists(edges, onFoot[i]))
-			edges.push_back(onFoot[i]);
+
+		if (!alreadyExists(edges, onFoot[i])) {
+			bool found = false;
+			for (size_t j = 0; j < edges.size(); j++)
+			{
+				for (size_t k = 0; k < edges.at(j)->dest->adj.size(); k++)
+				{
+					if (edges.at(j)->dest->adj.at(k)->dest == onFoot[i]->dest)
+					{
+						found = true;
+					}
+				}
+			}
+			if(!found)
+				edges.push_back(onFoot[i]);
+		}
+
 	}
 }
 
@@ -645,7 +658,7 @@ bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<
 
 
 vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
-	float dist;
+	double dist;
 	int x_dest;
 	int y_dest;
 	int x_src=n_source->getCoords().x;
@@ -664,7 +677,6 @@ vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 		y_dest = v->getCoords().y;
 		dist = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
 		if (dist <= max_dist) {
-
 			closeNodes.push_back(it->second);
 		}
 	}
