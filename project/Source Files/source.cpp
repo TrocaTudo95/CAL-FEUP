@@ -91,25 +91,33 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 void readNamesFile(Graph &graph) {
 	ifstream inFile;
 	openFile(inFile, LINES_FILENAME);
-	int idEdge;
+	int initialEdge, finalEdge;
 	string line, junk, streetName, bidirectional, lines, typeOfLine;
+	bool firstTime = true;
 	while (std::getline(inFile, line))
 	{
 		std::stringstream linestream(line);
-		linestream >> idEdge;
+		if (!firstTime) {
+			linestream >> finalEdge;
+			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional);
+			graph.addTransportationLine(tl);
+			initialEdge = finalEdge;
+			if (lines.size() > 0) {
+				tl->addLines(lines);
+				tl->setType(typeOfLine);
+			}
+		}
+		else {
+			linestream >> initialEdge;
+			firstTime = false;
+		}
 		std::getline(linestream, junk, ';');
 		std::getline(linestream, streetName, ';');
 		std::getline(linestream, bidirectional, ';');
 		std::getline(linestream, lines, ';');
 		std::getline(linestream, typeOfLine, ';');
 
-		TransportLine * tl = new TransportLine(idEdge, streetName, bidirectional);
-		graph.getEdgeById(idEdge)->setTransportLine(tl);
-
-		if (lines.size() > 0) {
-			tl->addLines(lines);
-			tl->setType(typeOfLine);
-		}
+		
 	}
 	inFile.close();
 }
@@ -216,8 +224,8 @@ int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	//readFiles(graph, gv);*/
-	testDijkstraTime(graph,gv);
+	readFiles(graph, gv);
+	//testDijkstraTime(graph,gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;
