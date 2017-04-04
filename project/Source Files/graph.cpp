@@ -52,6 +52,16 @@ bool Graph::addNode(const int &in, Point coords) {
 	return insertResponse.second;
 }
 
+void Graph::addTransportationLine(TransportLine * t1)
+{
+	int initialEdge = t1->getInitialEdgeId();
+	int finalEdge = t1->getFinalEdgeId();
+	
+	for (int i = initialEdge; i <= finalEdge; i++) {
+		edgeMap[i]->setTransportLine(t1);
+	}
+}
+
 
 
 bool Graph::removeNode(const int &in) {

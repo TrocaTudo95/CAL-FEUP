@@ -4,8 +4,9 @@
 #define BUS 'B'
 #define TRAM 'T'
 
-TransportLine::TransportLine(int edgeID, string name, string bidirectional) {
-	this->edgeID = edgeID;
+TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, string bidirectional) {
+	this->initialEdgeId = initialEdgeID;
+	this->finalEdgeId = finalEdgeID;
 	this->name = name;
 	if (bidirectional == "False") {
 		this->bidirectional = false;
@@ -17,7 +18,7 @@ TransportLine::TransportLine(int edgeID, string name, string bidirectional) {
 
 bool TransportLine::operator==(const TransportLine & b) const
 {
-	return (this->edgeID == b.edgeID);
+	return (this->initialEdgeId == b.initialEdgeId && this->finalEdgeId == b.finalEdgeId);
 }
 
 void TransportLine::addLines(string lines)
@@ -37,6 +38,27 @@ void TransportLine::setType(string type)
 	else if (type == "bus") {
 		this->type = BUS;
 	}
+}
+
+string TransportLine::toString() const
+{
+	string toReturn = name + "-" + type + "-";
+	unordered_set<string>::const_iterator it = lines.begin();
+	unordered_set<string>::const_iterator ite = lines.end();
+	for (; it != ite; it++) {
+		toReturn += *it +  " ";
+	}
+	return toReturn;
+}
+
+int TransportLine::getInitialEdgeId() const
+{
+	return initialEdgeId;
+}
+
+int TransportLine::getFinalEdgeId() const
+{
+	return finalEdgeId;
 }
 
 

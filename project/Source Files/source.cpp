@@ -169,12 +169,55 @@ void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 }
 
 
+void testDijkstraTime(Graph &g, GraphViewer *gv) {
+	Point p;
+	p.x = 10; p.y = 20;
+	g.addNode(1, p);
+	gv->addNode(1, p.x, p.y);
+	p.x = 20; p.y = 30;
+	g.addNode(2, p);
+	gv->addNode(2, p.x, p.y);
+	p.x = 50; p.y = 70;
+	g.addNode(3, p);
+	gv->addNode(3, p.x, p.y);
+	p.x = 100; p.y = 10;
+	g.addNode(4, p);
+	gv->addNode(4, p.x, p.y);
+	p.x = 10; p.y = 100;
+	g.addNode(5, p);
+	gv->addNode(5, p.x, p.y);
+	g.addEdge(1, 1, 4);
+	g.addEdge(2, 4, 3);
+	g.addEdge(3, 3, 5);
+	g.addEdge(4, 3, 2);
+	g.addEdge(5, 2, 5);
+	gv->addEdge(1, 1, 4, EdgeType::DIRECTED);
+	gv->addEdge(2, 4, 3, EdgeType::DIRECTED);
+	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
+	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
+	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
+	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False");
+	t1->addLines("205"); t1->setType("bus");
+	TransportLine * t2 = new TransportLine(2,3, "Rua dos benditos", "False");
+	t2->addLines("205,206"); t2->setType("bus");
+	TransportLine * t3 = new TransportLine(4,5, "Rua das carvalhas", "False");
+	t3->addLines("207"); t3->setType("bus");
+	g.addTransportationLine(t1); 
+	g.addTransportationLine(t2);
+	g.addTransportationLine(t3);
+	gv->setEdgeLabel(1, t1->toString());
+	gv->setEdgeLabel(2, t2->toString());
+	gv->setEdgeLabel(3, t2->toString());
+	gv->setEdgeLabel(4, t3->toString());
+	gv->setEdgeLabel(5, t3->toString());
+}
+
 int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	//readFiles(graph, gv);
-	testDijkstraShortestDistance(graph,gv);
+	//readFiles(graph, gv);*/
+	testDijkstraTime(graph,gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;
