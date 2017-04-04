@@ -15,8 +15,9 @@ private:
 	int initialEdgeId;
 	int finalEdgeId;
 	bool bidirectional;
+	int avg_wait_time;
 public:
-	TransportLine(int initialEdgeID,int finalEdgeID, string name, string bidirectional);
+	TransportLine(int initialEdgeID,int finalEdgeID, string name, string bidirectional,int avg_wait_time);
 	friend class Edge;
 	bool operator==(const TransportLine& b) const;
 	void addLines(string line);
@@ -25,5 +26,7 @@ public:
 	int getInitialEdgeId() const;
 	int getFinalEdgeId() const;
 	unordered_set<string>& getLines();
+	char getType() { return type; };
+	int getWaitTime() { return avg_wait_time; };
 };
 

@@ -26,6 +26,7 @@ public:
 	friend class Node;
 	bool operator==(const Edge& e) const;
 	void setTransportLine(TransportLine *tl);
+	TransportLine getTransportLine() { return (*line); };
 };
 
 #endif /* EGDE_HPP_ */

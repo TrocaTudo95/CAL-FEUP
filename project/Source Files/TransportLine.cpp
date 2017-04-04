@@ -4,10 +4,11 @@
 #define BUS 'B'
 #define TRAM 'T'
 
-TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, string bidirectional) {
+TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, string bidirectional, int avg_wait_time) {
 	this->initialEdgeId = initialEdgeID;
 	this->finalEdgeId = finalEdgeID;
 	this->name = name;
+	this->avg_wait_time = avg_wait_time;
 	if (bidirectional == "False") {
 		this->bidirectional = false;
 	}

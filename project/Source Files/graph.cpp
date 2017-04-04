@@ -484,6 +484,82 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 	}
 }
 
+
+void Graph::dijkstraShortestPath_time(const int & s) {
+	typename hashNodes::iterator it = nodeMap.begin();
+	typename hashNodes::iterator ite = nodeMap.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->processing = false;
+		it->second->dist = INT_INFINITY;
+		it->second->wayToGetThere = false;
+	}
+
+	Node* v = getNode(s);
+	v->dist = 0;
+	vector<Node *> pq;
+	pq.push_back(v);
+	vector<Edge > adja;
+	vector<Edge *> onFoot;
+	vector<Node *> temp;
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
+	while (!pq.empty()) {
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
+		pq.pop_back();
+		adja = v->adj;
+		temp = getCloseNodes(SEARCH_RADIUS, v);
+		onFoot = getCloseEdges(temp, v);
+		addEdgesFoot(adja, onFoot);
+		for (unsigned int i = 0; i < adja.size(); i++) {
+			int tempo;
+			Edge edge = adja[i];
+			bool onTransport = true;
+			if (v->wayToGetThere == 'W') {
+				onTransport = false;
+			}
+			Node* w = edge.dest;
+			char typeOfTransportLine = edge.line->getType();
+			switch (typeOfTransportLine) {
+			case 'W':
+				tempo = WALK_SPEED / edge.weight;
+				break;
+			case 'B':
+				if (onTransport)
+				 tempo = BUS_SPEED / edge.weight;
+				else {
+					tempo = BUS_SPEED / edge.weight + edge.line->getWaitTime();
+
+					if (WALK_SPEED / edge.weight < tempo) {
+						tempo = WALK_SPEED / edge.weight;
+						typeOfTransportLine = 'W';
+					}
+				}
+				break;
+			case 'T':
+				if (onTransport)
+				tempo = METRO_SPEED / edge.weight;
+				else
+					tempo = METRO_SPEED / edge.weight + edge.line->getWaitTime();
+
+				break;
+			}
+
+			if (w->dist > v->dist + tempo) {
+				w->dist = v->dist + tempo;
+				w->path = v;
+				w->wayToGetThere = typeOfTransportLine;
+				if (!w->processing) {
+					w->processing = true;
+					pq.push_back(w);
+				}
+				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
+			}
+		}
+	}
+}
+
 void Graph::addEdgesFoot(vector<Edge> & edges, vector<Edge *> & onFoot) {
 	for (size_t i = 0; i < onFoot.size(); i++) {
 		if (!alreadyExists(edges, onFoot[i]))
