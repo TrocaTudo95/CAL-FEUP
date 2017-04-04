@@ -35,16 +35,17 @@ typedef unordered_map<int, Node *> hashNodes;
 class Graph {
 	hashNodes nodeMap;
 	void dfs(Node *v, vector<int> &res) const;
-
 	//exercicio 5
 	int numCycles;
 	void dfsVisit(Node *v);
 	void dfsVisit();
+	int highestEdgeId;
 	//void getPathTo(Node *origin, list<int> &res);
 
 public:
+	Graph();
 	bool addNode(const int &in, Point coords);
-	bool addEdge(const int &sourc, const int &dest);
+	bool addEdge(int id,const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
 	vector<int> dfs() const;

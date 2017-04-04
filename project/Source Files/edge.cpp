@@ -4,5 +4,5 @@
 * Class Edge
 * ================================================================================================
 */
-Edge::Edge(Node *d, double w) : dest(d), weight(w) {}
+Edge::Edge(int idN,Node *d, double w) : id(idN),dest(d), weight(w) {}
 

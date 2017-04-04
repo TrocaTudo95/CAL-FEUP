@@ -31,6 +31,11 @@ bool Graph::isDAG() {
 
 
 
+Graph::Graph()
+{
+	highestEdgeId = 0;
+}
+
 bool Graph::addNode(const int &in, Point coords) {
 	Node *v1 = new Node(in, coords);
 	pair<hashNodes::iterator, bool> insertResponse = nodeMap.insert(make_pair(in, v1));
@@ -64,7 +69,7 @@ bool Graph::removeNode(const int &in) {
 }
 
 
-bool Graph::addEdge(const int &sourc, const int &dest) {
+bool Graph::addEdge(int id,const int &sourc, const int &dest) {
 	typename hashNodes::iterator it = nodeMap.find(sourc);
 	typename hashNodes::iterator ite = nodeMap.find(dest);
 	if (it == nodeMap.end() || ite == nodeMap.end())
@@ -73,7 +78,10 @@ bool Graph::addEdge(const int &sourc, const int &dest) {
 	Node *vD = ite->second;
 	vD->indegree++;
 	double w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
-	vS->addEdge(vD, w);
+	vS->addEdge(id,vD, w);
+	if (id > highestEdgeId) {
+		highestEdgeId = id;
+	}
 
 	return true;
 }
@@ -507,7 +515,9 @@ vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_so
 		x_dest = nodeMap[i]->getCoords().x;
 		y_dest = nodeMap[i]->getCoords().y;
 		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
-		Edge * e = new Edge(closeNodes[i], weight);
+		int nextId = highestEdgeId++;
+		highestEdgeId = nextId;
+		Edge * e = new Edge(nextId,closeNodes[i], weight);
 		closeEdges.push_back(e);
 	}
 	return closeEdges;

@@ -57,7 +57,7 @@ void readEdgesFile(Graph &graph, GraphViewer *gv) {
 		std::getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		linestream >> idNoDestino;
 		gv->addEdge(idAresta, idNoOrigem, idNoDestino, EdgeType::DIRECTED);
-		graph.addEdge(idNoOrigem, idNoDestino);
+		graph.addEdge(idAresta,idNoOrigem, idNoDestino);
 	}
 
 	inFile.close();

@@ -16,5 +16,6 @@ public:
 	friend class Edge;
 	bool operator==(const TransportLine& b) const;
 	void addLine(string line);
+	void setType(string type);
 };
 

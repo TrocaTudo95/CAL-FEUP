@@ -33,8 +33,8 @@ Node::Node(int in, Point coords){
 
 
 
-void Node::addEdge(Node *dest, double w) {
-	Edge edgeD(dest, w);
+void Node::addEdge(int id,Node *dest, double w) {
+	Edge edgeD(id,dest, w);
 	adj.push_back(edgeD);
 }
 

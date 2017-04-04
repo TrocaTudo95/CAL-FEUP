@@ -14,14 +14,13 @@ class Graph;
 */
 
 
-typedef std::unordered_set<TransportLine> linesSet;
 
 class Edge {
 	Node * dest;
 	double weight;
 	int id;
 public:
-	Edge(Node *d, double w);
+	Edge(int id,Node *d, double w);
 	friend class Graph;
 	friend class Node;
 };
