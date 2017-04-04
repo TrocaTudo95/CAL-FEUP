@@ -3,7 +3,6 @@
 #include <cassert>
 #include "graph.hpp"
 #include "graphviewer.h"
-#include "graph.hpp"
 
 const int WIDTH = 1920;
 const int HEIGHT = 1080;

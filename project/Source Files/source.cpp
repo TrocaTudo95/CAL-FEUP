@@ -6,7 +6,6 @@
 #include <sstream>
 #include "graphviewer.h"
 #include "graph.hpp"
-#include "test.hpp"
 
 /* CONSTANTS */
 
@@ -158,6 +157,8 @@ void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
 	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
 	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
+	gv->setVertexColor(1, "black");
+	gv->setVertexColor(5, "black");
 	g.dijkstraShortestPath_distance(1);
 	vector<int> path = g.getPath(1, 5);
 	cout << "Path : ";
@@ -172,7 +173,7 @@ int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	//readFiles(graph, gv);*/
+	//readFiles(graph, gv);
 	testDijkstraShortestDistance(graph,gv);
 	printf("Press to continue...\n");
 	getchar();

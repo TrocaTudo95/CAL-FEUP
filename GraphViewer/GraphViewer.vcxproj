@@ -17,7 +17,6 @@
     <ClCompile Include="..\project\Source Files\graph.cpp" />
     <ClCompile Include="..\project\Source Files\graphviewer.cpp" />
     <ClCompile Include="..\project\Source Files\node.cpp" />
-    <ClCompile Include="..\project\Source Files\test.cpp" />
     <ClCompile Include="..\project\Source Files\TransportLine.cpp" />
   </ItemGroup>
   <ItemGroup>

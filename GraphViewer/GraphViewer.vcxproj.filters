@@ -30,9 +30,6 @@
     <ClCompile Include="..\project\Source Files\node.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\project\Source Files\test.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="..\project\Source Files\source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
