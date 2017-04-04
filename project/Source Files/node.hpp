@@ -29,8 +29,8 @@ class Node {
 	bool processing;
 	int indegree;
 	int dist;
+	unordered_set<string> linesPath;
 	char wayToGetThere;
-	
 
 public:
 	Node* path;
