@@ -13,6 +13,12 @@ int Graph::getNumNode() const {
 	return nodeMap.size();
 }
 
+Edge * Graph::getEdgeById(int id)
+{
+	return edgeMap[id];
+}
+
+
 hashNodes Graph::getNodeMap() const {
 	return nodeMap;
 }
@@ -41,6 +47,7 @@ bool Graph::addNode(const int &in, Point coords) {
 	pair<hashNodes::iterator, bool> insertResponse = nodeMap.insert(make_pair(in, v1));
 	return insertResponse.second;
 }
+
 
 
 bool Graph::removeNode(const int &in) {

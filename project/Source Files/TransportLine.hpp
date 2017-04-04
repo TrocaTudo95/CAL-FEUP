@@ -15,7 +15,7 @@ public:
 	TransportLine(int edgeID, string name, string bidirectional);
 	friend class Edge;
 	bool operator==(const TransportLine& b) const;
-	void addLine(string line);
+	void addLines(string line);
 	void setType(string type);
 };
 

@@ -51,6 +51,7 @@ class Graph {
 public:
 	Graph();
 	bool addNode(const int &in, Point coords);
+	void addTransportLine(int edgeId, string streetName, string bidirectional);
 	bool addEdge(int id,const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
@@ -59,7 +60,7 @@ public:
 	int maxNewChildren(Node *v, int &inf) const;
 	hashNodes getNodeMap() const;
 	int getNumNode() const;
-
+	Edge* getEdgeById(int id);
 	//exercicio 5
 	Node* getNode(const int &v) const;
 	void resetIndegrees();

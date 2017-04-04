@@ -20,9 +20,15 @@ bool TransportLine::operator==(const TransportLine & b) const
 	return (this->edgeID == b.edgeID);
 }
 
-void TransportLine::addLine(string line)
+void TransportLine::addLines(string lines)
 {
-	lines.insert(line);
+	char separator = ',';
+	size_t nextSeparatorPos = lines.find(',');
+	while (nextSeparatorPos != string::npos) {
+		this->lines.insert(lines.substr(0, nextSeparatorPos));
+		lines = lines.substr(nextSeparatorPos+1);
+	}
+	this->lines.insert(lines);
 }
 
 void TransportLine::setType(string type)
