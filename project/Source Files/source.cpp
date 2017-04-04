@@ -6,7 +6,6 @@
 #include <sstream>
 #include "graphviewer.h"
 #include "graph.hpp"
-#include "test.hpp"
 
 /* CONSTANTS */
 
@@ -191,6 +190,42 @@ void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
 }
 
+
+void testDijkstraTime(Graph &g, GraphViewer *gv) {
+	Point p;
+	p.x = 10; p.y = 20;
+	g.addNode(1, p);
+	gv->addNode(1, p.x, p.y);
+	p.x = 20; p.y = 30;
+	g.addNode(2, p);
+	gv->addNode(2, p.x, p.y);
+	p.x = 50; p.y = 70;
+	g.addNode(3, p);
+	gv->addNode(3, p.x, p.y);
+	p.x = 100; p.y = 10;
+	g.addNode(4, p);
+	gv->addNode(4, p.x, p.y);
+	p.x = 10; p.y = 100;
+	g.addNode(5, p);
+	gv->addNode(5, p.x, p.y);
+	g.addEdge(1, 1, 4);
+	g.addEdge(2, 4, 3);
+	g.addEdge(3, 3, 5);
+	g.addEdge(4, 3, 2);
+	g.addEdge(5, 2, 5);
+	gv->addEdge(1, 1, 4, EdgeType::DIRECTED);
+	gv->addEdge(2, 4, 3, EdgeType::DIRECTED);
+	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
+	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
+	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
+	g.dijkstraShortestPath_distance(1);
+	vector<int> path = g.getPath(1, 5);
+	cout << "Path : ";
+	for (int i = 0; i < path.size(); i++) {
+		cout << path.at(i) << " | ";
+	}
+
+}
 
 int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
