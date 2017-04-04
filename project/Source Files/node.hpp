@@ -37,7 +37,7 @@ public:
 	friend class Graph;
 	Node(int info, Point coords);
 
-	void addEdge(int id,Node *dest, double w);
+	Edge* addEdge(int id,Node *dest, double w);
 	bool removeEdgeTo(Node *d);
 
 	int getInfo() const;

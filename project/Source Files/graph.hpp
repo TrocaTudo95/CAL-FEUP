@@ -25,6 +25,7 @@ const int DONE_VISITED = 2;
 const int INT_INFINITY = INT_MAX;
 
 typedef unordered_map<int, Node *> hashNodes;
+typedef unordered_map<int, Edge *> hashEdges;
 
 
 /* ================================================================================================
@@ -34,12 +35,14 @@ typedef unordered_map<int, Node *> hashNodes;
 
 class Graph {
 	hashNodes nodeMap;
+	hashEdges edgeMap;
 	void dfs(Node *v, vector<int> &res) const;
 	//exercicio 5
 	int numCycles;
 	void dfsVisit(Node *v);
 	void dfsVisit();
 	int highestEdgeId;
+
 	//void getPathTo(Node *origin, list<int> &res);
 
 public:

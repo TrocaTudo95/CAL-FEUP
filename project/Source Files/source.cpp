@@ -87,6 +87,11 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 	inFile.close();
 }
 
+
+void readNamesFile() {
+
+}
+
 void readFiles(Graph &graph, GraphViewer *gv) {
 	readNodesFile(graph, gv);
 	readEdgesFile(graph, gv);

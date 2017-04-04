@@ -78,7 +78,8 @@ bool Graph::addEdge(int id,const int &sourc, const int &dest) {
 	Node *vD = ite->second;
 	vD->indegree++;
 	double w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
-	vS->addEdge(id,vD, w);
+	Edge* e = vS->addEdge(id,vD, w);
+	edgeMap.insert(make_pair(id, e));
 	if (id > highestEdgeId) {
 		highestEdgeId = id;
 	}
