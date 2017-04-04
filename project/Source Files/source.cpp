@@ -67,7 +67,7 @@ void readEdgesFile(Graph &graph, GraphViewer *gv) {
 
 void readNodesFile(Graph &graph, GraphViewer *gv) {
 	ifstream inFile;
-	if(openFile(inFile, NODES_FILENAME));
+	openFile(inFile, NODES_FILENAME);
 
 	int idNo = 0;
 	Point point;
@@ -75,7 +75,7 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 
 	while (std::getline(inFile, line))
 	{
-		std::istringstream linestream(line);
+		std::stringstream linestream(line);
 		std::string coords;
 		linestream >> idNo;
 		std::getline(linestream, coords, ';');  // read up-to the first ; (discard ;).
@@ -91,52 +91,28 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 
 void readNamesFile(Graph &graph) {
 	ifstream inFile;
-	if (openFile(inFile, LINES_FILENAME));
-	std::string line;
+	openFile(inFile, LINES_FILENAME);
 	int idEdge;
-	string streetName;
-	string bidirectional;
-	string lines;
-	string typeOfLine;
+	string line, junk, streetName, bidirectional, lines, typeOfLine;
 	while (std::getline(inFile, line))
 	{
-		size_t previousSeparator = line.find(';');
-		size_t nextSeparator;
-		
-		if (previousSeparator != string::npos) {
-			idEdge = stoi(line.substr(0, previousSeparator));
-			
-		}
-		if ((nextSeparator = line.find(';', previousSeparator + 1)) != string::npos) {
-			streetName = line.substr(previousSeparator+1, nextSeparator - previousSeparator-1);
-			previousSeparator = nextSeparator;
-		}
-		if ((nextSeparator = line.find(';', previousSeparator + 1)) != string::npos) {
-			bidirectional = line.substr(previousSeparator+1, nextSeparator - previousSeparator - 1);
-			previousSeparator = nextSeparator;
-		}
+		std::stringstream linestream(line);
+		linestream >> idEdge;
+		std::getline(linestream, junk, ';');
+		std::getline(linestream, streetName, ';');
+		std::getline(linestream, bidirectional, ';');
+		std::getline(linestream, lines, ';');
+		std::getline(linestream, typeOfLine, ';');
 
 		TransportLine * tl = new TransportLine(idEdge, streetName, bidirectional);
-
 		graph.getEdgeById(idEdge)->setTransportLine(tl);
-	
 
-		if ((nextSeparator = line.find(';', previousSeparator + 1)) != string::npos) {
-			lines = line.substr(previousSeparator+1, nextSeparator - previousSeparator - 1);
-			previousSeparator = nextSeparator;
-		}
 		if (lines.size() > 0) {
 			tl->addLines(lines);
-			typeOfLine = line.substr(previousSeparator+1);
 			tl->setType(typeOfLine);
 		}
-		
-
-
 	}
 	inFile.close();
-
-
 }
 
 void readFiles(Graph &graph, GraphViewer *gv) {

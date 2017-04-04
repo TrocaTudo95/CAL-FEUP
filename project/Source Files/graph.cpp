@@ -16,7 +16,10 @@ int Graph::getNumNode() const {
 
 Edge * Graph::getEdgeById(int id)
 {
-	return edgeMap[id];
+	typename hashEdges::const_iterator it = edgeMap.find(id);
+	if (it == edgeMap.end())
+		return NULL;
+	return it->second;
 }
 
 

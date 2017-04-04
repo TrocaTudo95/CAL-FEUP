@@ -22,13 +22,11 @@ bool TransportLine::operator==(const TransportLine & b) const
 
 void TransportLine::addLines(string lines)
 {
-	char separator = ',';
-	size_t nextSeparatorPos = lines.find(',');
-	while (nextSeparatorPos != string::npos) {
-		this->lines.insert(lines.substr(0, nextSeparatorPos));
-		lines = lines.substr(nextSeparatorPos+1);
+	stringstream lineStream(lines);
+	string line;
+	while (getline(lineStream, line, ',')) {
+		this->lines.insert(line);
 	}
-	this->lines.insert(lines);
 }
 
 void TransportLine::setType(string type)
