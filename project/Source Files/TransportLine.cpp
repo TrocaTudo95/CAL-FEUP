@@ -14,7 +14,6 @@ TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, st
 	}
 	else this->bidirectional = true;
 	type = WALK;
-	
 }
 
 bool TransportLine::operator==(const TransportLine & b) const

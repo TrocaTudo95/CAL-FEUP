@@ -4,6 +4,7 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <time.h>
 #include "graphviewer.h"
 #include "graph.hpp"
 
@@ -226,6 +227,19 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	readFiles(graph, gv);
+	gv->setVertexColor(655, "black");
+	gv->setVertexColor(313, "black");
+	clock_t begin = clock();
+	graph.dijkstraShortestPath_distance(655);
+	vector<int> path = graph.getPath(655,313);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Path : ";
+	for (int i = 0; i < path.size(); i++)
+	{
+		cout << path.at(i) << " | ";
+	}
+	cout << endl << time_spent << endl;
 	//testDijkstraTime(graph,gv);
 	printf("Press to continue...\n");
 	getchar();

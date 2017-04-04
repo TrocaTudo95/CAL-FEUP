@@ -18,7 +18,7 @@
 
 using namespace std;
 
-
+const double SEARCH_RADIUS = 8.25;
 const int NOT_VISITED = 0;
 const int BEING_VISITED = 1;
 const int DONE_VISITED = 2;
