@@ -1,70 +1,50 @@
+#pragma once
+
 #include <cstdio>
+#include <iostream>
+#include <fstream>
+#include <sstream>
 #include "graphviewer.h"
-#include "readFiles.cpp"
+#include "graph.hpp"
 
 /* CONSTANTS */
 
 #define EDGE_COLOR_DEFAULT "blue"
 #define VERTEX_COLOR_DEFAULT "yellow"
+#define NODES_FILENAME "nos.txt"
+#define EDGES_FILENAME "arestas.txt"
 
 const int WIDTHOFGRAPH = 1920;
 const int HEIGHTOFGRAPH = 1080;
 
 
-
-void initGV(GraphViewer *gv) {
-	gv->createWindow(WIDTHOFGRAPH, HEIGHTOFGRAPH);
-	gv->defineEdgeColor(EDGE_COLOR_DEFAULT);
-	gv->defineVertexColor(VERTEX_COLOR_DEFAULT);
+void addNodeToGraph(Graph &graph, int ID, Point &coords) {
+	graph.addNode(ID, coords);
 }
 
-void run()
-{
-	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
-	initGV(gv);
+bool openFile(ifstream &inFile, const string filename) {
+	//Ler o ficheiro arestas.txt
+	inFile.open(filename);
 
+	if (!inFile)
+	{
+		cerr << "Unable to open file datafile.txt";
+		exit(1);   // call system to stop
+	}
+	return true;
+}
+
+
+void readEdgesInfoFile(Graph &graph, GraphViewer *gv) {
+
+}
+
+
+void readEdgesFile(Graph &graph, GraphViewer *gv) {
 	ifstream inFile;
 
-	//Ler o ficheiro nos.txt
-	inFile.open("nos.txt");
-
-	if (!inFile)
-	{
-		cerr << "Unable to open file datafile.txt";
-		exit(1);   // call system to stop
-	}
-
-	std::string   line;
-
-	int idNo = 0;
-	int X = 0; 
-	int Y = 0;
-
-	while (std::getline(inFile, line))
-	{
-		std::stringstream linestream(line);
-		std::string         data;
-
-		linestream >> idNo;
-
-		std::getline(linestream, data, ';');  // read up-to the first ; (discard ;).
-		linestream >> X;
-		std::getline(linestream, data, ';');  // read up-to the first ; (discard ;).
-		linestream >> Y;
-		gv->addNode(idNo, X, Y);
-	}
-
-	inFile.close();
-
-
-	//Ler o ficheiro arestas.txt
-	inFile.open("arestas.txt");
-
-	if (!inFile)
-	{
-		cerr << "Unable to open file datafile.txt";
-		exit(1);   // call system to stop
-	}
+	openFile(inFile, EDGES_FILENAME);
+	std::string line;
 
 	int idAresta = 0;
 	int idNoOrigem = 0;
@@ -74,25 +54,60 @@ void run()
 	{
 		std::stringstream linestream(line);
 		std::string data;
-
-
 		linestream >> idAresta;
-
 		std::getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		linestream >> idNoOrigem;
 		std::getline(linestream, data, ';');  // read up-to the first ; (discard ;).
 		linestream >> idNoDestino;
-		gv->addEdge(idAresta, idNoOrigem, idNoDestino, EdgeType::UNDIRECTED);
-
+		gv->addEdge(idAresta, idNoOrigem, idNoDestino, EdgeType::DIRECTED);
+		graph.addEdge(idNoOrigem, idNoDestino);
 	}
 
 	inFile.close();
 
+}
+
+void readNodesFile(Graph &graph, GraphViewer *gv) {
+	ifstream inFile;
+	if(openFile(inFile, NODES_FILENAME));
+
+	int idNo = 0;
+	Point point;
+	std::string line;
+
+	while (std::getline(inFile, line))
+	{
+		std::stringstream linestream(line);
+		std::string coords;
+		linestream >> idNo;
+		std::getline(linestream, coords, ';');  // read up-to the first ; (discard ;).
+		linestream >> point.x;
+		std::getline(linestream, coords, ';');  // read up-to the first ; (discard ;).
+		linestream >> point.y;
+		gv->addNode(idNo, point.x, point.y);
+		addNodeToGraph(graph, idNo, point);
+	}
+	inFile.close();
+}
+
+void readFiles(Graph &graph, GraphViewer *gv) {
+	readNodesFile(graph, gv);
+	readEdgesFile(graph, gv);
 	gv->rearrange();
 }
 
+
+void initGV(GraphViewer *gv) {
+	gv->createWindow(WIDTHOFGRAPH, HEIGHTOFGRAPH);
+	gv->defineEdgeColor(EDGE_COLOR_DEFAULT);
+	gv->defineVertexColor(VERTEX_COLOR_DEFAULT);
+}
+
 int main() {
-	run();
+	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
+	Graph graph;
+	initGV(gv);
+	readFiles(graph, gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;
