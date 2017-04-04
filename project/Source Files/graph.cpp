@@ -191,13 +191,17 @@ Node* Graph::getNode(const int &v) const {
 
 void Graph::resetIndegrees() {
 	//colocar todos os indegree em 0;
-	for (unsigned int i = 0; i < nodeSet.size(); i++) nodeSet[i]->indegree = 0;
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
+	for (; it != ite; it++)
+		it->second->indegree = 0;
 
 	//actualizar os indegree
-	for (unsigned int i = 0; i < nodeSet.size(); i++) {
+	it = nodeSet.begin();
+	for (; it != ite; it++){
 		//percorrer o vector de Edges, e actualizar indegree
-		for (unsigned int j = 0; j < nodeSet[i]->adj.size(); j++) {
-			nodeSet[i]->adj[j].dest->indegree++;
+		for (unsigned int j = 0; j < it->second->adj.size(); j++) {
+			it->second->adj[j].dest->indegree++;
 		}
 	}
 }
@@ -319,10 +323,11 @@ vector<int> Graph::getPath(const int &origin, const int &dest) {
 
 
 void Graph::unweightedShortestPath(const int &s) {
-
-	for (unsigned int i = 0; i < nodeSet.size(); i++) {
-		nodeSet[i]->path = NULL;
-		nodeSet[i]->dist = INT_INFINITY;
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
+	for (; it != ite; it++){
+		it->second->path = NULL;
+		it->second->dist = INT_INFINITY;
 	}
 
 	Node* v = getNode(s);
@@ -347,9 +352,12 @@ void Graph::unweightedShortestPath(const int &s) {
 
 void Graph::bellmanFordShortestPath(const int & s)
 {
-	for (unsigned int i = 0; i < nodeSet.size(); i++) {
-		nodeSet[i]->path = NULL;
-		nodeSet[i]->dist = INT_INFINITY;
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->dist = INT_INFINITY;
 	}
 
 	Node* v = getNode(s);
@@ -373,10 +381,14 @@ void Graph::bellmanFordShortestPath(const int & s)
 
 void Graph::dijkstraShortestPath(const int & s)
 {
-	for (unsigned int i = 0; i < nodeSet.size(); i++) {
-		nodeSet[i]->path = NULL;
-		nodeSet[i]->dist = INT_INFINITY;
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->dist = INT_INFINITY;
 	}
+
 	Node* v = getNode(s);
 	v->dist = 0;
 	vector<Node *> pq;
@@ -401,10 +413,14 @@ void Graph::dijkstraShortestPath(const int & s)
 
 void Graph::dijkstraShortestPath_distance(const int & s)
 {
-	for (unsigned int i = 0; i < nodeSet.size(); i++) {
-		nodeSet[i]->path = NULL;
-		nodeSet[i]->dist = INT_INFINITY;
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->dist = INT_INFINITY;
 	}
+
 	Node* v = getNode(s);
 	v->dist = 0;
 	vector<Node *> pq;
@@ -436,14 +452,16 @@ vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 	int y_src= n_source->getCoords().y;
 	vector<Node*> closeNodes;
 
-	for (size_t i = 0; i < nodeSet.size(); i++) {
-		x_dest = nodeSet[i]->getCoords().x;
-		y_dest = nodeSet[i]->getCoords().y;
+	typename hashNodes::const_iterator it = nodeSet.begin();
+	typename hashNodes::const_iterator ite = nodeSet.end();
+	for (; it != ite; it++)
+	{
+		x_dest = it->second->getCoords().x;
+		y_dest = it->second->getCoords().y;
 		dist = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
 		if (dist <= max_dist) {
-			closeNodes.push_back(nodeSet[i]);
+			closeNodes.push_back(it->second);
 		}
-
 	}
 	return closeNodes;
 }
