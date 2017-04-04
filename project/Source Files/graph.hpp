@@ -68,6 +68,7 @@ public:
 	vector<Node *> getCloseNodes(int max_dist, Node * n_source);
 	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
 	void dijkstraShortestPath_distance(const int & s);
+	void dijkstraLessTransportsUsed(const int &s);
 };
 
 

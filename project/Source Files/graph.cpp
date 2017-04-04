@@ -447,6 +447,25 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 	}
 }
 
+void Graph::dijkstraLessTransportsUsed(const int & s)
+{
+	typename hashNodes::iterator it = nodeSet.begin();
+	typename hashNodes::iterator ite = nodeSet.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->processing = false;
+		it->second->dist = INT_INFINITY;
+	}
+
+	Node* v = getNode(s);
+	v->dist = 0;
+	vector<Node *> pq;
+	pq.push_back(v);
+
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
+}
+
 
 vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 	float dist;

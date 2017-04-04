@@ -29,7 +29,6 @@ class Node {
 	bool processing;
 	int indegree;
 	int dist;
-	bool processing;
 	
 
 public:
@@ -49,6 +48,8 @@ public:
 
 	void setCoords(Point coords);
 	Point getCoords() const;
+
+	bool operator==(const Node& b);
 };
 
 struct Node_greater_than {
@@ -57,8 +58,6 @@ struct Node_greater_than {
 	}
 };
 
-bool operator==(const Node& a, const Node& b) {
-	return a.getInfo() == b.getInfo();
-}
+
 
 #endif /* NODE_HPP_ */

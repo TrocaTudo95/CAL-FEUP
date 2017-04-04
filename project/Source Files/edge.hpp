@@ -2,6 +2,8 @@
 #define EDGE_HPP_
 
 #pragma once
+#include <unordered_set>
+#include "TransportLine.hpp"
 
 class Node;
 class Graph;
@@ -10,6 +12,9 @@ class Graph;
 * Class Edge
 * ================================================================================================
 */
+
+
+typedef std::unordered_set<TransportLine> linesSet;
 
 class Edge {
 	Node * dest;

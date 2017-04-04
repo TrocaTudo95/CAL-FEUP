@@ -68,3 +68,8 @@ Point Node::getCoords() const {
 	return this->coords;
 }
 
+bool Node::operator==(const Node & b)
+{
+	return this->info == b.getInfo();
+}
+
