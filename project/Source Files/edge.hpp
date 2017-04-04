@@ -24,6 +24,7 @@ public:
 	Edge(int id,Node *d, double w);
 	friend class Graph;
 	friend class Node;
+	bool operator==(const Edge& e) const;
 	void setTransportLine(TransportLine *tl);
 };
 

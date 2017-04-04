@@ -50,6 +50,7 @@ public:
 	Point getCoords() const;
 
 	bool operator==(const Node& b);
+
 };
 
 struct Node_greater_than {

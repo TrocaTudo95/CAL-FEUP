@@ -13,3 +13,9 @@ void Edge::setTransportLine(TransportLine *tl)
 	line = tl;
 }
 
+bool Edge::operator==(const Edge& e) const {
+	return dest == e.dest;
+}
+
+
+
