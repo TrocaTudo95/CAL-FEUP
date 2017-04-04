@@ -13,7 +13,6 @@
   <ItemGroup>
     <ClCompile Include="..\project\Source Files\connection.cpp" />
     <ClCompile Include="..\project\Source Files\edge.cpp" />
-    <ClCompile Include="..\project\Source Files\readFiles.cpp" />
     <ClCompile Include="..\project\Source Files\source.cpp" />
     <ClCompile Include="..\project\Source Files\graph.cpp" />
     <ClCompile Include="..\project\Source Files\graphviewer.cpp" />

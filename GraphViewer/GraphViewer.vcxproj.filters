@@ -36,9 +36,6 @@
     <ClCompile Include="..\project\Source Files\source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\project\Source Files\readFiles.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\project\Source Files\connection.h">
