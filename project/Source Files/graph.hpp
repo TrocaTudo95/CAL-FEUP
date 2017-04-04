@@ -51,6 +51,7 @@ class Graph {
 public:
 	Graph();
 	bool addNode(const int &in, Point coords);
+	void addTransportationLine(TransportLine *t1);
 	bool addEdge(int id,const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);

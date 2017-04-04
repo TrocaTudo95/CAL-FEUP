@@ -97,6 +97,7 @@ void readNamesFile(Graph &graph) {
 	string bidirectional;
 	string lines;
 	string typeOfLine;
+	int previousEdgeId = 1;
 	while (std::getline(inFile, line))
 	{
 		size_t previousSeparator = line.find(';');
@@ -115,9 +116,7 @@ void readNamesFile(Graph &graph) {
 			previousSeparator = nextSeparator;
 		}
 
-		TransportLine * tl = new TransportLine(idEdge, streetName, bidirectional);
-
-		graph.getEdgeById(idEdge)->setTransportLine(tl);
+		//Need to add the transportation line to the graph and read first edge and last edge' id;
 	
 
 		if ((nextSeparator = line.find(';', previousSeparator + 1)) != string::npos) {
@@ -125,9 +124,9 @@ void readNamesFile(Graph &graph) {
 			previousSeparator = nextSeparator;
 		}
 		if (lines.size() > 0) {
-			tl->addLines(lines);
+			//tl->addLines(lines);
 			typeOfLine = line.substr(previousSeparator+1);
-			tl->setType(typeOfLine);
+			//tl->setType(typeOfLine);
 		}
 		
 
@@ -181,12 +180,6 @@ void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
 	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
 	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
-	g.dijkstraShortestPath_distance(1);
-	vector<int> path = g.getPath(1, 5);
-	cout << "Path : ";
-	for (int i = 0; i < path.size(); i++) {
-		cout << path.at(i) << " | ";
-	}
 
 }
 
@@ -218,13 +211,20 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
 	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
 	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
-	g.dijkstraShortestPath_distance(1);
-	vector<int> path = g.getPath(1, 5);
-	cout << "Path : ";
-	for (int i = 0; i < path.size(); i++) {
-		cout << path.at(i) << " | ";
-	}
-
+	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False");
+	t1->addLines("205"); t1->setType("bus");
+	TransportLine * t2 = new TransportLine(2,3, "Rua dos benditos", "False");
+	t2->addLines("205,206"); t2->setType("bus");
+	TransportLine * t3 = new TransportLine(4,5, "Rua das carvalhas", "False");
+	t3->addLines("207"); t3->setType("bus");
+	g.addTransportationLine(t1); 
+	g.addTransportationLine(t2);
+	g.addTransportationLine(t3);
+	gv->setEdgeLabel(1, t1->toString());
+	gv->setEdgeLabel(2, t2->toString());
+	gv->setEdgeLabel(3, t2->toString());
+	gv->setEdgeLabel(4, t3->toString());
+	gv->setEdgeLabel(5, t3->toString());
 }
 
 int main() {
@@ -232,7 +232,7 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	//readFiles(graph, gv);*/
-	testDijkstraShortestDistance(graph,gv);
+	testDijkstraTime(graph,gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;

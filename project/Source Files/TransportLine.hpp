@@ -9,13 +9,17 @@ private:
 	string name;
 	unordered_set<string>lines;
 	char type;
-	int edgeID;
+	int initialEdgeId;
+	int finalEdgeId;
 	bool bidirectional;
 public:
-	TransportLine(int edgeID, string name, string bidirectional);
+	TransportLine(int initialEdgeID,int finalEdgeID, string name, string bidirectional);
 	friend class Edge;
 	bool operator==(const TransportLine& b) const;
 	void addLines(string line);
 	void setType(string type);
+	string toString() const;
+	int getInitialEdgeId() const;
+	int getFinalEdgeId() const;
 };
 
