@@ -29,7 +29,6 @@ Node::Node(int in, Point coords){
 	this->processing = false;
 	this->indegree = 0;
 	this->dist = 0;
-	path = NULL;
 }
 
 
@@ -68,3 +67,4 @@ void Node::setCoords(Point coords) {
 Point Node::getCoords() const {
 	return this->coords;
 }
+

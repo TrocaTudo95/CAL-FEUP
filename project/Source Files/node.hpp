@@ -29,6 +29,7 @@ class Node {
 	bool processing;
 	int indegree;
 	int dist;
+	bool processing;
 	
 
 public:
@@ -55,5 +56,9 @@ struct Node_greater_than {
 		return a->getDist() > b->getDist();
 	}
 };
+
+bool operator==(const Node& a, const Node& b) {
+	return a.getInfo() == b.getInfo();
+}
 
 #endif /* NODE_HPP_ */

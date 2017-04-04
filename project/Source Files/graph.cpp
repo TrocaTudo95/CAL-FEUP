@@ -323,8 +323,8 @@ vector<int> Graph::getPath(const int &origin, const int &dest) {
 
 
 void Graph::unweightedShortestPath(const int &s) {
-	typename hashNodes::const_iterator it = nodeSet.begin();
-	typename hashNodes::const_iterator ite = nodeSet.end();
+	typename hashNodes::iterator it = nodeSet.begin();
+	typename hashNodes::iterator ite = nodeSet.end();
 	for (; it != ite; it++){
 		it->second->path = NULL;
 		it->second->dist = INT_INFINITY;
@@ -352,8 +352,8 @@ void Graph::unweightedShortestPath(const int &s) {
 
 void Graph::bellmanFordShortestPath(const int & s)
 {
-	typename hashNodes::const_iterator it = nodeSet.begin();
-	typename hashNodes::const_iterator ite = nodeSet.end();
+	typename hashNodes::iterator it = nodeSet.begin();
+	typename hashNodes::iterator ite = nodeSet.end();
 	for (; it != ite; it++)
 	{
 		it->second->path = NULL;
@@ -381,8 +381,8 @@ void Graph::bellmanFordShortestPath(const int & s)
 
 void Graph::dijkstraShortestPath(const int & s)
 {
-	typename hashNodes::const_iterator it = nodeSet.begin();
-	typename hashNodes::const_iterator ite = nodeSet.end();
+	typename hashNodes::iterator it = nodeSet.begin();
+	typename hashNodes::iterator ite = nodeSet.end();
 	for (; it != ite; it++)
 	{
 		it->second->path = NULL;
@@ -413,11 +413,12 @@ void Graph::dijkstraShortestPath(const int & s)
 
 void Graph::dijkstraShortestPath_distance(const int & s)
 {
-	typename hashNodes::const_iterator it = nodeSet.begin();
-	typename hashNodes::const_iterator ite = nodeSet.end();
+	typename hashNodes::iterator it = nodeSet.begin();
+	typename hashNodes::iterator ite = nodeSet.end();
 	for (; it != ite; it++)
 	{
 		it->second->path = NULL;
+		it->second->processing = false;
 		it->second->dist = INT_INFINITY;
 	}
 
@@ -436,8 +437,11 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 			if (w->dist > v->dist + v->adj[i].weight) {
 				w->dist = v->dist + v->adj[i].weight;
 				w->path = v;
-				pq.push_back(w);
-				push_heap(pq.begin(), pq.end(), Node_greater_than());
+				if (!w->processing) {
+					w->processing = true;
+					pq.push_back(w);
+				}
+				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
 	}
@@ -456,10 +460,15 @@ vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 	typename hashNodes::const_iterator ite = nodeSet.end();
 	for (; it != ite; it++)
 	{
-		x_dest = it->second->getCoords().x;
-		y_dest = it->second->getCoords().y;
+		Node *v = it->second;
+		if (*(it->second) == *(n_source)) {
+			continue;
+		}
+		x_dest = v->getCoords().x;
+		y_dest = v->getCoords().y;
 		dist = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
 		if (dist <= max_dist) {
+
 			closeNodes.push_back(it->second);
 		}
 	}

@@ -6,4 +6,3 @@
 */
 Edge::Edge(Node *d, double w) : dest(d), weight(w) {}
 
-
