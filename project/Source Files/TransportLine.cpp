@@ -67,4 +67,14 @@ unordered_set<string>& TransportLine::getLines()
 	return lines;
 }
 
+char TransportLine::getType()
+{
+	return type;
+}
+
+int TransportLine::getWaitTime()
+{
+	return avg_wait_time;
+}
+
 
