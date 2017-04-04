@@ -23,6 +23,9 @@ const int NOT_VISITED = 0;
 const int BEING_VISITED = 1;
 const int DONE_VISITED = 2;
 const int INT_INFINITY = INT_MAX;
+const int WALK_SPEED = 0.5;
+const int BUS_SPEED = 10;
+const int METRO_SPEED = 20;
 
 typedef unordered_map<int, Node *> hashNodes;
 typedef unordered_map<int, Edge *> hashEdges;
