@@ -29,6 +29,7 @@ class Node {
 	bool processing;
 	int indegree;
 	int dist;
+	char wayToGetThere;
 	
 
 public:

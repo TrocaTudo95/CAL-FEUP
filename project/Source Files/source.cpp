@@ -99,7 +99,7 @@ void readNamesFile(Graph &graph) {
 		std::stringstream linestream(line);
 		if (!firstTime) {
 			linestream >> finalEdge;
-			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional);
+			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional,rand()%6 +5);
 			graph.addTransportationLine(tl);
 			initialEdge = finalEdge;
 			if (lines.size() > 0) {
@@ -178,6 +178,7 @@ void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
+	
 	Point p;
 	p.x = 10; p.y = 20;
 	g.addNode(1, p);
@@ -204,11 +205,11 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
 	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
 	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
-	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False");
+	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False", rand() % 6 + 5);
 	t1->addLines("205"); t1->setType("bus");
-	TransportLine * t2 = new TransportLine(2,3, "Rua dos benditos", "False");
+	TransportLine * t2 = new TransportLine(2,3, "Rua dos benditos", "False", rand() % 6 + 5);
 	t2->addLines("205,206"); t2->setType("bus");
-	TransportLine * t3 = new TransportLine(4,5, "Rua das carvalhas", "False");
+	TransportLine * t3 = new TransportLine(4,5, "Rua das carvalhas", "False", rand() % 6 + 5);
 	t3->addLines("207"); t3->setType("bus");
 	g.addTransportationLine(t1); 
 	g.addTransportationLine(t2);

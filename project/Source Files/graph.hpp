@@ -78,7 +78,8 @@ public:
 	void dijkstraShortestPath_distance(const int & s);
 	void dijkstraLessTransportsUsed(const int &s);
 	void addEdgesFoot(vector<Edge> & edges, vector<Edge *> & onFoot);
-	bool Graph::alreadyExists(vector<Edge> & edges, Edge * e);
+	bool alreadyExists(vector<Edge> & edges, Edge * e);
+	void dijkstraShortestPath_time(const int & s);
 };
 
 
