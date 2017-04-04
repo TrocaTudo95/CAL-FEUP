@@ -1,0 +1,390 @@
+1;;False;;
+6;;False;;
+42;;False;;
+67;;False;;
+81;;False;D;tram
+90;;False;D;tram
+91;Rua Doutor António Bernardino de Almeida;False;;
+110;Rua de Dionísio Santos Silva;False;;
+121;Estrada Exterior da Circunvalação;False;205;bus
+122;Estrada Interior da Circunvalação;False;205,205;bus
+123;Estrada Interior da Circunvalação;False;205,205;bus
+124;Rua de Leonardo Coimbra;False;;
+131;Rua Alfredo Allen;True;;
+139;Rua Alfredo Allen;False;;
+143;Rua Júlio Amaral de Carvalho;False;;
+159;Rua do Doutor Roberto Frias;True;204,300,301;bus
+170;Rua Alfredo Allen;False;;
+173;Rua de São Tomé;True;300,301;bus
+189;Estrada da Circunvalação;True;204,604,704,301,;bus
+190;Rua do Bairro da Areosa;True;;
+196;Alameda Professor Hernâni Monteiro;False;111,204,300;bus
+197;Rua da Arroteia;False;604;bus
+201;Travessa da Asprela;False;;
+209;Rua Doutor Plácido da Costa;False;;
+220;Rua do Mestre Guilherme Camarinha;False;;
+225;Rua do Mestre Guilherme Camarinha;False;;
+227;Caminho da Asprela;False;;
+229;Rua Particular da Arroteia;False;;
+236;Rua Bouça da Cavadinha;True;;
+242;Rua da Arroteia;True;;
+244;Rua da Arroteia;True;;
+245;Rua Joaquim Teixeira Leite;True;;
+250;Travessa Doutor Barros;True;;
+257;Rua da Asprela;False;;
+260;Rua Amândio Galhano;False;;
+261;;False;;
+263;;True;;
+264;Rua Gonçalo Mendes da Maia;False;;
+293;Rua Gonçalo Mendes da Maia;False;;
+297;Rua Dom Frei Vicente da Soledade e Castro;True;;
+306;Rua do Doutor Manuel Pereira da Silva;True;;
+315;;True;;
+319;;True;;
+329;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+336;Rua Conde de Avranches;False;300,301;bus
+339;Rua Coronel Almeida Valente;True;;
+346;Rua de Leonardo Coimbra;False;;
+347;Travessa da Bouça da Cavadinha;False;;
+354;Travessa da Arroteia;False;;
+365;;False;;
+366;;False;;
+367;;False;;
+368;Rua do Mestre Guilherme Camarinha;False;;
+369;;False;;
+380;;False;;
+382;;False;;
+383;;False;;
+384;Rua Académico Futebol Club;False;;
+402;;False;;
+403;Rua da Azenha;False;;
+411;Rua do Carriçal;False;;
+415;Rua Agra do Amial;False;;
+423;Rua do Arquitecto Lobão Vital;False;;
+434;;False;;
+437;;False;;
+438;;False;;
+439;;False;204;bus
+441;Estrada da Circunvalação;False;301;bus
+443;Estrada da Circunvalação;False;;
+446;;True;;
+450;;True;;
+453;Rua de Dionísio dos Santos Silva;True;;
+466;Rua Henrique de Sousa Reis;False;;
+482;;False;;
+488;;False;;
+496;;False;;
+497;Rua da Arroteia;True;;
+499;Travessa Gonçalo Mendes da Maia;True;;
+514;Rua Doutor António Bernardino de Almeida;False;;
+516;Rua do Mestre Guilherme Camarinha;False;;
+518;Urgência Adultos;True;;
+525;Urgência Adultos;True;;
+530;Urgência Neonatologia;True;;
+535;Entrada Urgências;False;;
+538;Urgência Pediatria;True;;
+541;Urgência Pediatria;True;;
+549;Rua do Sal;True;;
+551;Rua do Fogo;True;;
+555;Rua de Santiago;True;;
+562;Rua do Pico;True;;
+565;Rua da Ilha Terceira;True;;
+572;Rua de Santo Antão;True;;
+574;Rua da Santa Maria;True;;
+577;Rua do Corvo;True;;
+580;Rua do Príncipe;True;;
+582;Praça da Ilha Brava;False;;
+585;;False;;
+591;;False;;
+592;Rua Albertina de Sousa Paraíso;False;;
+593;Acesso consultas externas;False;;
+602;;False;;
+608;;False;;
+610;;False;;
+615;;True;;
+617;;True;;
+620;;True;;
+625;Linha D;False;;
+626;Rua Professor Armando de Castro;False;;
+628;Rua Professor Armando de Castro;True;;
+629;;True;;
+630;;True;;
+637;;True;;
+648;;True;;
+653;;True;;
+656;Alameda Professor Hernâni Monteiro;True;204,604,300;bus
+658;Estrada Interior da Circunvalação;False;205,704,205;bus
+660;Estrada Exterior da Circunvalação;False;10,205;bus
+690;Estrada Interior da Circunvalação;False;205,704,205,;bus
+694;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+702;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+704;Rua Conde de Aurora;False;;
+706;;False;;
+708;;False;;
+711;;True;;
+716;;True;;
+724;;True;;
+728;Travessa Doutor Barros;True;;
+730;Rua Professor Armando de Castro;True;;
+733;Rua Conde de Avranches;True;;
+736;Rua Conde de Avranches;False;;
+737;Rua Doutor Roberto Frias;False;204,604,301;bus
+738;Alameda Professor Hernâni Monteiro;False;111,204,604,300;bus
+741;Rua Raul Castro;False;;
+744;Rua Raul Castro;False;;
+747;;False;;
+751;Rua Professor Armando de Castro;False;;
+752;;False;;
+756;Rua Raul Castro;False;;
+757;Estrada da Circunvalação;False;;
+758;Rua das Desertas;False;;
+759;Rua de Porto Santo;False;;
+762;Rua de São Jorge;False;;
+770;Rua das Berlengas;False;;
+789;;False;;
+796;Rua Doutor Roberto Frias;True;204,300,301;bus
+803;Rua Gonçalo Mendes da Maia;True;;
+805;Alameda Professor Hernâni Monteiro;True;111,204,604,300;bus
+809;;False;D;tram
+818;;False;D;tram
+829;;False;D;tram
+840;Linha D;True;;
+841;;False;D;tram
+842;Linha D;False;;
+843;Rua Doutor Plácido da Costa;False;;
+845;Rua Doutor Plácido da Costa;False;;
+847;Rua do Mestre Guilherme Camarinha;False;;
+848;Rua do Mestre Guilherme Camarinha;False;;
+849;Rua do Mestre Guilherme Camarinha;False;;
+851;Rua do Mestre Guilherme Camarinha;False;;
+853;;False;;
+859;Entrada Urgências;False;;
+870;Entrada Urgências;False;;
+872;;False;;
+883;;False;;
+884;;False;;
+885;;False;;
+886;;False;;
+887;;False;;
+888;;False;;
+890;;False;;
+892;;False;;
+894;;False;;
+896;;False;;
+898;;False;;
+900;;False;;
+902;;False;;
+905;;False;;
+908;;False;;
+911;;False;;
+914;;False;;
+918;;False;;
+922;;False;;
+926;;False;;
+930;;False;;
+935;;False;;
+940;;False;;
+946;;False;;
+951;;False;;
+957;;False;;
+965;;False;;
+973;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+974;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+976;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+978;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+980;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+982;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+985;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+988;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+991;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+994;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+997;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+1003;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01;road
+1010;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1018;;False;;
+1030;;False;;
+1038;;False;;
+1048;;False;;
+1063;;True;;
+1069;;True;;
+1076;;False;;
+1079;;False;;
+1084;;False;;
+1086;;False;;
+1088;;False;;
+1090;;False;;
+1095;Alameda Professor Hernâni Monteiro;False;111,204,604,300;bus
+1097;Estrada Interior da Circunvalação;False;111,205,704,300,205;bus
+1118;Estrada Exterior da Circunvalação;False;204,704,301,205;bus
+1161;Rua Doutor António Bernardino de Almeida;False;;
+1162;Rua Doutor António Bernardino de Almeida;False;;
+1168;;False;;
+1177;;True;;
+1189;;True;;
+1190;;True;;
+1191;;True;;
+1192;;True;;
+1193;;False;;
+1194;;True;;
+1195;;True;;
+1196;;True;;
+1197;;False;;
+1198;;False;;
+1199;;False;;
+1200;;False;;
+1201;;False;;
+1202;;False;;
+1203;;False;;
+1204;;False;;
+1205;;False;;
+1206;;False;;
+1207;;False;;
+1208;;False;;
+1209;;True;;
+1210;;True;;
+1211;;False;;
+1212;;False;;
+1213;;False;;
+1214;;False;;
+1215;;False;;
+1216;;False;;
+1217;;False;;
+1218;;False;;
+1219;;False;;
+1220;;False;;
+1221;;False;;
+1222;;False;;
+1223;;True;;
+1224;;True;;
+1225;;True;;
+1226;;False;;
+1227;;False;;
+1228;;False;;
+1248;;False;;
+1250;;False;;
+1252;;False;;
+1254;;False;;
+1256;;False;;
+1258;;False;;
+1260;;False;;
+1262;;False;;
+1264;;False;;
+1266;;False;;
+1268;;False;;
+1270;;False;;
+1272;;False;;
+1274;;False;;
+1276;;False;;
+1278;;False;;
+1280;;False;;
+1282;;False;;
+1284;;False;;
+1287;;False;;
+1290;;False;;
+1293;;False;;
+1296;;False;;
+1299;;True;;
+1302;;False;;
+1305;;False;;
+1308;;False;;
+1311;;False;;
+1314;;False;;
+1317;;False;;
+1320;;False;;
+1323;;False;;
+1326;;False;;
+1329;;False;;
+1332;;True;;
+1335;;False;;
+1338;;False;;
+1341;;False;;
+1344;Rua de Dionísio dos Santos Silva;False;;
+1347;;False;;
+1350;;False;;
+1353;;False;;
+1357;;False;;
+1361;;False;;
+1365;;False;;
+1369;;False;;
+1373;;False;;
+1377;;False;;
+1381;;False;;
+1385;;False;;
+1389;;True;;
+1393;;True;;
+1398;;False;;
+1403;;True;;
+1408;;True;;
+1413;;False;;
+1418;;False;;
+1424;;False;;
+1430;;False;;
+1436;Rua de Dionísio dos Santos Silva;False;;
+1455;;False;;
+1462;;False;;
+1470;;False;;
+1478;;False;;
+1486;Rua Doutor António Bernardino de Almeida;False;;
+1489;Rua Conde de Avranches;False;;
+1490;Rua Doutor António Bernardino de Almeida;False;;
+1492;;False;;
+1512;Rua Doutor António Bernardino de Almeida;False;;
+1514;Rua Doutor António Bernardino de Almeida;False;;
+1516;;False;;
+1526;;False;;
+1527;Rua do Bairro da Brisa;False;;
+1547;Rua do Seixido;False;;
+1558;;False;;
+1570;;False;;
+1574;;False;;
+1578;;False;;
+1592;;False;;
+1594;;False;;
+1597;;False;;
+1598;;False;;
+1600;;False;;
+1602;;False;;
+1606;;False;;
+1610;;False;;
+1621;;False;;
+1628;Rua Agra do Amial;False;;
+1630;Travessa da Bouça;True;;
+1634;Rua Doutor António Bernardino de Almeida;False;;
+1635;Rua Doutor António Bernardino de Almeida;False;;
+1636;Rua de Dionísio Santos Silva;False;;
+1637;Rua Alfredo Allen;False;;
+1642;Rua Henrique de Sousa Reis;False;;
+1650;;False;;
+1657;Rua da Arroteia;True;;
+1658;Rua da Arroteia;True;;
+1664;;True;;
+1668;;True;;
+1670;;True;;
+1672;;True;;
+1673;;True;;
+1674;;True;;
+1676;Viela de Lamas;True;;
+1685;;True;;
+1688;;True;;
+1698;;False;;
+1707;;False;;
+1715;;False;;
+1720;;False;;
+1727;;False;;
+1729;;False;;
+1732;Alameda 25 de Abril;False;;
+1733;;False;;
+1737;;False;;
+1740;;False;;
+1746;;False;;
+1748;Travessa da Bouça;False;;
+1753;Viela da Bouça;False;;
+1759;Travessa da Bouça;False;;
+1761;Travessa da Bouça;False;;
+1762;Rua do Doutor Júlio de Matos;False;;
+1771;Rua do Doutor Manuel Pereira da Silva;False;;
+1784;Travessa de Lamas;False;;
+1795;Travessa de Lamas;False;;
+1805;Estrada Interior da Circunvalação;False;205,704,205;bus
+1811;;False;;
+1815;;False;;
