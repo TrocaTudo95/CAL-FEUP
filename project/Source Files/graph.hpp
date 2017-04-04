@@ -73,6 +73,8 @@ public:
 	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
 	void dijkstraShortestPath_distance(const int & s);
 	void dijkstraLessTransportsUsed(const int &s);
+	void addEdgesFoot(vector<Edge> & edges, vector<Edge *> & onFoot);
+	bool Graph::alreadyExists(vector<Edge> & edges, Edge * e);
 };
 
 

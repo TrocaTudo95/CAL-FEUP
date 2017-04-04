@@ -7,6 +7,7 @@
 * ================================================================================================
 */
 
+#define SEARCH_RADIUS 50
 
 
 int Graph::getNumNode() const {
@@ -435,16 +436,23 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 	v->dist = 0;
 	vector<Node *> pq;
 	pq.push_back(v);
-
+	vector<Edge > adja;
+	vector<Edge *> onFoot;
+	vector<Node *> temp;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	while (!pq.empty()) {
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i].dest;
-			if (w->dist > v->dist + v->adj[i].weight) {
-				w->dist = v->dist + v->adj[i].weight;
+		adja = v->adj;
+		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		onFoot = getCloseEdges(temp, v);
+		addEdgesFoot(adja, onFoot);
+
+		for (unsigned int i = 0; i < adja.size(); i++) {
+			Node* w = adja[i].dest;
+			if (w->dist > v->dist + adja[i].weight) {
+				w->dist = v->dist + adja[i].weight;
 				w->path = v;
 				if (!w->processing) {
 					w->processing = true;
@@ -454,6 +462,21 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 			}
 		}
 	}
+}
+
+void Graph::addEdgesFoot(vector<Edge> & edges, vector<Edge *> & onFoot) {
+	for (size_t i = 0; i < onFoot.size(); i++) {
+		if (!alreadyExists(edges, onFoot[i]))
+			edges.push_back(*onFoot[i]);
+	}
+}
+
+bool Graph::alreadyExists(vector<Edge> & edges, Edge * e) {
+	for (size_t i = 0; i < edges.size(); i++) {
+		if (edges[i] == (*e))
+			return true;
+	}
+	return false;
 }
 
 void Graph::dijkstraLessTransportsUsed(const int & s)
