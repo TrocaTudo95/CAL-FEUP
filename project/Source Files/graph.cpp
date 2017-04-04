@@ -464,7 +464,10 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
-		adja = v->adj;
+		//adja = v->adj;
+		for (size_t i = 0; i < v->adj.size(); i++) {
+			adja.push_back(v->adj[i]);
+		}
 		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
 		onFoot = getCloseEdges(temp, v);
 		addEdgesFoot(adja, onFoot);
@@ -508,7 +511,10 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
-		adja = v->adj;
+		//adja = v->adj;
+		for (size_t i = 0; i < v->adj.size(); i++) {
+			adja.push_back(v->adj[i]);
+		}
 		temp = getCloseNodes(SEARCH_RADIUS, v);
 		onFoot = getCloseEdges(temp, v);
 		addEdgesFoot(adja, onFoot);
@@ -541,7 +547,7 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 				if (onTransport)
 				tempo = METRO_SPEED / edge.weight;
 				else
-					tempo = METRO_SPEED / edge.weight + edge.line->getWaitTime();
+					tempo = BUS_SPEED / edge.weight + edge.line->getWaitTime();
 
 				break;
 			}

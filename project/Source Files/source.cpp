@@ -219,14 +219,20 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	gv->setEdgeLabel(3, t2->toString());
 	gv->setEdgeLabel(4, t3->toString());
 	gv->setEdgeLabel(5, t3->toString());
+	g.dijkstraShortestPath_time(1);
+	vector<int> path = g.getPath(1, 5);
+	cout << "Path : ";
+	for (int i = 0; i < path.size(); i++) {
+		cout << path.at(i) << " | ";
+	}
 }
 
 int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	readFiles(graph, gv);
-	//testDijkstraTime(graph,gv);
+	//readFiles(graph, gv);
+	testDijkstraTime(graph,gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;
