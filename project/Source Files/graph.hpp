@@ -79,6 +79,7 @@ public:
 	void dijkstraLessTransportsUsed(const int &s);
 	void addEdgesFoot(vector<Edge> & edges, vector<Edge *> & onFoot);
 	bool Graph::alreadyExists(vector<Edge> & edges, Edge * e);
+	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
 };
 
 

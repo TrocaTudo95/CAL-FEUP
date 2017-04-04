@@ -29,6 +29,7 @@ Node::Node(int in, Point coords){
 	this->processing = false;
 	this->indegree = 0;
 	this->dist = 0;
+	this->linesPath = {};
 }
 
 

@@ -24,5 +24,6 @@ public:
 	string toString() const;
 	int getInitialEdgeId() const;
 	int getFinalEdgeId() const;
+	unordered_set<string>& getLines();
 };
 

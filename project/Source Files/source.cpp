@@ -4,10 +4,11 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <ctime>
 #include "graphviewer.h"
 #include "graph.hpp"
 
-/* CONSTANTS */
+ /*CONSTANTS */
 
 #define EDGE_COLOR_DEFAULT "blue"
 #define VERTEX_COLOR_DEFAULT "yellow"
@@ -29,11 +30,6 @@ bool openFile(ifstream &inFile, const string filename) {
 		exit(1);   // call system to stop
 	}
 	return true;
-}
-
-
-void readEdgesInfoFile(Graph &graph, GraphViewer *gv) {
-
 }
 
 
@@ -177,7 +173,7 @@ void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 }
 
 
-void testDijkstraTime(Graph &g, GraphViewer *gv) {
+void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 	Point p;
 	p.x = 10; p.y = 20;
 	g.addNode(1, p);
@@ -218,14 +214,28 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	gv->setEdgeLabel(3, t2->toString());
 	gv->setEdgeLabel(4, t3->toString());
 	gv->setEdgeLabel(5, t3->toString());
+	g.dijkstraLessTransportsUsed(1);
+	vector<int> path = g.getPath(1, 5);
+	for (int i = 0; i < path.size(); i++) {
+		cout << " " << path[i] << " ";
+	}
+}
+
+void testReadGraph(Graph &g) {
+	clock_t begin = clock();
+	g.dijkstraShortestPath_distance(1);
+	clock_t end = clock();
+	cout << double(end - begin) / CLOCKS_PER_SEC << "s";
+	vector<int> path = g.getPath(1,150);
 }
 
 int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	readFiles(graph, gv);
-	//testDijkstraTime(graph,gv);
+	//readFiles(graph,gv);
+	//testReadGraph(graph);
+	testDijkstraNumTransportsUsed(graph, gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;

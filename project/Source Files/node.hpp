@@ -29,7 +29,7 @@ class Node {
 	bool processing;
 	int indegree;
 	int dist;
-	
+	unordered_set<string> linesPath;
 
 public:
 	Node* path;
