@@ -38,6 +38,10 @@ void TransportLine::setType(string type)
 	else if (type == "bus") {
 		this->type = BUS;
 	}
+	else if (type == "walk")
+	{
+		this->type = WALK;
+	}
 }
 
 string TransportLine::toString() const
@@ -74,6 +78,24 @@ char TransportLine::getType()
 int TransportLine::getWaitTime()
 {
 	return avg_wait_time;
+}
+
+bool TransportLine::isBidirectional() {
+	return bidirectional;
+}
+
+TransportLine * TransportLine::createReverse() {
+	string b;
+	if (bidirectional)
+	{
+		b = "True";
+	}
+	else
+	{
+		b = "False";
+	}
+	TransportLine *reverseTL = new TransportLine(finalEdgeId, initialEdgeId, name, b, avg_wait_time);
+	return reverseTL;
 }
 
 

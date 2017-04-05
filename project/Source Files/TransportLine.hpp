@@ -28,5 +28,7 @@ public:
 	unordered_set<string>& getLines();
 	char getType();
 	int getWaitTime();
+	bool isBidirectional();
+	TransportLine* createReverse();
 };
 

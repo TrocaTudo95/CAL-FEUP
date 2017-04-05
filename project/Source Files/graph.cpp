@@ -50,13 +50,38 @@ bool Graph::addNode(const int &in, Point coords) {
 	return insertResponse.second;
 }
 
-void Graph::addTransportationLine(TransportLine * t1)
+void Graph::addTransportationLine(TransportLine * t1) {
+	int initialEdge = t1->getInitialEdgeId();
+	int finalEdge = t1->getFinalEdgeId();
+
+	for (int i = initialEdge; i <= finalEdge; i++)
+	{
+		edgeMap[i]->setTransportLine(t1);
+	}
+}
+
+void Graph::addTransportationLine(TransportLine * t1,const unordered_map<int, pair<int, int>> &edgeOD)
 {
 	int initialEdge = t1->getInitialEdgeId();
 	int finalEdge = t1->getFinalEdgeId();
 	
 	for (int i = initialEdge; i <= finalEdge; i++) {
 		edgeMap[i]->setTransportLine(t1);
+		Node *ori = nodeMap[edgeOD.at(i).first];
+		Node *dest = nodeMap[edgeOD.at(i).second];
+		double w = sqrt(pow(ori->getCoords().x - dest->getCoords().x, 2) + pow(ori->getCoords().y - dest->getCoords().y, 2));
+		highestEdgeId++;
+		Edge * addedEdge = dest->addEdge(highestEdgeId, ori, w);
+		edgeMap.insert(make_pair(highestEdgeId, addedEdge));
+		if (t1->isBidirectional())
+		{
+			edgeMap[highestEdgeId]->setTransportLine(t1);
+		}
+		else
+		{
+			TransportLine *TP = t1->createReverse();
+			edgeMap[highestEdgeId]->setTransportLine(TP);
+		}
 	}
 }
 

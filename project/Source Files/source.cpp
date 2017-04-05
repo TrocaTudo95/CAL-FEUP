@@ -33,7 +33,7 @@ bool openFile(ifstream &inFile, const string filename) {
 }
 
 
-void readEdgesFile(Graph &graph, GraphViewer *gv) {
+void readEdgesFile(Graph &graph, GraphViewer *gv, unordered_map<int, pair<int,int>> &edgeMap) {
 	ifstream inFile;
 
 	openFile(inFile, EDGES_FILENAME);
@@ -54,6 +54,7 @@ void readEdgesFile(Graph &graph, GraphViewer *gv) {
 		linestream >> idNoDestino;
 		gv->addEdge(idAresta, idNoOrigem, idNoDestino, EdgeType::DIRECTED);
 		graph.addEdge(idAresta,idNoOrigem, idNoDestino);
+		edgeMap.insert(make_pair(idAresta, make_pair(idNoOrigem, idNoDestino)));
 	}
 
 	inFile.close();
@@ -84,7 +85,7 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 }
 
 
-void readNamesFile(Graph &graph) {
+void readNamesFile(Graph &graph, unordered_map<int, pair<int, int>> &edgeMap) {
 	ifstream inFile;
 	openFile(inFile, LINES_FILENAME);
 	int initialEdge, finalEdge;
@@ -96,7 +97,7 @@ void readNamesFile(Graph &graph) {
 		if (!firstTime) {
 			linestream >> finalEdge;
 			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional,rand()%6 +5);
-			graph.addTransportationLine(tl);
+			graph.addTransportationLine(tl, edgeMap);
 			initialEdge = finalEdge;
 			if (lines.size() > 0) {
 				tl->addLines(lines);
@@ -112,16 +113,15 @@ void readNamesFile(Graph &graph) {
 		std::getline(linestream, bidirectional, ';');
 		std::getline(linestream, lines, ';');
 		std::getline(linestream, typeOfLine, ';');
-
-		
 	}
 	inFile.close();
 }
 
 void readFiles(Graph &graph, GraphViewer *gv) {
 	readNodesFile(graph, gv);
-	readEdgesFile(graph, gv);
-	readNamesFile(graph);
+	unordered_map<int, pair<int, int>> edgeInfo;
+	readEdgesFile(graph, gv, edgeInfo);
+	readNamesFile(graph, edgeInfo);
 	gv->rearrange();
 }
 
@@ -282,6 +282,19 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	readFiles(graph, gv);
+	gv->setVertexColor(655, "black");
+	gv->setVertexColor(313, "black");
+	clock_t begin = clock();
+	graph.dijkstraShortestPath_distance(655);
+	vector<int> path = graph.getPath(655, 313);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Path : ";
+	for (int i = 0; i < path.size(); i++)
+	{
+		cout << path.at(i) << " | ";
+	}
+	cout << endl << time_spent << endl;
 	//testDijkstraTime(graph,gv);
 	//readFiles(graph,gv);
 	//testReadGraph(graph);
