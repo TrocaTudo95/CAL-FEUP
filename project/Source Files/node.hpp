@@ -24,7 +24,7 @@ typedef struct {
 class Node {
 	int info;
 	Point coords;
-	vector<Edge> adj;
+	vector<Edge*> adj;
 	bool visited;
 	bool processing;
 	int indegree;

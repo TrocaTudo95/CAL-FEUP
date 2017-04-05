@@ -210,11 +210,6 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 	g.addTransportationLine(t1);
 	g.addTransportationLine(t2);
 	g.addTransportationLine(t3);
-	gv->setEdgeLabel(1, t1->toString());
-	gv->setEdgeLabel(2, t2->toString());
-	gv->setEdgeLabel(3, t2->toString());
-	gv->setEdgeLabel(4, t3->toString());
-	gv->setEdgeLabel(5, t3->toString());
 	g.dijkstraLessTransportsUsed(1);
 	vector<int> path = g.getPath(1, 5);
 	for (int i = 0; i < path.size(); i++) {
@@ -287,7 +282,7 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	//readFiles(graph, gv);
-	testDijkstraTime(graph,gv);
+	//testDijkstraTime(graph,gv);
 	//readFiles(graph,gv);
 	//testReadGraph(graph);
 	testDijkstraNumTransportsUsed(graph, gv);

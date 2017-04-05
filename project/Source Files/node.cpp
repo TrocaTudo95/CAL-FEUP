@@ -9,10 +9,10 @@
 
 bool Node::removeEdgeTo(Node *d) {
 	d->indegree--; //adicionado do exercicio 5
-	typename vector<Edge>::iterator it = adj.begin();
-	typename vector<Edge>::iterator ite = adj.end();
+	typename vector<Edge*>::iterator it = adj.begin();
+	typename vector<Edge*>::iterator ite = adj.end();
 	while (it != ite) {
-		if (it->dest == d) {
+		if ((*it)->dest == d) {
 			adj.erase(it);
 			return true;
 		}
@@ -35,9 +35,9 @@ Node::Node(int in, Point coords){
 
 
 Edge* Node::addEdge(int id,Node *dest, double w) {
-	Edge edgeD(id,dest, w);
+	Edge *edgeD = new Edge(id,dest, w);
 	adj.push_back(edgeD);
-	return &edgeD;
+	return edgeD;
 }
 
 

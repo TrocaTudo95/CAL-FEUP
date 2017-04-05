@@ -26,7 +26,7 @@ public:
 	int getInitialEdgeId() const;
 	int getFinalEdgeId() const;
 	unordered_set<string>& getLines();
-	char getType() { return type; };
-	int getWaitTime() { return avg_wait_time; };
+	char getType();
+	int getWaitTime();
 };
 

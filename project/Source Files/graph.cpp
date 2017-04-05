@@ -75,11 +75,11 @@ bool Graph::removeNode(const int &in) {
 			it1->second->removeEdgeTo(v);
 		}
 
-		typename vector<Edge >::iterator itAdj = v->adj.begin();
-		typename vector<Edge >::iterator itAdje = v->adj.end();
+		typename vector<Edge*>::iterator itAdj = v->adj.begin();
+		typename vector<Edge*>::iterator itAdje = v->adj.end();
 		for (; itAdj != itAdje; itAdj++)
 		{
-			itAdj->dest->indegree--;
+			(*itAdj)->dest->indegree--;
 		}
 		delete v;
 		return true;
@@ -140,11 +140,11 @@ vector<int> Graph::dfs() const {
 void Graph::dfs(Node *v, vector<int> &res) const {
 	v->visited = true;
 	res.push_back(v->info);
-	typename vector<Edge >::iterator it = (v->adj).begin();
-	typename vector<Edge >::iterator ite = (v->adj).end();
+	typename vector<Edge*>::iterator it = (v->adj).begin();
+	typename vector<Edge*>::iterator ite = (v->adj).end();
 	for (; it != ite; it++)
-		if (it->dest->visited == false) {
-			dfs(it->dest, res);
+		if ((*it)->dest->visited == false) {
+			dfs((*it)->dest, res);
 		}
 }
 
@@ -158,10 +158,10 @@ vector<int> Graph::bfs(Node *v) const {
 		Node *v1 = q.front();
 		q.pop();
 		res.push_back(v1->info);
-		typename vector<Edge >::iterator it = v1->adj.begin();
-		typename vector<Edge >::iterator ite = v1->adj.end();
+		typename vector<Edge*>::iterator it = v1->adj.begin();
+		typename vector<Edge*>::iterator ite = v1->adj.end();
 		for (; it != ite; it++) {
-			Node *d = it->dest;
+			Node *d = (*it)->dest;
 			if (d->visited == false) {
 				d->visited = true;
 				q.push(d);
@@ -188,10 +188,10 @@ int Graph::maxNewChildren(Node *v, int &inf) const {
 		int l = level.front();
 		level.pop(); l++;
 		int nChildren = 0;
-		typename vector<Edge >::iterator it = v1->adj.begin();
-		typename vector<Edge >::iterator ite = v1->adj.end();
+		typename vector<Edge*>::iterator it = v1->adj.begin();
+		typename vector<Edge*>::iterator ite = v1->adj.end();
 		for (; it != ite; it++) {
-			Node *d = it->dest;
+			Node *d = (*it)->dest;
 			if (d->visited == false) {
 				d->visited = true;
 				q.push(d);
@@ -229,7 +229,7 @@ void Graph::resetIndegrees() {
 	for (; it != ite; it++){
 		//percorrer o vector de Edges, e actualizar indegree
 		for (unsigned int j = 0; j < it->second->adj.size(); j++) {
-			it->second->adj[j].dest->indegree++;
+			it->second->adj[j]->dest->indegree++;
 		}
 	}
 }
@@ -265,12 +265,12 @@ void Graph::dfsVisit() {
 void Graph::dfsVisit(Node *v) {
 	v->processing = true;
 	v->visited = true;
-	typename vector<Edge >::iterator it = (v->adj).begin();
-	typename vector<Edge >::iterator ite = (v->adj).end();
+	typename vector<Edge*>::iterator it = (v->adj).begin();
+	typename vector<Edge*>::iterator ite = (v->adj).end();
 	for (; it != ite; it++) {
-		if (it->dest->processing == true) numCycles++;
-		if (it->dest->visited == false) {
-			dfsVisit(it->dest);
+		if ((*it)->dest->processing == true) numCycles++;
+		if ((*it)->dest->visited == false) {
+			dfsVisit((*it)->dest);
 		}
 	}
 	v->processing = false;
@@ -306,8 +306,8 @@ vector<int> Graph::topologicalOrder() {
 		res.push_back(v->info);
 
 		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			v->adj[i].dest->indegree--;
-			if (v->adj[i].dest->indegree == 0) q.push(v->adj[i].dest);
+			v->adj[i]->dest->indegree--;
+			if (v->adj[i]->dest->indegree == 0) q.push(v->adj[i]->dest);
 		}
 	}
 
@@ -366,7 +366,7 @@ void Graph::unweightedShortestPath(const int &s) {
 	while (!q.empty()) {
 		v = q.front(); q.pop();
 		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i].dest;
+			Node* w = v->adj[i]->dest;
 			if (w->dist > v->dist + 1) {
 				w->dist = v->dist + 1;
 				w->path = v;
@@ -396,9 +396,9 @@ void Graph::bellmanFordShortestPath(const int & s)
 	while (!q.empty()) {
 		v = q.front(); q.pop();
 		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i].dest;
-			if (w->dist > v->dist + v->adj[i].weight) {
-				w->dist = v->dist + v->adj[i].weight;
+			Node* w = v->adj[i]->dest;
+			if (w->dist > v->dist + v->adj[i]->weight) {
+				w->dist = v->dist + v->adj[i]->weight;
 				w->path = v;
 				q.push(w);
 			}
@@ -428,9 +428,9 @@ void Graph::dijkstraShortestPath(const int & s)
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i].dest;
-			if (w->dist > v->dist + v->adj[i].weight) {
-				w->dist = v->dist + v->adj[i].weight;
+			Node* w = v->adj[i]->dest;
+			if (w->dist > v->dist + v->adj[i]->weight) {
+				w->dist = v->dist + v->adj[i]->weight;
 				w->path = v;
 				pq.push_back(w);
 				push_heap(pq.begin(), pq.end(), Node_greater_than());
@@ -454,7 +454,7 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 	v->dist = 0;
 	vector<Node *> pq;
 	pq.push_back(v);
-	vector<Edge > adja;
+	vector<Edge *> adja;
 	vector<Edge *> onFoot;
 	vector<Node *> temp;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
@@ -462,18 +462,15 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
-		//adja = v->adj;
-		for (size_t i = 0; i < v->adj.size(); i++) {
-			adja.push_back(v->adj[i]);
-		}
+		adja = v->adj;
 		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
 		onFoot = getCloseEdges(temp, v);
 		addEdgesFoot(adja, onFoot);
 
 		for (unsigned int i = 0; i < adja.size(); i++) {
-			Node* w = adja[i].dest;
-			if (w->dist > v->dist + adja[i].weight) {
-				w->dist = v->dist + adja[i].weight;
+			Node* w = adja[i]->dest;
+			if (w->dist > v->dist + adja[i]->weight) {
+				w->dist = v->dist + adja[i]->weight;
 				w->path = v;
 				if (!w->processing) {
 					w->processing = true;
@@ -501,7 +498,7 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 	v->dist = 0;
 	vector<Node *> pq;
 	pq.push_back(v);
-	vector<Edge > adja;
+	vector<Edge* > adja;
 	vector<Edge *> onFoot;
 	vector<Node *> temp;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
@@ -509,43 +506,40 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
-		//adja = v->adj;
-		for (size_t i = 0; i < v->adj.size(); i++) {
-			adja.push_back(v->adj[i]);
-		}
+		adja = v->adj;
 		temp = getCloseNodes(SEARCH_RADIUS, v);
 		onFoot = getCloseEdges(temp, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int tempo;
-			Edge edge = adja[i];
+			Edge *edge = adja[i];
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
 				onTransport = false;
 			}
-			Node* w = edge.dest;
-			char typeOfTransportLine = edge.line->getType();
+			Node* w = edge->dest;
+			char typeOfTransportLine = edge->line->getType();
 			switch (typeOfTransportLine) {
 			case 'W':
-				tempo = WALK_SPEED / edge.weight;
+				tempo = WALK_SPEED / edge->weight;
 				break;
 			case 'B':
 				if (onTransport)
-				 tempo = BUS_SPEED / edge.weight;
+				 tempo = BUS_SPEED / edge->weight;
 				else {
-					tempo = BUS_SPEED / edge.weight + edge.line->getWaitTime();
+					tempo = BUS_SPEED / edge->weight + edge->line->getWaitTime();
 
-					if (WALK_SPEED / edge.weight < tempo) {
-						tempo = WALK_SPEED / edge.weight;
+					if (WALK_SPEED / edge->weight < tempo) {
+						tempo = WALK_SPEED / edge->weight;
 						typeOfTransportLine = 'W';
 					}
 				}
 				break;
 			case 'T':
 				if (onTransport)
-				tempo = METRO_SPEED / edge.weight;
+				tempo = METRO_SPEED / edge->weight;
 				else
-					tempo = BUS_SPEED / edge.weight + edge.line->getWaitTime();
+					tempo = BUS_SPEED / edge->weight + edge->line->getWaitTime();
 
 				break;
 			}
@@ -564,29 +558,31 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 	}
 }
 
-void Graph::addEdgesFoot(vector<Edge> & edges, vector<Edge *> & onFoot) {
+void Graph::addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot) {
 	for (size_t i = 0; i < onFoot.size(); i++) {
+
 		if (!alreadyExists(edges, onFoot[i])) {
 			bool found = false;
 			for (size_t j = 0; j < edges.size(); j++)
 			{
-				for (size_t k = 0; k < edges.at(j).dest->adj.size(); k++)
+				for (size_t k = 0; k < edges.at(j)->dest->adj.size(); k++)
 				{
-					if (edges.at(j).dest->adj.at(k).dest == onFoot[i]->dest)
+					if (edges.at(j)->dest->adj.at(k)->dest == onFoot[i]->dest)
 					{
 						found = true;
 					}
 				}
 			}
 			if(!found)
-				edges.push_back(*onFoot[i]);
+				edges.push_back(onFoot[i]);
 		}
+
 	}
 }
 
-bool Graph::alreadyExists(vector<Edge> & edges, Edge * e) {
+bool Graph::alreadyExists(vector<Edge*> & edges, Edge * e) {
 	for (size_t i = 0; i < edges.size(); i++) {
-		if (edges[i] == (*e))
+		if (edges[i] == e)
 			return true;
 	}
 	return false;
@@ -608,7 +604,7 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 	v->dist = 0;
 	vector<Node *> pq;
 	pq.push_back(v);
-	vector<Edge > adja;
+	vector<Edge *> adja;
 	vector<Edge *> onFoot;
 	vector<Node *> temp;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
@@ -622,13 +618,13 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int weight = 0;
-			Node* w = adja[i].dest;
-			unordered_set<string> edgeLines = adja.at(i).line->getLines();
+			Node* w = adja[i]->dest;
+			unordered_set<string> edgeLines = adja.at(i)->line->getLines();
 			if (isChangingTransport(edgeLines,v->linesPath)) {
 				weight = 1;
 			}
-			if (w->dist > v->dist + adja[i].weight) {
-				w->dist = v->dist + adja[i].weight;
+			if (w->dist > v->dist + adja[i]->weight) {
+				w->dist = v->dist + adja[i]->weight;
 				w->path = v;
 				w->linesPath = edgeLines;
 				if (!w->processing) {
