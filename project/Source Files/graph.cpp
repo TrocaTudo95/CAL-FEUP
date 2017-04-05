@@ -50,13 +50,38 @@ bool Graph::addNode(const int &in, Point coords) {
 	return insertResponse.second;
 }
 
-void Graph::addTransportationLine(TransportLine * t1)
+void Graph::addTransportationLine(TransportLine * t1) {
+	int initialEdge = t1->getInitialEdgeId();
+	int finalEdge = t1->getFinalEdgeId();
+
+	for (int i = initialEdge; i <= finalEdge; i++)
+	{
+		edgeMap[i]->setTransportLine(t1);
+	}
+}
+
+void Graph::addTransportationLine(TransportLine * t1,const unordered_map<int, pair<int, int>> &edgeOD)
 {
 	int initialEdge = t1->getInitialEdgeId();
 	int finalEdge = t1->getFinalEdgeId();
 	
 	for (int i = initialEdge; i <= finalEdge; i++) {
 		edgeMap[i]->setTransportLine(t1);
+		Node *ori = nodeMap[edgeOD.at(i).first];
+		Node *dest = nodeMap[edgeOD.at(i).second];
+		double w = sqrt(pow(ori->getCoords().x - dest->getCoords().x, 2) + pow(ori->getCoords().y - dest->getCoords().y, 2));
+		highestEdgeId++;
+		Edge * addedEdge = dest->addEdge(highestEdgeId, ori, w);
+		edgeMap.insert(make_pair(highestEdgeId, addedEdge));
+		if (t1->isBidirectional())
+		{
+			edgeMap[highestEdgeId]->setTransportLine(t1);
+		}
+		else
+		{
+			TransportLine *TP = t1->createReverse();
+			edgeMap[highestEdgeId]->setTransportLine(TP);
+		}
 	}
 }
 
@@ -324,23 +349,24 @@ vector<int> Graph::topologicalOrder() {
 
 
 
+vector<PathTo> Graph::getPath(const int &origin, const int &dest) {
 
-vector<int> Graph::getPath(const int &origin, const int &dest) {
-
-	list<int> buffer;
+	list<PathTo> buffer;
 	Node* v = getNode(dest);
-
-	//cout << v->info << " ";
-	buffer.push_front(v->info);
+	PathTo pathTo; pathTo.path = v->info; pathTo.dist = v->dist; pathTo.wayToGetThere = v->wayToGetThere;
+	buffer.push_front(pathTo);
 	while (v->path != NULL &&  v->path->info != origin) {
 		v = v->path;
-		buffer.push_front(v->info);
+		pathTo.path = v->info; pathTo.dist = v->dist; pathTo.wayToGetThere = v->wayToGetThere;
+		buffer.push_front(pathTo);
 	}
-	if (v->path != NULL)
-		buffer.push_front(v->path->info);
-
-
-	vector<int> res;
+	if (v->path != NULL) {
+		v = v->path;
+		pathTo.path = v->info; pathTo.dist = v->dist; pathTo.wayToGetThere = v->wayToGetThere;
+		buffer.push_front(pathTo);
+	}
+		
+	vector<PathTo> res;
 	while (!buffer.empty()) {
 		res.push_back(buffer.front());
 		buffer.pop_front();
@@ -491,7 +517,7 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 		it->second->path = NULL;
 		it->second->processing = false;
 		it->second->dist = INT_INFINITY;
-		it->second->wayToGetThere = false;
+		it->second->wayToGetThere = 'W';
 	}
 
 	Node* v = getNode(s);
@@ -513,33 +539,39 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int tempo;
 			Edge *edge = adja[i];
+			TransportLine * currentTransportLine = edge->line;
+			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			char typeOfTransportLine;
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
 				onTransport = false;
 			}
 			Node* w = edge->dest;
-			char typeOfTransportLine = edge->line->getType();
+			if (currentTransportLine != nullptr) {
+				typeOfTransportLine = currentTransportLine->getType();
+			}
+			else typeOfTransportLine = 'W';
 			switch (typeOfTransportLine) {
 			case 'W':
-				tempo = WALK_SPEED / edge->weight;
+				tempo = edgeDistance/ WALK_SPEED;
 				break;
 			case 'B':
 				if (onTransport)
-				 tempo = BUS_SPEED / edge->weight;
+				 tempo = edgeDistance/ BUS_SPEED;
 				else {
-					tempo = BUS_SPEED / edge->weight + edge->line->getWaitTime();
+					tempo =  edgeDistance/ BUS_SPEED + currentTransportLine->getWaitTime();
 
-					if (WALK_SPEED / edge->weight < tempo) {
-						tempo = WALK_SPEED / edge->weight;
+					if (edgeDistance/ WALK_SPEED < tempo) {
+						tempo = edgeDistance/ WALK_SPEED;
 						typeOfTransportLine = 'W';
 					}
 				}
 				break;
 			case 'T':
 				if (onTransport)
-				tempo = METRO_SPEED / edge->weight;
+				tempo = edgeDistance / METRO_SPEED;
 				else
-					tempo = BUS_SPEED / edge->weight + edge->line->getWaitTime();
+					tempo = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
 
 				break;
 			}
@@ -598,6 +630,7 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		it->second->processing = false;
 		it->second->dist = INT_INFINITY;
 		it->second->linesPath.clear();
+		it->second->wayToGetThere = 'W';
 	}
 
 	Node* v = getNode(s);
@@ -619,13 +652,31 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int weight = 0;
 			Node* w = adja[i]->dest;
-			unordered_set<string> edgeLines = adja.at(i)->line->getLines();
+			//Little Optimization
+			if (w->dist < v->dist) {
+				continue;
+			}
+			//End Of Optimization
+			TransportLine * tl = adja.at(i)->line;
+			unordered_set<string> edgeLines;
+			char wayToGetToW = v->wayToGetThere;
+			if (tl != nullptr) {
+				edgeLines = tl->getLines();
+			}
+			 
 			if (isChangingTransport(edgeLines,v->linesPath)) {
 				weight = 1;
+				if (edgeLines.begin()->size() > 1) {
+					wayToGetToW = 'B';
+				}
+				else {
+					wayToGetToW = 'M';
+				}
 			}
-			if (w->dist > v->dist + adja[i]->weight) {
-				w->dist = v->dist + adja[i]->weight;
+			if (w->dist > v->dist + weight) {
+				w->dist = v->dist + weight;
 				w->path = v;
+				w->wayToGetThere = wayToGetToW;
 				w->linesPath = edgeLines;
 				if (!w->processing) {
 					w->processing = true;
@@ -639,6 +690,10 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 
 
 bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines) {
+	if (edgeLines.size() == 0) {
+		return false;
+	}
+
 	unordered_set<string>::iterator itEdge = edgeLines.begin();
 	unordered_set<string>::iterator itEdgeFinal = edgeLines.end();
 
