@@ -224,11 +224,11 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
 }
 
-void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
+void testDijkstraFavoriteTransport(Graph &g, GraphViewer *gv) {
 
 	int initialVertex = 655, finalVertex = 313;
 	clock_t begin = clock();
-	g.dijkstraLessTransportsUsed(initialVertex);
+	g.dijkstraFavoriteTransport(130, 'B');
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
