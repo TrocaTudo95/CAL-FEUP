@@ -272,7 +272,7 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 		cout << "Go by " << message << " to node " << p.path << " in " << p.dist - previousDist << " " << units << " \n";
 		gv->setVertexColor(p.path, "red");
 		gv->rearrange();
-		Sleep(500);
+		Sleep(100);
 		previousDist = p.dist;
 	}
 	int totalDist = path.at(path.size() - 1).dist;

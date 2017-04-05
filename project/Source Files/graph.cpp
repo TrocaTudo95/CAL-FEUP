@@ -542,10 +542,6 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 			TransportLine * currentTransportLine = edge->line;
 			int edgeDistance = edge->weight * PIXEL_TO_METER;
 			char typeOfTransportLine;
-			bool onTransport = true;
-			if (v->wayToGetThere == 'W') {
-				onTransport = false;
-			}
 			Node* w = edge->dest;
 			if (currentTransportLine != nullptr) {
 				typeOfTransportLine = currentTransportLine->getType();
@@ -556,23 +552,10 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 				tempo = edgeDistance/ WALK_SPEED;
 				break;
 			case 'B':
-				if (onTransport)
 				 tempo = edgeDistance/ BUS_SPEED;
-				else {
-					tempo =  edgeDistance/ BUS_SPEED + currentTransportLine->getWaitTime();
-
-					if (edgeDistance/ WALK_SPEED < tempo) {
-						tempo = edgeDistance/ WALK_SPEED;
-						typeOfTransportLine = 'W';
-					}
-				}
 				break;
 			case 'T':
-				if (onTransport)
 				tempo = edgeDistance / METRO_SPEED;
-				else
-					tempo = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
-
 				break;
 			}
 
