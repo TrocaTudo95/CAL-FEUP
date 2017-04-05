@@ -559,11 +559,11 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 }
 
 void Graph::addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot) {
+	size_t startSize = edges.size();
 	for (size_t i = 0; i < onFoot.size(); i++) {
-
 		if (!alreadyExists(edges, onFoot[i])) {
 			bool found = false;
-			for (size_t j = 0; j < edges.size(); j++)
+			for (size_t j = 0; j < startSize; j++)
 			{
 				for (size_t k = 0; k < edges.at(j)->dest->adj.size(); k++)
 				{

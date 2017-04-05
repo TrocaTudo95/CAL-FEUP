@@ -281,11 +281,11 @@ int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	//readFiles(graph, gv);
+	readFiles(graph, gv);
 	//testDijkstraTime(graph,gv);
 	//readFiles(graph,gv);
 	//testReadGraph(graph);
-	testDijkstraNumTransportsUsed(graph, gv);
+	//testDijkstraNumTransportsUsed(graph, gv);
 	//testDijkstraTime(graph, gv);
 	//testDijkstraShortestDistance(graph, gv);
 	printf("Press to continue...\n");
