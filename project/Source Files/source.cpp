@@ -139,9 +139,8 @@ void testReadGraph(Graph &g);
 void testDijkstraTime(Graph &g, GraphViewer *gv);
 void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);
 void runTestSuite(Graph &g, GraphViewer *gv);
-
-
-
+void useTestGraph(Graph &g, GraphViewer *gv);
+void printPath(vector<PathTo> path, string type, GraphViewer *gv);
 
 
 int main() {
@@ -150,7 +149,6 @@ int main() {
 	Graph graph;
 	//readFiles(graph, gv);
 	//testDijkstraTime(graph,gv);
-	//readFiles(graph,gv);
 	runTestSuite(graph,gv);
 	printf("Press to continue...\n");
 	getchar();
@@ -170,60 +168,11 @@ void testReadGraph(Graph &g) {
 	g.dijkstraShortestPath_distance(1);
 	clock_t end = clock();
 	cout << double(end - begin) / CLOCKS_PER_SEC << "s";
-	vector<int> path = g.getPath(1, 150);
+	vector<PathTo> path = g.getPath(1, 150);
 
 }
 
-void testDijkstraTime(Graph &g, GraphViewer *gv) {
-	Point p;
-	p.x = 10; p.y = 20;
-	g.addNode(1, p);
-	gv->addNode(1, p.x, p.y);
-	p.x = 20; p.y = 30;
-	g.addNode(2, p);
-	gv->addNode(2, p.x, p.y);
-	p.x = 50; p.y = 70;
-	g.addNode(3, p);
-	gv->addNode(3, p.x, p.y);
-	p.x = 100; p.y = 10;
-	g.addNode(4, p);
-	gv->addNode(4, p.x, p.y);
-	p.x = 10; p.y = 100;
-	g.addNode(5, p);
-	gv->addNode(5, p.x, p.y);
-	g.addEdge(1, 1, 4);
-	g.addEdge(2, 4, 3);
-	g.addEdge(3, 3, 5);
-	g.addEdge(4, 3, 2);
-	g.addEdge(5, 2, 5);
-	gv->addEdge(1, 1, 4, EdgeType::DIRECTED);
-	gv->addEdge(2, 4, 3, EdgeType::DIRECTED);
-	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
-	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
-	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
-	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False", rand() % 6 + 5);
-	t1->addLines("205"); t1->setType("bus");
-	TransportLine * t2 = new TransportLine(2, 3, "Rua dos benditos", "False", rand() % 6 + 5);
-	t2->addLines("205,206"); t2->setType("bus");
-	TransportLine * t3 = new TransportLine(4, 5, "Rua das carvalhas", "False", rand() % 6 + 5);
-	t3->addLines("207"); t3->setType("bus");
-	g.addTransportationLine(t1);
-	g.addTransportationLine(t2);
-	g.addTransportationLine(t3);
-	gv->setEdgeLabel(1, t1->toString());
-	gv->setEdgeLabel(2, t2->toString());
-	gv->setEdgeLabel(3, t2->toString());
-	gv->setEdgeLabel(4, t3->toString());
-	gv->setEdgeLabel(5, t3->toString());
-	g.dijkstraShortestPath_time(1);
-	vector<int> path = g.getPath(1, 5);
-	cout << "Path : ";
-	for (int i = 0; i < path.size(); i++) {
-		cout << path.at(i) << " | ";
-	}
-}
-
-void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
+void useTestGraph(Graph &g, GraphViewer *gv) {
 	Point p;
 	p.x = 10; p.y = 20;
 	g.addNode(1, p);
@@ -237,7 +186,7 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 	p.x = 100; p.y = 10;
 	g.addNode(4, p);
 	gv->addNode(4, p.x, p.y);
-	p.x = 10; p.y = 100;
+	p.x = 100; p.y = 200;
 	g.addNode(5, p);
 	gv->addNode(5, p.x, p.y);
 	g.addEdge(1, 1, 4);
@@ -252,12 +201,12 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
 	gv->addEdge(5, 2, 3, EdgeType::DIRECTED);
 	gv->addEdge(6, 2, 5, EdgeType::DIRECTED);
-	
-	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False", rand() % 6 + 5);
+
+	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False", (rand() % 6 + 5)*60);
 	t1->addLines("205"); t1->setType("bus");
-	TransportLine * t2 = new TransportLine(2, 3, "Rua dos benditos", "False", rand() % 6 + 5);
+	TransportLine * t2 = new TransportLine(2, 3, "Rua dos benditos", "False", (rand() % 6 + 5) * 60);
 	t2->addLines("206"); t2->setType("metro");
-	TransportLine * t3 = new TransportLine(4, 6, "Rua das carvalhas", "False", rand() % 6 + 5);
+	TransportLine * t3 = new TransportLine(4, 6, "Rua das carvalhas", "False", (rand() % 6 + 5) * 60);
 	t3->addLines("207"); t3->setType("bus");
 	g.addTransportationLine(t1);
 	g.addTransportationLine(t2);
@@ -268,47 +217,67 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 	gv->setEdgeLabel(4, t3->toString());
 	gv->setEdgeLabel(5, t3->toString());
 	gv->setEdgeLabel(6, t3->toString());
+}
+
+void testDijkstraTime(Graph &g, GraphViewer *gv) {
+	
+	//useTestGraph(g, gv);
+	int initialVertex = 1, finalVertex = 5;
+	g.dijkstraShortestPath_time(1);
+	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	gv->setVertexColor(initialVertex, "black");
+	gv->setVertexColor(finalVertex, "black");
+	
+}
+
+void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
+	useTestGraph(g, gv);
+	int initialVertex = 1, finalVertex = 5;
 	g.dijkstraLessTransportsUsed(1);
-	vector<int> path = g.getPath(1, 5);
-	for (int i = 0; i < path.size(); i++) {
-		cout << " " << path[i] << " ";
-	}
+	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	gv->setVertexColor(initialVertex, "black");
+	gv->setVertexColor(finalVertex, "black");
+	printPath(path, "transport changes", gv);
 }
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
-	Point p;
-	p.x = 10; p.y = 20;
-	g.addNode(1, p);
-	gv->addNode(1, p.x, p.y);
-	p.x = 20; p.y = 30;
-	g.addNode(2, p);
-	gv->addNode(2, p.x, p.y);
-	p.x = 50; p.y = 70;
-	g.addNode(3, p);
-	gv->addNode(3, p.x, p.y);
-	p.x = 100; p.y = 10;
-	g.addNode(4, p);
-	gv->addNode(4, p.x, p.y);
-	p.x = 10; p.y = 100;
-	g.addNode(5, p);
-	gv->addNode(5, p.x, p.y);
-	g.addEdge(1, 1, 4);
-	g.addEdge(2, 4, 3);
-	g.addEdge(3, 3, 5);
-	g.addEdge(4, 3, 2);
-	g.addEdge(5, 2, 5);
-	gv->addEdge(1, 1, 4, EdgeType::DIRECTED);
-	gv->addEdge(2, 4, 3, EdgeType::DIRECTED);
-	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
-	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
-	gv->addEdge(5, 2, 5, EdgeType::DIRECTED);
-	gv->setVertexColor(1, "black");
-	gv->setVertexColor(5, "black");
+	useTestGraph(g, gv);
 	g.dijkstraShortestPath_distance(1);
-	vector<int> path = g.getPath(1, 5);
-	cout << "Path : ";
-	for (int i = 0; i < path.size(); i++) {
-		cout << path.at(i) << " | ";
-	}
+	vector<PathTo> path = g.getPath(1, 5);
+}
 
+void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
+	int previousDist = 0;
+	string units = type;
+	cout << "Start in " << path.at(0).path << "\n";
+	for (int i = 1; i < path.size(); i++) {
+		PathTo p = path.at(i);
+		string message;
+		switch (p.wayToGetThere) {
+		case 'W':
+			message = "walking";
+			break;
+		case 'T':
+			message = "metro";
+			break;
+		case 'B':
+			message = "bus";
+			break;
+		}
+		cout << "Go by " << message << " to node " << p.path << " in " << p.dist - previousDist << " " << units <<" \n";
+		gv->setVertexColor(p.path, "red");
+		Sleep(1000);
+		previousDist = p.dist;
+	}
+	int totalDist = path.at(path.size() - 1).dist;
+	if (type == "seconds") {
+		cout << "Total Time: " << totalDist / 60 << "m:" << totalDist % 60 << "s \n";
+	}
+	else if (type == "meters") {
+		cout << "Total Distance: " << totalDist << " meters\n";
+	}
+	else if (type == "transport changes") {
+		cout << "Transports Used : " << totalDist << "\n";
+	}
+	
 }

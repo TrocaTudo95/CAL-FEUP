@@ -26,9 +26,19 @@ const int INT_INFINITY = INT_MAX;
 const int WALK_SPEED = 1;
 const int BUS_SPEED = 10;
 const int METRO_SPEED = 20;
+const int PIXEL_TO_METER = 8;
 
 typedef unordered_map<int, Node *> hashNodes;
 typedef unordered_map<int, Edge *> hashEdges;
+
+
+
+typedef struct {
+	int path;
+	int dist;
+	char wayToGetThere;
+} PathTo;
+
 
 
 /* ================================================================================================
@@ -67,7 +77,7 @@ public:
 	vector<Node*> getSources() const;
 	int getNumCycles();
 	vector<int> topologicalOrder();
-	vector<int> getPath(const int &origin, const int &dest);
+	vector<PathTo> getPath(const int &origin, const int &dest);
 	void unweightedShortestPath(const int &v);
 	bool isDAG();
 	//exercicio 6
