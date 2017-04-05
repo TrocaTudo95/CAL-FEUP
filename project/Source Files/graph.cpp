@@ -619,7 +619,12 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int weight = 0;
 			Node* w = adja[i]->dest;
-			unordered_set<string> edgeLines = adja.at(i)->line->getLines();
+			TransportLine * tl = adja.at(i)->line;
+			unordered_set<string> edgeLines;
+			if (tl != nullptr) {
+				edgeLines = tl->getLines();
+			}
+			 
 			if (isChangingTransport(edgeLines,v->linesPath)) {
 				weight = 1;
 			}
@@ -639,6 +644,10 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 
 
 bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines) {
+	if (edgeLines.size() == 0) {
+		return false;
+	}
+
 	unordered_set<string>::iterator itEdge = edgeLines.begin();
 	unordered_set<string>::iterator itEdgeFinal = edgeLines.end();
 

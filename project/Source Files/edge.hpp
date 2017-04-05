@@ -14,7 +14,6 @@ class Graph;
 */
 
 
-
 class Edge {
 	Node * dest;
 	double weight;
