@@ -157,8 +157,8 @@ int main() {
 
 void runTestSuite(Graph &g, GraphViewer *gv) {
 	readFiles(g, gv);
-	testDijkstraTime(g, gv);
-	//testDijkstraShortestDistance(g, gv);
+	//testDijkstraTime(g, gv);
+	testDijkstraShortestDistance(g, gv);
 	//testDijkstraNumTransportsUsed(g, gv);
 }
 
@@ -239,7 +239,7 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 655, finalVertex = 313;
+	int initialVertex = 655, finalVertex = 579;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_distance(initialVertex);
 	clock_t end = clock();
@@ -286,4 +286,28 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 		cout << "Transports Used : " << totalDist << "\n";
 	}
 
+}
+void initialMenu(Graph &g, GraphViewer *gv){
+	cout << "Escolha a minimizacao a efetuar:" << endl;
+	cout << "1-Minimização da distancia a percorrer" << endl;
+	cout << "2-Minimização do tempo de viagem" << endl;
+	cout << "3-Minimização das mudanças de linha de transporte" << endl;
+	int option;
+
+	while (1) {
+		cout <<"Escolha uma opcao: ";
+		cin >> option;
+		switch (option) {
+		case 1:testDijkstraShortestDistance(g, gv);
+			break;
+		case 2: testDijkstraTime(g, gv);
+			break;
+		case 3: testDijkstraNumTransportsUsed(g, gv);
+			break;
+		default:
+			cout <<endl<< "Introduza uma opcao valida!" << endl;
+		}
+
+	}
+	
 }
