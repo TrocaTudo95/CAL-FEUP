@@ -300,6 +300,7 @@ int main() {
 	//testReadGraph(graph);
 	//testDijkstraNumTransportsUsed(graph, gv);
 	//testDijkstraTime(graph, gv);
+	//testDijkstraShortestDistance(graph, gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;
