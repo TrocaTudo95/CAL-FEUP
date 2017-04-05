@@ -212,7 +212,7 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 655, finalVertex = 579;
+	int initialVertex = 698, finalVertex = 729;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();

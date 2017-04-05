@@ -715,7 +715,17 @@ vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 		y_dest = v->getCoords().y;
 		dist = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
 		if (dist <= max_dist) {
-			closeNodes.push_back(it->second);
+			bool found = false;
+			for (size_t i = 0; i < n_source->adj.size(); i++)
+			{
+				if (it->second == n_source->adj.at(i)->dest)
+				{
+					found = true;
+					break;
+				}
+			}
+			if(!found)
+				closeNodes.push_back(it->second);
 		}
 	}
 	return closeNodes;
