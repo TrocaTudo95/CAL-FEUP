@@ -603,7 +603,7 @@ bool Graph::alreadyExists(vector<Edge*> & edges, Edge * e) {
 	return false;
 }
 
-void Graph::dijkstraLessTransportsUsed(const int & s)
+void Graph::dijkstraFavoriteTransport(const int & s, char favorite)
 {
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
@@ -612,7 +612,6 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		it->second->path = NULL;
 		it->second->processing = false;
 		it->second->dist = INT_INFINITY;
-		it->second->linesPath.clear();
 		it->second->wayToGetThere = 'W';
 	}
 
@@ -620,7 +619,7 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 	v->dist = 0;
 	vector<Node *> pq;
 	pq.push_back(v);
-	vector<Edge *> adja;
+	vector<Edge* > adja;
 	vector<Edge *> onFoot;
 	vector<Node *> temp;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
@@ -629,43 +628,43 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		temp = getCloseNodes(SEARCH_RADIUS, v);
 		onFoot = getCloseEdges(temp, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
-			int weight = 0;
-			Node* w = adja[i]->dest;
-			//Little Optimization
-			if (w->dist < v->dist) {
-				continue;
+			int tempo;
+			Edge *edge = adja[i];
+			TransportLine * currentTransportLine = edge->line;
+			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			char typeOfTransportLine;
+			Node* w = edge->dest;
+			if (currentTransportLine != nullptr) {
+				typeOfTransportLine = currentTransportLine->getType();
 			}
-			//End Of Optimization
-			TransportLine * tl = adja.at(i)->line;
-			unordered_set<string> edgeLines;
-			char wayToGetToW = v->wayToGetThere;
-			if (tl != nullptr) {
-				edgeLines = tl->getLines();
+			else typeOfTransportLine = 'W';
+			switch (typeOfTransportLine) {
+			case 'W':
+				tempo = edgeDistance / WALK_SPEED;
+				break;
+			case 'B':
+				tempo = edgeDistance / BUS_SPEED;
+				break;
+			case 'T':
+				tempo = edgeDistance / METRO_SPEED;
+				break;
 			}
-			 
-			if (isChangingTransport(edgeLines,v->linesPath)) {
-				weight = 1;
-				if (edgeLines.begin()->size() > 1) {
-					wayToGetToW = 'B';
-				}
-				else {
-					wayToGetToW = 'M';
-				}
+			if (typeOfTransportLine == favorite) {
+				tempo = tempo *0.5;
 			}
-			if (w->dist > v->dist + weight) {
-				w->dist = v->dist + weight;
+			if (w->dist > v->dist + tempo) {
+				w->dist = v->dist + tempo;
 				w->path = v;
-				w->wayToGetThere = wayToGetToW;
-				w->linesPath = edgeLines;
+				w->wayToGetThere = typeOfTransportLine;
 				if (!w->processing) {
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); 
+				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
 	}
