@@ -62,6 +62,7 @@ public:
 	Graph();
 	bool addNode(const int &in, Point coords);
 	void addTransportationLine(TransportLine *t1);
+	void addTransportationLine(TransportLine *t1,const unordered_map<int, pair<int, int>> &edgeOD);
 	bool addEdge(int id,const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
