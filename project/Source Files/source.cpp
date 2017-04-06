@@ -142,6 +142,7 @@ void runTestSuite(Graph &g, GraphViewer *gv);
 void useTestGraph(Graph &g, GraphViewer *gv);
 void printPath(vector<PathTo> path, string type, GraphViewer *gv);
 void initialMenu(Graph &g, GraphViewer *gv);
+bool checkwalkPercentage(const int &origin, const int &dest, float percentage, Graph &g);
 
 
 int main() {
@@ -214,15 +215,17 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 1121, finalVertex = 1123;
+	int initialVertex =55, finalVertex = 980;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	if (checkwalkPercentage(initialVertex, finalVertex, 0.5, g))
+		cout << "you walked too much"<<endl;
 	gv->setVertexColor(initialVertex, "black");
-	gv->setVertexColor(finalVertex, "black");
 	printPath(path, "seconds", gv);
+	gv->setVertexColor(finalVertex, "black");
 
 }
 
@@ -292,20 +295,22 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 
 
 bool checkwalkPercentage(const int &origin, const int &dest, float percentage, Graph &g) {
-	vector<Node *> nodePath = g.getNodePath(origin,dest);
-	int total_dist = nodePath[nodePath.size() - 1]->getDist();
-	int walk_dist=0;
-	int dist=0;
-	float atual_percentage;
+	vector<Node *> nodePath = g.getNodePath(origin, dest);
+	float total_dist = nodePath[nodePath.size() - 1]->getDist();
+	float walk_dist = 0;
+	int prev_dist = nodePath[0]->getDist();
+	float percentage_a;
 
 
 	for (size_t i = 1; i < nodePath.size(); i++) {
-		dist += nodePath[i]->getDist();
+
 		if (nodePath[i]->getWayTogetThere() == 'W')
-			walk_dist += (dist - nodePath[i]->getDist());
+			walk_dist += (nodePath[i]->getDist()-prev_dist);
+
+		prev_dist = nodePath[i]->getDist();
 	}
 
-	return((walk_dist / dist) > percentage);
+	return(percentage_a > percentage);
 
 
 }
