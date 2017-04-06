@@ -141,13 +141,15 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);
 void runTestSuite(Graph &g, GraphViewer *gv);
 void useTestGraph(Graph &g, GraphViewer *gv);
 void printPath(vector<PathTo> path, string type, GraphViewer *gv);
+void initialMenu(Graph &g, GraphViewer *gv);
 
 
 int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	runTestSuite(graph,gv);
+	//runTestSuite(graph,gv);
+	initialMenu(graph, gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;
@@ -157,8 +159,8 @@ int main() {
 
 void runTestSuite(Graph &g, GraphViewer *gv) {
 	readFiles(g, gv);
-	//testDijkstraTime(g, gv);
-	testDijkstraShortestDistance(g, gv);
+	testDijkstraTime(g, gv);
+	//testDijkstraShortestDistance(g, gv);
 	//testDijkstraNumTransportsUsed(g, gv);
 }
 
@@ -212,7 +214,7 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 698, finalVertex = 729;
+	int initialVertex = 1121, finalVertex = 1123;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
@@ -288,15 +290,22 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 
 }
 void initialMenu(Graph &g, GraphViewer *gv){
+	readFiles(g, gv);
 	cout << "Escolha a minimizacao a efetuar:" << endl;
-	cout << "1-Minimização da distancia a percorrer" << endl;
-	cout << "2-Minimização do tempo de viagem" << endl;
-	cout << "3-Minimização das mudanças de linha de transporte" << endl;
-	int option;
+	cout << "1-Minimizacao da distancia a percorrer" << endl;
+	cout << "2-Minimizacao do tempo de viagem" << endl;
+	cout << "3-Minimizacao das mudanças de linha de transporte" << endl;
+	
 
 	while (1) {
 		cout <<"Escolha uma opcao: ";
+		int option;
 		cin >> option;
+		if (cin.fail()) {
+			cout << endl << "Introduza uma opcao valida!" << endl;
+			cin.clear();
+			cin.ignore(256, '\n');
+		}
 		switch (option) {
 		case 1:testDijkstraShortestDistance(g, gv);
 			break;
@@ -306,6 +315,7 @@ void initialMenu(Graph &g, GraphViewer *gv){
 			break;
 		default:
 			cout <<endl<< "Introduza uma opcao valida!" << endl;
+			break;
 		}
 
 	}
