@@ -653,11 +653,12 @@ void Graph::dijkstraFavoriteTransport(const int & s, char favorite)
 				tempo = edgeDistance / METRO_SPEED;
 				break;
 			}
+			int tempoReal = tempo;
 			if (typeOfTransportLine == favorite) {
-				tempo = tempo *0.5;
+				tempo = tempo *0.01;
 			}
 			if (w->dist > v->dist + tempo) {
-				w->dist = v->dist + tempo;
+				w->dist = v->dist + tempoReal;
 				w->path = v;
 				w->wayToGetThere = typeOfTransportLine;
 				if (!w->processing) {

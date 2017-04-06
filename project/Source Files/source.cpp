@@ -137,7 +137,7 @@ void initGV(GraphViewer *gv) {
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv);
 void testReadGraph(Graph &g);
 void testDijkstraTime(Graph &g, GraphViewer *gv);
-void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);
+void testDijkstraFavoriteTransport(Graph &g, GraphViewer *gv,char favorite);
 void runTestSuite(Graph &g, GraphViewer *gv);
 void useTestGraph(Graph &g, GraphViewer *gv);
 void printPath(vector<PathTo> path, string type, GraphViewer *gv);
@@ -159,7 +159,7 @@ void runTestSuite(Graph &g, GraphViewer *gv) {
 	readFiles(g, gv);
 	//testDijkstraTime(g, gv);
 	//testDijkstraShortestDistance(g, gv);
-	testDijkstraNumTransportsUsed(g, gv);
+	testDijkstraFavoriteTransport(g, gv,'W');
 }
 
 
@@ -212,7 +212,7 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 284, finalVertex = 117;
+	int initialVertex = 285, finalVertex = 117;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
@@ -224,17 +224,17 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
 }
 
-void testDijkstraFavoriteTransport(Graph &g, GraphViewer *gv) {
+void testDijkstraFavoriteTransport(Graph &g, GraphViewer *gv,char favorite) {
 
-	int initialVertex = 655, finalVertex = 313;
+	int initialVertex = 245, finalVertex = 67;
 	clock_t begin = clock();
-	g.dijkstraFavoriteTransport(130, 'B');
+	g.dijkstraFavoriteTransport(initialVertex, favorite);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
 	gv->setVertexColor(initialVertex, "black");
 	gv->setVertexColor(finalVertex, "black");
-	printPath(path, "transport changes", gv);
+	printPath(path, "seconds", gv);
 }
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
