@@ -52,6 +52,8 @@ public:
 
 	bool operator==(const Node& b);
 
+	char getWayTogetThere() { return wayToGetThere; };
+
 };
 
 struct Node_greater_than {

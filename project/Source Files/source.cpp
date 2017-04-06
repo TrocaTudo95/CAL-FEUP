@@ -289,6 +289,26 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 	}
 
 }
+
+
+bool checkwalkPercentage(const int &origin, const int &dest, float percentage, Graph &g) {
+	vector<Node *> nodePath = g.getNodePath(origin,dest);
+	int total_dist = nodePath[nodePath.size() - 1]->getDist();
+	int walk_dist=0;
+	int dist=0;
+	float atual_percentage;
+
+
+	for (size_t i = 1; i < nodePath.size(); i++) {
+		dist += nodePath[i]->getDist();
+		if (nodePath[i]->getWayTogetThere() == 'W')
+			walk_dist += (dist - nodePath[i]->getDist());
+	}
+
+	return((walk_dist / dist) > percentage);
+
+
+}
 void initialMenu(Graph &g, GraphViewer *gv){
 	readFiles(g, gv);
 	cout << "Escolha a minimizacao a efetuar:" << endl;
