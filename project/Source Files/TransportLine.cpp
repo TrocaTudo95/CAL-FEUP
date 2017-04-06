@@ -16,6 +16,11 @@ TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, st
 	type = WALK;
 }
 
+void TransportLine::setEdgeMap(unordered_map<int, pair<int, int>>& edgesOD)
+{
+	edgeMap = edgesOD;
+}
+
 bool TransportLine::operator==(const TransportLine & b) const
 {
 	return (this->initialEdgeId == b.initialEdgeId && this->finalEdgeId == b.finalEdgeId);
@@ -42,6 +47,11 @@ void TransportLine::setType(string type)
 	{
 		this->type = WALK;
 	}
+}
+
+void TransportLine::setType(char type)
+{
+	this->type = type;
 }
 
 string TransportLine::toString() const
@@ -96,6 +106,32 @@ TransportLine * TransportLine::createReverse() {
 	}
 	TransportLine *reverseTL = new TransportLine(finalEdgeId, initialEdgeId, name, b, avg_wait_time);
 	return reverseTL;
+}
+
+unordered_set<int> TransportLine::getNodesIds()
+{
+	unordered_set<int> returnNodes;
+	for (int i = initialEdgeId; i <= finalEdgeId; i++) {
+		returnNodes.insert(edgeMap.at(i).first);
+	}
+	returnNodes.insert(edgeMap.at(finalEdgeId).second);
+	return returnNodes;
+	
+}
+
+TransportLine * TransportLine::copy()
+{
+	string biDirectional;
+	if (bidirectional) {
+		biDirectional = "True";
+	}
+	else {
+		biDirectional = "False";
+	}
+	TransportLine* tl = new TransportLine(initialEdgeId, finalEdgeId, name, biDirectional, avg_wait_time);
+	tl->setType(type);
+	tl->setEdgeMap(edgeMap);
+	return tl;
 }
 
 

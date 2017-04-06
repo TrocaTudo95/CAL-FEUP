@@ -211,17 +211,18 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 }
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
-
+	Graph * copiedGraph = g.copy();
+	copiedGraph->preprocessGraphForWaitingTimes();
 	int initialVertex = 655, finalVertex = 579;
 	clock_t begin = clock();
-	g.dijkstraShortestPath_time(initialVertex);
+	copiedGraph->dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	vector<PathTo> path = copiedGraph->getPath(initialVertex, finalVertex);
 	gv->setVertexColor(initialVertex, "black");
 	gv->setVertexColor(finalVertex, "black");
 	printPath(path, "seconds", gv);
-
+	free(copiedGraph);
 }
 
 void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
@@ -272,7 +273,7 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 		cout << "Go by " << message << " to node " << p.path << " in " << p.dist - previousDist << " " << units << " \n";
 		gv->setVertexColor(p.path, "red");
 		gv->rearrange();
-		Sleep(500);
+		Sleep(16);
 		previousDist = p.dist;
 	}
 	int totalDist = path.at(path.size() - 1).dist;

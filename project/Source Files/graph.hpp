@@ -28,6 +28,12 @@ const int BUS_SPEED = 10;
 const int METRO_SPEED = 20;
 const int PIXEL_TO_METER = 8;
 
+
+
+class Node;
+class Edge;
+class TransportLine;
+
 typedef unordered_map<int, Node *> hashNodes;
 typedef unordered_map<int, Edge *> hashEdges;
 
@@ -49,21 +55,35 @@ typedef struct {
 class Graph {
 	hashNodes nodeMap;
 	hashEdges edgeMap;
+	hashEdges edgeMapCopy;
+	hashNodes nodeMapCopy;
 	void dfs(Node *v, vector<int> &res) const;
 	//exercicio 5
 	int numCycles;
 	void dfsVisit(Node *v);
 	void dfsVisit();
 	int highestEdgeId;
+	vector<TransportLine*> transportationLines;
 
 	//void getPathTo(Node *origin, list<int> &res);
 
 public:
 	Graph();
+	~Graph();
+
+	void copyEdges();
+	void copyNodes();
+
+	void setNodeMap(hashNodes map);
+	void setEdgeMap(hashEdges map);
+	void setHighestEdgeId(int id);
+
+	void setTransportationLines(vector<TransportLine*> tlVector);
 	bool addNode(const int &in, Point coords);
 	void addTransportationLine(TransportLine *t1);
-	void addTransportationLine(TransportLine *t1,const unordered_map<int, pair<int, int>> &edgeOD);
+	void addTransportationLine(TransportLine *t1,unordered_map<int, pair<int, int>> &edgeOD);
 	bool addEdge(int id,const int &sourc, const int &dest);
+	bool addEdgeCopied(int id, const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
 	vector<int> dfs() const;
@@ -94,7 +114,8 @@ public:
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
 
 	void dijkstraShortestPath_time(const int & s);
-
+	void preprocessGraphForWaitingTimes();
+	Graph * copy();
 };
 
 
