@@ -35,7 +35,7 @@ Node::Node(int in, Point coords){
 
 
 Edge* Node::addEdge(int id,Node *dest, double w) {
-	Edge *edgeD = new Edge(id,this,dest, w);
+	Edge *edgeD = new Edge(id,dest, w);
 	adj.push_back(edgeD);
 	return edgeD;
 }
@@ -78,6 +78,11 @@ vector<int> Node::getEdgesId()
 		idsToReturn.push_back(adj.at(i)->id);
 	}
 	return idsToReturn;
+}
+
+vector<Edge*> Node::getEdges()
+{
+	return adj;
 }
 
 

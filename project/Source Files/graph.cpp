@@ -64,30 +64,35 @@ Graph::~Graph()
 	}
 }
 
-void Graph::copyEdges()
+hashNodes* Graph::copyNodes()
 {
-	hashEdges::iterator it = edgeMap.begin();
-	hashEdges::iterator ite = edgeMap.end();
-	for (; it != ite; it++) {
-		int idSrc = it->second->src->info;
-		int idDest = it->second->dest->info;
-		addEdgeCopied(it->first, idSrc, idDest);
-	}
-
-}
-void Graph::copyNodes()
-{
+	hashNodes* nodeMapCopy = new hashNodes();
 	hashNodes::iterator it = nodeMap.begin();
 	hashNodes::iterator ite = nodeMap.end();
 
 	for (; it != ite; it++) {
-		nodeMapCopy.insert(make_pair(it->first, it->second->copy()));
+		nodeMapCopy->insert(make_pair(it->first, it->second->copy()));
 	}
-
+	return nodeMapCopy;
 }
-void Graph::setNodeMap(hashNodes map)
+void Graph::copyEdges(hashNodes originalNodes)
 {
-	nodeMap = map;
+	hashNodes::iterator it = originalNodes.begin();
+	hashNodes::iterator ite = originalNodes.end();
+	for (; it != ite; it++) {
+		Node*v = it->second;
+		vector<Edge*> vEdges = v->getEdges();
+		for (int i = 0; i < vEdges.size(); i++) {
+			Edge* currentEdge = vEdges.at(i);
+			addEdge(currentEdge->id, getNode(v->info)->info, getNode(currentEdge->dest->info)->info);
+			TransportLine *tl = currentEdge->getTransportLine();
+			edgeMap[currentEdge->id]->setTransportLine(tl);
+		}
+	}
+}
+void Graph::setNodeMap(hashNodes *map)
+{
+	nodeMap = *map;
 }
 void Graph::setEdgeMap(hashEdges map)
 {
@@ -113,6 +118,11 @@ bool Graph::addNode(const int &in, Point coords) {
 }
 
 void Graph::addTransportationLine(TransportLine * t1) {
+	for (int i = 0; i < transportationLines.size(); i++) {
+		if (transportationLines.at(i) == t1) {
+			return;
+		}
+	}
 	int initialEdge = t1->getInitialEdgeId();
 	int finalEdge = t1->getFinalEdgeId();
 
@@ -125,6 +135,11 @@ void Graph::addTransportationLine(TransportLine * t1) {
 
 void Graph::addTransportationLine(TransportLine * t1,unordered_map<int, pair<int, int>> &edgeOD)
 {
+	for (int i = 0; i < transportationLines.size(); i++) {
+		if (transportationLines.at(i) == t1) {
+			return;
+		}
+	}
 	int initialEdge = t1->getInitialEdgeId();
 	int finalEdge = t1->getFinalEdgeId();
 	t1->setEdgeMap(edgeOD);
@@ -196,26 +211,6 @@ bool Graph::addEdge(int id,const int &sourc, const int &dest) {
 
 	return true;
 }
-
-bool Graph::addEdgeCopied(int id, const int & sourc, const int & dest)
-{
-	typename hashNodes::iterator it = nodeMapCopy.find(sourc);
-	typename hashNodes::iterator ite = nodeMapCopy.find(dest);
-	if (it == nodeMapCopy.end() || ite == nodeMapCopy.end())
-		return false;
-	Node *vS = it->second;
-	Node *vD = ite->second;
-	vD->indegree++;
-	double w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
-	Edge* e = vS->addEdge(id, vD, w);
-	edgeMapCopy.insert(make_pair(id, e));
-	if (id > highestEdgeId) {
-		highestEdgeId = id;
-	}
-
-	return true;
-}
-
 
 bool Graph::removeEdge(const int &sourc, const int &dest) {
 	typename hashNodes::iterator it = nodeMap.find(sourc);
@@ -684,19 +679,23 @@ void Graph::preprocessGraphForWaitingTimes()
 			continue;
 		}
 		int initialEdgeId = t->getInitialEdgeId();
-		unordered_set<int> nodesIds = t->getNodesIds();
-
-		unordered_set<int>::iterator it = nodesIds.begin();
+		vector<int> nodesIds = t->getNodesIds();
+		if (nodesIds.size() < 3) {
+			continue;
+		}
+		vector<int>::iterator it = nodesIds.begin();
 		
 		for (int i = 0; i < nodesIds.size()-2; i++) {
-			Node * src = nodeMap.at(*it);
+			Node * src = getNode(*it);
+			assert(src != NULL);
 			int weight = 0;
-			unordered_set<int>::iterator itDest = it;
+			vector<int>::iterator itDest = it;
 			for (int j = i; j < nodesIds.size()-1; j++) {
 				itDest++;
 				weight += getEdgeById(initialEdgeId + j)->weight;
 				if (i != j) {
-					Node * dest = nodeMap.at(*itDest);
+					Node * dest = getNode(*itDest);
+					assert(dest != NULL);
 					highestEdgeId++;
 					Edge * e = src->addEdge(highestEdgeId, dest, weight);
 					edgeMap.insert(make_pair(e->id, e));
@@ -712,13 +711,11 @@ void Graph::preprocessGraphForWaitingTimes()
 
 Graph * Graph::copy()
 {
-	copyNodes();
-	copyEdges();
 	Graph *g = new Graph();
-	g->setNodeMap(nodeMapCopy);
-	g->setEdgeMap(edgeMapCopy);
-	g->setHighestEdgeId(highestEdgeId);
+	g->setNodeMap(copyNodes());
 	g->setTransportationLines(transportationLines);
+	g->copyEdges(nodeMap);
+	
 	return g;
 	
 }
@@ -887,7 +884,7 @@ vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_so
 		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
 		int nextId = highestEdgeId++;
 		highestEdgeId = nextId;
-		Edge * e = new Edge(nextId,n_source,closeNodes[i], weight);
+		Edge * e = new Edge(nextId,closeNodes[i], weight);
 		closeEdges.push_back(e);
 	}
 	return closeEdges;

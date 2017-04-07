@@ -52,6 +52,7 @@ public:
 	Point getCoords() const;
 
 	vector<int> getEdgesId();
+	vector<Edge*> getEdges();
 
 	bool operator==(const Node& b);
 	Node* copy();

@@ -5,6 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include <unordered_map>
+#include <cassert>
 
 using namespace std;
 
@@ -22,6 +23,7 @@ private:
 	bool bidirectional;
 	int avg_wait_time;
 	unordered_map<int, pair<int, int>> edgeMap;
+	TransportLine * reverse;
 public:
 	friend class Edge;
 	TransportLine(int initialEdgeID,int finalEdgeID, string name, string bidirectional,int avg_wait_time);
@@ -38,7 +40,7 @@ public:
 	int getWaitTime();
 	bool isBidirectional();
 	TransportLine* createReverse();
-	unordered_set<int> TransportLine::getNodesIds();
+	vector<int> TransportLine::getNodesIds();
 	TransportLine* copy();
 };
 

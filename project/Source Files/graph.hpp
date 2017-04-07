@@ -14,7 +14,9 @@
 #include <algorithm>
 #include <iostream>
 #include <unordered_map>
+#include <cassert>
 #include "node.hpp"
+
 
 using namespace std;
 
@@ -55,8 +57,6 @@ typedef struct {
 class Graph {
 	hashNodes nodeMap;
 	hashEdges edgeMap;
-	hashEdges edgeMapCopy;
-	hashNodes nodeMapCopy;
 	void dfs(Node *v, vector<int> &res) const;
 	//exercicio 5
 	int numCycles;
@@ -71,10 +71,10 @@ public:
 	Graph();
 	~Graph();
 
-	void copyEdges();
-	void copyNodes();
+	hashNodes* copyNodes();
+	void copyEdges(hashNodes originalNodes);
 
-	void setNodeMap(hashNodes map);
+	void setNodeMap(hashNodes *map);
 	void setEdgeMap(hashEdges map);
 	void setHighestEdgeId(int id);
 
@@ -83,7 +83,6 @@ public:
 	void addTransportationLine(TransportLine *t1);
 	void addTransportationLine(TransportLine *t1,unordered_map<int, pair<int, int>> &edgeOD);
 	bool addEdge(int id,const int &sourc, const int &dest);
-	bool addEdgeCopied(int id, const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
 	vector<int> dfs() const;

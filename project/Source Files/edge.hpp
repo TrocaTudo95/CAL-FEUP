@@ -16,19 +16,19 @@ class TransportLine;
 
 
 class Edge {
-	Node* src;
 	Node* dest;
 	double weight;
 	int id;
 	TransportLine *line;
 public:
-	Edge(int id,Node* s,Node *d, double w);
+	Edge(int id,Node *d, double w);
 	friend class Graph;
 	friend class Node;
 	bool operator==(const Edge& e) const;
 	void setTransportLine(TransportLine *tl);
-	TransportLine getTransportLine() { return (*line); };
+	TransportLine* getTransportLine() { return (line); };
 	Node * getDest() const;
+	Edge* copyEdge();
 };
 
 #endif /* EGDE_HPP_ */
