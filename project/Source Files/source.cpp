@@ -160,8 +160,8 @@ int main() {
 
 void runTestSuite(Graph &g, GraphViewer *gv) {
 	readFiles(g, gv);
-	testDijkstraTime(g, gv);
-	//testDijkstraShortestDistance(g, gv);
+	//testDijkstraTime(g, gv);
+	testDijkstraShortestDistance(g, gv);
 	//testDijkstraNumTransportsUsed(g, gv);
 }
 

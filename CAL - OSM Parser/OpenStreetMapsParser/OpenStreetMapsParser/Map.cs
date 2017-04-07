@@ -447,6 +447,9 @@ namespace OpenStreetMapsParser
 
             Dictionary<long, long> hashIds = new Dictionary<long, long>();//ADICIONADO POR MIM
             Dictionary<long, long> hashRoads = new Dictionary<long, long>();//ADICIONADO POR MIM
+            PointF minProjc = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(minLon, minLat));
+            PointF maxProjc = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(maxLon, maxLat));
+            double ration = (maxProjc.X - minProjc.X) / (maxProjc.Y - minProjc.Y);
 
             foreach (KeyValuePair<long, Node> e in croppedNodes)
             {
@@ -455,10 +458,17 @@ namespace OpenStreetMapsParser
                 float lat = x.getLat();
                 float lon = x.getLon();
                 PointF xy = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(lon, lat));
-                PointF minProjc = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(minLon, minLat));
-                PointF maxProjc = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(maxLon, maxLat));
-                int xPoint = (int) (minProjc.X + 1920 / (maxProjc.X - minProjc.X) * (xy.X - minProjc.X));
-                int yPoint = 1080 - (int) (minProjc.Y + 1080 / (maxProjc.Y - minProjc.Y) * (xy.Y - minProjc.Y));
+                int xPoint, yPoint;
+                if (ration <= 16 / 9)
+                {
+                    xPoint = (int)(minProjc.X + (int) (1080 / ration) / (maxProjc.X - minProjc.X) * (xy.X - minProjc.X));
+                    yPoint = 1080 - (int)(minProjc.Y + 1080 / (maxProjc.Y - minProjc.Y) * (xy.Y - minProjc.Y));
+                }
+                else
+                {
+                    xPoint = (int)(minProjc.X + 1920 / (maxProjc.X - minProjc.X) * (xy.X - minProjc.X));
+                    yPoint = (int) (1920 / ration) - (int)(minProjc.Y + (int)(1920 / ration) / (maxProjc.Y - minProjc.Y) * (xy.Y - minProjc.Y));
+                }
                 if (x.getIsRoadNode())
                 {
                     file.WriteLine(nodeID.ToString()+";"+xPoint.ToString(CultureInfo.InvariantCulture)+";"+yPoint.ToString(CultureInfo.InvariantCulture));
@@ -483,8 +493,7 @@ namespace OpenStreetMapsParser
             RoadType actualRoadType = null;
             long lastNode = -1;
             bool isRoad = false;
-
-            bool isActualLine = false;
+            
             long idOfLine = -1;
             string lineName = "";
             string lineType = "";
@@ -575,7 +584,6 @@ namespace OpenStreetMapsParser
                                 break;
                             case "relation":
                                 stateLvl1 = "relation";
-                                isActualLine = true;
                                 idOfLine = long.Parse(textReader.GetAttribute("id"));
                                 break;
                             case "member":
@@ -637,7 +645,6 @@ namespace OpenStreetMapsParser
                             }
                             lineType = "";
                             lineName = "";
-                            isActualLine = false;
                             stateLvl1 = "";
                             idOfLine = -1;
                         }
