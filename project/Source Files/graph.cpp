@@ -374,6 +374,29 @@ vector<PathTo> Graph::getPath(const int &origin, const int &dest) {
 	return res;
 }
 
+vector<Node *> Graph::getNodePath(const int &origin, const int &dest) {
+	list<Node *> buffer;
+	vector<Node *> res;
+	Node* v = getNode(dest);
+	buffer.push_front(v);
+	while (v->path != NULL &&  v->path->info != origin) {
+		v = v->path;
+		buffer.push_front(v);
+	}
+	if (v->path != NULL) {
+		v = v->path;
+		buffer.push_front(v);
+	}
+
+	while (!buffer.empty()) {
+		res.push_back(buffer.front());
+		buffer.pop_front();
+	}
+	return res;
+}
+
+
+
 
 
 void Graph::unweightedShortestPath(const int &s) {

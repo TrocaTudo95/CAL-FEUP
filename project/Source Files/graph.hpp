@@ -94,7 +94,7 @@ public:
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
 
 	void dijkstraShortestPath_time(const int & s);
-
+	vector<Node *> getNodePath(const int &origin, const int &dest);
 };
 
 

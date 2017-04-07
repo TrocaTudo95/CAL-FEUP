@@ -141,13 +141,16 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);
 void runTestSuite(Graph &g, GraphViewer *gv);
 void useTestGraph(Graph &g, GraphViewer *gv);
 void printPath(vector<PathTo> path, string type, GraphViewer *gv);
+void initialMenu(Graph &g, GraphViewer *gv);
+bool checkwalkPercentage(const int &origin, const int &dest, float percentage, Graph &g);
 
 
 int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
-	runTestSuite(graph,gv);
+	//runTestSuite(graph,gv);
+	initialMenu(graph, gv);
 	printf("Press to continue...\n");
 	getchar();
 	return 0;
@@ -212,15 +215,17 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 1130, finalVertex = 883;
+	int initialVertex =55, finalVertex = 980;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	if (checkwalkPercentage(initialVertex, finalVertex, 0.5, g))
+		cout << "you walked too much"<<endl;
 	gv->setVertexColor(initialVertex, "black");
-	gv->setVertexColor(finalVertex, "black");
 	printPath(path, "seconds", gv);
+	gv->setVertexColor(finalVertex, "black");
 
 }
 
@@ -287,16 +292,45 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 	}
 
 }
+
+
+bool checkwalkPercentage(const int &origin, const int &dest, float percentage, Graph &g) {
+	vector<Node *> nodePath = g.getNodePath(origin, dest);
+	float total_dist = nodePath[nodePath.size() - 1]->getDist();
+	float walk_dist = 0;
+	int prev_dist = nodePath[0]->getDist();
+	float percentage_a;
+
+
+	for (size_t i = 1; i < nodePath.size(); i++) {
+
+		if (nodePath[i]->getWayTogetThere() == 'W')
+			walk_dist += (nodePath[i]->getDist()-prev_dist);
+
+		prev_dist = nodePath[i]->getDist();
+	}
+
+	return(percentage_a > percentage);
+
+
+}
 void initialMenu(Graph &g, GraphViewer *gv){
+	readFiles(g, gv);
 	cout << "Escolha a minimizacao a efetuar:" << endl;
-	cout << "1-Minimização da distancia a percorrer" << endl;
-	cout << "2-Minimização do tempo de viagem" << endl;
-	cout << "3-Minimização das mudanças de linha de transporte" << endl;
-	int option;
+	cout << "1-Minimizacao da distancia a percorrer" << endl;
+	cout << "2-Minimizacao do tempo de viagem" << endl;
+	cout << "3-Minimizacao das mudanï¿½as de linha de transporte" << endl;
+	
 
 	while (1) {
 		cout <<"Escolha uma opcao: ";
+		int option;
 		cin >> option;
+		if (cin.fail()) {
+			cout << endl << "Introduza uma opcao valida!" << endl;
+			cin.clear();
+			cin.ignore(256, '\n');
+		}
 		switch (option) {
 		case 1:testDijkstraShortestDistance(g, gv);
 			break;
@@ -306,6 +340,7 @@ void initialMenu(Graph &g, GraphViewer *gv){
 			break;
 		default:
 			cout <<endl<< "Introduza uma opcao valida!" << endl;
+			break;
 		}
 
 	}
