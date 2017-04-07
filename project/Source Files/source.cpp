@@ -13,7 +13,6 @@
 #include <ctime>
 #include "graphviewer.h"
 #include "graph.hpp"
-#include "Graphics.cpp"
 
  /*CONSTANTS */
 
@@ -281,6 +280,13 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 		cout << "Transports Used : " << totalDist << "\n";
 	}
 
+	system("pause");
+	for (int i = 1; i < path.size(); i++)
+	{
+		PathTo p = path.at(i);
+		gv->setVertexColor(p.path, "yellow");
+	}
+	gv->rearrange();
 }
 
 
@@ -356,7 +362,6 @@ void displayMenu(Graph &graph, GraphViewer *gv) {
 		cin >> option;
 		if (cin.fail())
 		{
-			cout << endl << "Introduza uma opcao valida!" << endl;
 			cin.clear();
 			cin.ignore(256, '\n');
 		}
