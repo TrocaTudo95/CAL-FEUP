@@ -213,7 +213,7 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	Graph * copiedGraph = g.copy();
 	copiedGraph->preprocessGraphForWaitingTimes();
-	int initialVertex = 655, finalVertex = 579;
+	int initialVertex = 286, finalVertex = 1027;
 	clock_t begin = clock();
 	copiedGraph->dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();

@@ -679,7 +679,8 @@ void Graph::preprocessGraphForWaitingTimes()
 {
 	for (int tl = 0; tl < transportationLines.size(); tl++) {
 		TransportLine * t = transportationLines.at(tl);
-		if (t->getType() == 'W') {
+		char typeOfTransport = t->getType();
+		if (typeOfTransport == 'W' || typeOfTransport == 'T') {
 			continue;
 		}
 		int initialEdgeId = t->getInitialEdgeId();
@@ -698,6 +699,7 @@ void Graph::preprocessGraphForWaitingTimes()
 					Node * dest = nodeMap.at(*itDest);
 					highestEdgeId++;
 					Edge * e = src->addEdge(highestEdgeId, dest, weight);
+					edgeMap.insert(make_pair(e->id, e));
 					e->setTransportLine(t);
 				}
 			}
