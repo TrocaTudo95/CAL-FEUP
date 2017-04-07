@@ -456,38 +456,6 @@ void Graph::bellmanFordShortestPath(const int & s)
 }
 
 
-void Graph::dijkstraShortestPath(const int & s)
-{
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++)
-	{
-		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
-	}
-
-	Node* v = getNode(s);
-	v->dist = 0;
-	vector<Node *> pq;
-	pq.push_back(v);
-
-	make_heap(pq.begin(), pq.end(), Node_greater_than());
-	while (!pq.empty()) {
-		v = pq.front();
-		pop_heap(pq.begin(), pq.end(), Node_greater_than());
-		pq.pop_back();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i]->dest;
-			if (w->dist > v->dist + v->adj[i]->weight) {
-				w->dist = v->dist + v->adj[i]->weight;
-				w->path = v;
-				pq.push_back(w);
-				push_heap(pq.begin(), pq.end(), Node_greater_than());
-			}
-		}
-	}
-}
-
 void Graph::dijkstraShortestPath_distance(const int & s)
 {
 	typename hashNodes::iterator it = nodeMap.begin();
@@ -525,9 +493,72 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
+	}
+}
+
+void Graph::dijkstraShortestPath_distance(const int & s, const int & d) {
+	typename hashNodes::iterator it = nodeMap.begin();
+	typename hashNodes::iterator ite = nodeMap.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->processing = false;
+		it->second->dist = INT_INFINITY;
+	}
+
+	Node* dNode = getNode(d);
+	Node* v = getNode(s);
+	double alfa, xCenter, yCenter, semiA, semiB, dY, dX, distance;
+	double xR[3], yR[3];
+	dY = (v->coords.y - dNode->coords.y);
+	dX = (v->coords.x - dNode->coords.x);
+	xCenter = (v->coords.x + dNode->coords.x) / 2.0;
+	yCenter = (v->coords.y + dNode->coords.y) / 2.0;
+	distance = sqrt(pow(dX, 2) + pow(dY, 2));
+	semiA = distance * 1.2;
+	semiB = distance;
+	alfa = -atan(dY / dX);
+	xR[0] = cos(alfa); xR[1] = -sin(alfa); xR[2] = yCenter*sin(alfa) - xCenter*cos(alfa) + xCenter;
+	yR[0] = sin(alfa); yR[1] = cos(alfa); yR[2] = -xCenter*sin(alfa) - yCenter*cos(alfa) + yCenter;
+	v->dist = 0;
+	vector<Node *> pq;
+	pq.push_back(v);
+	vector<Edge *> adja;
+	vector<Edge *> onFoot;
+	vector<Node *> temp;
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
+	while (!pq.empty())
+	{
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
+		pq.pop_back();
+		adja = v->adj;
+		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		onFoot = getCloseEdges(temp, v);
+		addEdgesFoot(adja, onFoot);
+
+		for (unsigned int i = 0; i < adja.size(); i++)
+		{
+			Node* w = adja[i]->dest;
+			if (w->dist > v->dist + adja[i]->weight)
+			{
+				w->dist = v->dist + adja[i]->weight;
+				w->path = v;
+				if (!w->processing)
+				{
+					double xRotated, yRotated;
+					xRotated = xR[0] * w->coords.x + xR[1] * w->coords.y + xR[2];
+					yRotated = yR[0] * w->coords.x + yR[1] * w->coords.y + yR[2];
+					w->processing = true;
+					if (pow(((xRotated - xCenter)/semiA), 2)+pow(((yRotated-yCenter)/semiB),2) <= 1)
+						pq.push_back(w);
+				}
+			}
+		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 	}
 }
 
@@ -590,9 +621,9 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 	}
 }
 
@@ -688,9 +719,9 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); 
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than());
 	}
 }
 

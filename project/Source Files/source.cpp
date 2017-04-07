@@ -244,11 +244,12 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 655, finalVertex = 579;
+	int initialVertex = 660, finalVertex = 1131;
 	clock_t begin = clock();
-	g.dijkstraShortestPath_distance(initialVertex);
+	g.dijkstraShortestPath_distance(initialVertex, finalVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "TIME: " << time_spent << endl;
 	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
 	gv->setVertexColor(initialVertex, "black");
 	gv->setVertexColor(finalVertex, "black");
