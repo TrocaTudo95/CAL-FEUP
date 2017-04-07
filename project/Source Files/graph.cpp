@@ -139,30 +139,33 @@ void Graph::addTransportationLine(TransportLine * t1,unordered_map<int, pair<int
 	int initialEdge = t1->getInitialEdgeId();
 	int finalEdge = t1->getFinalEdgeId();
 	t1->setEdgeMap(edgeOD);
+	TransportLine *TP = nullptr;
 	
 	for (int i = initialEdge; i <= finalEdge; i++) {
 		edgeMap[i]->setTransportLine(t1);
-		Node *ori = nodeMap[edgeOD.at(i).first];
-		Node *dest = nodeMap[edgeOD.at(i).second];
-		double w = sqrt(pow(ori->getCoords().x - dest->getCoords().x, 2) + pow(ori->getCoords().y - dest->getCoords().y, 2));
-		highestEdgeId++;
-		Edge * addedEdge = dest->addEdge(highestEdgeId,ori, w);
-		edgeMap.insert(make_pair(highestEdgeId, addedEdge));
-		if (t1->isBidirectional())
-		{
-			edgeMap[highestEdgeId]->setTransportLine(t1);
-		}
-		else
-		{
-			if (t1->getType() != 'T')
+		if (t1->getType() != 'T'){
+			Node *ori = nodeMap[edgeOD.at(i).first];
+			Node *dest = nodeMap[edgeOD.at(i).second];
+			double w = sqrt(pow(ori->getCoords().x - dest->getCoords().x, 2) + pow(ori->getCoords().y - dest->getCoords().y, 2));
+			highestEdgeId++;
+			Edge * addedEdge = dest->addEdge(highestEdgeId,ori, w);
+			edgeMap.insert(make_pair(highestEdgeId, addedEdge));
+			if (t1->isBidirectional())
 			{
-				TransportLine *TP = t1->createReverse();
-				edgeMap[highestEdgeId]->setTransportLine(TP);
-				transportationLines.push_back(TP);
+			edgeMap[highestEdgeId]->setTransportLine(t1);
+			}
+			else
+			{
+			TP = t1->createReverse();
+			edgeMap[highestEdgeId]->setTransportLine(TP);
+			transportationLines.push_back(TP);
 			}
 		}
 	}
 	transportationLines.push_back(t1);
+	if (TP != nullptr) {
+		transportationLines.push_back(TP);
+	}
 	
 }
 

@@ -97,12 +97,13 @@ void readNamesFile(Graph &graph, unordered_map<int, pair<int, int>> &edgeMap) {
 		if (!firstTime) {
 			linestream >> finalEdge;
 			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%6 +5)*60);
-			graph.addTransportationLine(tl, edgeMap);
-			initialEdge = finalEdge;
 			if (lines.size() > 0) {
 				tl->addLines(lines);
 				tl->setType(typeOfLine);
 			}
+			graph.addTransportationLine(tl, edgeMap);
+			initialEdge = finalEdge;
+			
 		}
 		else {
 			linestream >> initialEdge;
@@ -213,7 +214,7 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	Graph * copiedGraph = g.copy();
 	copiedGraph->preprocessGraphForWaitingTimes();
-	int initialVertex = 187, finalVertex = 729;
+	int initialVertex = 187, finalVertex = 673;
 	clock_t begin = clock();
 	copiedGraph->dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
