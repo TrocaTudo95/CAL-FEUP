@@ -26,6 +26,8 @@ public:
 	bool operator==(const Edge& e) const;
 	void setTransportLine(TransportLine *tl);
 	TransportLine getTransportLine() { return (*line); };
+	Node * getDest() { return dest; }
+	double getWeight() { return weight; }
 };
 
 #endif /* EGDE_HPP_ */
