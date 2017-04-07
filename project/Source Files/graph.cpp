@@ -135,11 +135,7 @@ void Graph::addTransportationLine(TransportLine * t1) {
 
 void Graph::addTransportationLine(TransportLine * t1,unordered_map<int, pair<int, int>> &edgeOD)
 {
-	for (int i = 0; i < transportationLines.size(); i++) {
-		if (transportationLines.at(i) == t1) {
-			return;
-		}
-	}
+
 	int initialEdge = t1->getInitialEdgeId();
 	int finalEdge = t1->getFinalEdgeId();
 	t1->setEdgeMap(edgeOD);
@@ -158,8 +154,12 @@ void Graph::addTransportationLine(TransportLine * t1,unordered_map<int, pair<int
 		}
 		else
 		{
-			TransportLine *TP = t1->createReverse();
-			edgeMap[highestEdgeId]->setTransportLine(TP);
+			if (t1->getType() != 'T')
+			{
+				TransportLine *TP = t1->createReverse();
+				edgeMap[highestEdgeId]->setTransportLine(TP);
+				transportationLines.push_back(TP);
+			}
 		}
 	}
 	transportationLines.push_back(t1);
