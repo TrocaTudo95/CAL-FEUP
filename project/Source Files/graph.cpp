@@ -499,6 +499,10 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 	}
 }
 
+void printMSG(int id) {
+	cout << "Hello from thread, analysing Node: " << id << endl;
+}
+
 void Graph::dijkstraShortestPath_distance(const int & s, const int & d) {
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
@@ -518,8 +522,8 @@ void Graph::dijkstraShortestPath_distance(const int & s, const int & d) {
 	xCenter = (v->coords.x + dNode->coords.x) / 2.0;
 	yCenter = (v->coords.y + dNode->coords.y) / 2.0;
 	distance = sqrt(pow(dX, 2) + pow(dY, 2));
-	semiA = distance * 1.2;
-	semiB = distance;
+	semiA = distance * 0.9;
+	semiB = distance * 0.8;
 	alfa = -atan(dY / dX);
 	xR[0] = cos(alfa); xR[1] = -sin(alfa); xR[2] = yCenter*sin(alfa) - xCenter*cos(alfa) + xCenter;
 	yR[0] = sin(alfa); yR[1] = cos(alfa); yR[2] = -xCenter*sin(alfa) - yCenter*cos(alfa) + yCenter;
@@ -533,6 +537,7 @@ void Graph::dijkstraShortestPath_distance(const int & s, const int & d) {
 	while (!pq.empty())
 	{
 		v = pq.front();
+		thread t1(printMSG, v->getInfo());
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
@@ -553,12 +558,13 @@ void Graph::dijkstraShortestPath_distance(const int & s, const int & d) {
 					xRotated = xR[0] * w->coords.x + xR[1] * w->coords.y + xR[2];
 					yRotated = yR[0] * w->coords.x + yR[1] * w->coords.y + yR[2];
 					w->processing = true;
-					if (pow(((xRotated - xCenter)/semiA), 2)+pow(((yRotated-yCenter)/semiB),2) <= 1)
+					//if (pow(((xRotated - xCenter)/semiA), 2)+pow(((yRotated-yCenter)/semiB),2) <= 1)
 						pq.push_back(w);
 				}
 			}
 		}
 		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
+		t1.join();
 	}
 }
 

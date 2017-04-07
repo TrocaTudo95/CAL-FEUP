@@ -215,7 +215,7 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
 
-	int initialVertex =55, finalVertex = 980;
+	int initialVertex =1823, finalVertex = 8136;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
@@ -244,7 +244,7 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 660, finalVertex = 1131;
+	int initialVertex = 1823, finalVertex = 8136;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_distance(initialVertex, finalVertex);
 	clock_t end = clock();
