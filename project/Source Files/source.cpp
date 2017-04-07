@@ -214,7 +214,6 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 }
 
 void testDijkstraTime(Graph &g, GraphViewer *gv) {
-
 	int initialVertex =1823, finalVertex = 8136;
 	clock_t begin = clock();
 	g.dijkstraShortestPath_time(initialVertex);
@@ -226,7 +225,6 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	gv->setVertexColor(initialVertex, "black");
 	printPath(path, "seconds", gv);
 	gv->setVertexColor(finalVertex, "black");
-
 }
 
 void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {

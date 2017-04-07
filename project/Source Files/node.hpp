@@ -34,9 +34,9 @@ class Node {
 
 public:
 	Node* path;
-
 	friend class Graph;
 	Node(int info, Point coords);
+	vector<Edge*> getAdj() {return adj;}
 
 	Edge* addEdge(int id,Node *dest, double w);
 	bool removeEdgeTo(Node *d);
@@ -45,6 +45,11 @@ public:
 	void setInfo(int info);
 
 	int getDist() const;
+	void setDist(int dist);
+
+	bool getProcessing();
+	void setProcessing(bool pro);
+
 	int getIndegree() const;
 
 	void setCoords(Point coords);

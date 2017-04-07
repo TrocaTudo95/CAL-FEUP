@@ -51,6 +51,18 @@ int Node::getDist() const {
 	return this->dist;
 }
 
+void Node::setDist(int dist) {
+	this->dist = dist;
+}
+
+bool Node::getProcessing() {
+	return this->processing;
+}
+
+void Node::setProcessing(bool pro) {
+	this->processing = pro;
+}
+
 
 
 void Node::setInfo(int info) {
