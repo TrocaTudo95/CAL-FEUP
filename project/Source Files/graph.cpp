@@ -374,6 +374,29 @@ vector<PathTo> Graph::getPath(const int &origin, const int &dest) {
 	return res;
 }
 
+vector<Node *> Graph::getNodePath(const int &origin, const int &dest) {
+	list<Node *> buffer;
+	vector<Node *> res;
+	Node* v = getNode(dest);
+	buffer.push_front(v);
+	while (v->path != NULL &&  v->path->info != origin) {
+		v = v->path;
+		buffer.push_front(v);
+	}
+	if (v->path != NULL) {
+		v = v->path;
+		buffer.push_front(v);
+	}
+
+	while (!buffer.empty()) {
+		res.push_back(buffer.front());
+		buffer.pop_front();
+	}
+	return res;
+}
+
+
+
 
 
 void Graph::unweightedShortestPath(const int &s) {
@@ -433,38 +456,6 @@ void Graph::bellmanFordShortestPath(const int & s)
 }
 
 
-void Graph::dijkstraShortestPath(const int & s)
-{
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++)
-	{
-		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
-	}
-
-	Node* v = getNode(s);
-	v->dist = 0;
-	vector<Node *> pq;
-	pq.push_back(v);
-
-	make_heap(pq.begin(), pq.end(), Node_greater_than());
-	while (!pq.empty()) {
-		v = pq.front();
-		pop_heap(pq.begin(), pq.end(), Node_greater_than());
-		pq.pop_back();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i]->dest;
-			if (w->dist > v->dist + v->adj[i]->weight) {
-				w->dist = v->dist + v->adj[i]->weight;
-				w->path = v;
-				pq.push_back(w);
-				push_heap(pq.begin(), pq.end(), Node_greater_than());
-			}
-		}
-	}
-}
-
 void Graph::dijkstraShortestPath_distance(const int & s)
 {
 	typename hashNodes::iterator it = nodeMap.begin();
@@ -502,9 +493,72 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
+	}
+}
+
+void Graph::dijkstraShortestPath_distance(const int & s, const int & d) {
+	typename hashNodes::iterator it = nodeMap.begin();
+	typename hashNodes::iterator ite = nodeMap.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->processing = false;
+		it->second->dist = INT_INFINITY;
+	}
+
+	Node* dNode = getNode(d);
+	Node* v = getNode(s);
+	double alfa, xCenter, yCenter, semiA, semiB, dY, dX, distance;
+	double xR[3], yR[3];
+	dY = (v->coords.y - dNode->coords.y);
+	dX = (v->coords.x - dNode->coords.x);
+	xCenter = (v->coords.x + dNode->coords.x) / 2.0;
+	yCenter = (v->coords.y + dNode->coords.y) / 2.0;
+	distance = sqrt(pow(dX, 2) + pow(dY, 2));
+	semiA = distance * 1.2;
+	semiB = distance;
+	alfa = -atan(dY / dX);
+	xR[0] = cos(alfa); xR[1] = -sin(alfa); xR[2] = yCenter*sin(alfa) - xCenter*cos(alfa) + xCenter;
+	yR[0] = sin(alfa); yR[1] = cos(alfa); yR[2] = -xCenter*sin(alfa) - yCenter*cos(alfa) + yCenter;
+	v->dist = 0;
+	vector<Node *> pq;
+	pq.push_back(v);
+	vector<Edge *> adja;
+	vector<Edge *> onFoot;
+	vector<Node *> temp;
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
+	while (!pq.empty())
+	{
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
+		pq.pop_back();
+		adja = v->adj;
+		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		onFoot = getCloseEdges(temp, v);
+		addEdgesFoot(adja, onFoot);
+
+		for (unsigned int i = 0; i < adja.size(); i++)
+		{
+			Node* w = adja[i]->dest;
+			if (w->dist > v->dist + adja[i]->weight)
+			{
+				w->dist = v->dist + adja[i]->weight;
+				w->path = v;
+				if (!w->processing)
+				{
+					double xRotated, yRotated;
+					xRotated = xR[0] * w->coords.x + xR[1] * w->coords.y + xR[2];
+					yRotated = yR[0] * w->coords.x + yR[1] * w->coords.y + yR[2];
+					w->processing = true;
+					if (pow(((xRotated - xCenter)/semiA), 2)+pow(((yRotated-yCenter)/semiB),2) <= 1)
+						pq.push_back(w);
+				}
+			}
+		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 	}
 }
 
@@ -542,10 +596,6 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 			TransportLine * currentTransportLine = edge->line;
 			int edgeDistance = edge->weight * PIXEL_TO_METER;
 			char typeOfTransportLine;
-			bool onTransport = true;
-			if (v->wayToGetThere == 'W') {
-				onTransport = false;
-			}
 			Node* w = edge->dest;
 			if (currentTransportLine != nullptr) {
 				typeOfTransportLine = currentTransportLine->getType();
@@ -556,23 +606,10 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 				tempo = edgeDistance/ WALK_SPEED;
 				break;
 			case 'B':
-				if (onTransport)
 				 tempo = edgeDistance/ BUS_SPEED;
-				else {
-					tempo =  edgeDistance/ BUS_SPEED + currentTransportLine->getWaitTime();
-
-					if (edgeDistance/ WALK_SPEED < tempo) {
-						tempo = edgeDistance/ WALK_SPEED;
-						typeOfTransportLine = 'W';
-					}
-				}
 				break;
 			case 'T':
-				if (onTransport)
 				tempo = edgeDistance / METRO_SPEED;
-				else
-					tempo = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
-
 				break;
 			}
 
@@ -584,9 +621,9 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 	}
 }
 
@@ -682,9 +719,9 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); 
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than());
 	}
 }
 
@@ -732,7 +769,17 @@ vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 		y_dest = v->getCoords().y;
 		dist = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
 		if (dist <= max_dist) {
-			closeNodes.push_back(it->second);
+			bool found = false;
+			for (size_t i = 0; i < n_source->adj.size(); i++)
+			{
+				if (it->second == n_source->adj.at(i)->dest)
+				{
+					found = true;
+					break;
+				}
+			}
+			if(!found)
+				closeNodes.push_back(it->second);
 		}
 	}
 	return closeNodes;
