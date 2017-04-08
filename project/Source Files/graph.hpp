@@ -88,22 +88,23 @@ public:
 	bool removeEdge(const int &sourc, const int &dest);
 	
 	hashNodes getNodeMap() const;
-	int getNumNode() const;
 	Edge* getEdgeById(int id);
 
 	Node* getNode(const int &v) const;
 
 	vector<Node*> getSources() const;
-
 	vector<PathTo> getPath(const int &origin, const int &dest);
+	vector<Node *> getNodePath(const int &origin, const int &dest);
+	vector<Node *> getCloseNodes(int max_dist, Node * n_source);
+	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
+
 	void unweightedShortestPath(const int &v);
 
 	void bellmanFordShortestPath(const int &v);
 
 	bool checkWalkPercentage(const int &origin, const int &dest, float percentage);
 
-	vector<Node *> getCloseNodes(int max_dist, Node * n_source);
-	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
+	
 
 	void dijkstraShortestDistance(const int & s);
 	void dijkstraShortestDistance(const int & s, const int & d);
@@ -116,9 +117,7 @@ public:
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
 	bool alreadyExists(vector<Edge*> & edges, Edge * e);
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
-
-	void dijkstraShortestPath_time(const int & s);
-	vector<Node *> getNodePath(const int &origin, const int &dest);
+	
 
 	void preprocessGraphForWaitingTimes();
 	Graph * copy();

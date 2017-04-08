@@ -7,11 +7,6 @@
 * ================================================================================================
 */
 
-
-int Graph::getNumNode() const {
-	return nodeMap.size();
-}
-
 Edge * Graph::getEdgeById(int id)
 {
 	typename hashEdges::const_iterator it = edgeMap.find(id);
@@ -24,8 +19,6 @@ Edge * Graph::getEdgeById(int id)
 hashNodes Graph::getNodeMap() const {
 	return nodeMap;
 }
-
-
 
 
 Graph::Graph()
