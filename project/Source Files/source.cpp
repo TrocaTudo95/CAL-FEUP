@@ -105,6 +105,7 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 		std::getline(linestream, coords, ';');  // read up-to the first ; (discard ;).
 		linestream >> point.y;
 		gv->addNode(idNo, point.x, point.y);
+		gv->setVertexLabel(idNo, to_string(idNo));
 		graph.addNode(idNo, point);
 	}
 	inFile.close();
