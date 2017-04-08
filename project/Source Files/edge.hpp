@@ -31,7 +31,6 @@ public:
 	TransportLine* getTransportLine();
 	Node * getDest() const;
 	Edge* copyEdge();
-
 };
 
 #endif /* EGDE_HPP_ */

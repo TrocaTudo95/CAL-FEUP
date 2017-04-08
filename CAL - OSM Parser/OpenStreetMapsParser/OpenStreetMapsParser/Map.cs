@@ -14,10 +14,9 @@ using System.Xml;
 using System.Globalization;
 using System.IO;
 
-
-
 namespace OpenStreetMapsParser
 {
+
     class Map
     {
         Dictionary<string, RoadType> roadTypes;
@@ -438,9 +437,10 @@ namespace OpenStreetMapsParser
 
         }
 
-        public void saveOpenStreetMapCropped(float minLat, float minLon, float maxLat, float maxLon, string fileNameNodes, string fileNameRoads, string fileNameSubRoads)
+        public void saveOpenStreetMapCropped(float minLat, float minLon, float maxLat, float maxLon, string fileNameNodes, string fileNameRoads, string fileNameSubRoads, string fileDistance)
         {
             StreamWriter file = new StreamWriter(fileNameNodes);
+            StreamWriter metroToPixel = new StreamWriter(fileDistance);
             //file.WriteLine("##NODES##");
 
             long nodeID = 1;
@@ -450,7 +450,20 @@ namespace OpenStreetMapsParser
             PointF minProjc = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(minLon, minLat));
             PointF maxProjc = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(maxLon, maxLat));
             double ration = (maxProjc.X - minProjc.X) / (maxProjc.Y - minProjc.Y);
-
+            const double EARTH_RADIUOS = 6371000.0;
+            double distancia_LON = EARTH_RADIUOS * Math.Cos((minProjc.Y + maxProjc.Y) / 2) * (maxProjc.X - minProjc.X);
+            double distancia_LAT = EARTH_RADIUOS * (maxProjc.Y - minProjc.Y);
+            if (ration <= (16.0 / 9.0))
+            {
+                metroToPixel.WriteLine(distancia_LON / (1080 * ration));
+                metroToPixel.WriteLine(distancia_LAT / 1080);
+            }
+            else
+            {
+                metroToPixel.WriteLine(distancia_LON / 1920);
+                metroToPixel.WriteLine(distancia_LAT / (1920 / ration));
+            }
+            metroToPixel.Close();
             foreach (KeyValuePair<long, Node> e in croppedNodes)
             {
                 Node x = e.Value;
@@ -459,9 +472,9 @@ namespace OpenStreetMapsParser
                 float lon = x.getLon();
                 PointF xy = PlateCareePaintMapModel.GPSCoordinatesToProjection(new PointF(lon, lat));
                 int xPoint, yPoint;
-                if (ration <= 16 / 9)
+                if (ration <= 16.0 / 9.0)
                 {
-                    xPoint = (int)(minProjc.X + (int) (1080 / ration) / (maxProjc.X - minProjc.X) * (xy.X - minProjc.X));
+                    xPoint = (int)(minProjc.X + (int) (1080 * ration) / (maxProjc.X - minProjc.X) * (xy.X - minProjc.X));
                     yPoint = 1080 - (int)(minProjc.Y + 1080 / (maxProjc.Y - minProjc.Y) * (xy.Y - minProjc.Y));
                 }
                 else

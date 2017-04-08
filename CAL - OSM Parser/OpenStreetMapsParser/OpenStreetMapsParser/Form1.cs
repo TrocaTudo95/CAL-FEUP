@@ -230,39 +230,51 @@ namespace OpenStreetMapsParser
                     if (res != DialogResult.Cancel)
                     if (fileNameSubRoads != "")
                     {
-                        if (this.destMinLatitudeTextBox.Text != "" && this.destMinLongitudeTextBox.Text != "" && this.destMaxLatitudeTextBox.Text != "" && this.destMaxLongitudeTextBox.Text != "")
+                        this.saveFileDialog1.Title = "Select the file to save the Metro per Pixel";
+                        this.saveFileDialog1.FileName = "";
+                        res = this.saveFileDialog1.ShowDialog();
+                        string fileDistance = this.saveFileDialog1.FileName;
+                        if (res != DialogResult.Cancel)
+                        if (fileDistance != "")
                         {
-                            try
+                            if (this.destMinLatitudeTextBox.Text != "" && this.destMinLongitudeTextBox.Text != "" && this.destMaxLatitudeTextBox.Text != "" && this.destMaxLongitudeTextBox.Text != "")
                             {
-                                this.openStreetMapFileButton.Enabled = false;
-                                this.analyseOriginalMapButton.Enabled = false;
-                                this.produceNewMapButton.Enabled = false;
-                                this.produceMapFileButton.Enabled = false;
+                                try
+                                {
+                                    this.openStreetMapFileButton.Enabled = false;
+                                    this.analyseOriginalMapButton.Enabled = false;
+                                    this.produceNewMapButton.Enabled = false;
+                                    this.produceMapFileButton.Enabled = false;
 
-                                float minlat = float.Parse(this.destMinLatitudeTextBox.Text, CultureInfo.InvariantCulture);
-                                float minlon = float.Parse(this.destMinLongitudeTextBox.Text, CultureInfo.InvariantCulture);
-                                float maxlat = float.Parse(this.destMaxLatitudeTextBox.Text, CultureInfo.InvariantCulture);
-                                float maxlon = float.Parse(this.destMaxLongitudeTextBox.Text, CultureInfo.InvariantCulture);
+                                    float minlat = float.Parse(this.destMinLatitudeTextBox.Text, CultureInfo.InvariantCulture);
+                                    float minlon = float.Parse(this.destMinLongitudeTextBox.Text, CultureInfo.InvariantCulture);
+                                    float maxlat = float.Parse(this.destMaxLatitudeTextBox.Text, CultureInfo.InvariantCulture);
+                                    float maxlon = float.Parse(this.destMaxLongitudeTextBox.Text, CultureInfo.InvariantCulture);
 
-                                this.map.saveOpenStreetMapCropped(minlat, minlon, maxlat, maxlon, fileNameNodes, fileNameRoads, fileNameSubRoads);
+                                    this.map.saveOpenStreetMapCropped(minlat, minlon, maxlat, maxlon, fileNameNodes, fileNameRoads, fileNameSubRoads, fileDistance);
 
-                                this.openStreetMapFileButton.Enabled = true;
-                                this.analyseOriginalMapButton.Enabled = true;
-                                this.produceNewMapButton.Enabled = true;
-                                this.produceMapFileButton.Enabled = true;
-                            }
-                            catch (FormatException)
-                            {
-                                MessageBox.Show("The latitude or longitude values are in a wrong format.");
-                            }
-                            catch (Exception)
-                            {
-                                MessageBox.Show("An error occured! Please contact an administrator");
-                            }
+                                    this.openStreetMapFileButton.Enabled = true;
+                                    this.analyseOriginalMapButton.Enabled = true;
+                                    this.produceNewMapButton.Enabled = true;
+                                    this.produceMapFileButton.Enabled = true;
+                                }
+                                catch (FormatException)
+                                {
+                                    MessageBox.Show("The latitude or longitude values are in a wrong format.");
+                                }
+                                catch (Exception)
+                                {
+                                    MessageBox.Show("An error occured! Please contact an administrator");
+                                }
+                             }
+                             else
+                             {
+                                MessageBox.Show("Invalid latitude or longitude values!");
+                             }
                         }
                         else
                         {
-                            MessageBox.Show("Invalid latitude or longitude values!");
+                            MessageBox.Show("Invalid distance filename!");
                         }
                     }
                     else

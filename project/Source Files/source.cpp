@@ -21,12 +21,14 @@
 #define NODES_FILENAME "nos.txt"
 #define EDGES_FILENAME "arestas.txt"
 #define LINES_FILENAME "names.txt"
+#define METER_PER_PIXEL_FILENAME "meter_per_pixel.txt"
 #define TAB_SPACE_INITIAL "     "
 #define TAB_SPACE "         "
 #define WALKING_LIMIT 0.5
 
 const int WIDTHOFGRAPH = 1920;
 const int HEIGHTOFGRAPH = 1080;
+
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
@@ -42,6 +44,21 @@ bool openFile(ifstream &inFile, const string filename) {
 		exit(1);   // call system to stop
 	}
 	return true;
+}
+
+void readMeter_Per_Pixel(Graph &graph) {
+	ifstream inFile;
+	openFile(inFile, METER_PER_PIXEL_FILENAME);
+	std::string line;
+	getline(inFile, line);
+	double d = stod(line.substr());
+	cout << d << endl;
+	graph.setMETER_PER_PIXEL_X(d);
+	getline(inFile, line);
+	d = stod(line.substr());
+	cout << d << endl;
+	graph.setMETER_PER_PIXEL_Y(d);
+	inFile.close();
 }
 
 
@@ -68,9 +85,7 @@ void readEdgesFile(Graph &graph, GraphViewer *gv, unordered_map<int, pair<int,in
 		graph.addEdge(idAresta,idNoOrigem, idNoDestino);
 		edgeMap.insert(make_pair(idAresta, make_pair(idNoOrigem, idNoDestino)));
 	}
-
 	inFile.close();
-
 }
 
 void readNodesFile(Graph &graph, GraphViewer *gv) {
@@ -131,6 +146,7 @@ void readNamesFile(Graph &graph, unordered_map<int, pair<int, int>> &edgeMap) {
 }
 
 void readFiles(Graph &graph, GraphViewer *gv) {
+	readMeter_Per_Pixel(graph);
 	readNodesFile(graph, gv);
 	unordered_map<int, pair<int, int>> edgeInfo;
 	readEdgesFile(graph, gv, edgeInfo);
@@ -237,7 +253,7 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 1823, finalVertex = 8136;
+	int initialVertex = 1530, finalVertex = 954;
 	clock_t begin = clock();
 	//Testing dijkstra optimized by Elipse
 	g.dijkstraShortestDistance(initialVertex, finalVertex);

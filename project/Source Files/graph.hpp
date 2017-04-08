@@ -31,8 +31,6 @@ const int INT_INFINITY = INT_MAX;
 const int WALK_SPEED = 1;
 const int BUS_SPEED = 10;
 const int METRO_SPEED = 20;
-const int PIXEL_TO_METER = 8;
-
 
 
 class Node;
@@ -67,12 +65,17 @@ class Graph {
 	void dfsVisit();
 	int highestEdgeId;
 	vector<TransportLine*> transportationLines;
+	double METER_PER_PIXEL_X;
+	double METER_PER_PIXEL_Y;
 
 	//void getPathTo(Node *origin, list<int> &res);
 
 public:
 	Graph();
 	~Graph();
+
+	void setMETER_PER_PIXEL_X(double d);
+	void setMETER_PER_PIXEL_Y(double d);
 
 	hashNodes* copyNodes();
 	void copyEdges(hashNodes originalNodes);

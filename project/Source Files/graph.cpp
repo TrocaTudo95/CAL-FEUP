@@ -24,6 +24,8 @@ hashNodes Graph::getNodeMap() const {
 Graph::Graph()
 {
 	highestEdgeId = 0;
+	METER_PER_PIXEL_X = 1;
+	METER_PER_PIXEL_Y = 1;
 }
 
 Graph::~Graph()
@@ -42,6 +44,14 @@ Graph::~Graph()
 		delete(it->second);
 	}
 	cout << "Memory Dealocated\n";
+}
+
+void Graph::setMETER_PER_PIXEL_X(double d) {
+	METER_PER_PIXEL_X = d;
+}
+
+void Graph::setMETER_PER_PIXEL_Y(double d) {
+	METER_PER_PIXEL_Y = d;
 }
 
 hashNodes* Graph::copyNodes()
@@ -111,7 +121,7 @@ void Graph::addTransportationLine(TransportLine * t1,unordered_map<int, pair<int
 		if (t1->getType() != 'T'){
 			Node *ori = nodeMap[edgeOD.at(i).first];
 			Node *dest = nodeMap[edgeOD.at(i).second];
-			double w = sqrt(pow(ori->getCoords().x - dest->getCoords().x, 2) + pow(ori->getCoords().y - dest->getCoords().y, 2));
+			double w = sqrt(pow((ori->getCoords().x - dest->getCoords().x) * METER_PER_PIXEL_X, 2) + pow((ori->getCoords().y - dest->getCoords().y) * METER_PER_PIXEL_Y, 2));
 			highestEdgeId++;
 			Edge * addedEdge = dest->addEdge(highestEdgeId,ori, w);
 			edgeMap.insert(make_pair(highestEdgeId, addedEdge));
@@ -168,13 +178,12 @@ bool Graph::addEdge(int id,const int &sourc, const int &dest) {
 	Node *vS = it->second;
 	Node *vD = ite->second;
 	vD->indegree++;
-	double w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
+	double w = sqrt(pow((vS->coords.x - vD->coords.x)*METER_PER_PIXEL_X, 2) + pow((vS->coords.y - vD->coords.y)*METER_PER_PIXEL_Y, 2));
 	Edge* e = vS->addEdge(id,vD, w);
 	edgeMap.insert(make_pair(id, e));
 	if (id > highestEdgeId) {
 		highestEdgeId = id;
 	}
-
 	return true;
 }
 
@@ -483,7 +492,7 @@ void Graph::dijkstraBestTime(const int & s) {
 			Edge *edge = adja[i];
 			Node* w = edge->dest;
 			TransportLine * currentTransportLine = edge->line;
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
 			char typeOfTransportLine;
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
@@ -552,7 +561,7 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 			Edge *edge = adja[i];
 			Node* w = edge->dest;
 			TransportLine * currentTransportLine = edge->line;
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
 			char typeOfTransportLine;
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
@@ -634,7 +643,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 			int deltaTime;
 			Edge *edge = adja[i];
 			TransportLine * currentTransportLine = edge->line;
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
 			char typeOfTransportLine;
 			Node* w = edge->dest;
 			if (currentTransportLine != nullptr) {
@@ -703,7 +712,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 			Edge *edge = adja[i];
 			Node* w = edge->dest;
 			TransportLine * currentTransportLine = edge->line;
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
 			char typeOfTransportLine;
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
@@ -974,7 +983,7 @@ vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_so
 		Node *dest = nodeMap[closeNodes.at(i)->info];
 		x_dest = dest->getCoords().x;
 		y_dest = dest->getCoords().y;
-		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
+		weight = sqrt(pow((x_src - x_dest)*METER_PER_PIXEL_X, 2) + pow((y_src - y_dest)*METER_PER_PIXEL_Y, 2));
 		int nextId = highestEdgeId++;
 		highestEdgeId = nextId;
 		Edge * e = new Edge(nextId,closeNodes[i], weight);
