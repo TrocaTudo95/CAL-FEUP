@@ -154,7 +154,6 @@ void Graph::setReverseTransportationLines()
 			}
 			else {
 				tlReverse = tl->createReverseWalking(highestTransportLineId + 1, highestEdgeId - numEdges + 1, highestEdgeId);
-
 			}
 			addTransportationLine(tlReverse);
 		}

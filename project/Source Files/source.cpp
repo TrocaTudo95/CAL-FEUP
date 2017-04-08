@@ -536,7 +536,9 @@ void startMenu(Graph &graph, GraphViewer *gv) {
 			cin.clear();
 			cin.ignore(256, '\n');
 		}
-		if (option > 0 && option < 3)
+		if (initialVertex != -1 && finalVertex != -1 && option == 2)
+			functions[option](graph, gv);
+		if (option == 1)
 			functions[option](graph, gv);
 	} while (option != 0);
 }
