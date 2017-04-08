@@ -29,7 +29,6 @@ public:
 	double getWeight() { return weight; }
 	int getTransportLineId();
 	Edge* copyEdge();
-
 };
 
 #endif /* EGDE_HPP_ */

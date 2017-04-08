@@ -25,6 +25,8 @@ Graph::Graph()
 {
 	highestEdgeId = 0;
 	highestTransportLineId = 0;
+	METER_PER_PIXEL_X = 1;
+	METER_PER_PIXEL_Y = 1;
 }
 
 Graph::~Graph()
@@ -43,6 +45,14 @@ Graph::~Graph()
 		delete(it->second);
 	}
 	cout << "Memory Dealocated\n";
+}
+
+void Graph::setMETER_PER_PIXEL_X(double d) {
+	METER_PER_PIXEL_X = d;
+}
+
+void Graph::setMETER_PER_PIXEL_Y(double d) {
+	METER_PER_PIXEL_Y = d;
 }
 
 hashNodes* Graph::copyNodes()
@@ -189,10 +199,10 @@ bool Graph::addEdge(int id,const int &sourc, const int &dest, int w) {
 	}
 	Edge* e = vS->addEdge(id,dest, w);
 	edgeMap.insert(make_pair(id, make_pair(e,sourc)));
+
 	if (id > highestEdgeId) {
 		highestEdgeId = id;
 	}
-
 	return true;
 }
 
@@ -589,7 +599,7 @@ void Graph::dijkstraBestTime(const int & s) {
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
 			char typeOfTransportLine;
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
@@ -625,8 +635,9 @@ void Graph::dijkstraBestTime(const int & s) {
 	}
 }
 
-void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
+void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cost)
 {
+	
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++)
@@ -655,10 +666,12 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int deltaTime;
+			double cost;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
+
 			char typeOfTransportLine;
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
@@ -669,6 +682,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 				typeOfTransportLine = currentTransportLine->getType();
 			}
 			else typeOfTransportLine = 'W';
+
+
+
 			switch (typeOfTransportLine) {
 			case 'W':
 				deltaTime = edgeDistance / WALK_SPEED;
@@ -684,6 +700,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 						typeOfTransportLine = 'W';
 					}
 				}
+				if (max_cost > 0)
+					if (v->cost > max_cost)
+						deltaTime = 99999;
 				break;
 			case 'T':
 				if (onTransport)
@@ -691,6 +710,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 				else
 					deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
 
+				if (max_cost > 0)
+					if (v->cost > max_cost)
+						deltaTime = 99999;
 				break;
 			}
 
@@ -698,6 +720,10 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 				w->dist = v->dist + deltaTime;
 				w->path = v;
 				w->wayToGetThere = typeOfTransportLine;
+				if (max_cost > 0) {
+					cost = calculateCost(edgeDistance, typeOfTransportLine);
+					w->cost = v->cost + cost;
+				}
 				if (!w->processing) {
 					w->processing = true;
 					pq.push_back(w);
@@ -741,7 +767,8 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
+
 			char typeOfTransportLine;
 		
 			if (currentTransportLine != nullptr) {
@@ -810,7 +837,8 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
-			int edgeDistance = edge->weight * PIXEL_TO_METER;
+			int edgeDistance = edge->weight;
+
 			char typeOfTransportLine;
 			bool onTransport = true;
 			if (v->wayToGetThere == 'W') {
@@ -863,7 +891,69 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 	}
 }
 
+void Graph::dijkstraLessTransportsUsed(const int & s)
+{
+	typename hashNodes::iterator it = nodeMap.begin();
+	typename hashNodes::iterator ite = nodeMap.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->processing = false;
+		it->second->dist = INT_INFINITY;
+		it->second->linesPath.clear();
+		it->second->wayToGetThere = 'W';
+	}
 
+	Node* v = getNode(s);
+	v->dist = 0;
+	vector<Node *> pq;
+	pq.push_back(v);
+	vector<Edge* > adja;
+	vector<Edge *> onFoot;
+	vector<int> closeNodes;
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
+	while (!pq.empty()) {
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
+		pq.pop_back();
+		adja = v->adj;
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		onFoot = getCloseEdges(closeNodes, v);
+		addEdgesFoot(adja, onFoot);
+		for (unsigned int i = 0; i < adja.size(); i++) {
+			int weight = 0;
+			Edge *edge = adja[i];
+			Node* w = getNode(edge->destNode);
+			TransportLine * tl = getTransportLine(edge->transportLineId);
+			unordered_set<string> edgeLines;
+			char wayToGetToW = v->wayToGetThere;
+			if (tl != nullptr) {
+				edgeLines = tl->getLines();
+			}
+
+			if (isChangingTransport(edgeLines, v->linesPath)) {
+				weight = 1;
+				if (edgeLines.begin()->size() > 1) {
+					wayToGetToW = 'B';
+				}
+				else {
+					wayToGetToW = 'T';
+				}
+			}
+			if (w->dist > v->dist + weight) {
+				w->dist = v->dist + weight;
+				w->path = v;
+				w->wayToGetThere = wayToGetToW;
+				w->linesPath = edgeLines;
+				if (!w->processing) {
+					w->processing = true;
+					pq.push_back(w);
+				}
+				make_heap(pq.begin(), pq.end(), Node_greater_than());
+			}
+		}
+	}
+}
 
 void Graph::preprocessGraphForWaitingTimes()
 {
@@ -1010,7 +1100,6 @@ bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<
 	unordered_set<string>::iterator itEdge = edgeLines.begin();
 	unordered_set<string>::iterator itEdgeFinal = edgeLines.end();
 
-	
 	unordered_set<string>::iterator itVPathFinal = vPathLines.end();
 
 	for (; itEdge != itEdgeFinal; itEdge++) {
@@ -1022,6 +1111,20 @@ bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<
 		}
 	}
 	return true;
+}
+
+double Graph::calculateCost(double distance, char transportation)
+{
+	switch (transportation) {
+	case 'W':
+		return 0.0;
+	case 'T':
+		return distance * 0.001;
+	
+	case'B':
+		return distance *0.0005;
+
+	}
 }
 
 
@@ -1075,7 +1178,7 @@ vector<Edge *> Graph::getCloseEdges(const vector<int>& closeNodes, Node * n_sour
 		Node *dest = nodeMap.at(closeNodes.at(i));
 		x_dest = dest->getCoords().x;
 		y_dest = dest->getCoords().y;
-		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
+		weight = sqrt(pow((x_src - x_dest)*METER_PER_PIXEL_X, 2) + pow((y_src - y_dest)*METER_PER_PIXEL_Y, 2));
 		int nextId = highestEdgeId++;
 		highestEdgeId = nextId;
 		Edge * e = new Edge(nextId,closeNodes[i], weight);

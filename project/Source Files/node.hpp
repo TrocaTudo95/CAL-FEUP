@@ -30,6 +30,7 @@ class Node {
 	bool processing;
 	int indegree;
 	int dist;
+	double cost;
 	unordered_set<string> linesPath;
 	char wayToGetThere;
 

@@ -32,8 +32,10 @@ const int INT_INFINITY = INT_MAX;
 const int WALK_SPEED = 1;
 const int BUS_SPEED = 10;
 const int METRO_SPEED = 20;
-const int PIXEL_TO_METER = 8;
+
+
 const double FAV_TRANSPORT_MULTIPLIER = 0.01;
+
 
 
 
@@ -72,6 +74,7 @@ private:
 	void dfsVisit(Node *v);
 	void dfsVisit();
 	int highestEdgeId;
+
 	int highestTransportLineId;
 	
 	vvii adjList; //stores vector<vector<pair<int,int>>> , For each node, stores a vector of <destNodeId,weight>
@@ -79,10 +82,17 @@ private:
 	vi in_queue;
 	vi path;
 
+	double METER_PER_PIXEL_X;
+	double METER_PER_PIXEL_Y;
+
+
 
 public:
 	Graph();
 	~Graph();
+
+	void setMETER_PER_PIXEL_X(double d);
+	void setMETER_PER_PIXEL_Y(double d);
 
 	hashNodes* copyNodes();
 	void copyEdges(hashNodes originalNodes);
@@ -120,15 +130,17 @@ public:
 	void dijkstraShortestDistance(const int & s);
 	void dijkstraShortestDistance(const int & s, const int & d);
 	void dijkstraBestTime(const int & s);
-	void dijkstraBestTimeWithWaitingTime(const int &s);
+	void dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cost);
 	void dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite);
 	void dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int &s, char favorite);
+	void dijkstraLessTransportsUsed(const int &s);
 
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
 	void addEdgesFootSPFA(vii & edges,vii & onFoot);
 	bool alreadyExists(vector<Edge*> & edges, Edge * e);
 	bool alreadyExistsSPFA(vii & edges, int e);
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
+	double calculateCost(double distance, char transportation);
 	
 
 	void preprocessGraphForWaitingTimes();
