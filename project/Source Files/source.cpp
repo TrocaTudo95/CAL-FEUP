@@ -16,8 +16,8 @@
 
  /*CONSTANTS */
 
-#define EDGE_COLOR_DEFAULT "blue"
-#define VERTEX_COLOR_DEFAULT "yellow"
+#define EDGE_COLOR_DEFAULT GRAY
+#define VERTEX_COLOR_DEFAULT YELLOW
 #define NODES_FILENAME "nos.txt"
 #define EDGES_FILENAME "arestas.txt"
 #define LINES_FILENAME "names.txt"
@@ -180,9 +180,8 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 		}
 		cout << "Go by " << message << " to node " << p.path << " in " << p.dist - previousDist << " " << units << " \n";
 		if (i != path.size() - 1)
-			gv->setVertexColor(p.path, "red");
+			gv->setVertexColor(p.path, GREEN);
 		gv->rearrange();
-		Sleep(16);
 		previousDist = p.dist;
 	}
 	int totalDist = path.at(path.size() - 1).dist;
@@ -200,7 +199,7 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 	for (int i = 1; i < path.size() - 1; i++)
 	{
 		PathTo p = path.at(i);
-		gv->setVertexColor(p.path, "yellow");
+		gv->setVertexColor(p.path, VERTEX_COLOR_DEFAULT);
 	}
 	gv->rearrange();
 }
@@ -480,8 +479,8 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 			finalVertex = -1;
 			system("pause");
 		}
-		gv->setVertexColor(initialVertex, "black");
-		gv->setVertexColor(finalVertex, "black");
+		gv->setVertexColor(initialVertex, RED);
+		gv->setVertexColor(finalVertex, RED);
 	}
 }
 
@@ -516,6 +515,7 @@ void initGV(GraphViewer *gv) {
 	gv->createWindow(WIDTHOFGRAPH, HEIGHTOFGRAPH);
 	gv->defineEdgeColor(EDGE_COLOR_DEFAULT);
 	gv->defineVertexColor(VERTEX_COLOR_DEFAULT);
+	gv->defineEdgeCurved(false);
 }
 
 int main() {
