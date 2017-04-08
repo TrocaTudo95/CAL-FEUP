@@ -37,11 +37,13 @@ public:
 	Node* path;
 	friend class Graph;
 	/**
-	* @brief constructor of class Nodes
+	* @brief constructor of class Node
 	* @param info Node's id
-	* @param coords represents the x and y of the node for calculations
+	* @param coords represents the x and y, that will be used to calculate distances between nodes.
 	*/
 	Node(int info, Point coords);
+
+
 	vector<Edge*> getAdj();
 	/**
 	* @brief function to return the Tranportation Line id
@@ -75,8 +77,8 @@ public:
 	*/
 	void setDist(int dist);
 	/**
-	* @brief function to return the boolean processing that indicates if the Node is being processed
-	* @return boolean processing
+	* @brief function to return the boolean processing that indicates if the Node is being processed in the heap.
+	* @return True if it is being processed, False otherwise;
 	*/
 	bool getProcessing();
 	/**
@@ -102,12 +104,12 @@ public:
 	/**
 	* @brief comparates two edges by theirs ids
 	* @param b Node to comparate with
-	* @return returns true if the two id's are equal, false otherwise
+	* @return True if the two id's are equal, false otherwise
 	*/
 	bool operator==(const Node& b);
 	/**
 	* @brief function that makes a copy of the current Node and returns it
-	* @return returns the Node copy that was created
+	* @return A pointer to a node with same Id and Coordinates;
 	*/
 	Node* copy();
 	/**
