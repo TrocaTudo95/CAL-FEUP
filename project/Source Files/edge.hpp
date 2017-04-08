@@ -7,6 +7,7 @@
 
 class Node;
 class Graph;
+class TransportLine;
 
 /* ================================================================================================
 * Class Edge
@@ -15,7 +16,7 @@ class Graph;
 
 
 class Edge {
-	Node * dest;
+	Node* dest;
 	double weight;
 	int id;
 	TransportLine *line;
@@ -25,7 +26,12 @@ public:
 	friend class Node;
 	bool operator==(const Edge& e) const;
 	void setTransportLine(TransportLine *tl);
-	TransportLine getTransportLine() { return (*line); };
+	Node * getDest() { return dest; }
+	double getWeight() { return weight; }
+	TransportLine* getTransportLine();
+	Node * getDest() const;
+	Edge* copyEdge();
+
 };
 
 #endif /* EGDE_HPP_ */

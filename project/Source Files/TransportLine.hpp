@@ -4,8 +4,14 @@
 #include <unordered_set>
 #include <sstream>
 #include <iostream>
+#include <unordered_map>
+#include <cassert>
 
 using namespace std;
+
+class Graph;
+class Node;
+class Edge;
 
 class TransportLine {
 private:
@@ -16,12 +22,16 @@ private:
 	int finalEdgeId;
 	bool bidirectional;
 	int avg_wait_time;
+	unordered_map<int, pair<int, int>> edgeMap;
+	TransportLine * reverse;
 public:
-	TransportLine(int initialEdgeID,int finalEdgeID, string name, string bidirectional,int avg_wait_time);
 	friend class Edge;
+	TransportLine(int initialEdgeID,int finalEdgeID, string name, string bidirectional,int avg_wait_time);
+	void setEdgeMap(unordered_map<int, pair<int, int>> &edgesOD);
 	bool operator==(const TransportLine& b) const;
 	void addLines(string line);
 	void setType(string type);
+	void setType(char type);
 	string toString() const;
 	int getInitialEdgeId() const;
 	int getFinalEdgeId() const;
@@ -30,5 +40,7 @@ public:
 	int getWaitTime();
 	bool isBidirectional();
 	TransportLine* createReverse();
+	vector<int> TransportLine::getNodesIds();
+	TransportLine* copy();
 };
 
