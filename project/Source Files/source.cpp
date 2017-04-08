@@ -236,7 +236,7 @@ void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
 	copiedGraph->preprocessGraphForWaitingTimes();
 
 	clock_t begin = clock();
-	copiedGraph->dijkstraBestTime(initialVertex);
+	copiedGraph->dijkstraBestTimeWithWaitingTime(initialVertex,0);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	cout << "Dijkstra Best Time and Avg. Waiting Time Calculated In: " << time_spent << " seconds.\n";
