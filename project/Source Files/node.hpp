@@ -10,6 +10,7 @@
 using namespace std;
 
 class Graph;
+class Edge;
 
 typedef struct {
 	int x;
@@ -38,7 +39,7 @@ public:
 	Node(int info, Point coords);
 	vector<Edge*> getAdj() {return adj;}
 
-	Edge* addEdge(int id,Node *dest, double w);
+	Edge* addEdge(int id, Node *dest, double w);
 	bool removeEdgeTo(Node *d);
 
 	int getInfo() const;
@@ -55,7 +56,11 @@ public:
 	void setCoords(Point coords);
 	Point getCoords() const;
 
+	vector<int> getEdgesId();
+	vector<Edge*> getEdges();
+
 	bool operator==(const Node& b);
+	Node* copy();
 
 	char getWayTogetThere() { return wayToGetThere; };
 

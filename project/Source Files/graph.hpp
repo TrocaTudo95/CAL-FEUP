@@ -17,7 +17,9 @@
 #include <atomic>
 #include <condition_variable>
 #include <unordered_map>
+#include <cassert>
 #include "node.hpp"
+
 
 using namespace std;
 
@@ -30,6 +32,12 @@ const int WALK_SPEED = 1;
 const int BUS_SPEED = 10;
 const int METRO_SPEED = 20;
 const int PIXEL_TO_METER = 8;
+
+
+
+class Node;
+class Edge;
+class TransportLine;
 
 typedef unordered_map<int, Node *> hashNodes;
 typedef unordered_map<int, Edge *> hashEdges;
@@ -58,45 +66,63 @@ class Graph {
 	void dfsVisit(Node *v);
 	void dfsVisit();
 	int highestEdgeId;
+	vector<TransportLine*> transportationLines;
 
 	//void getPathTo(Node *origin, list<int> &res);
 
 public:
 	Graph();
+	~Graph();
+
+	hashNodes* copyNodes();
+	void copyEdges(hashNodes originalNodes);
+
+	void setNodeMap(hashNodes *map);
+	void setEdgeMap(hashEdges map);
+	void setHighestEdgeId(int id);
+	void setTransportationLines(vector<TransportLine*> tlVector);
 	bool addNode(const int &in, Point coords);
-	void addTransportationLine(TransportLine *t1);
-	void addTransportationLine(TransportLine *t1,const unordered_map<int, pair<int, int>> &edgeOD);
+	void addTransportationLine(TransportLine *t1,unordered_map<int, pair<int, int>> &edgeOD);
 	bool addEdge(int id,const int &sourc, const int &dest);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
-	vector<int> dfs() const;
-	vector<int> bfs(Node *v) const;
-	int maxNewChildren(Node *v, int &inf) const;
+	
 	hashNodes getNodeMap() const;
 	int getNumNode() const;
 	Edge* getEdgeById(int id);
-	//exercicio 5
+
 	Node* getNode(const int &v) const;
-	void resetIndegrees();
+
 	vector<Node*> getSources() const;
-	int getNumCycles();
-	vector<int> topologicalOrder();
+
 	vector<PathTo> getPath(const int &origin, const int &dest);
 	void unweightedShortestPath(const int &v);
-	bool isDAG();
-	//exercicio 6
+
 	void bellmanFordShortestPath(const int &v);
-	void dijkstraShortestPath(const int &s);
+
+	bool checkWalkPercentage(const int &origin, const int &dest, float percentage);
+
 	vector<Node *> getCloseNodes(int max_dist, Node * n_source);
 	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
-	void dijkstraShortestPath_distance(const int & s);
-	void dijkstraShortestPath_distance(const int & s, const int & d);
-	void dijkstraLessTransportsUsed(const int &s);
+
+	void dijkstraShortestDistance(const int & s);
+	void dijkstraShortestDistance(const int & s, const int & d);
+	void dijkstraBestTime(const int & s);
+	void dijkstraBestTimeWithWaitingTime(const int &s);
+	void dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite);
+	void dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int &s, char favorite);
+	void dijkstraLessTransportsUsed(const int &s); //(Renato) Este é para sair, verificar só se isto ajuda alguma coisa a implementar o menor custo
+
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
 	bool alreadyExists(vector<Edge*> & edges, Edge * e);
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
+
 	void dijkstraShortestPath_time(const int & s);
 	vector<Node *> getNodePath(const int &origin, const int &dest);
+
+	void preprocessGraphForWaitingTimes();
+	Graph * copy();
+
 };
 
 
