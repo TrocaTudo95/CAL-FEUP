@@ -68,13 +68,9 @@ private:
 	hashNodes nodeMap;
 	hashEdges edgeMap;
 	hashTL transportationLines;
-	void dfs(Node *v, vector<int> &res) const;
 	//exercicio 5
 	int numCycles;
-	void dfsVisit(Node *v);
-	void dfsVisit();
 	int highestEdgeId;
-
 	int highestTransportLineId;
 	
 	vvii adjList; //stores vector<vector<pair<int,int>>> , For each node, stores a vector of <destNodeId,weight>
@@ -112,7 +108,6 @@ public:
 	Edge* getEdgeById(int id);
 	Node* getNode(const int &v) const;
 	TransportLine* getTransportLine(const int &id) const;
-	vector<Node*> getSources() const;
 	vector<PathTo> getPath(const int &origin, const int &dest);
 	vector<Node *> getNodePath(const int &origin, const int &dest);
 	vector<int> getPathForSPFA(const int &origin, const int &dest);

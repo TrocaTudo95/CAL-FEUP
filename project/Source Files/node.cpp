@@ -8,7 +8,6 @@
 */
 
 bool Node::removeEdgeTo(Node *d) {
-	d->indegree--; //adicionado do exercicio 5
 	typename vector<Edge*>::iterator it = adj.begin();
 	typename vector<Edge*>::iterator ite = adj.end();
 	while (it != ite) {
@@ -27,7 +26,6 @@ Node::Node(int in, Point coords){
 	this->coords = coords;
 	this->visited = false;
 	this->processing = false;
-	this->indegree = 0;
 	this->dist = 0;
 	this->linesPath = {};
 }
@@ -71,9 +69,6 @@ void Node::setInfo(int info) {
 }
 
 
-int Node::getIndegree() const {
-	return this->indegree;
-}
 
 void Node::setCoords(Point coords) {
 	this->coords = coords;

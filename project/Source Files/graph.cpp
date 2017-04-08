@@ -179,7 +179,6 @@ bool Graph::removeNode(const int &in) {
 		for (; itAdj != itAdje; itAdj++)
 		{
 			Node *d = getNode((*itAdj)->destNode);
-			d->indegree--;
 		}
 		delete v;
 		return true;
@@ -195,7 +194,6 @@ bool Graph::addEdge(int id,const int &sourc, const int &dest, int w) {
 		return false;
 	Node *vS = it->second;
 	Node *vD = ite->second;
-	vD->indegree++;
 	if (w == 0) {
 		w = sqrt(pow(METER_PER_PIXEL_X*(vS->coords.x - vD->coords.x), 2) + pow(METER_PER_PIXEL_Y*(vS->coords.y - vD->coords.y), 2));
 	}
@@ -216,7 +214,6 @@ bool Graph::removeEdge(const int &sourc, const int &dest) {
 	Node *vS = it->second;
 	Node *vD = ite->second;
 
-	vD->indegree--;
 	return vS->removeEdgeTo(vD);
 }
 
@@ -238,19 +235,6 @@ TransportLine * Graph::getTransportLine(const int & id) const
 }
 
 
-
-
-vector<Node*> Graph::getSources() const {
-	vector< Node* > buffer;
-	typename hashNodes::const_iterator it = nodeMap.begin();
-	typename hashNodes::const_iterator ite = nodeMap.end();
-	for (; it != ite; it++)
-		if (it->second->indegree == 0)
-		{
-			buffer.push_back(it->second);
-		}
-	return buffer;
-}
 
 
 bool Graph::checkWalkPercentage(const int &origin, const int &dest, float percentage) {
