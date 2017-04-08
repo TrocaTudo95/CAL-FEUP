@@ -191,7 +191,8 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	readFiles(graph, gv);
-	displayMenu(graph, gv);
+	//displayMenu(graph, gv);
+	testDijkstraShortestDistance(graph, gv);
 	return 0;
 }
 
@@ -246,23 +247,26 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 
 
 void testSPFA(Graph &g, GraphViewer *gv) {
-	int initialVertex = 1823, finalVertex = 8136;
+	int initialVertex = 482, finalVertex = 775;
 	clock_t begin = clock();
 	//Testing SPFA
 	g.preprocessGraphForSPFA();
-	g.SPFAWithAdjacencyList(initialVertex);
+	g.SPFAWithAdjacencyList(initialVertex,finalVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	cout << "Dijkstra Shortest Distance Calculated In: " << time_spent << " seconds.\n";
-	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	cout << "SPFA Distance Calculated In: " << time_spent << " seconds.\n";
+	vector<int> path = g.getPathForSPFA(initialVertex, finalVertex);
 	gv->setVertexColor(initialVertex, "black");
-	printPath(path, "meters", gv);
+	for (int i = 0; i < path.size(); i++) {
+		cout << "Go To Node " << path[i] << ";\n";
+	}
 	gv->setVertexColor(finalVertex, "black");
+	system("pause");
 }
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
-	int initialVertex = 1823, finalVertex = 8136;
+	int initialVertex = 482, finalVertex = 775;
 	clock_t begin = clock();
 	//Testing dijkstra optimized by Elipse
 	g.dijkstraShortestDistance(initialVertex, finalVertex);

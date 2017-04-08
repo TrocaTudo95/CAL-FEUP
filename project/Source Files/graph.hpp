@@ -76,6 +76,8 @@ private:
 	
 	vvii adjList; //stores vector<vector<pair<int,int>>> , For each node, stores a vector of <destNodeId,weight>
 	vi dist;
+	vi in_queue;
+	vi path;
 
 
 public:
@@ -103,8 +105,10 @@ public:
 	vector<Node*> getSources() const;
 	vector<PathTo> getPath(const int &origin, const int &dest);
 	vector<Node *> getNodePath(const int &origin, const int &dest);
+	vector<int> getPathForSPFA(const int &origin, const int &dest);
 	vector<int> getCloseNodes(int max_dist, Node * n_source);
 	vector<Edge *> getCloseEdges(const vector<int>& closeNodes, Node * n_source);
+	vii getCloseEdgesSPFA(vector<int> &closeNodes, Node *src);
 
 	void unweightedShortestPath(const int &v);
 
@@ -112,7 +116,7 @@ public:
 
 	bool checkWalkPercentage(const int &origin, const int &dest, float percentage);
 
-	void SPFAWithAdjacencyList(const int &s);
+	void SPFAWithAdjacencyList(const int &s,const int &d);
 	void dijkstraShortestDistance(const int & s);
 	void dijkstraShortestDistance(const int & s, const int & d);
 	void dijkstraBestTime(const int & s);
@@ -121,7 +125,9 @@ public:
 	void dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int &s, char favorite);
 
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
+	void addEdgesFootSPFA(vii & edges,vii & onFoot);
 	bool alreadyExists(vector<Edge*> & edges, Edge * e);
+	bool alreadyExistsSPFA(vii & edges, int e);
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
 	
 

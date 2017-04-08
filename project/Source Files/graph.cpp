@@ -308,6 +308,27 @@ vector<Node *> Graph::getNodePath(const int &origin, const int &dest) {
 	return res;
 }
 
+vector<int> Graph::getPathForSPFA(const int &origin, const int &dest) {
+	list<int> buffer;
+	vector<int> res;
+	int v = dest;
+	buffer.push_front(v);
+	while (path[v] != 0 && path[v] != origin) {
+		v = path[v];
+		buffer.push_front(v);
+	}
+	if (path[v] != 0) {
+		v = path[v];
+		buffer.push_front(v);
+	}
+
+	while (!buffer.empty()) {
+		res.push_back(buffer.front());
+		buffer.pop_front();
+	}
+	return res;
+}
+
 
 void Graph::unweightedShortestPath(const int &s) {
 	typename hashNodes::iterator it = nodeMap.begin();
@@ -367,8 +388,63 @@ void Graph::bellmanFordShortestPath(const int & s)
 
 
 
-void Graph::SPFAWithAdjacencyList(const int & s)
+void Graph::SPFAWithAdjacencyList(const int & s, const int &d)
 {
+	int v, w, weight;
+	for (int i = 0; i < dist.size(); i++) {
+		dist[i] = INT_MAX;
+		in_queue[i] = 0;
+		path[i] = 0;
+	}
+	Node * dNode = getNode(d);
+	Node * sNode = getNode(s);
+	double alfa, xCenter, yCenter, semiA, semiB, dY, dX, distance;
+	double R[2][3];
+	dY = (sNode->coords.y - dNode->coords.y);
+	dX = (sNode->coords.x - dNode->coords.x);
+	xCenter = (sNode->coords.x + dNode->coords.x) / 2.0;
+	yCenter = (sNode->coords.y + dNode->coords.y) / 2.0;
+	distance = sqrt(pow(dX, 2) + pow(dY, 2));
+	semiA = distance * 0.9;
+	semiB = distance * 0.8;
+	alfa = -atan(dY / dX);
+	R[0][0] = cos(alfa); R[0][1] = -sin(alfa); R[0][2] = yCenter*sin(alfa) - xCenter*cos(alfa) + xCenter;
+	R[1][0] = sin(alfa); R[1][1] = cos(alfa); R[1][2] = -xCenter*sin(alfa) - yCenter*cos(alfa) + yCenter;
+
+	queue<int> q; q.push(s);
+	dist.at(s) = 0;
+	in_queue.at(s) = 1;
+	vii adja;
+	vii onFoot;
+	vector<int> closeNodes;
+	while (!q.empty()) {
+		v = q.front(); q.pop(); in_queue[v] = 0;
+		adja = adjList[v];
+		Node * vN = getNode(v);
+		closeNodes = getCloseNodes(SEARCH_RADIUS, vN);// the max_dist has to be defined
+		onFoot = getCloseEdgesSPFA(closeNodes, vN);
+		addEdgesFootSPFA(adja, onFoot);
+		for (int j = 0; j < adja.size(); j++) {
+			w = adja[j].first;
+			Node * wNode = getNode(w);
+			weight = adja[j].second;
+			if (dist[v] + weight < dist[w]) {
+				dist[w] = dist[v] + weight;
+				path[w] = v;
+				if (!in_queue[w]) {
+					double xRotated, yRotated;
+					xRotated = R[0][0] * wNode->coords.x + R[0][1] * wNode->coords.y + R[0][2];
+					yRotated = R[1][0] * wNode->coords.x + R[1][1] * wNode->coords.y + R[1][2];
+					if (pow(((xRotated - xCenter) / semiA), 2) + pow(((yRotated - yCenter) / semiB), 2) <= 1) {
+						q.push(w);
+						in_queue[w] = 1;
+					}
+					
+				}
+			}
+		}
+	}
+
 }
 
 void Graph::dijkstraShortestDistance(const int & s) {
@@ -827,8 +903,10 @@ void Graph::preprocessGraphForWaitingTimes()
 
 void Graph::preprocessGraphForSPFA()
 {
-	dist.resize(nodeMap.size());
-	adjList.resize(nodeMap.size());
+	dist.resize(nodeMap.size()+1);
+	in_queue.resize(nodeMap.size()+1);
+	adjList.resize(nodeMap.size()+1);
+	path.resize(nodeMap.size() + 1);
 
 	hashNodes::iterator it = nodeMap.begin();
 	hashNodes::iterator ite = nodeMap.end();
@@ -882,9 +960,42 @@ void Graph::addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot) {
 	}
 }
 
+void Graph::addEdgesFootSPFA(vii & edges, vii & onFoot)
+{
+	size_t startSize = edges.size();
+	for (size_t i = 0; i < onFoot.size(); i++) {
+		if (!alreadyExistsSPFA(edges, onFoot[i].first)) {
+			bool found = false;
+			for (size_t j = 0; j < startSize; j++)
+			{
+				Node *d = getNode(edges[j].first);
+				for (size_t k = 0; k < d->adj.size(); k++)
+				{
+					if (d->adj.at(k)->destNode == onFoot[i].first)
+					{
+						found = true;
+					}
+				}
+			}
+			if (!found)
+				edges.push_back(onFoot[i]);
+		}
+
+	}
+}
+
 bool Graph::alreadyExists(vector<Edge*> & edges, Edge * e) {
 	for (size_t i = 0; i < edges.size(); i++) {
 		if (edges[i] == e)
+			return true;
+	}
+	return false;
+}
+
+
+bool Graph::alreadyExistsSPFA(vii & edges, int e) {
+	for (size_t i = 0; i < edges.size(); i++) {
+		if (edges[i].first == e)
 			return true;
 	}
 	return false;
@@ -972,4 +1083,23 @@ vector<Edge *> Graph::getCloseEdges(const vector<int>& closeNodes, Node * n_sour
 	}
 	return closeEdges;
 
+}
+
+vii Graph::getCloseEdgesSPFA(vector<int>& closeNodes, Node *src)
+{
+	vii closeEdges;
+	double weight;
+	int x_dest;
+	int y_dest;
+	int x_src = src->getCoords().x;
+	int y_src = src->getCoords().y;
+
+	for (size_t i = 0; i < closeNodes.size(); i++) {
+		Node *dest = nodeMap.at(closeNodes.at(i));
+		x_dest = dest->getCoords().x;
+		y_dest = dest->getCoords().y;
+		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));
+		closeEdges.push_back(make_pair(closeNodes[i], weight));
+	}
+	return closeEdges;
 }
