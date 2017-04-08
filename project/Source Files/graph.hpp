@@ -82,8 +82,8 @@ private:
 	vi in_queue;
 	vi path;
 
-	double METER_PER_PIXEL_X;
-	double METER_PER_PIXEL_Y;
+	static double METER_PER_PIXEL_X;
+	static double METER_PER_PIXEL_Y;
 
 
 

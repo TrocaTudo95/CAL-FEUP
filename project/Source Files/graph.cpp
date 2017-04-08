@@ -7,6 +7,9 @@
 * ================================================================================================
 */
 
+double Graph::METER_PER_PIXEL_X = 1.0;
+double Graph::METER_PER_PIXEL_Y = 1.0;
+
 Edge * Graph::getEdgeById(int id)
 {
 	typename hashEdges::const_iterator it = edgeMap.find(id);
@@ -25,8 +28,7 @@ Graph::Graph()
 {
 	highestEdgeId = 0;
 	highestTransportLineId = 0;
-	METER_PER_PIXEL_X = 1;
-	METER_PER_PIXEL_Y = 1;
+
 }
 
 Graph::~Graph()
@@ -195,7 +197,7 @@ bool Graph::addEdge(int id,const int &sourc, const int &dest, int w) {
 	Node *vD = ite->second;
 	vD->indegree++;
 	if (w == 0) {
-		w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
+		w = sqrt(pow(METER_PER_PIXEL_X*(vS->coords.x - vD->coords.x), 2) + pow(METER_PER_PIXEL_Y*(vS->coords.y - vD->coords.y), 2));
 	}
 	Edge* e = vS->addEdge(id,dest, w);
 	edgeMap.insert(make_pair(id, make_pair(e,sourc)));
@@ -646,6 +648,7 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cos
 		it->second->processing = false;
 		it->second->dist = INT_INFINITY;
 		it->second->wayToGetThere = 'W';
+		it->second->cost = 0;
 	}
 
 	Node* v = getNode(s);
@@ -700,9 +703,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cos
 						typeOfTransportLine = 'W';
 					}
 				}
-				if (max_cost > 0)
+				/*if (max_cost > 0)
 					if (v->cost > max_cost)
-						deltaTime = 99999;
+						deltaTime = 99999;*/
 				break;
 			case 'T':
 				if (onTransport)
@@ -710,9 +713,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cos
 				else
 					deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
 
-				if (max_cost > 0)
+				/*if (max_cost > 0)
 					if (v->cost > max_cost)
-						deltaTime = 99999;
+						deltaTime = 99999;*/
 				break;
 			}
 
@@ -720,10 +723,10 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cos
 				w->dist = v->dist + deltaTime;
 				w->path = v;
 				w->wayToGetThere = typeOfTransportLine;
-				if (max_cost > 0) {
+				/*if (max_cost > 0) {
 					cost = calculateCost(edgeDistance, typeOfTransportLine);
 					w->cost = v->cost + cost;
-				}
+				}*/
 				if (!w->processing) {
 					w->processing = true;
 					pq.push_back(w);
