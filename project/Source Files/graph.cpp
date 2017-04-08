@@ -981,7 +981,7 @@ void Graph::preprocessGraphForWaitingTimes()
 				if (i != j) {
 					highestEdgeId++;
 					Edge * e = src->addEdge(highestEdgeId, *itDest, weight);
-					edgeMap.insert(make_pair(e->id, make_pair(e,*it)));
+					edgeMap.insert(make_pair(e->id, make_pair(e, *it)));
 					e->setTransportLine(tlIter.first);
 				}
 			}
@@ -993,9 +993,9 @@ void Graph::preprocessGraphForWaitingTimes()
 
 void Graph::preprocessGraphForSPFA()
 {
-	dist.resize(nodeMap.size()+1);
-	in_queue.resize(nodeMap.size()+1);
-	adjList.resize(nodeMap.size()+1);
+	dist.resize(nodeMap.size() + 1);
+	in_queue.resize(nodeMap.size() + 1);
+	adjList.resize(nodeMap.size() + 1);
 	path.resize(nodeMap.size() + 1);
 
 	hashNodes::iterator it = nodeMap.begin();
