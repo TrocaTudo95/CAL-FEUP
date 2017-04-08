@@ -136,7 +136,6 @@ void initGV(GraphViewer *gv) {
 
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv);
-void testReadGraph(Graph &g);
 void testDijkstraTime(Graph &g, GraphViewer *gv);
 void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);
 void runTestSuite(Graph &g, GraphViewer *gv);
@@ -219,11 +218,13 @@ void testDijkstraTime(Graph &g, GraphViewer *gv) {
 	copiedGraph->dijkstraShortestPath_time(initialVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Dijkstra calculated in: " << time_spent << " seconds.\n";
 	vector<PathTo> path = copiedGraph->getPath(initialVertex, finalVertex);
 	gv->setVertexColor(initialVertex, "black");
 	gv->setVertexColor(finalVertex, "black");
+	cout << "Printing path\n";
 	printPath(path, "seconds", gv);
-	free(copiedGraph);
+	delete copiedGraph;
 }
 
 void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {

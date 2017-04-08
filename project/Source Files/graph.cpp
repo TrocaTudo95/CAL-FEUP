@@ -46,22 +46,20 @@ Graph::Graph()
 
 Graph::~Graph()
 {
-	//Free Transportation Lines
-	for (int i = 0; i < transportationLines.size(); i++) {
-		free(transportationLines.at(i));
-	}
+	cout << "Deallocating Memory\n";
 	//Free Edges
 	hashEdges::iterator itEdges = edgeMap.begin();
 	hashEdges::iterator itEdgesEnd = edgeMap.end();
 	for (; itEdges != itEdgesEnd; itEdges++) {
-		free(itEdges->second);
+		delete(itEdges->second);
 	}
 	//Free Nodes
 	hashNodes::iterator it = nodeMap.begin();
 	hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++) {
-		free(it->second);
+		delete(it->second);
 	}
+	cout << "Memory Dealocated\n";
 }
 
 hashNodes* Graph::copyNodes()
