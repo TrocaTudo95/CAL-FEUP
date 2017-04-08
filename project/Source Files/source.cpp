@@ -561,10 +561,6 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	readFiles(graph, gv);
-	//startMenu(graph, gv);
-	initialVertex = 961;
-	finalVertex = 2929;
-	testDijkstraBestTimeWithWaitingTime(graph, gv);
-	system("pause");
+	startMenu(graph, gv);
 	return 0;
 }

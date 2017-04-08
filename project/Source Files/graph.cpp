@@ -637,9 +637,11 @@ void Graph::dijkstraBestTime(const int & s) {
 	}
 }
 
-void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cost)
+
+void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cost)
 {
-	
+	double cost; 
+	int deltaTime, summedCost, edgeDistance;
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++)
@@ -668,12 +670,11 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cos
 		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
-			int deltaTime;
-			double cost;
+			cost = 0;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
-			int edgeDistance = edge->weight;
+			edgeDistance = edge->weight;
 
 			char typeOfTransportLine;
 			bool onTransport = true;
@@ -686,47 +687,58 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cos
 			}
 			else typeOfTransportLine = 'W';
 
-
-
+			if (max_cost > 0) {
+				cost = calculateCost(edgeDistance, typeOfTransportLine);
+			}
+			summedCost = v->cost + cost;
 			switch (typeOfTransportLine) {
 			case 'W':
 				deltaTime = edgeDistance / WALK_SPEED;
 				break;
 			case 'B':
-				if (onTransport)
-					deltaTime = edgeDistance / BUS_SPEED;
-				else {
-					deltaTime = edgeDistance / BUS_SPEED + currentTransportLine->getWaitTime();
-
+				if (onTransport) {
+					if (summedCost > max_cost) {
+						deltaTime = INT_MAX;
+					}
+					else {
+						deltaTime = edgeDistance / BUS_SPEED;
+					}
+					
+				}
+				else
+				{
+					if (summedCost > max_cost) {
+						deltaTime = INT_MAX;
+					}
+					else {
+						deltaTime = edgeDistance / BUS_SPEED + currentTransportLine->getWaitTime();
+					}
 					if (edgeDistance / WALK_SPEED < deltaTime) {
 						deltaTime = edgeDistance / WALK_SPEED;
 						typeOfTransportLine = 'W';
 					}
 				}
-				/*if (max_cost > 0)
-					if (v->cost > max_cost)
-						deltaTime = 99999;*/
 				break;
 			case 'T':
-				if (onTransport)
+				if (onTransport) {
 					deltaTime = edgeDistance / METRO_SPEED;
-				else
+				}
+				else {
 					deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
-
-				/*if (max_cost > 0)
-					if (v->cost > max_cost)
-						deltaTime = 99999;*/
+				}
+				if (summedCost > max_cost) {
+					deltaTime = INT_MAX;
+				}		
 				break;
 			}
-
+			
 			if (w->dist > v->dist + deltaTime) {
 				w->dist = v->dist + deltaTime;
 				w->path = v;
 				w->wayToGetThere = typeOfTransportLine;
-				/*if (max_cost > 0) {
-					cost = calculateCost(edgeDistance, typeOfTransportLine);
-					w->cost = v->cost + cost;
-				}*/
+				if (max_cost > 0) {
+					w->cost = summedCost;
+				}
 				if (!w->processing) {
 					w->processing = true;
 					pq.push_back(w);
