@@ -112,7 +112,7 @@ public:
 	void dijkstraShortestDistance(const int & s);
 	void dijkstraShortestDistance(const int & s, const int & d);
 	void dijkstraBestTime(const int & s);
-	void dijkstraBestTimeWithWaitingTime(const int &s);
+	void dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cost);
 	void dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite);
 	void dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int &s, char favorite);
 	void dijkstraLessTransportsUsed(const int &s); //(Renato) Este é para sair, verificar só se isto ajuda alguma coisa a implementar o menor custo
@@ -120,6 +120,7 @@ public:
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
 	bool alreadyExists(vector<Edge*> & edges, Edge * e);
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
+	double calculateCost(double distance, char transportation);
 	
 
 	void preprocessGraphForWaitingTimes();
