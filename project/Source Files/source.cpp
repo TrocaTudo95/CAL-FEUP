@@ -474,12 +474,12 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 	if (initialVertex != -1)
 	{
 		gv->setVertexColor(initialVertex, VERTEX_COLOR_DEFAULT);
-		initialVertex != -1;
+		initialVertex = -1;
 	}
 	if (finalVertex != -1)
 	{
 		gv->setVertexColor(finalVertex, VERTEX_COLOR_DEFAULT);
-		finalVertex != -1;
+		finalVertex = -1;
 	}
 	while (initialVertex == -1 || finalVertex == -1)
 	{
