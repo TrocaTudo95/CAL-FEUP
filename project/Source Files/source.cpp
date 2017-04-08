@@ -13,7 +13,6 @@
 #include <ctime>
 #include "graphviewer.h"
 #include "graph.hpp"
-#include "Graphics.cpp"
 
  /*CONSTANTS */
 
@@ -22,6 +21,7 @@
 #define NODES_FILENAME "nos.txt"
 #define EDGES_FILENAME "arestas.txt"
 #define LINES_FILENAME "names.txt"
+#define BACKGROUNG_FILENAME "map.png"
 #define TAB_SPACE_INITIAL "     "
 #define TAB_SPACE "         "
 
@@ -88,6 +88,8 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 		std::getline(linestream, coords, ';');  // read up-to the first ; (discard ;).
 		linestream >> point.y;
 		gv->addNode(idNo, point.x, point.y);
+		linestream.clear();
+		gv->setVertexLabel(idNo, to_string(idNo));
 		graph.addNode(idNo, point);
 	}
 	inFile.close();
@@ -139,6 +141,7 @@ void initGV(GraphViewer *gv) {
 	gv->createWindow(WIDTHOFGRAPH, HEIGHTOFGRAPH);
 	gv->defineEdgeColor(EDGE_COLOR_DEFAULT);
 	gv->defineVertexColor(VERTEX_COLOR_DEFAULT);
+	gv->setBackground(BACKGROUNG_FILENAME);
 }
 
 

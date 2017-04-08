@@ -28,6 +28,9 @@
     <ClInclude Include="..\project\Source Files\node.hpp" />
     <ClInclude Include="..\project\Source Files\TransportLine.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Image Include="map.png" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{49146E35-4524-405C-9603-4773FFBCBF6B}</ProjectGuid>
     <RootNamespace>GraphViewer</RootNamespace>
