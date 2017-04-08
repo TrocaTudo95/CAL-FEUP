@@ -18,7 +18,6 @@ class TransportLine;
 class Edge {
 	Node* dest;
 	double weight;
-	double money_cost;
 	int id;
 	TransportLine *line;
 public:
@@ -29,7 +28,6 @@ public:
 	void setTransportLine(TransportLine *tl);
 	Node * getDest() { return dest; }
 	double getWeight() { return weight; }
-	double getMoneyCost() { return money_cost; };
 	TransportLine* getTransportLine();
 	Node * getDest() const;
 	Edge* copyEdge();

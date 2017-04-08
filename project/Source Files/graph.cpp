@@ -528,8 +528,9 @@ void Graph::dijkstraBestTime(const int & s) {
 	}
 }
 
-void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
+void Graph::dijkstraBestTimeWithWaitingTime(const int & s,const double & max_cost)
 {
+	
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++)
@@ -558,6 +559,7 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int deltaTime;
+			double cost;
 			Edge *edge = adja[i];
 			Node* w = edge->dest;
 			TransportLine * currentTransportLine = edge->line;
@@ -572,6 +574,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 				typeOfTransportLine = currentTransportLine->getType();
 			}
 			else typeOfTransportLine = 'W';
+
+
+
 			switch (typeOfTransportLine) {
 			case 'W':
 				deltaTime = edgeDistance / WALK_SPEED;
@@ -587,6 +592,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 						typeOfTransportLine = 'W';
 					}
 				}
+				if (max_cost > 0)
+					if (v->cost > max_cost)
+						deltaTime = 99999;
 				break;
 			case 'T':
 				if (onTransport)
@@ -594,6 +602,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 				else
 					deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
 
+				if (max_cost > 0)
+					if (v->cost > max_cost)
+						deltaTime = 99999;
 				break;
 			}
 
@@ -601,6 +612,10 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 				w->dist = v->dist + deltaTime;
 				w->path = v;
 				w->wayToGetThere = typeOfTransportLine;
+				if (max_cost > 0) {
+					cost = calculateCost(edgeDistance, typeOfTransportLine);
+					w->cost = v->cost + cost;
+				}
 				if (!w->processing) {
 					w->processing = true;
 					pq.push_back(w);
@@ -931,6 +946,20 @@ bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<
 		}
 	}
 	return true;
+}
+
+double Graph::calculateCost(double distance, char transportation)
+{
+	switch (transportation) {
+	case 'W':
+		return 0.0;
+	case 'T':
+		return distance * 0.001;
+	
+	case'B':
+		return distance *0.0005;
+
+	}
 }
 
 
