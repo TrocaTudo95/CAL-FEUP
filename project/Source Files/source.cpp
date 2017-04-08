@@ -191,8 +191,8 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	readFiles(graph, gv);
-	//displayMenu(graph, gv);
-	testDijkstraShortestDistance(graph, gv);
+	displayMenu(graph, gv);
+	//testDijkstraShortestDistance(graph, gv);
 	return 0;
 }
 
