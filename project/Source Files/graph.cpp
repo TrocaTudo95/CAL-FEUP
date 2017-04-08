@@ -514,39 +514,7 @@ void Graph::bellmanFordShortestPath(const int & s)
 }
 
 
-void Graph::dijkstraShortestPath(const int & s)
-{
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++)
-	{
-		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
-	}
-
-	Node* v = getNode(s);
-	v->dist = 0;
-	vector<Node *> pq;
-	pq.push_back(v);
-
-	make_heap(pq.begin(), pq.end(), Node_greater_than());
-	while (!pq.empty()) {
-		v = pq.front();
-		pop_heap(pq.begin(), pq.end(), Node_greater_than());
-		pq.pop_back();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i]->dest;
-			if (w->dist > v->dist + v->adj[i]->weight) {
-				w->dist = v->dist + v->adj[i]->weight;
-				w->path = v;
-				pq.push_back(w);
-				push_heap(pq.begin(), pq.end(), Node_greater_than());
-			}
-		}
-	}
-}
-
-void Graph::dijkstraShortestPath_distance(const int & s)
+void Graph::dijkstraShortestDistance(const int & s)
 {
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
@@ -590,7 +558,7 @@ void Graph::dijkstraShortestPath_distance(const int & s)
 }
 
 
-void Graph::dijkstraShortestPath_time(const int & s) {
+void Graph::dijkstraBestTime(const int & s) {
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++)
@@ -620,6 +588,7 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int tempo;
 			Edge *edge = adja[i];
+			Node* w = edge->dest;
 			TransportLine * currentTransportLine = edge->line;
 			int edgeDistance = edge->weight * PIXEL_TO_METER;
 			char typeOfTransportLine;
@@ -627,7 +596,7 @@ void Graph::dijkstraShortestPath_time(const int & s) {
 			if (v->wayToGetThere == 'W') {
 				onTransport = false;
 			}
-			Node* w = edge->dest;
+			
 			if (currentTransportLine != nullptr) {
 				typeOfTransportLine = currentTransportLine->getType();
 			}
@@ -783,11 +752,6 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int weight = 0;
 			Node* w = adja[i]->dest;
-			//Little Optimization
-			if (w->dist < v->dist) {
-				continue;
-			}
-			//End Of Optimization
 			TransportLine * tl = adja.at(i)->line;
 			unordered_set<string> edgeLines;
 			char wayToGetToW = v->wayToGetThere;

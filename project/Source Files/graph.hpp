@@ -102,17 +102,17 @@ public:
 	bool isDAG();
 	//exercicio 6
 	void bellmanFordShortestPath(const int &v);
-	void dijkstraShortestPath(const int &s);
 	vector<Node *> getCloseNodes(int max_dist, Node * n_source);
 	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
-	void dijkstraShortestPath_distance(const int & s);
+	void dijkstraShortestDistance(const int & s);
+	void dijkstraBestTime(const int & s);
 	void dijkstraLessTransportsUsed(const int &s);
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
 
 	bool alreadyExists(vector<Edge*> & edges, Edge * e);
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
 
-	void dijkstraShortestPath_time(const int & s);
+	
 	void preprocessGraphForWaitingTimes();
 	Graph * copy();
 };

@@ -136,7 +136,7 @@ void initGV(GraphViewer *gv) {
 
 
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv);
-void testDijkstraTime(Graph &g, GraphViewer *gv);
+void testDijkstraBestTimeWithAvgWaiting(Graph &g, GraphViewer *gv);
 void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);
 void runTestSuite(Graph &g, GraphViewer *gv);
 void useTestGraph(Graph &g, GraphViewer *gv);
@@ -157,9 +157,9 @@ int main() {
 
 void runTestSuite(Graph &g, GraphViewer *gv) {
 	readFiles(g, gv);
-	testDijkstraTime(g, gv);
+	//testDijkstraBestTimeWithAvgWaiting(g, gv);
 	//testDijkstraShortestDistance(g, gv);
-	//testDijkstraNumTransportsUsed(g, gv);
+	testDijkstraNumTransportsUsed(g, gv);
 }
 
 
@@ -210,12 +210,12 @@ void useTestGraph(Graph &g, GraphViewer *gv) {
 	gv->setEdgeLabel(6, t3->toString());
 }
 
-void testDijkstraTime(Graph &g, GraphViewer *gv) {
+void testDijkstraBestTimeWithAvgWaiting(Graph &g, GraphViewer *gv) {
 	Graph * copiedGraph = g.copy();
 	copiedGraph->preprocessGraphForWaitingTimes();
 	int initialVertex = 187, finalVertex = 673;
 	clock_t begin = clock();
-	copiedGraph->dijkstraShortestPath_time(initialVertex);
+	copiedGraph->dijkstraBestTime(initialVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	cout << "Dijkstra calculated in: " << time_spent << " seconds.\n";
@@ -240,11 +240,12 @@ void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
 	printPath(path, "transport changes", gv);
 }
 
+
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
 	int initialVertex = 655, finalVertex = 313;
 	clock_t begin = clock();
-	g.dijkstraShortestPath_distance(initialVertex);
+	g.dijkstraShortestDistance(initialVertex);
 	clock_t end = clock();
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
