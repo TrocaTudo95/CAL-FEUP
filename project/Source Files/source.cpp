@@ -192,7 +192,7 @@ int main() {
 	Graph graph;
 	readFiles(graph, gv);
 	//displayMenu(graph, gv);
-	testDijkstraShortestDistance(graph, gv);
+	testDijkstraBestTimeWithWaitingTime(graph, gv);
 	return 0;
 }
 
@@ -304,7 +304,7 @@ void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
 	end = clock();
 	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	cout << "Graph Preprocessed In: " << time_spent << " seconds.\n";
-	int initialVertex = 187, finalVertex = 673;
+	int initialVertex = 961, finalVertex = 2929;
 	begin = clock();
 	copiedGraph->dijkstraBestTimeWithWaitingTime(initialVertex);
 	end = clock();
