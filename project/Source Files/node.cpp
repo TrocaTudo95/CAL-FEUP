@@ -42,6 +42,7 @@ Edge* Node::addEdge(int id,Node *dest, double w) {
 
 
 
+
 int Node::getInfo() const {
 	return this->info;
 }
@@ -82,8 +83,29 @@ Point Node::getCoords() const {
 	return this->coords;
 }
 
+vector<int> Node::getEdgesId()
+{
+	vector<int> idsToReturn;
+	for (int i = 0; i < adj.size(); i++) {
+		idsToReturn.push_back(adj.at(i)->id);
+	}
+	return idsToReturn;
+}
+
+vector<Edge*> Node::getEdges()
+{
+	return adj;
+}
+
+
 bool Node::operator==(const Node & b)
 {
 	return this->info == b.getInfo();
+}
+
+Node * Node::copy()
+{
+	Node* copyN = new Node(info, coords);
+	return copyN;
 }
 

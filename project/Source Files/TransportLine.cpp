@@ -5,6 +5,8 @@
 #define TRAM 'T'
 
 TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, string bidirectional, int avg_wait_time) {
+	reverse = nullptr;
+	assert(reverse == nullptr);
 	this->initialEdgeId = initialEdgeID;
 	this->finalEdgeId = finalEdgeID;
 	this->name = name;
@@ -14,6 +16,13 @@ TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, st
 	}
 	else this->bidirectional = true;
 	type = WALK;
+}
+
+
+
+void TransportLine::setEdgeMap(unordered_map<int, pair<int, int>>& edgesOD)
+{
+	edgeMap = edgesOD;
 }
 
 bool TransportLine::operator==(const TransportLine & b) const
@@ -42,6 +51,11 @@ void TransportLine::setType(string type)
 	{
 		this->type = WALK;
 	}
+}
+
+void TransportLine::setType(char type)
+{
+	this->type = type;
 }
 
 string TransportLine::toString() const
@@ -85,17 +99,48 @@ bool TransportLine::isBidirectional() {
 }
 
 TransportLine * TransportLine::createReverse() {
-	string b;
-	if (bidirectional)
-	{
-		b = "True";
+	if (reverse == nullptr) {
+		string b;
+		if (bidirectional)
+		{
+			b = "True";
+		}
+		else
+		{
+			b = "False";
+		}
+		reverse = new TransportLine(finalEdgeId, initialEdgeId, name, b, avg_wait_time);
 	}
-	else
-	{
-		b = "False";
+	return reverse;
+}
+
+
+
+vector<int> TransportLine::getNodesIds()
+{
+	int size = finalEdgeId - initialEdgeId + 1;
+	vector<int> returnNodes(size);
+	for (int i = initialEdgeId; i <= finalEdgeId; i++) {
+		returnNodes.at(i-initialEdgeId) = (edgeMap.at(i).first);
 	}
-	TransportLine *reverseTL = new TransportLine(finalEdgeId, initialEdgeId, name, b, avg_wait_time);
-	return reverseTL;
+	returnNodes.at(size-1) = (edgeMap.at(finalEdgeId).second);
+	return returnNodes;
+	
+}
+
+TransportLine * TransportLine::copy()
+{
+	string biDirectional;
+	if (bidirectional) {
+		biDirectional = "True";
+	}
+	else {
+		biDirectional = "False";
+	}
+	TransportLine* tl = new TransportLine(initialEdgeId, finalEdgeId, name, biDirectional, avg_wait_time);
+	tl->setType(type);
+	tl->setEdgeMap(edgeMap);
+	return tl;
 }
 
 

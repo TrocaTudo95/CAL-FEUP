@@ -21,13 +21,18 @@
 #define NODES_FILENAME "nos.txt"
 #define EDGES_FILENAME "arestas.txt"
 #define LINES_FILENAME "names.txt"
-#define BACKGROUNG_FILENAME "map.png"
+#define METER_PER_PIXEL_FILENAME "meter_per_pixel.txt"
 #define TAB_SPACE_INITIAL "     "
 #define TAB_SPACE "         "
+#define WALKING_LIMIT 0.5
 
 const int WIDTHOFGRAPH = 1920;
 const int HEIGHTOFGRAPH = 1080;
 
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*------------------------------------------------------READ FILES AREA --------------------------------------------------------------*/
 
 bool openFile(ifstream &inFile, const string filename) {
 	//Ler o ficheiro arestas.txt
@@ -39,6 +44,21 @@ bool openFile(ifstream &inFile, const string filename) {
 		exit(1);   // call system to stop
 	}
 	return true;
+}
+
+void readMeter_Per_Pixel(Graph &graph) {
+	ifstream inFile;
+	openFile(inFile, METER_PER_PIXEL_FILENAME);
+	std::string line;
+	getline(inFile, line);
+	double d = stod(line.substr());
+	cout << d << endl;
+	graph.setMETER_PER_PIXEL_X(d);
+	getline(inFile, line);
+	d = stod(line.substr());
+	cout << d << endl;
+	graph.setMETER_PER_PIXEL_Y(d);
+	inFile.close();
 }
 
 
@@ -65,9 +85,7 @@ void readEdgesFile(Graph &graph, GraphViewer *gv, unordered_map<int, pair<int,in
 		graph.addEdge(idAresta,idNoOrigem, idNoDestino);
 		edgeMap.insert(make_pair(idAresta, make_pair(idNoOrigem, idNoDestino)));
 	}
-
 	inFile.close();
-
 }
 
 void readNodesFile(Graph &graph, GraphViewer *gv) {
@@ -107,13 +125,14 @@ void readNamesFile(Graph &graph, unordered_map<int, pair<int, int>> &edgeMap) {
 		std::stringstream linestream(line);
 		if (!firstTime) {
 			linestream >> finalEdge;
-			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional,rand()%6 +5);
-			graph.addTransportationLine(tl, edgeMap);
-			initialEdge = finalEdge;
+			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%6 +5)*60);
 			if (lines.size() > 0) {
 				tl->addLines(lines);
 				tl->setType(typeOfLine);
 			}
+			graph.addTransportationLine(tl, edgeMap);
+			initialEdge = finalEdge;
+			
 		}
 		else {
 			linestream >> initialEdge;
@@ -129,12 +148,16 @@ void readNamesFile(Graph &graph, unordered_map<int, pair<int, int>> &edgeMap) {
 }
 
 void readFiles(Graph &graph, GraphViewer *gv) {
+	readMeter_Per_Pixel(graph);
 	readNodesFile(graph, gv);
 	unordered_map<int, pair<int, int>> edgeInfo;
 	readEdgesFile(graph, gv, edgeInfo);
 	readNamesFile(graph, edgeInfo);
 	gv->rearrange();
 }
+
+/*------------------------------------------------------READ FILES AREA --------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------------------*/
 
 
 void initGV(GraphViewer *gv) {
@@ -145,110 +168,46 @@ void initGV(GraphViewer *gv) {
 }
 
 
-void testDijkstraShortestDistance(Graph &g, GraphViewer *gv);
-void testDijkstraTime(Graph &g, GraphViewer *gv);
-void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);
+
 void runTestSuite(Graph &g, GraphViewer *gv);
-void useTestGraph(Graph &g, GraphViewer *gv);
 void printPath(vector<PathTo> path, string type, GraphViewer *gv);
-bool checkwalkPercentage(const int &origin, const int &dest, float percentage, Graph &g);
+void testDijkstraShortestDistance(Graph &g, GraphViewer *gv);
+void testDijkstraBestTime(Graph &g, GraphViewer *gv);
+void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv);
+void testDijkstraBestTimeWithFavoriteTransport(Graph &g, GraphViewer *gv, char favorite);
+void testDijkstraBestTimeWithFavoriteTransportAndWaitingTime(Graph &g, GraphViewer *gv, char favorite);
+void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv);//deprecated
+
+void exitFunction(Graph &graph, GraphViewer *gv);
+void cleanScreen();
+void displayTimeTravel(Graph &graph, GraphViewer *gv);
+void displayMenu(Graph &graph, GraphViewer *gv);
+
+
+int main() {
+	/*#if defined(WIN32) || defined(_WIN32) || defined(__WIN32) && !defined(__CYGWIN__)
+	system("chcp 65001");
+	#endif*/
+
+	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
+	initGV(gv);
+	Graph graph;
+	readFiles(graph, gv);
+	displayMenu(graph, gv);
+	return 0;
+}
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*-------------------------------------------------TEST ALGORITHMS AREA --------------------------------------------------------------*/
 
 
 void runTestSuite(Graph &g, GraphViewer *gv) {
-	//testDijkstraTime(g, gv);
+	readFiles(g, gv);
 	testDijkstraShortestDistance(g, gv);
-	//testDijkstraNumTransportsUsed(g, gv);
+	//testDijkstraBestTimeWithAvgWaiting(g, gv);
+	//testDijkstraShortestDistance(g, gv);
 }
-
-
-void useTestGraph(Graph &g, GraphViewer *gv) {
-	Point p;
-	p.x = 10; p.y = 20;
-	g.addNode(1, p);
-	gv->addNode(1, p.x, p.y);
-	p.x = 12; p.y = 23;
-	g.addNode(2, p);
-	gv->addNode(2, p.x, p.y);
-	p.x = 50; p.y = 70;
-	g.addNode(3, p);
-	gv->addNode(3, p.x, p.y);
-	p.x = 100; p.y = 10;
-	g.addNode(4, p);
-	gv->addNode(4, p.x, p.y);
-	p.x = 100; p.y = 200;
-	g.addNode(5, p);
-	gv->addNode(5, p.x, p.y);
-	g.addEdge(1, 1, 4);
-	g.addEdge(2, 4, 3);
-	g.addEdge(3, 3, 5);
-	g.addEdge(4, 3, 2);
-	g.addEdge(5, 2, 3);
-	g.addEdge(6, 2, 5);
-	gv->addEdge(1, 1, 4, EdgeType::DIRECTED);
-	gv->addEdge(2, 4, 3, EdgeType::DIRECTED);
-	gv->addEdge(3, 3, 5, EdgeType::DIRECTED);
-	gv->addEdge(4, 3, 2, EdgeType::DIRECTED);
-	gv->addEdge(5, 2, 3, EdgeType::DIRECTED);
-	gv->addEdge(6, 2, 5, EdgeType::DIRECTED);
-
-	TransportLine * t1 = new TransportLine(1, 1, "Rua dos malmequeres", "False", (rand() % 6 + 5) * 60);
-	t1->addLines("205"); t1->setType("bus");
-	TransportLine * t2 = new TransportLine(2, 3, "Rua dos benditos", "False", (rand() % 6 + 5) * 60);
-	t2->addLines("206"); t2->setType("metro");
-	TransportLine * t3 = new TransportLine(4, 6, "Rua das carvalhas", "False", (rand() % 6 + 5) * 60);
-	t3->addLines("207"); t3->setType("bus");
-	g.addTransportationLine(t1);
-	g.addTransportationLine(t2);
-	g.addTransportationLine(t3);
-	gv->setEdgeLabel(1, t1->toString());
-	gv->setEdgeLabel(2, t2->toString());
-	gv->setEdgeLabel(3, t2->toString());
-	gv->setEdgeLabel(4, t3->toString());
-	gv->setEdgeLabel(5, t3->toString());
-	gv->setEdgeLabel(6, t3->toString());
-}
-
-void testDijkstraTime(Graph &g, GraphViewer *gv) {
-	int initialVertex =1823, finalVertex = 8136;
-	clock_t begin = clock();
-	g.dijkstraShortestPath_time(initialVertex);
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
-	if (checkwalkPercentage(initialVertex, finalVertex, 0.5, g))
-		cout << "you walked too much"<<endl;
-	gv->setVertexColor(initialVertex, "black");
-	printPath(path, "seconds", gv);
-	gv->setVertexColor(finalVertex, "black");
-}
-
-void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
-
-	int initialVertex = 655, finalVertex = 313;
-	clock_t begin = clock();
-	g.dijkstraLessTransportsUsed(initialVertex);
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
-	gv->setVertexColor(initialVertex, "black");
-	gv->setVertexColor(finalVertex, "black");
-	printPath(path, "transport changes", gv);
-}
-
-void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
-
-	int initialVertex = 1823, finalVertex = 8136;
-	clock_t begin = clock();
-	g.dijkstraShortestPath_distance(initialVertex, finalVertex);
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-	cout << "TIME: " << time_spent << endl;
-	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
-	gv->setVertexColor(initialVertex, "black");
-	gv->setVertexColor(finalVertex, "black");
-	printPath(path, "meters", gv);
-}
-
 
 void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 	int previousDist = 0;
@@ -271,6 +230,7 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 		cout << "Go by " << message << " to node " << p.path << " in " << p.dist - previousDist << " " << units << " \n";
 		gv->setVertexColor(p.path, "red");
 		gv->rearrange();
+		Sleep(16);
 		previousDist = p.dist;
 	}
 	int totalDist = path.at(path.size() - 1).dist;
@@ -284,28 +244,126 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 		cout << "Transports Used : " << totalDist << "\n";
 	}
 
-}
-
-
-bool checkwalkPercentage(const int &origin, const int &dest, float percentage, Graph &g) {
-	vector<Node *> nodePath = g.getNodePath(origin, dest);
-	float total_dist = nodePath[nodePath.size() - 1]->getDist();
-	float walk_dist = 0;
-	int prev_dist = nodePath[0]->getDist();
-	float percentage_a;
-
-
-	for (size_t i = 1; i < nodePath.size(); i++) {
-
-		if (nodePath[i]->getWayTogetThere() == 'W')
-			walk_dist += (nodePath[i]->getDist()-prev_dist);
-
-		prev_dist = nodePath[i]->getDist();
+	system("pause");
+	for (int i = 1; i < path.size(); i++)
+	{
+		PathTo p = path.at(i);
+		gv->setVertexColor(p.path, "yellow");
 	}
+	gv->rearrange();
+}
 
-	return(percentage_a > percentage);
+
+void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
+
+	int initialVertex = 1530, finalVertex = 954;
+	clock_t begin = clock();
+	//Testing dijkstra optimized by Elipse
+	g.dijkstraShortestDistance(initialVertex, finalVertex);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Dijkstra Shortest Distance Calculated In: " << time_spent << " seconds.\n";
+	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	gv->setVertexColor(initialVertex, "black");
+	printPath(path, "meters", gv);
+	gv->setVertexColor(finalVertex, "black");
+}
+
+void testDijkstraBestTime(Graph &g, GraphViewer *gv) {
+	int initialVertex = 187, finalVertex = 673;
+	clock_t begin = clock();
+	g.dijkstraBestTime(initialVertex);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Dijkstra Best Time Calculated In: " << time_spent << " seconds.\n";
+	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	if (g.checkWalkPercentage(initialVertex, finalVertex, WALKING_LIMIT)) {
+		cout << "You walked more than " << WALKING_LIMIT * 100 << "% of the way" << endl;
+	}
+	gv->setVertexColor(initialVertex, "black");
+	printPath(path, "seconds", gv);
+	gv->setVertexColor(finalVertex, "black");
+}
+
+void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
+	Graph * copiedGraph = g.copy();
+	copiedGraph->preprocessGraphForWaitingTimes();
+	int initialVertex = 187, finalVertex = 673;
+
+	clock_t begin = clock();
+	copiedGraph->dijkstraBestTime(initialVertex);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Dijkstra Best Time and Avg. Waiting Time Calculated In: " << time_spent << " seconds.\n";
+	vector<PathTo> path = copiedGraph->getPath(initialVertex, finalVertex);
+	if (copiedGraph->checkWalkPercentage(initialVertex, finalVertex,WALKING_LIMIT)) {
+		cout << "You walked more than " << WALKING_LIMIT*100 << "% of the way"<< endl;
+	}
+	gv->setVertexColor(initialVertex, "black");
+	printPath(path, "seconds", gv);
+	gv->setVertexColor(finalVertex, "black");
+	delete copiedGraph;
 
 }
+
+void testDijkstraBestTimeWithFavoriteTransport(Graph &g, GraphViewer *gv, char favorite)
+{
+	int initialVertex = 187, finalVertex = 673;
+	clock_t begin = clock();
+	g.dijkstraBestTimeWithFavoriteTransport(initialVertex,favorite);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Dijkstra Best Time,Fav.Transport Calculated In: " << time_spent << " seconds.\n";
+	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	if (g.checkWalkPercentage(initialVertex, finalVertex, WALKING_LIMIT)) {
+		cout << "You walked more than " << WALKING_LIMIT * 100 << "% of the way" << endl;
+	}
+	gv->setVertexColor(initialVertex, "black");
+	printPath(path, "seconds", gv);
+	gv->setVertexColor(finalVertex, "black");
+}
+
+void testDijkstraBestTimeWithFavoriteTransportAndWaitingTime(Graph &g, GraphViewer *gv, char favorite)
+{
+	Graph * copiedGraph = g.copy();
+	copiedGraph->preprocessGraphForWaitingTimes();
+	int initialVertex = 187, finalVertex = 673;
+
+	clock_t begin = clock();
+	copiedGraph->dijkstraBestTimeWithFavoriteTransportAndWaitingTime(initialVertex,favorite);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Dijkstra Best Time,Fav.Transport and Avg. Waiting Time Calculated In: " << time_spent << " seconds.\n";
+	vector<PathTo> path = copiedGraph->getPath(initialVertex, finalVertex);
+	if (copiedGraph->checkWalkPercentage(initialVertex, finalVertex, WALKING_LIMIT)) {
+		cout << "You walked more than " << WALKING_LIMIT * 100 << "% of the way" << endl;
+	}
+	gv->setVertexColor(initialVertex, "black");
+	printPath(path, "seconds", gv);
+	gv->setVertexColor(finalVertex, "black");
+	delete copiedGraph;
+}
+
+void testDijkstraNumTransportsUsed(Graph &g, GraphViewer *gv) {
+
+	int initialVertex = 655, finalVertex = 313;
+	clock_t begin = clock();
+	g.dijkstraLessTransportsUsed(initialVertex);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	gv->setVertexColor(initialVertex, "black");
+	gv->setVertexColor(finalVertex, "black");
+	printPath(path, "transport changes", gv);
+}
+
+
+/*-------------------------------------------------TEST ALGORITHMS AREA --------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+/*-----------------------------------------------USER INTERFACE AREA------------------------------------------------------------------*/
 
 void exitFunction(Graph &graph, GraphViewer *gv) {
 	exit(1);
@@ -317,13 +375,13 @@ void cleanScreen() {
 
 void displayTimeTravel(Graph &graph, GraphViewer *gv) {
 	cleanScreen();
-	void(*functions[2])(Graph &graph, GraphViewer* gv) = { &testDijkstraTime, &testDijkstraTime }; //TODO: ALTERAR PARA COM TEMPO DE ESPERA
-	cout << TAB_SPACE_INITIAL << "Escolha a minimizacao a efetuar:" << endl;
+	void(*functions[2])(Graph &graph, GraphViewer* gv) = { &testDijkstraBestTime, &testDijkstraBestTimeWithWaitingTime };
+	cout << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl;
 	cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
 	cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
 	cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.1. Sem tempo de espera" << endl;
 	cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.2. Com tempo de espera" << endl;
-	cout << TAB_SPACE << "*. Minimizacao das mudanças de linha de transporte" << endl;
+	cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
 	cout << TAB_SPACE << "*. Minimizacao ..." << endl;
 	cout << TAB_SPACE << "0. Back" << endl;
 	cout << endl << "Escolha uma opcao: ";
@@ -348,10 +406,10 @@ void displayMenu(Graph &graph, GraphViewer *gv) {
 	while (1)
 	{
 		cleanScreen();
-		cout << TAB_SPACE_INITIAL << "Escolha a minimizacao a efetuar:" << endl;
-		cout << TAB_SPACE << "1. Minimizacao da distancia a percorrer" << endl;
+		cout << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl;
+		cout << TAB_SPACE << "1. Minimizacao da distância a percorrer" << endl;
 		cout << TAB_SPACE << "2. Minimizacao do tempo de viagem" << endl;
-		cout << TAB_SPACE << "3. Minimizacao das mudan�as de linha de transporte" << endl;
+		cout << TAB_SPACE << "3. Minimizacao das mudancas de linha de transporte" << endl;
 		cout << TAB_SPACE << "4. Minimizacao ..." << endl;
 		cout << TAB_SPACE << "0. Exit" << endl;
 		cout << endl << "Escolha uma opcao: ";
@@ -359,7 +417,6 @@ void displayMenu(Graph &graph, GraphViewer *gv) {
 		cin >> option;
 		if (cin.fail())
 		{
-			cout << endl << "Introduza uma opcao valida!" << endl;
 			cin.clear();
 			cin.ignore(256, '\n');
 		}
@@ -368,11 +425,8 @@ void displayMenu(Graph &graph, GraphViewer *gv) {
 	}
 }
 
-int main() {
-	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
-	initGV(gv);
-	Graph graph;
-	readFiles(graph, gv);
-	displayMenu(graph, gv);
-	return 0;
-}
+/*-----------------------------------------------USER INTERFACE AREA------------------------------------------------------------------*/
+/*------------------------------------------------------------------------------------------------------------------------------------*/
+
+
+
