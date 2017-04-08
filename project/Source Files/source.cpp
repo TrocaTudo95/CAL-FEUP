@@ -52,11 +52,9 @@ void readMeter_Per_Pixel(Graph &graph) {
 	std::string line;
 	getline(inFile, line);
 	double d = stod(line.substr());
-	cout << d << endl;
 	graph.setMETER_PER_PIXEL_X(d);
 	getline(inFile, line);
 	d = stod(line.substr());
-	cout << d << endl;
 	graph.setMETER_PER_PIXEL_Y(d);
 	inFile.close();
 }
