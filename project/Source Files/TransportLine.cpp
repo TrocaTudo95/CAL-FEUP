@@ -4,9 +4,8 @@
 #define BUS 'B'
 #define TRAM 'T'
 
-TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, string bidirectional, int avg_wait_time) {
-	reverse = nullptr;
-	assert(reverse == nullptr);
+TransportLine::TransportLine(int transportLineId,int initialEdgeID, int finalEdgeID, string name, string bidirectional, int avg_wait_time) {
+	this->id = transportLineId;
 	this->initialEdgeId = initialEdgeID;
 	this->finalEdgeId = finalEdgeID;
 	this->name = name;
@@ -18,12 +17,6 @@ TransportLine::TransportLine(int initialEdgeID, int finalEdgeID, string name, st
 	type = WALK;
 }
 
-
-
-void TransportLine::setEdgeMap(unordered_map<int, pair<int, int>>& edgesOD)
-{
-	edgeMap = edgesOD;
-}
 
 bool TransportLine::operator==(const TransportLine & b) const
 {
@@ -37,6 +30,11 @@ void TransportLine::addLines(string lines)
 	while (getline(lineStream, line, ',')) {
 		this->lines.insert(line);
 	}
+}
+
+void TransportLine::setLines(unordered_set<string> &l)
+{
+	lines = l;
 }
 
 void TransportLine::setType(string type)
@@ -69,6 +67,11 @@ string TransportLine::toString() const
 	return toReturn;
 }
 
+int TransportLine::getId() const
+{
+	return id;
+}
+
 int TransportLine::getInitialEdgeId() const
 {
 	return initialEdgeId;
@@ -98,49 +101,27 @@ bool TransportLine::isBidirectional() {
 	return bidirectional;
 }
 
-TransportLine * TransportLine::createReverse() {
-	if (reverse == nullptr) {
-		string b;
-		if (bidirectional)
-		{
-			b = "True";
-		}
-		else
-		{
-			b = "False";
-		}
-		reverse = new TransportLine(finalEdgeId, initialEdgeId, name, b, avg_wait_time);
-	}
-	return reverse;
+TransportLine * TransportLine::createReverseWalking(int id, int initialEdgeId, int finalEdgeId)
+{
+	return new TransportLine(id, initialEdgeId, finalEdgeId, name, "False", avg_wait_time);
 }
 
 
+TransportLine * TransportLine::createFullReverse(int id, int initialEdgeId, int finalEdgeId)
+{	TransportLine* tl = new TransportLine(id, initialEdgeId, finalEdgeId, name, "False", avg_wait_time);
+	tl->setType(type);
+	tl->setLines(lines);
+	return tl;
+}
 
-vector<int> TransportLine::getNodesIds()
+vector<int> TransportLine::getNodesIds(unordered_map<int, pair<Edge*, int>> &edgeMap)
 {
 	int size = finalEdgeId - initialEdgeId + 1;
 	vector<int> returnNodes(size);
 	for (int i = initialEdgeId; i <= finalEdgeId; i++) {
-		returnNodes.at(i-initialEdgeId) = (edgeMap.at(i).first);
+		returnNodes.at(i-initialEdgeId) = (edgeMap.at(i).second);
 	}
-	returnNodes.at(size-1) = (edgeMap.at(finalEdgeId).second);
+	returnNodes.at(size-1) = (edgeMap.at(finalEdgeId).first->getDest());
 	return returnNodes;
 	
 }
-
-TransportLine * TransportLine::copy()
-{
-	string biDirectional;
-	if (bidirectional) {
-		biDirectional = "True";
-	}
-	else {
-		biDirectional = "False";
-	}
-	TransportLine* tl = new TransportLine(initialEdgeId, finalEdgeId, name, biDirectional, avg_wait_time);
-	tl->setType(type);
-	tl->setEdgeMap(edgeMap);
-	return tl;
-}
-
-

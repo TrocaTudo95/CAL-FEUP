@@ -12,7 +12,7 @@ Edge * Graph::getEdgeById(int id)
 	typename hashEdges::const_iterator it = edgeMap.find(id);
 	if (it == edgeMap.end())
 		return NULL;
-	return it->second;
+	return it->second.first;
 }
 
 
@@ -24,6 +24,7 @@ hashNodes Graph::getNodeMap() const {
 Graph::Graph()
 {
 	highestEdgeId = 0;
+	highestTransportLineId = 0;
 }
 
 Graph::~Graph()
@@ -33,7 +34,7 @@ Graph::~Graph()
 	hashEdges::iterator itEdges = edgeMap.begin();
 	hashEdges::iterator itEdgesEnd = edgeMap.end();
 	for (; itEdges != itEdgesEnd; itEdges++) {
-		delete(itEdges->second);
+		delete(itEdges->second.first);
 	}
 	//Free Nodes
 	hashNodes::iterator it = nodeMap.begin();
@@ -61,12 +62,12 @@ void Graph::copyEdges(hashNodes originalNodes)
 	hashNodes::iterator ite = originalNodes.end();
 	for (; it != ite; it++) {
 		Node*v = it->second;
-		vector<Edge*> vEdges = v->getEdges();
+		vector<Edge*> vEdges = v->getAdj();
 		for (int i = 0; i < vEdges.size(); i++) {
 			Edge* currentEdge = vEdges.at(i);
-			addEdge(currentEdge->id, getNode(v->info)->info, getNode(currentEdge->dest->info)->info);
-			TransportLine *tl = currentEdge->getTransportLine();
-			edgeMap[currentEdge->id]->setTransportLine(tl);
+			addEdge(currentEdge->id, v->info,currentEdge->destNode);
+			int tl = currentEdge->getTransportLineId();
+			edgeMap[currentEdge->id].first->setTransportLine(tl);
 		}
 	}
 }
@@ -83,12 +84,9 @@ void Graph::setHighestEdgeId(int id)
 	highestEdgeId = id;
 }
 
-void Graph::setTransportationLines(vector<TransportLine*> tlVector)
+void Graph::setTransportationLines(const hashTL &tlMap)
 {	
-	transportationLines.resize(tlVector.size());
-	for (int i = 0; i < tlVector.size(); i++) {
-		transportationLines.at(i) = tlVector.at(i);
-	}
+	transportationLines = tlMap;
 }
 
 
@@ -98,40 +96,57 @@ bool Graph::addNode(const int &in, Point coords) {
 	return insertResponse.second;
 }
 
-void Graph::addTransportationLine(TransportLine * t1,unordered_map<int, pair<int, int>> &edgeOD)
+void Graph::addTransportationLine(TransportLine * tl)
 {
-
-	int initialEdge = t1->getInitialEdgeId();
-	int finalEdge = t1->getFinalEdgeId();
-	t1->setEdgeMap(edgeOD);
-	TransportLine *TP = nullptr;
-	
+	int initialEdge = tl->getInitialEdgeId();
+	int finalEdge = tl->getFinalEdgeId();
+	int tlId = tl->getId();
+	transportationLines.insert(make_pair(tlId, tl));
+	if (tlId > highestEdgeId) {
+		highestEdgeId = tlId;
+	}
 	for (int i = initialEdge; i <= finalEdge; i++) {
-		edgeMap[i]->setTransportLine(t1);
-		if (t1->getType() != 'T'){
-			Node *ori = nodeMap[edgeOD.at(i).first];
-			Node *dest = nodeMap[edgeOD.at(i).second];
-			double w = sqrt(pow(ori->getCoords().x - dest->getCoords().x, 2) + pow(ori->getCoords().y - dest->getCoords().y, 2));
-			highestEdgeId++;
-			Edge * addedEdge = dest->addEdge(highestEdgeId,ori, w);
-			edgeMap.insert(make_pair(highestEdgeId, addedEdge));
-			if (t1->isBidirectional())
-			{
-			edgeMap[highestEdgeId]->setTransportLine(t1);
+		edgeMap[i].first->setTransportLine(tlId);
+	}
+	
+	
+}
+
+void Graph::setReverseTransportationLines()
+{
+	hashTL::iterator it = transportationLines.begin();
+	hashTL::iterator ite = transportationLines.end();
+	int destRevId, oriRevId, initialEdge, finalEdge, numEdges;
+	Node *destReverse;
+	Node *oriReverse;
+	double weight;
+	bool isBidirectional;
+	TransportLine *tl, *tlReverse;
+	for (; it != ite; it++) {
+		tl = it->second;
+		isBidirectional = tl->isBidirectional();
+		if (tl->getType() != 'T' || isBidirectional) {
+			initialEdge = tl->getInitialEdgeId();
+			finalEdge = tl->getFinalEdgeId();
+			numEdges = finalEdge - initialEdge + 1;
+			for (int i = finalEdge; i >= initialEdge; i--) {
+				destRevId = edgeMap.at(i).second;
+				oriRevId = edgeMap.at(i).first->getDest();
+				destReverse = getNode(destRevId);
+				oriReverse = getNode(oriRevId);
+				weight = edgeMap.at(i).first->weight;
+				addEdge(highestEdgeId + 1, oriRevId, destRevId, weight);
 			}
-			else
-			{
-			TP = t1->createReverse();
-			edgeMap[highestEdgeId]->setTransportLine(TP);
-			transportationLines.push_back(TP);
+			if (isBidirectional) {
+				tlReverse = tl->createFullReverse(highestTransportLineId + 1, highestEdgeId-numEdges+1, highestEdgeId);
 			}
+			else {
+				tlReverse = tl->createReverseWalking(highestTransportLineId + 1, highestEdgeId - numEdges + 1, highestEdgeId);
+
+			}
+			addTransportationLine(tlReverse);
 		}
 	}
-	transportationLines.push_back(t1);
-	if (TP != nullptr) {
-		transportationLines.push_back(TP);
-	}
-	
 }
 
 bool Graph::removeNode(const int &in) {
@@ -151,7 +166,8 @@ bool Graph::removeNode(const int &in) {
 		typename vector<Edge*>::iterator itAdje = v->adj.end();
 		for (; itAdj != itAdje; itAdj++)
 		{
-			(*itAdj)->dest->indegree--;
+			Node *d = getNode((*itAdj)->destNode);
+			d->indegree--;
 		}
 		delete v;
 		return true;
@@ -160,7 +176,7 @@ bool Graph::removeNode(const int &in) {
 }
 
 
-bool Graph::addEdge(int id,const int &sourc, const int &dest) {
+bool Graph::addEdge(int id,const int &sourc, const int &dest, int w) {
 	typename hashNodes::iterator it = nodeMap.find(sourc);
 	typename hashNodes::iterator ite = nodeMap.find(dest);
 	if (it == nodeMap.end() || ite == nodeMap.end())
@@ -168,9 +184,11 @@ bool Graph::addEdge(int id,const int &sourc, const int &dest) {
 	Node *vS = it->second;
 	Node *vD = ite->second;
 	vD->indegree++;
-	double w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
-	Edge* e = vS->addEdge(id,vD, w);
-	edgeMap.insert(make_pair(id, e));
+	if (w == 0) {
+		w = sqrt(pow(vS->coords.x - vD->coords.x, 2) + pow(vS->coords.y - vD->coords.y, 2));
+	}
+	Edge* e = vS->addEdge(id,dest, w);
+	edgeMap.insert(make_pair(id, make_pair(e,sourc)));
 	if (id > highestEdgeId) {
 		highestEdgeId = id;
 	}
@@ -195,6 +213,14 @@ bool Graph::removeEdge(const int &sourc, const int &dest) {
 Node* Graph::getNode(const int &v) const {
 	typename hashNodes::const_iterator it = nodeMap.find(v);
 	if (it == nodeMap.end())
+		return NULL;
+	return it->second;
+}
+
+TransportLine * Graph::getTransportLine(const int & id) const
+{
+	hashTL::const_iterator it = transportationLines.find(id);
+	if (it == transportationLines.end())
 		return NULL;
 	return it->second;
 }
@@ -299,7 +325,7 @@ void Graph::unweightedShortestPath(const int &s) {
 	while (!q.empty()) {
 		v = q.front(); q.pop();
 		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i]->dest;
+			Node* w = getNode(v->adj[i]->destNode);
 			if (w->dist > v->dist + 1) {
 				w->dist = v->dist + 1;
 				w->path = v;
@@ -329,7 +355,7 @@ void Graph::bellmanFordShortestPath(const int & s)
 	while (!q.empty()) {
 		v = q.front(); q.pop();
 		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = v->adj[i]->dest;
+			Node* w = getNode(v->adj[i]->destNode);
 			if (w->dist > v->dist + v->adj[i]->weight) {
 				w->dist = v->dist + v->adj[i]->weight;
 				w->path = v;
@@ -340,6 +366,10 @@ void Graph::bellmanFordShortestPath(const int & s)
 }
 
 
+
+void Graph::SPFAWithAdjacencyList(const int & s)
+{
+}
 
 void Graph::dijkstraShortestDistance(const int & s) {
 	typename hashNodes::iterator it = nodeMap.begin();
@@ -357,7 +387,7 @@ void Graph::dijkstraShortestDistance(const int & s) {
 	pq.push_back(v);
 	vector<Edge *> adja;
 	vector<Edge *> onFoot;
-	vector<Node *> temp;
+	vector<int> closeNodes;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	while (!pq.empty())
 	{
@@ -365,13 +395,13 @@ void Graph::dijkstraShortestDistance(const int & s) {
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
-		onFoot = getCloseEdges(temp, v);
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 
 		for (unsigned int i = 0; i < adja.size(); i++)
 		{
-			Node* w = adja[i]->dest;
+			Node* w = getNode(adja[i]->destNode);
 			if (w->dist > v->dist + adja[i]->weight)
 			{
 				w->dist = v->dist + adja[i]->weight;
@@ -417,20 +447,20 @@ void Graph::dijkstraShortestDistance(const int & s, const int & d) {
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	vector<Edge *> adja;
 	vector<Edge *> onFoot;
-	vector<Node *> temp;
+	vector<int> closeNodes;
 	while (!pq.empty())
 	{
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		temp = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
-		onFoot = getCloseEdges(temp, v);
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 
 		for (unsigned int i = 0; i < adja.size(); i++)
 		{
-			Node* w = adja[i]->dest;
+			Node* w = getNode(adja[i]->destNode);
 			if (w->dist > v->dist + adja[i]->weight)
 			{
 				w->dist = v->dist + adja[i]->weight;
@@ -468,21 +498,21 @@ void Graph::dijkstraBestTime(const int & s) {
 	pq.push_back(v);
 	vector<Edge* > adja;
 	vector<Edge *> onFoot;
-	vector<Node *> temp;
+	vector<int> closeNodes;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	while (!pq.empty()) {
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		temp = getCloseNodes(SEARCH_RADIUS, v);
-		onFoot = getCloseEdges(temp, v);
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);
+		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int deltaTime;
 			Edge *edge = adja[i];
-			Node* w = edge->dest;
-			TransportLine * currentTransportLine = edge->line;
+			Node* w = getNode(edge->destNode);
+			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
 			int edgeDistance = edge->weight * PIXEL_TO_METER;
 			char typeOfTransportLine;
 			bool onTransport = true;
@@ -537,21 +567,21 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int & s)
 	pq.push_back(v);
 	vector<Edge* > adja;
 	vector<Edge *> onFoot;
-	vector<Node *> temp;
+	vector<int> closeNodes;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	while (!pq.empty()) {
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		temp = getCloseNodes(SEARCH_RADIUS, v);
-		onFoot = getCloseEdges(temp, v);
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);
+		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int deltaTime;
 			Edge *edge = adja[i];
-			Node* w = edge->dest;
-			TransportLine * currentTransportLine = edge->line;
+			Node* w = getNode(edge->destNode);
+			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
 			int edgeDistance = edge->weight * PIXEL_TO_METER;
 			char typeOfTransportLine;
 			bool onTransport = true;
@@ -620,23 +650,24 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 	pq.push_back(v);
 	vector<Edge* > adja;
 	vector<Edge *> onFoot;
-	vector<Node *> temp;
+	vector<int> closeNodes;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	while (!pq.empty()) {
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		temp = getCloseNodes(SEARCH_RADIUS, v);
-		onFoot = getCloseEdges(temp, v);
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);
+		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int deltaTime;
 			Edge *edge = adja[i];
-			TransportLine * currentTransportLine = edge->line;
+			Node* w = getNode(edge->destNode);
+			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
 			int edgeDistance = edge->weight * PIXEL_TO_METER;
 			char typeOfTransportLine;
-			Node* w = edge->dest;
+		
 			if (currentTransportLine != nullptr) {
 				typeOfTransportLine = currentTransportLine->getType();
 			}
@@ -688,21 +719,21 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 	pq.push_back(v);
 	vector<Edge* > adja;
 	vector<Edge *> onFoot;
-	vector<Node *> temp;
+	vector<int> closeNodes;
 	make_heap(pq.begin(), pq.end(), Node_greater_than());
 	while (!pq.empty()) {
 		v = pq.front();
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		temp = getCloseNodes(SEARCH_RADIUS, v);
-		onFoot = getCloseEdges(temp, v);
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);
+		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
 			int deltaTime;
 			Edge *edge = adja[i];
-			Node* w = edge->dest;
-			TransportLine * currentTransportLine = edge->line;
+			Node* w = getNode(edge->destNode);
+			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
 			int edgeDistance = edge->weight * PIXEL_TO_METER;
 			char typeOfTransportLine;
 			bool onTransport = true;
@@ -760,40 +791,60 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 
 void Graph::preprocessGraphForWaitingTimes()
 {
-	for (int tl = 0; tl < transportationLines.size(); tl++) {
-		TransportLine * t = transportationLines.at(tl);
+	for (auto& tlIter : transportationLines) {
+		TransportLine * t = tlIter.second;
 		char typeOfTransport = t->getType();
 		if (typeOfTransport == 'W' || typeOfTransport == 'T') {
 			continue;
 		}
 		int initialEdgeId = t->getInitialEdgeId();
-		vector<int> nodesIds = t->getNodesIds();
+		vector<int> nodesIds = t->getNodesIds(edgeMap);
 		if (nodesIds.size() < 3) {
 			continue;
 		}
 		vector<int>::iterator it = nodesIds.begin();
-		
-		for (int i = 0; i < nodesIds.size()-2; i++) {
+
+		for (int i = 0; i < nodesIds.size() - 2; i++) {
 			Node * src = getNode(*it);
 			assert(src != NULL);
 			int weight = 0;
 			vector<int>::iterator itDest = it;
-			for (int j = i; j < nodesIds.size()-1; j++) {
+			for (int j = i; j < nodesIds.size() - 1; j++) {
 				itDest++;
 				weight += getEdgeById(initialEdgeId + j)->weight;
 				if (i != j) {
-					Node * dest = getNode(*itDest);
-					assert(dest != NULL);
 					highestEdgeId++;
-					Edge * e = src->addEdge(highestEdgeId, dest, weight);
-					edgeMap.insert(make_pair(e->id, e));
-					e->setTransportLine(t);
+					Edge * e = src->addEdge(highestEdgeId, *itDest, weight);
+					edgeMap.insert(make_pair(e->id, make_pair(e,*it)));
+					e->setTransportLine(tlIter.first);
 				}
 			}
 			it++;
 		}
 	}
 
+}
+
+void Graph::preprocessGraphForSPFA()
+{
+	dist.resize(nodeMap.size());
+	adjList.resize(nodeMap.size());
+
+	hashNodes::iterator it = nodeMap.begin();
+	hashNodes::iterator ite = nodeMap.end();
+
+	for (; it != ite; it++) {
+		Node *v = it->second;
+		int vId = v->getInfo();
+		vector<Edge*> edges = v->getAdj();
+		int edgesSize = edges.size();
+		adjList.at(vId).resize(edgesSize);
+		for (int i = 0; i < edgesSize; i++) {
+			Edge* actualEdge = edges.at(i);
+			adjList.at(v->info).at(i).first = actualEdge->destNode;
+			adjList.at(v->info).at(i).second = actualEdge->weight;
+		}
+	}
 
 }
 
@@ -815,9 +866,10 @@ void Graph::addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot) {
 			bool found = false;
 			for (size_t j = 0; j < startSize; j++)
 			{
-				for (size_t k = 0; k < edges.at(j)->dest->adj.size(); k++)
+				Node *d = getNode(edges.at(j)->destNode);
+				for (size_t k = 0; k < d->adj.size(); k++)
 				{
-					if (edges.at(j)->dest->adj.at(k)->dest == onFoot[i]->dest)
+					if (d->adj.at(k)->destNode == onFoot[i]->destNode)
 					{
 						found = true;
 					}
@@ -862,19 +914,20 @@ bool Graph::isChangingTransport(unordered_set<string> &edgeLines, unordered_set<
 }
 
 
-vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
+vector<int> Graph::getCloseNodes(int max_dist, Node * n_source) {
 	double dist;
 	int x_dest;
 	int y_dest;
 	int x_src = n_source->getCoords().x;
 	int y_src = n_source->getCoords().y;
-	vector<Node*> closeNodes;
+	vector<int> closeNodes;
 
 	typename hashNodes::const_iterator it = nodeMap.begin();
 	typename hashNodes::const_iterator ite = nodeMap.end();
 	for (; it != ite; it++)
 	{
 		Node *v = it->second;
+		int vId = v->info;
 		if (*(it->second) == *(n_source)) {
 			continue;
 		}
@@ -885,21 +938,21 @@ vector<Node*> Graph::getCloseNodes(int max_dist, Node * n_source) {
 			bool found = false;
 			for (size_t i = 0; i < n_source->adj.size(); i++)
 			{
-				if (it->second == n_source->adj.at(i)->dest)
+				if (vId == n_source->adj.at(i)->destNode)
 				{
 					found = true;
 					break;
 				}
 			}
 			if (!found)
-				closeNodes.push_back(it->second);
+				closeNodes.push_back(vId);
 		}
 	}
 	return closeNodes;
 }
 
 
-vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_source) {
+vector<Edge *> Graph::getCloseEdges(const vector<int>& closeNodes, Node * n_source) {
 	vector<Edge *> closeEdges;
 	double weight;
 	int x_dest;
@@ -908,7 +961,7 @@ vector<Edge *> Graph::getCloseEdges(const vector<Node*>& closeNodes, Node * n_so
 	int y_src = n_source->getCoords().y;
 
 	for (size_t i = 0; i < closeNodes.size(); i++) {
-		Node *dest = nodeMap[closeNodes.at(i)->info];
+		Node *dest = nodeMap.at(closeNodes.at(i));
 		x_dest = dest->getCoords().x;
 		y_dest = dest->getCoords().y;
 		weight = sqrt(pow(x_src - x_dest, 2) + pow(y_src - y_dest, 2));

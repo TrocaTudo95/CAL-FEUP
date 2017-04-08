@@ -19,6 +19,7 @@
 #include <unordered_map>
 #include <cassert>
 #include "node.hpp"
+#include "TransportLine.hpp"
 
 
 using namespace std;
@@ -41,8 +42,10 @@ class Edge;
 class TransportLine;
 
 typedef unordered_map<int, Node *> hashNodes;
-typedef unordered_map<int, Edge *> hashEdges;
-
+typedef unordered_map<int, pair<Edge *,int>> hashEdges; //idEdge, pair<Edge*,idNoOrigem>
+typedef unordered_map<int, TransportLine *> hashTL;
+typedef vector<pair<int, int>> vii; typedef vector<vii> vvii;
+typedef vector<int> vi;
 
 
 typedef struct {
@@ -59,17 +62,21 @@ typedef struct {
 */
 
 class Graph {
+private:
 	hashNodes nodeMap;
 	hashEdges edgeMap;
+	hashTL transportationLines;
 	void dfs(Node *v, vector<int> &res) const;
 	//exercicio 5
 	int numCycles;
 	void dfsVisit(Node *v);
 	void dfsVisit();
 	int highestEdgeId;
-	vector<TransportLine*> transportationLines;
+	int highestTransportLineId;
+	
+	vvii adjList; //stores vector<vector<pair<int,int>>> , For each node, stores a vector of <destNodeId,weight>
+	vi dist;
 
-	//void getPathTo(Node *origin, list<int> &res);
 
 public:
 	Graph();
@@ -81,23 +88,23 @@ public:
 	void setNodeMap(hashNodes *map);
 	void setEdgeMap(hashEdges map);
 	void setHighestEdgeId(int id);
-	void setTransportationLines(vector<TransportLine*> tlVector);
+	void setTransportationLines(const hashTL &tlMap);
 	bool addNode(const int &in, Point coords);
-	void addTransportationLine(TransportLine *t1,unordered_map<int, pair<int, int>> &edgeOD);
-	bool addEdge(int id,const int &sourc, const int &dest);
+	void addTransportationLine(TransportLine *t1);
+	void setReverseTransportationLines();
+	bool addEdge(int id,const int &sourc, const int &dest, int w=0);
 	bool removeNode(const int &in);
 	bool removeEdge(const int &sourc, const int &dest);
 	
 	hashNodes getNodeMap() const;
 	Edge* getEdgeById(int id);
-
 	Node* getNode(const int &v) const;
-
+	TransportLine* getTransportLine(const int &id) const;
 	vector<Node*> getSources() const;
 	vector<PathTo> getPath(const int &origin, const int &dest);
 	vector<Node *> getNodePath(const int &origin, const int &dest);
-	vector<Node *> getCloseNodes(int max_dist, Node * n_source);
-	vector<Edge *> getCloseEdges(const vector<Node*>& closeNodes, Node * n_source);
+	vector<int> getCloseNodes(int max_dist, Node * n_source);
+	vector<Edge *> getCloseEdges(const vector<int>& closeNodes, Node * n_source);
 
 	void unweightedShortestPath(const int &v);
 
@@ -105,7 +112,7 @@ public:
 
 	bool checkWalkPercentage(const int &origin, const int &dest, float percentage);
 
-
+	void SPFAWithAdjacencyList(const int &s);
 	void dijkstraShortestDistance(const int & s);
 	void dijkstraShortestDistance(const int & s, const int & d);
 	void dijkstraBestTime(const int & s);
@@ -119,6 +126,7 @@ public:
 	
 
 	void preprocessGraphForWaitingTimes();
+	void preprocessGraphForSPFA();
 	Graph * copy();
 
 };

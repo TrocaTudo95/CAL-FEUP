@@ -12,7 +12,7 @@ bool Node::removeEdgeTo(Node *d) {
 	typename vector<Edge*>::iterator it = adj.begin();
 	typename vector<Edge*>::iterator ite = adj.end();
 	while (it != ite) {
-		if ((*it)->dest == d) {
+		if ((*it)->destNode == d->info) {
 			adj.erase(it);
 			return true;
 		}
@@ -34,7 +34,7 @@ Node::Node(int in, Point coords){
 
 
 
-Edge* Node::addEdge(int id,Node *dest, double w) {
+Edge* Node::addEdge(int id,int dest, double w) {
 	Edge *edgeD = new Edge(id,dest, w);
 	adj.push_back(edgeD);
 	return edgeD;
@@ -92,7 +92,7 @@ vector<int> Node::getEdgesId()
 	return idsToReturn;
 }
 
-vector<Edge*> Node::getEdges()
+vector<Edge*> Node::getAdj()
 {
 	return adj;
 }

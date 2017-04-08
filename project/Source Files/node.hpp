@@ -37,9 +37,9 @@ public:
 	Node* path;
 	friend class Graph;
 	Node(int info, Point coords);
-	vector<Edge*> getAdj() {return adj;}
+	vector<Edge*> getAdj();
 
-	Edge* addEdge(int id, Node *dest, double w);
+	Edge* addEdge(int id, int dest, double w);
 	bool removeEdgeTo(Node *d);
 
 	int getInfo() const;
@@ -57,7 +57,6 @@ public:
 	Point getCoords() const;
 
 	vector<int> getEdgesId();
-	vector<Edge*> getEdges();
 
 	bool operator==(const Node& b);
 	Node* copy();

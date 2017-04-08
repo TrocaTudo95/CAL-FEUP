@@ -4,34 +4,33 @@
 * Class Edge
 * ================================================================================================
 */
-Edge::Edge(int idN,Node *d, double w) : id(idN),dest(d), weight(w) {
-	line = nullptr;
+Edge::Edge(int idN,int destN, double w) : id(idN),destNode(destN), weight(w) {
 }
 
-void Edge::setTransportLine(TransportLine *tl)
+void Edge::setTransportLine(int transportLineId)
 {
-	line = tl;
+	this->transportLineId = transportLineId;
 }
 
-TransportLine * Edge::getTransportLine()
+int Edge::getTransportLineId()
 {
-	return line;
+	return transportLineId;
 }
 
-Node * Edge::getDest() const
+int Edge::getDest() const
 {
-	return dest;
+	return destNode;
 }
 
 Edge* Edge::copyEdge()
 {
-	Edge *copied = new Edge(id, dest, weight);
-	copied->setTransportLine(line);
+	Edge *copied = new Edge(id, destNode, weight);
+	copied->setTransportLine(transportLineId);
 	return copied;
 }
 
 bool Edge::operator==(const Edge& e) const {
-	return dest == e.dest;
+	return destNode == e.destNode;
 }
 
 

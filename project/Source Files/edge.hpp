@@ -3,7 +3,6 @@
 
 #pragma once
 #include <unordered_set>
-#include "TransportLine.hpp"
 
 class Node;
 class Graph;
@@ -16,20 +15,19 @@ class TransportLine;
 
 
 class Edge {
-	Node* dest;
+	int destNode;
 	double weight;
 	int id;
-	TransportLine *line;
+	int transportLineId;
 public:
-	Edge(int id,Node *d, double w);
+	Edge(int id,int destN, double w);
 	friend class Graph;
 	friend class Node;
 	bool operator==(const Edge& e) const;
-	void setTransportLine(TransportLine *tl);
-	Node * getDest() { return dest; }
+	void setTransportLine(int transportLineId);
+	int getDest() const;
 	double getWeight() { return weight; }
-	TransportLine* getTransportLine();
-	Node * getDest() const;
+	int getTransportLineId();
 	Edge* copyEdge();
 
 };

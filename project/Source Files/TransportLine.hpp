@@ -5,7 +5,7 @@
 #include <sstream>
 #include <iostream>
 #include <unordered_map>
-#include <cassert>
+#include "edge.hpp"
 
 using namespace std;
 
@@ -15,6 +15,7 @@ class Edge;
 
 class TransportLine {
 private:
+	int id;
 	string name;
 	unordered_set<string>lines;
 	char type;
@@ -22,25 +23,24 @@ private:
 	int finalEdgeId;
 	bool bidirectional;
 	int avg_wait_time;
-	unordered_map<int, pair<int, int>> edgeMap;
-	TransportLine * reverse;
 public:
 	friend class Edge;
-	TransportLine(int initialEdgeID,int finalEdgeID, string name, string bidirectional,int avg_wait_time);
-	void setEdgeMap(unordered_map<int, pair<int, int>> &edgesOD);
+	TransportLine(int id,int initialEdgeID,int finalEdgeID, string name, string bidirectional,int avg_wait_time);
 	bool operator==(const TransportLine& b) const;
 	void addLines(string line);
+	void setLines(unordered_set<string> &l);
 	void setType(string type);
 	void setType(char type);
 	string toString() const;
+	int getId()const;
 	int getInitialEdgeId() const;
 	int getFinalEdgeId() const;
 	unordered_set<string>& getLines();
 	char getType();
 	int getWaitTime();
 	bool isBidirectional();
-	TransportLine* createReverse();
-	vector<int> TransportLine::getNodesIds();
-	TransportLine* copy();
+	TransportLine* createReverseWalking(int id, int initialEdgeId, int finalEdgeId);
+	TransportLine* createFullReverse(int id, int initialEdgeId,int finalEdgeId);
+	vector<int> getNodesIds(unordered_map<int,pair<Edge*,int>> &edgeMap);
 };
 

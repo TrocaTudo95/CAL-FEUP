@@ -45,7 +45,7 @@ bool openFile(ifstream &inFile, const string filename) {
 }
 
 
-void readEdgesFile(Graph &graph, GraphViewer *gv, unordered_map<int, pair<int,int>> &edgeMap) {
+void readEdgesFile(Graph &graph, GraphViewer *gv) {
 	ifstream inFile;
 
 	openFile(inFile, EDGES_FILENAME);
@@ -66,7 +66,6 @@ void readEdgesFile(Graph &graph, GraphViewer *gv, unordered_map<int, pair<int,in
 		linestream >> idNoDestino;
 		gv->addEdge(idAresta, idNoOrigem, idNoDestino, EdgeType::DIRECTED);
 		graph.addEdge(idAresta,idNoOrigem, idNoDestino);
-		edgeMap.insert(make_pair(idAresta, make_pair(idNoOrigem, idNoDestino)));
 	}
 
 	inFile.close();
@@ -97,23 +96,24 @@ void readNodesFile(Graph &graph, GraphViewer *gv) {
 }
 
 
-void readNamesFile(Graph &graph, unordered_map<int, pair<int, int>> &edgeMap) {
+void readNamesFile(Graph &graph) {
 	ifstream inFile;
 	openFile(inFile, LINES_FILENAME);
 	int initialEdge, finalEdge;
 	string line, junk, streetName, bidirectional, lines, typeOfLine;
 	bool firstTime = true;
+	int id = 0;
 	while (std::getline(inFile, line))
 	{
 		std::stringstream linestream(line);
-		if (!firstTime) {
+		if (id!=0) {
 			linestream >> finalEdge;
-			TransportLine * tl = new TransportLine(initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%6 +5)*60);
+			TransportLine * tl = new TransportLine(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%6 +5)*60);
 			if (lines.size() > 0) {
 				tl->addLines(lines);
 				tl->setType(typeOfLine);
 			}
-			graph.addTransportationLine(tl, edgeMap);
+			graph.addTransportationLine(tl);
 			initialEdge = finalEdge;
 			
 		}
@@ -126,15 +126,34 @@ void readNamesFile(Graph &graph, unordered_map<int, pair<int, int>> &edgeMap) {
 		std::getline(linestream, bidirectional, ';');
 		std::getline(linestream, lines, ';');
 		std::getline(linestream, typeOfLine, ';');
+		id++;
 	}
 	inFile.close();
+	graph.setReverseTransportationLines();
 }
 
 void readFiles(Graph &graph, GraphViewer *gv) {
+	double time_spent;
+
+	clock_t begin = clock();
 	readNodesFile(graph, gv);
-	unordered_map<int, pair<int, int>> edgeInfo;
-	readEdgesFile(graph, gv, edgeInfo);
-	readNamesFile(graph, edgeInfo);
+	clock_t end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Nodes Read In: " << time_spent << " seconds.\n";
+
+
+	begin = clock();
+	readEdgesFile(graph, gv);
+	end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Edges Read In: " << time_spent << " seconds.\n";
+	
+
+	begin = clock();
+	readNamesFile(graph);
+	end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Names Read In: " << time_spent << " seconds.\n";
 	gv->rearrange();
 }
 
@@ -149,8 +168,8 @@ void initGV(GraphViewer *gv) {
 }
 
 
-void runTestSuite(Graph &g, GraphViewer *gv);
 void printPath(vector<PathTo> path, string type, GraphViewer *gv);
+void testSPFA(Graph &g, GraphViewer *gv);
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv);
 void testDijkstraBestTime(Graph &g, GraphViewer *gv);
 void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv);
@@ -172,20 +191,14 @@ int main() {
 	initGV(gv);
 	Graph graph;
 	readFiles(graph, gv);
-	displayMenu(graph, gv);
+	//displayMenu(graph, gv);
+	testDijkstraShortestDistance(graph, gv);
 	return 0;
 }
 
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*-------------------------------------------------TEST ALGORITHMS AREA --------------------------------------------------------------*/
-
-
-void runTestSuite(Graph &g, GraphViewer *gv) {
-	readFiles(g, gv);
-	//testDijkstraBestTime(g, gv);
-	//testDijkstraShortestDistance(g, gv);
-}
 
 
 void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
@@ -233,6 +246,21 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 }
 
 
+void testSPFA(Graph &g, GraphViewer *gv) {
+	int initialVertex = 1823, finalVertex = 8136;
+	clock_t begin = clock();
+	//Testing SPFA
+	g.preprocessGraphForSPFA();
+	g.SPFAWithAdjacencyList(initialVertex);
+	clock_t end = clock();
+	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Dijkstra Shortest Distance Calculated In: " << time_spent << " seconds.\n";
+	vector<PathTo> path = g.getPath(initialVertex, finalVertex);
+	gv->setVertexColor(initialVertex, "black");
+	printPath(path, "meters", gv);
+	gv->setVertexColor(finalVertex, "black");
+}
+
 void testDijkstraShortestDistance(Graph &g, GraphViewer *gv) {
 
 	int initialVertex = 1823, finalVertex = 8136;
@@ -265,13 +293,19 @@ void testDijkstraBestTime(Graph &g, GraphViewer *gv) {
 }
 
 void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
+	clock_t begin, end; double time_spent;
 	Graph * copiedGraph = g.copy();
+	cout << "Preprocessing graph...\n";
+	begin = clock();
 	copiedGraph->preprocessGraphForWaitingTimes();
+	end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	cout << "Graph Preprocessed In: " << time_spent << " seconds.\n";
 	int initialVertex = 187, finalVertex = 673;
-	clock_t begin = clock();
+	begin = clock();
 	copiedGraph->dijkstraBestTimeWithWaitingTime(initialVertex);
-	clock_t end = clock();
-	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+	end = clock();
+	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	cout << "Dijkstra Best Time and Avg. Waiting Time Calculated In: " << time_spent << " seconds.\n";
 	vector<PathTo> path = copiedGraph->getPath(initialVertex, finalVertex);
 	if (copiedGraph->checkWalkPercentage(initialVertex, finalVertex,WALKING_LIMIT)) {
