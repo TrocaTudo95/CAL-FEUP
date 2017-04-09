@@ -1,0 +1,208 @@
+1;Rua de Ramalho Ortigão;False;;
+3;Rua da Conceição;False;;
+5;Rua de José Falcão;False;;
+10;Rua de Avis;False;;
+13;Rua de Carlos Alberto;True;;
+15;Rua do Alferes Malheiro;False;;
+16;Rua do Bonjardim;False;;
+32;Rua da Firmeza;False;;
+40;;False;D,;tram
+41;;False;;
+46;;False;D,;tram
+47;Rua de São Filipe de Nery;False;201,207,200,30,301,;bus
+50;Rua dos Clérigos;False;201,207,200,30,500,301,;bus
+54;Rua Heróis e Mártires de Angola;False;30,3M,600,;bus
+61;Rua de Fernandes Tomás;False;800,300,;bus
+67;Rua Cândido dos Reis;False;;
+76;Rua da Galeria de Paris;False;;
+81;Praça Guilherme Gomes Fernandes;False;201,207,200,30,300,;bus
+89;Túnel dos Almadas;False;;
+90;Rua Elísio de Melo;False;201,207,200,30,300,;bus
+93;Rua de Dom João I;False;;
+98;Rua do General Silveira;False;;
+101;Rua Sá de Noronha;False;;
+108;Rua do Almada;False;;
+117;Rua do Carmo;False;201,207,200,30,104,602,300,;bus
+118;Rua das Oliveiras;False;;
+126;Rua da Trindade;False;30,3M,600,;bus
+137;Rua da Firmeza;False;200,;bus
+139;Pátio do Bolhão;False;;
+142;;False;;
+143;Rua Ateneu Comercial do Porto;False;;
+149;Rua do Conde de Vizela;False;;
+152;Rua de Ricardo Jorge;False;;
+159;Rua da Picaria;False;;
+163;Rua Doutor António Luís Gomes;False;30,3M,600,;bus
+173;Rua do Clube dos Fenianos;False;30,3M,600,;bus
+185;Rua de Alexandre Braga;False;800,;bus
+188;Praça Gen. Humberto Delgado;False;;
+193;Rua Formosa;False;;
+201;Rua Sá de Noronha;False;;
+206;Rua de Ceuta;False;201,207,200,30,300,;bus
+214;Praça de Carlos Alberto;False;;
+228;Praça Coronel Pacheco;False;;
+251;Rua do Pinheiro;False;;
+254;Travessa de São Carlos;False;;
+256;Rua de Santa Catarina;False;207,;bus
+258;Rua de Passos Manuel;False;207,;bus
+268;Rua 31 de Janeiro;False;;
+278;;False;;
+280;;False;;
+289;;False;;
+297;Rua de Camões;False;30,3M,600,;bus
+299;;False;;
+300;;False;;
+301;;False;;
+304;Rua da Fábrica;False;;
+306;Rua Doutor Magalhães Lemos;False;201,207,200,300,;bus
+312;Rua de José Falcão;False;201,207,200,30,300,;bus
+313;Rua de Santa Teresa;False;;
+314;Rua Actor João Guedes;False;;
+320;;False;;
+323;;False;;
+326;;False;;
+329;;False;;
+330;;False;;
+335;Rua de Fernandes Tomás;False;;
+345;Rua Formosa;False;800,301,;bus
+347;Rua do Bolhão;False;200,;bus
+349;Rua do Bolhão;False;;
+351;Rua Guedes de Azevedo;False;;
+352;Túnel dos Almadas;False;;
+354;Travessa Rua Formosa;False;;
+359;Pátio do Bonjardim;True;;
+368;Rua Rodrigues Sampaio;False;;
+370;Praça de Almeida Garrett;False;201,200,301,;bus
+372;Travessa de Passos Manuel;True;;
+379;Beco Passos Manuel;True;;
+383;Praça de Almeida Garrett;False;207,500,;bus
+385;Praça da Batalha;False;207,;bus
+389;Praça da Liberdade;False;;
+397;Avenida dos Aliados;False;3M,600,;bus
+405;;False;201,207,200,300,;bus
+407;Rua da Fábrica;False;;
+409;Praça Dona Filipa de Lencastre;False;201,207,200,30,300,;bus
+412;;False;;
+420;Rua das Carmelitas;False;;
+428;;False;;
+438;Praça Gomes Teixeira;False;104,602,;bus
+442;;False;;
+447;;False;201,207,200,30,104,300,;bus
+449;;False;;
+453;Praça de Gomes Teixeira;False;201,207,200,30,104,602,300,;bus
+462;Avenida dos Aliados;False;30,3M,600,;bus
+469;Praça da Liberdade;False;201,207,200,30,500,301,;bus
+477;Rua de Sá da Bandeira;True;200,300,301,;bus
+481;;True;;
+484;;True;;
+485;Rua Doutor António E. Magalhães;False;;
+486;;False;;
+489;Travessa da Rua Formosa;False;;
+490;Rua de Rodrigues Sampaio;True;;
+491;;True;;
+496;;True;;
+500;;True;;
+501;;False;;
+504;Rua Guilherme da Costa Carvalho;False;;
+508;;False;;
+515;;False;;
+516;;True;;
+524;;True;;
+530;;True;;
+536;;True;;
+546;;False;;
+550;Rua do Estêvão;False;;
+558;;False;;
+563;;False;;
+570;;False;;
+573;;False;;
+574;Largo de Mompilher;False;;
+575;Largo de Mompilher;False;;
+579;;True;;
+582;;True;;
+584;;True;;
+591;;False;;
+593;;False;;
+595;;False;;
+600;Praça de Carlos Alberto;False;;
+602;Rua de Sá da Bandeira;True;200,300,301,;bus
+605;;False;;
+607;Rua Ateneu Comercial do Porto;False;;
+608;Rua do Carmo;False;602,;bus
+610;;False;;
+613;Travessa das Almas;True;;
+617;Ilha;True;;
+618;;True;;
+630;;False;;
+634;;False;;
+638;;False;;
+642;;True;;
+652;;False;;
+663;;False;;
+669;;False;;
+670;;False;;
+673;;False;;
+675;;False;;
+677;;False;;
+684;;False;;
+697;;False;;
+705;;False;;
+708;;False;;
+710;;False;;
+715;;False;E,C,A,F,B,;tram
+716;;False;;
+723;;False;;
+724;;False;;
+725;;False;;
+726;;False;;
+727;;False;;
+729;;False;;
+731;;True;;
+733;;False;B,E,F,A,C,;tram
+734;;False;;
+736;;False;;
+741;;False;;
+747;;False;D,;tram
+749;;False;D,;tram
+750;;False;D,;tram
+752;;False;D,;tram
+753;;True;;
+754;;True;;
+755;;False;;
+772;;True;;
+777;;True;;
+778;;True;;
+782;;True;;
+783;;True;;
+784;Travessa da Rua Formosa;True;;
+786;;True;;
+787;;True;;
+788;;True;;
+789;;True;;
+790;;True;;
+791;;True;;
+792;;True;;
+793;;True;;
+795;;True;;
+797;;True;;
+798;Praça de Carlos Alberto;False;;
+800;Praça de Carlos Alberto;False;;
+805;Rua Formosa;False;800,301,;bus
+807;Largo do Pinheiro;False;;
+808;Largo do Pinheiro;False;;
+810;Túnel Campanhã-Trindade;False;E,C,A,F,B,;tram
+815;Túnel Campanhã-Trindade;False;E,C,A,F,B,;tram
+816;Túnel Campanhã-Trindade;False;B,E,F,A,C,;tram
+821;Túnel Campanhã-Trindade;False;B,E,F,A,C,;tram
+822;Rua do Bonjardim;True;;
+827;;True;;
+828;;False;;
+829;;False;;
+832;Rua Doutor Ferreira da Silva;True;104,602,;bus
+833;Avenida dos Aliados;False;30,3M,3M,600,;bus
+843;Rua de Fernandes Tomás;False;300,;bus
+845;Rua de Sá da Bandeira;True;200,;bus
+850;Rua Formosa;False;301,;bus
+853;Rua de Sá da Bandeira;True;200,300,;bus
+856;Praça de Almeida Garrett;False;201,207,200,500,301,;bus
+857;Rua de Sá da Bandeira;False;201,200,301,;bus

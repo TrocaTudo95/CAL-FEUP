@@ -18,10 +18,10 @@
 
 #define EDGE_COLOR_DEFAULT GRAY
 #define VERTEX_COLOR_DEFAULT YELLOW
-#define NODES_FILENAME "nos.txt"
-#define EDGES_FILENAME "arestas.txt"
-#define LINES_FILENAME "names.txt"
-#define METER_PER_PIXEL_FILENAME "meter_per_pixel.txt"
+string NODES_FILENAME;
+string EDGES_FILENAME;
+string LINES_FILENAME;
+string METER_PER_PIXEL_FILENAME;
 #define TAB_SPACE_INITIAL "     "
 #define TAB_SPACE "         "
 #define WALKING_LIMIT 0.5
@@ -29,8 +29,8 @@
 const int WIDTHOFGRAPH = 1920;
 const int HEIGHTOFGRAPH = 1080;
 
-int initialVertex = 1;
-int finalVertex = 10;
+int initialVertex = -1;
+int finalVertex = -1;
 
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 /*------------------------------------------------------READ FILES AREA --------------------------------------------------------------*/
@@ -352,7 +352,7 @@ void displayTimeTravel(Graph &graph, GraphViewer *gv) {
 			NULL,
 			&testDijkstraBestTime,
 			&testDijkstraBestTimeWithWaitingTime };
-		cout << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl;
+		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
 		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
 		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
 		cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.1. Sem tempo de espera" << endl;
@@ -382,7 +382,7 @@ void displayLessTransportTravelWithFavorite(Graph &graph, GraphViewer *gv) {
 	do
 	{
 		cleanScreen();
-		cout << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl;
+		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
 		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
 		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
 		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
@@ -420,7 +420,7 @@ void displayLessTransportTravel(Graph &graph, GraphViewer *gv) {
 	do
 	{
 		cleanScreen();
-		cout << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl;
+		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
 		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
 		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
 		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
@@ -451,7 +451,7 @@ void displayMenu(Graph &graph, GraphViewer *gv) {
 	do
 	{
 		cleanScreen();
-		cout << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl;
+		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
 		cout << TAB_SPACE << "1. Minimizacao da distância a percorrer" << endl;
 		cout << TAB_SPACE << "2. Minimizacao do tempo de viagem" << endl;
 		cout << TAB_SPACE << "3. Minimizacao das mudancas de linha de transporte" << endl;
@@ -484,7 +484,7 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 	while (initialVertex == -1 || finalVertex == -1)
 	{
 		cleanScreen();
-		cout << TAB_SPACE_INITIAL << "Selecao de Nos" << endl;
+		cout << endl << TAB_SPACE_INITIAL << "Selecao de Nos" << endl << endl;
 		cout << TAB_SPACE << "Selecione o Nó de Origem:" << endl;
 		cin >> initialVertex;
 		if (cin.fail())
@@ -524,7 +524,7 @@ void startMenu(Graph &graph, GraphViewer *gv) {
 	do
 	{
 		cleanScreen();
-		cout << TAB_SPACE_INITIAL << "Bem vindo ao Sistema MultiModal" << endl;
+		cout << endl << TAB_SPACE_INITIAL << "Bem vindo ao Sistema MultiModal" << endl << endl;
 		cout << TAB_SPACE << "1. Selecione Nodes" << endl;
 		cout << TAB_SPACE << "2. Escolha do Caminho a Percorrer" << endl;
 		cout << TAB_SPACE << "0. Exit" << endl;
@@ -540,6 +540,69 @@ void startMenu(Graph &graph, GraphViewer *gv) {
 			functions[option](graph, gv);
 		if (option == 1)
 			functions[option](graph, gv);
+	} while (option != 0);
+}
+
+void selectGraphToLoad() {
+	int option;
+	do
+	{
+		cleanScreen();
+		cout << endl << TAB_SPACE_INITIAL << "Bem vindo ao Sistema MultiModal" << endl;
+		cout << TAB_SPACE << "Selecione Nodes o Mapa desejado:" << endl << endl;
+		cout << TAB_SPACE << "1. Aliados        - N: 820;   A: 850" << endl;
+		cout << TAB_SPACE << "2. FEUP           - N: 1987;  A: 2172" << endl;
+		cout << TAB_SPACE << "3. FEUP2           - N: 3693;  A: 4036" << endl;
+		cout << TAB_SPACE << "4. Campo Alegre   - N: 6739;  A: 7107" << endl;
+		cout << TAB_SPACE << "5. Porto          - N: 13164; A: 14303" << endl;
+		cout << endl << "Escolha uma opcao: ";
+
+		cin >> option;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(256, '\n');
+		}
+		switch (option)
+		{
+		case 1:
+			NODES_FILENAME = "aliados_nos.txt";
+			EDGES_FILENAME = "aliados_arestas.txt";
+			LINES_FILENAME = "aliados_names.txt";
+			METER_PER_PIXEL_FILENAME = "aliados_meter_per_pixel.txt";
+			option = 0;
+			break;
+		case 2:
+			NODES_FILENAME = "feup_nos.txt";
+			EDGES_FILENAME = "feup_arestas.txt";
+			LINES_FILENAME = "feup_names.txt";
+			METER_PER_PIXEL_FILENAME = "feup_meter_per_pixel.txt";
+			option = 0;
+			break;
+		case 3:
+			NODES_FILENAME = "feup2_nos.txt";
+			EDGES_FILENAME = "feup2_arestas.txt";
+			LINES_FILENAME = "feup2_names.txt";
+			METER_PER_PIXEL_FILENAME = "feup2_meter_per_pixel.txt";
+			option = 0;
+			break;
+		case 4:
+			NODES_FILENAME = "campo_alegre_nos.txt";
+			EDGES_FILENAME = "campo_alegre_arestas.txt";
+			LINES_FILENAME = "campo_alegre_names.txt";
+			METER_PER_PIXEL_FILENAME = "campo_alegre_meter_per_pixel.txt";
+			option = 0;
+			break;
+		case 5:
+			NODES_FILENAME = "centro_nos.txt";
+			EDGES_FILENAME = "centro_arestas.txt";
+			LINES_FILENAME = "centro_names.txt";
+			METER_PER_PIXEL_FILENAME = "centro_meter_per_pixel.txt";
+			option = 0;
+			break;
+		default:
+			break;
+		}
 	} while (option != 0);
 }
 
@@ -562,6 +625,7 @@ int main() {
 	GraphViewer *gv = new GraphViewer(WIDTHOFGRAPH, HEIGHTOFGRAPH, false);
 	initGV(gv);
 	Graph graph;
+	selectGraphToLoad();
 	readFiles(graph, gv);
 	startMenu(graph, gv);
 	return 0;

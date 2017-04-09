@@ -7,9 +7,6 @@
 * ================================================================================================
 */
 
-double Graph::METER_PER_PIXEL_X = 1.0;
-double Graph::METER_PER_PIXEL_Y = 1.0;
-
 Edge * Graph::getEdgeById(int id)
 {
 	typename hashEdges::const_iterator it = edgeMap.find(id);
@@ -28,7 +25,8 @@ Graph::Graph()
 {
 	highestEdgeId = 0;
 	highestTransportLineId = 0;
-
+	METER_PER_PIXEL_X = 1;
+	METER_PER_PIXEL_Y = 1;
 }
 
 Graph::~Graph()
