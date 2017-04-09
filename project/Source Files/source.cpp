@@ -263,6 +263,17 @@ void testDijkstraBestTime(Graph &g, GraphViewer *gv) {
 }
 
 void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
+	double option;
+	cout << endl << "Custo Máximo da viagem? (0 - Significa sem limite de Custo)" << endl;
+	cin >> option;
+	while (cin.fail() || option <= 0)
+	{
+		cout << endl << "Introduza uma opcao valida!" << endl;
+		cin.clear();
+		cin.ignore(256, '\n');
+		cout << endl << "Custo Máximo da viagem?" << endl;
+		cin >> option;
+	}
 	clock_t begin, end; double time_spent;
 	Graph * copiedGraph = g.copy();
 	cout << "Preprocessing graph...\n";
@@ -272,7 +283,7 @@ void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
 	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	cout << "Graph Preprocessed In: " << time_spent << " seconds.\n";
 	begin = clock();
-	copiedGraph->dijkstraBestTimeWithWaitingTime(initialVertex,0);
+	copiedGraph->dijkstraBestTimeWithWaitingTime(initialVertex,option);
 	end = clock();
 	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 
