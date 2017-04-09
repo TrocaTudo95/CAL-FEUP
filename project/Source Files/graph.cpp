@@ -519,7 +519,7 @@ void Graph::dijkstraBestTime(const int & s) {
 		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
-			int deltaTime;
+			double deltaTime;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
@@ -563,7 +563,7 @@ void Graph::dijkstraBestTime(const int & s) {
 void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cost)
 {
 	double cost; 
-	int deltaTime, summedCost, edgeDistance;
+	double deltaTime, summedCost, edgeDistance;
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++)
@@ -692,7 +692,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
-			int deltaTime;
+			double deltaTime;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
@@ -715,7 +715,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 				deltaTime = edgeDistance / METRO_SPEED;
 				break;
 			}
-			int realTime = deltaTime;
+			double realTime = deltaTime;
 			if (typeOfTransportLine == favorite) {
 				deltaTime = deltaTime * FAV_TRANSPORT_MULTIPLIER;
 			}
@@ -802,7 +802,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 
 				break;
 			}
-			int realTime = deltaTime;
+			double realTime = deltaTime;
 			if (typeOfTransportLine == favorite) {
 				deltaTime = deltaTime *FAV_TRANSPORT_MULTIPLIER;
 			}
@@ -823,7 +823,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & s, const double & max_cost, char favorite)
 {
 	double cost;
-	int deltaTime, summedCost, edgeDistance;
+	double deltaTime, summedCost, edgeDistance;
 	typename hashNodes::iterator it = nodeMap.begin();
 	typename hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++)
@@ -905,7 +905,7 @@ void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & 
 				}
 			}
 
-			int realTime = deltaTime;
+			double realTime = deltaTime;
 			if (typeOfTransportLine == favorite) {
 				deltaTime = deltaTime *FAV_TRANSPORT_MULTIPLIER;
 			}
