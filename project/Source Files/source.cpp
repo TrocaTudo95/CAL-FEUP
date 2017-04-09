@@ -116,14 +116,14 @@ void readNamesFile(Graph &graph) {
 	openFile(inFile, LINES_FILENAME);
 	int initialEdge, finalEdge;
 	string line, junk, streetName, bidirectional, lines, typeOfLine;
-	bool firstTime = true;
 	int id = 0;
 	while (std::getline(inFile, line))
 	{
 		std::stringstream linestream(line);
 		if (id!=0) {
 			linestream >> finalEdge;
-			TransportLine * tl = new TransportLine(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%6 +3)*60);
+			TransportLine * tl = new TransportLine(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%1 +1)*60);
+			
 			if (lines.size() > 0) {
 				tl->addLines(lines);
 				tl->setType(typeOfLine);
@@ -134,14 +134,14 @@ void readNamesFile(Graph &graph) {
 		}
 		else {
 			linestream >> initialEdge;
-			firstTime = false;
 		}
+		id++;
 		std::getline(linestream, junk, ';');
 		std::getline(linestream, streetName, ';');
 		std::getline(linestream, bidirectional, ';');
 		std::getline(linestream, lines, ';');
 		std::getline(linestream, typeOfLine, ';');
-		id++;
+		
 	}
 	inFile.close();
 	graph.setReverseTransportationLines();

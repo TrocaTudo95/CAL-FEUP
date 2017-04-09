@@ -75,7 +75,7 @@ void Graph::copyEdges(hashNodes originalNodes)
 		vector<Edge*> vEdges = v->getAdj();
 		for (int i = 0; i < vEdges.size(); i++) {
 			Edge* currentEdge = vEdges.at(i);
-			addEdge(currentEdge->id, v->info,currentEdge->destNode);
+			addEdge(currentEdge->id, v->info,currentEdge->destNode, currentEdge->weight);
 			int tl = currentEdge->getTransportLineId();
 			edgeMap[currentEdge->id].first->setTransportLine(tl);
 		}
@@ -97,6 +97,7 @@ void Graph::setHighestEdgeId(int id)
 void Graph::setTransportationLines(const hashTL &tlMap)
 {	
 	transportationLines = tlMap;
+	highestTransportLineId = tlMap.size();
 }
 
 
@@ -112,14 +113,12 @@ void Graph::addTransportationLine(TransportLine * tl)
 	int finalEdge = tl->getFinalEdgeId();
 	int tlId = tl->getId();
 	transportationLines.insert(make_pair(tlId, tl));
-	if (tlId > highestEdgeId) {
-		highestEdgeId = tlId;
+	if (tlId > highestTransportLineId) {
+		highestTransportLineId = tlId;
 	}
 	for (int i = initialEdge; i <= finalEdge; i++) {
 		edgeMap[i].first->setTransportLine(tlId);
 	}
-	
-	
 }
 
 void Graph::setReverseTransportationLines()
@@ -184,7 +183,7 @@ bool Graph::removeNode(const int &in) {
 }
 
 
-bool Graph::addEdge(int id,const int &sourc, const int &dest, int w) {
+bool Graph::addEdge(int id,const int &sourc, const int &dest, double w) {
 	typename hashNodes::iterator it = nodeMap.find(sourc);
 	typename hashNodes::iterator ite = nodeMap.find(dest);
 	if (it == nodeMap.end() || ite == nodeMap.end())
@@ -320,63 +319,6 @@ vector<int> Graph::getPathForSPFA(const int &origin, const int &dest) {
 		buffer.pop_front();
 	}
 	return res;
-}
-
-
-void Graph::unweightedShortestPath(const int &s) {
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++){
-		it->second->path = NULL;
-		it->second->dist = DOUBLE_INFINITY;
-	}
-
-	Node* v = getNode(s);
-	v->dist = 0;
-	queue< Node* > q;
-	q.push(v);
-
-	while (!q.empty()) {
-		v = q.front(); q.pop();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = getNode(v->adj[i]->destNode);
-			if (w->dist > v->dist + 1) {
-				w->dist = v->dist + 1;
-				w->path = v;
-				q.push(w);
-			}
-		}
-	}
-}
-
-
-
-void Graph::bellmanFordShortestPath(const int & s)
-{
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++)
-	{
-		it->second->path = NULL;
-		it->second->dist = DOUBLE_INFINITY;
-	}
-
-	Node* v = getNode(s);
-	v->dist = 0;
-	queue< Node* > q;
-	q.push(v);
-
-	while (!q.empty()) {
-		v = q.front(); q.pop();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = getNode(v->adj[i]->destNode);
-			if (w->dist > v->dist + v->adj[i]->weight) {
-				w->dist = v->dist + v->adj[i]->weight;
-				w->path = v;
-				q.push(w);
-			}
-		}
-	}
 }
 
 
@@ -1053,34 +995,34 @@ void Graph::preprocessGraphForWaitingTimes()
 	for (auto& tlIter : transportationLines) {
 		TransportLine * t = tlIter.second;
 		char typeOfTransport = t->getType();
-		if (typeOfTransport == 'W' || typeOfTransport == 'T') {
-			continue;
-		}
-		int initialEdgeId = t->getInitialEdgeId();
-		vector<int> nodesIds = t->getNodesIds(edgeMap);
-		if (nodesIds.size() < 3) {
-			continue;
-		}
-		vector<int>::iterator it = nodesIds.begin();
+		if (typeOfTransport == 'B') {
+			int initialEdgeId = t->getInitialEdgeId();
+			vector<int> nodesIds = t->getNodesIds(edgeMap);
+			if (nodesIds.size() > 2) {
+				vector<int>::iterator it = nodesIds.begin();
 
-		for (int i = 0; i < nodesIds.size() - 2; i++) {
-			Node * src = getNode(*it);
-			assert(src != NULL);
-			int weight = 0;
-			vector<int>::iterator itDest = it;
-			for (int j = i; j < nodesIds.size() - 1; j++) {
-				itDest++;
-				weight += getEdgeById(initialEdgeId + j)->weight;
-				if (i != j) {
-					highestEdgeId++;
-					Edge * e = src->addEdge(highestEdgeId, *itDest, weight);
-					edgeMap.insert(make_pair(e->id, make_pair(e, *it)));
-					e->setTransportLine(tlIter.first);
+				for (int i = 0; i < nodesIds.size() - 2; i++) {
+					Node * src = getNode(*it);
+					assert(src != NULL);
+					double weight = 0;
+					vector<int>::iterator itDest = it;
+					for (int j = i; j < nodesIds.size() - 1; j++) {
+						itDest++;
+						weight += getEdgeById(initialEdgeId + j)->weight;
+						if (i != j) {
+							highestEdgeId++;
+							Edge * e = src->addEdge(highestEdgeId, *itDest, weight);
+							edgeMap.insert(make_pair(e->id, make_pair(e, *it)));
+							e->setTransportLine(tlIter.first);
+						}
+					}
+					it++;
 				}
 			}
-			it++;
 		}
+			
 	}
+		
 
 }
 
