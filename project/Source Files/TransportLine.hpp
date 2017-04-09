@@ -93,7 +93,7 @@ public:
 	char getType();
 	/**
 	* @brief get the TransportLine's average waiting time
-	* @return TransportLine's average waiting time in minutes
+	* @return TransportLine's average waiting time in seconds
 	*/
 	int getWaitTime();
 	/**

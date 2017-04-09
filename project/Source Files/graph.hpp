@@ -18,6 +18,7 @@
 #include <condition_variable>
 #include <unordered_map>
 #include <cassert>
+#include <float.h>
 #include "node.hpp"
 #include "TransportLine.hpp"
 
@@ -29,9 +30,10 @@ const int NOT_VISITED = 0;
 const int BEING_VISITED = 1;
 const int DONE_VISITED = 2;
 const int INT_INFINITY = INT_MAX;
-const int WALK_SPEED = 1;
-const int BUS_SPEED = 10;
-const int METRO_SPEED = 20;
+const double DOUBLE_INFINITY = DBL_MAX;
+const double WALK_SPEED = 0.8;
+const double BUS_SPEED = 10.0;
+const double METRO_SPEED = 20.0;
 
 
 const double FAV_TRANSPORT_MULTIPLIER = 0.01;
@@ -52,7 +54,7 @@ typedef vector<int> vi;
 
 typedef struct {
 	int path;
-	int dist;
+	double dist;
 	char wayToGetThere;
 } PathTo;
 

@@ -28,7 +28,7 @@ class Node {
 	vector<Edge*> adj;
 	bool visited;
 	bool processing;
-	int dist;
+	double dist;
 	double cost;
 	unordered_set<string> linesPath;
 	char wayToGetThere;

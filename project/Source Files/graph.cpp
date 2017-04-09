@@ -249,7 +249,7 @@ bool Graph::checkWalkPercentage(const int &origin, const int &dest, float percen
 
 		prev_dist = nodePath[i]->getDist();
 	}
-
+	percentage_a = walk_dist / total_dist;
 	return(percentage_a > percentage);
 
 }
@@ -328,7 +328,7 @@ void Graph::unweightedShortestPath(const int &s) {
 	typename hashNodes::iterator ite = nodeMap.end();
 	for (; it != ite; it++){
 		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 	}
 
 	Node* v = getNode(s);
@@ -358,7 +358,7 @@ void Graph::bellmanFordShortestPath(const int & s)
 	for (; it != ite; it++)
 	{
 		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 	}
 
 	Node* v = getNode(s);
@@ -447,9 +447,8 @@ void Graph::dijkstraShortestDistance(const int & s) {
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 	}
-
 	Node* v = getNode(s);
 	v->dist = 0;
 	vector<Node *> pq;
@@ -464,7 +463,7 @@ void Graph::dijkstraShortestDistance(const int & s) {
 		pop_heap(pq.begin(), pq.end(), Node_greater_than());
 		pq.pop_back();
 		adja = v->adj;
-		closeNodes = getCloseNodes(SEARCH_RADIUS, v);// the max_dist has to be defined
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);
 		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 
@@ -494,7 +493,7 @@ void Graph::dijkstraShortestDistance(const int & s, const int & d) {
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 	}
 	Node* dNode = getNode(d);
 	Node* v = getNode(s);
@@ -557,7 +556,7 @@ void Graph::dijkstraBestTime(const int & s) {
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 		it->second->wayToGetThere = 'W';
 	}
 
@@ -629,7 +628,7 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cos
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 		it->second->wayToGetThere = 'W';
 		it->second->cost = 0;
 	}
@@ -730,7 +729,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 		it->second->wayToGetThere = 'W';
 	}
 
@@ -800,7 +799,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 		it->second->wayToGetThere = 'W';
 	}
 
@@ -821,11 +820,11 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 		onFoot = getCloseEdges(closeNodes, v);
 		addEdgesFoot(adja, onFoot);
 		for (unsigned int i = 0; i < adja.size(); i++) {
-			int deltaTime;
+			double deltaTime;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
 			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
-			int edgeDistance = edge->weight;
+			double edgeDistance = edge->weight;
 
 			char typeOfTransportLine;
 			bool onTransport = true;
@@ -847,7 +846,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 				else {
 					deltaTime = edgeDistance / BUS_SPEED + currentTransportLine->getWaitTime();
 
-					if (edgeDistance / WALK_SPEED < deltaTime) {
+					if ((double)edgeDistance / WALK_SPEED < (double)deltaTime) {
 						deltaTime = edgeDistance / WALK_SPEED;
 						typeOfTransportLine = 'W';
 					}
@@ -889,7 +888,7 @@ void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & 
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 		it->second->wayToGetThere = 'W';
 		it->second->cost = 0;
 	}
@@ -993,7 +992,7 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 	{
 		it->second->path = NULL;
 		it->second->processing = false;
-		it->second->dist = INT_INFINITY;
+		it->second->dist = DOUBLE_INFINITY;
 		it->second->linesPath.clear();
 		it->second->wayToGetThere = 'W';
 	}
@@ -1116,6 +1115,8 @@ Graph * Graph::copy()
 	g->setNodeMap(copyNodes());
 	g->setTransportationLines(transportationLines);
 	g->copyEdges(nodeMap);
+	g->setMETER_PER_PIXEL_X(METER_PER_PIXEL_X);
+	g->setMETER_PER_PIXEL_Y(METER_PER_PIXEL_Y);
 	
 	return g;
 	

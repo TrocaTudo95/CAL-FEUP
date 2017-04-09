@@ -177,7 +177,7 @@ void readFiles(Graph &graph, GraphViewer *gv) {
 /*------------------------------------------------------------------------------------------------------------------------------------*/
 
 void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
-	int previousDist = 0;
+	double previousDist = 0;
 	string units = type;
 	cout << "Start in " << path.at(0).path << "\n";
 	for (int i = 1; i < path.size(); i++) {
@@ -305,7 +305,6 @@ void testDijkstraBestTimeWithFavoriteTransportAndWaitingTime(Graph &g, GraphView
 {
 	Graph * copiedGraph = g.copy();
 	copiedGraph->preprocessGraphForWaitingTimes();
-
 	clock_t begin = clock();
 	copiedGraph->dijkstraBestTimeWithFavoriteTransportAndWaitingTime(initialVertex,favorite);
 	clock_t end = clock();
@@ -355,8 +354,8 @@ void displayBestTimeWithFavorite(Graph &graph, GraphViewer *gv) {
 		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
 		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
 		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
-		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Sem Tranporte Favorito" << endl;
-		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Com Tranporte Favorito" << endl;
+		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Sem Transporte Favorito" << endl;
+		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Com Transporte Favorito" << endl;
 		cout << TAB_SPACE << TAB_SPACE << "3.2.1. Sem tempo de espera" << endl;
 		cout << TAB_SPACE << TAB_SPACE << "3.2.2. Com tempo de espera" << endl;
 		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
