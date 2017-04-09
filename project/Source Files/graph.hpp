@@ -128,6 +128,7 @@ public:
 	void dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cost);
 	void dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite);
 	void dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int &s, char favorite);
+	void dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int &s, const double &max_cost, char favorite);
 	void dijkstraLessTransportsUsed(const int &s);
 
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);

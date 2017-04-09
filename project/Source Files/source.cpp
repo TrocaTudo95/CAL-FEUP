@@ -123,7 +123,7 @@ void readNamesFile(Graph &graph) {
 		std::stringstream linestream(line);
 		if (id!=0) {
 			linestream >> finalEdge;
-			TransportLine * tl = new TransportLine(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%6 +5)*60);
+			TransportLine * tl = new TransportLine(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%6 +3)*60);
 			if (lines.size() > 0) {
 				tl->addLines(lines);
 				tl->setType(typeOfLine);
