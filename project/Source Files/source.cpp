@@ -11,6 +11,7 @@
 #include <fstream>
 #include <sstream>
 #include <ctime>
+#include <iomanip>
 #include "graphviewer.h"
 #include "graph.hpp"
 
@@ -194,7 +195,7 @@ void printPath(vector<PathTo> path, string type, GraphViewer *gv) {
 			message = "bus";
 			break;
 		}
-		cout << "Go by " << message << " to node " << p.path << " in " << p.dist - previousDist << " " << units << " \n";
+		cout << "Go by " << message << " to node " << p.path << " in " << fixed << setprecision(2) << p.dist - previousDist << " " << units << " \n";
 		if (i != path.size() - 1)
 			gv->setVertexColor(p.path, GREEN);
 		gv->rearrange();
