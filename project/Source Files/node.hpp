@@ -53,7 +53,7 @@ public:
 	/**
 	* @brief remove the Edge specified by the Node pointer d (destiny node of the Edge) from the adj vector
 	* @param d Node pointer to specify the Edge destiny to remove
-	* @return returns true if successfully removes the Edge and false otherwise
+	* @return true if successfully removes the Edge and false otherwise
 	*/
 	bool removeEdgeTo(Node *d);
 	/**

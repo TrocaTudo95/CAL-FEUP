@@ -32,27 +32,27 @@ public:
 	/**
 	* @brief Comparates two edges by theirs destination nodes.
 	* @param e Edge to comparate with.
-	* @return returns true if the two edges have the same destination node.
+	* @return true if the two edges have the same destination node.
 	*/
 	bool operator==(const Edge& e) const;
 	/**
 	* @brief sets the attribute transportLineId.
-	* @brief transportLineId TransportLine id.
+	* @param transportLineId TransportLine id.
 	*/
 	void setTransportLine(int transportLineId);
 	/**
 	* @brief function to return the destination node id. 
-	* @return returns the destination node id .
+	* @return the destination node id .
 	*/
 	int getDest() const;
 	/**
 	* @brief function to return the Edge weight
-	* @return returns the Edge weight, as distance.
+	* @return the Edge weight, as distance.
 	*/
 	double getWeight() { return weight; }
 	/**
 	* @brief function to return the Tranportation Line id
-	* @return returns the Tranportation Line id
+	* @return the Tranportation Line id
 	*/
 	int getTransportLineId();
 	/**
