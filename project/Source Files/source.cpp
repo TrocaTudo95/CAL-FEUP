@@ -375,7 +375,7 @@ void displayBestTimeWithFavorite(Graph &graph, GraphViewer *gv) {
 		cout << TAB_SPACE << TAB_SPACE << "3.2.1. Sem tempo de espera" << endl;
 		cout << TAB_SPACE << TAB_SPACE << "3.2.2. Com tempo de espera" << endl;
 		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
-		cout << TAB_SPACE << "*. Minimizacao ..." << endl;
+		cout << TAB_SPACE << "*. Minimizacao do Custo" << endl;
 		cout << TAB_SPACE << "0. Back" << endl;
 		cout << endl << "Escolha uma opcao: ";
 		cin >> option;
@@ -433,7 +433,7 @@ void displayBestTimeWithoutFavorite(Graph &graph, GraphViewer *gv) {
 		cout << TAB_SPACE << TAB_SPACE << "3.2.2. Com tempo de espera" << endl;
 		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Com Tranporte Favorito" << endl;
 		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
-		cout << TAB_SPACE << "*. Minimizacao ..." << endl;
+		cout << TAB_SPACE << "*. Minimizacao do Custo" << endl;
 		cout << TAB_SPACE << "0. Back" << endl;
 		cout << endl << "Escolha uma opcao: ";
 		cin >> option;
@@ -463,7 +463,7 @@ void displayTimeTravel(Graph &graph, GraphViewer *gv) {
 		cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.1. Sem Tranporte Favorito" << endl;
 		cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.2. Com Tranporte Favorito" << endl;
 		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
-		cout << TAB_SPACE << "*. Minimizacao ..." << endl;
+		cout << TAB_SPACE << "*. Minimizacao do Custo" << endl;
 		cout << TAB_SPACE << "0. Back" << endl;
 		cout << endl << "Escolha uma opcao: ";
 		cin >> option;
