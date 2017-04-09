@@ -343,37 +343,7 @@ void cleanScreen() {
 	system("CLS");
 }
 
-void displayTimeTravel(Graph &graph, GraphViewer *gv) {
-	int option;
-	do
-	{
-		cleanScreen();
-		void(*functions[3])(Graph &graph, GraphViewer* gv) = { 
-			NULL,
-			&testDijkstraBestTime,
-			&testDijkstraBestTimeWithWaitingTime };
-		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
-		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
-		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
-		cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.1. Sem tempo de espera" << endl;
-		cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.2. Com tempo de espera" << endl;
-		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
-		cout << TAB_SPACE << "*. Minimizacao ..." << endl;
-		cout << TAB_SPACE << "0. Back" << endl;
-		cout << endl << "Escolha uma opcao: ";
-		cin >> option;
-		if (cin.fail())
-		{
-			cout << endl << "Introduza uma opcao valida!" << endl;
-			cin.clear();
-			cin.ignore(256, '\n');
-		}
-		if (option >= 1 && option < 3)
-			functions[option](graph, gv);
-	} while (option != 0);
-}
-
-void displayLessTransportTravelWithFavorite(Graph &graph, GraphViewer *gv) {
+void displayBestTimeWithFavorite(Graph &graph, GraphViewer *gv) {
 	void(*functions[3])(Graph &graph, GraphViewer* gv, char favorite) = {
 		NULL,
 		&testDijkstraBestTimeWithFavoriteTransport, 
@@ -385,11 +355,11 @@ void displayLessTransportTravelWithFavorite(Graph &graph, GraphViewer *gv) {
 		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
 		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
 		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
-		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
 		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Sem Tranporte Favorito" << endl;
 		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Com Tranporte Favorito" << endl;
 		cout << TAB_SPACE << TAB_SPACE << "3.2.1. Sem tempo de espera" << endl;
 		cout << TAB_SPACE << TAB_SPACE << "3.2.2. Com tempo de espera" << endl;
+		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
 		cout << TAB_SPACE << "*. Minimizacao ..." << endl;
 		cout << TAB_SPACE << "0. Back" << endl;
 		cout << endl << "Escolha uma opcao: ";
@@ -411,11 +381,11 @@ void displayLessTransportTravelWithFavorite(Graph &graph, GraphViewer *gv) {
 	} while (option != 0);
 }
 
-void displayLessTransportTravel(Graph &graph, GraphViewer *gv) {
+void displayBestTimeWithoutFavorite(Graph &graph, GraphViewer *gv) {
 	void(*functions[3])(Graph &graph, GraphViewer* gv) = {
 		NULL,
-		&testDijkstraNumTransportsUsed,
-		&displayLessTransportTravelWithFavorite };
+		&testDijkstraBestTime,
+		&testDijkstraBestTimeWithWaitingTime };
 	int option;
 	do
 	{
@@ -423,9 +393,41 @@ void displayLessTransportTravel(Graph &graph, GraphViewer *gv) {
 		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
 		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
 		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
+		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Sem Tranporte Favorito" << endl;
+		cout << TAB_SPACE << TAB_SPACE << "3.2.1. Sem tempo de espera" << endl;
+		cout << TAB_SPACE << TAB_SPACE << "3.2.2. Com tempo de espera" << endl;
+		cout << TAB_SPACE << TAB_SPACE_INITIAL << "*.*. Com Tranporte Favorito" << endl;
 		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
-		cout << TAB_SPACE << TAB_SPACE_INITIAL << "3.1. Sem Tranporte Favorito" << endl;
-		cout << TAB_SPACE << TAB_SPACE_INITIAL << "3.2. Com Tranporte Favorito" << endl;
+		cout << TAB_SPACE << "*. Minimizacao ..." << endl;
+		cout << TAB_SPACE << "0. Back" << endl;
+		cout << endl << "Escolha uma opcao: ";
+		cin >> option;
+		if (cin.fail())
+		{
+			cout << endl << "Introduza uma opcao valida!" << endl;
+			cin.clear();
+			cin.ignore(256, '\n');
+		}
+		if (option >= 1 && option < 3)
+			functions[option](graph, gv);
+	} while (option != 0);
+}
+
+void displayTimeTravel(Graph &graph, GraphViewer *gv) {
+	void(*functions[3])(Graph &graph, GraphViewer* gv) = {
+		NULL,
+		&displayBestTimeWithoutFavorite,
+		&displayBestTimeWithFavorite };
+	int option;
+	do
+	{
+		cleanScreen();
+		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
+		cout << TAB_SPACE << "*. Minimizacao da distancia a percorrer" << endl;
+		cout << TAB_SPACE << "*. Minimizacao do tempo de viagem" << endl;
+		cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.1. Sem Tranporte Favorito" << endl;
+		cout << TAB_SPACE << TAB_SPACE_INITIAL << "2.2. Com Tranporte Favorito" << endl;
+		cout << TAB_SPACE << "*. Minimizacao das mudancas de linha de transporte" << endl;
 		cout << TAB_SPACE << "*. Minimizacao ..." << endl;
 		cout << TAB_SPACE << "0. Back" << endl;
 		cout << endl << "Escolha uma opcao: ";
@@ -446,7 +448,7 @@ void displayMenu(Graph &graph, GraphViewer *gv) {
 		NULL,
 		&testDijkstraShortestDistance,
 		&displayTimeTravel,
-		&displayLessTransportTravel };
+		&testDijkstraNumTransportsUsed };
 	int option;
 	do
 	{

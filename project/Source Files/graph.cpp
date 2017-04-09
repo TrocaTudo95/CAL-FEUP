@@ -784,7 +784,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 			}
 			int realTime = deltaTime;
 			if (typeOfTransportLine == favorite) {
-				deltaTime = deltaTime *FAV_TRANSPORT_MULTIPLIER;
+				deltaTime = deltaTime * FAV_TRANSPORT_MULTIPLIER;
 			}
 			if (w->dist > v->dist + deltaTime) {
 				w->dist = v->dist + realTime;
