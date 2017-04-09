@@ -266,7 +266,7 @@ void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
 	double option;
 	cout << endl << "Custo Máximo da viagem? (0 - Significa sem limite de Custo)" << endl;
 	cin >> option;
-	while (cin.fail() || option <= 0)
+	while (cin.fail() || option < 0)
 	{
 		cout << endl << "Introduza uma opcao valida!" << endl;
 		cin.clear();

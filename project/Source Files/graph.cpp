@@ -657,9 +657,9 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cos
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than());
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than());
 	}
 }
 
@@ -727,9 +727,9 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 	}
 }
 
@@ -814,9 +814,9 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
 	}
 }
 
@@ -920,9 +920,9 @@ void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & 
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than());
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than());
 	}
 }
 
@@ -984,9 +984,9 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 					w->processing = true;
 					pq.push_back(w);
 				}
-				make_heap(pq.begin(), pq.end(), Node_greater_than());
 			}
 		}
+		make_heap(pq.begin(), pq.end(), Node_greater_than());
 	}
 }
 
