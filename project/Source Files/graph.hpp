@@ -84,40 +84,145 @@ private:
 
 
 public:
+	/**
+	* @brief Creates a Graph initializing highestEdgeId and highestTransportLineId to 0.
+	*/
 	Graph();
+	/**
+	* @brief Graph's destructor to free memory alocated by a graph
+	*/
 	~Graph();
-
+	/**
+	* @brief intitalizes METER_PER_PIXEL_X that defines the number of meters wich a pixel corresponds to
+	* @param d value to initialize METER_PER_PIXEL_X
+	*/
 	void setMETER_PER_PIXEL_X(double d);
+	/**
+	* @brief intitalizes METER_PER_PIXEL_Y that defines the number of meters wich a pixel corresponds to
+	* @param d value to initialize METER_PER_PIXEL_Y
+	*/
 	void setMETER_PER_PIXEL_Y(double d);
-
+	/**
+	* @brief creates a copy of the variable nodeMap and returns a pointer to it
+	* @return a pointer to a copy of the nodeMap Graph's variable
+	*/
 	hashNodes* copyNodes();
+	/**
+	* @brief introduces the edges passed by the adjacencies on originalNodes in the graph
+	* @param originalNodes unordered_map containing the Nodes from wich the edges will be added to the graph
+	*/
 	void copyEdges(hashNodes originalNodes);
-
+	/**
+	* @brief initializes nodeMap with map
+	* @param map hashNodes containing the Nodes to set
+	*/
 	void setNodeMap(hashNodes *map);
+	/**
+	* @brief initializes edgeMap with map
+	* @param map hashNodes containing the Edges to set
+	*/
 	void setEdgeMap(hashEdges map);
+	/**
+	* @brief initializes highestEdgeId that represents the highest Edge id
+	* @param id highest Edge id
+	*/
 	void setHighestEdgeId(int id);
+	/**
+	* @brief initializes transportationLines with the unorded set passed by argument
+	* @param tlMap unorded set with the transportations lines
+	*/
 	void setTransportationLines(const hashTL &tlMap);
+	/**
+	* @brief creates a new Node and inserts it in the nodeMap
+	* @param in Node's id
+	* @param coords struct containing x and y to create the Node
+	* @return false if node already exists
+	*/
 	bool addNode(const int &in, Point coords);
 	void addTransportationLine(TransportLine *t1);
 	void setReverseTransportationLines();
+	/**
+	* @brief creates a new Edge with the id specified between the source Node and the destiny Node calculating the weight for the Edge
+	* @param id Edge's id
+	* @param sourc source Node's id
+	* @param dest destiny Node's id
+	* @param w Edge's weight
+	* @return false if the destiny or the source Node is the last one
+	*/
 	bool addEdge(int id,const int &sourc, const int &dest, int w=0);
+	/**
+	* @brief removes the node specified by its id
+	* @param in Node's id to remove
+	* @return false if the Node does not exist
+	*/
 	bool removeNode(const int &in);
+	/**
+	* @brief removes the Edge that links the nodes passed by argument through theirs id's
+	* @param sourc source Node's id
+	* @param dest destiny Node's id
+	* @return false if the Edge does not exist
+	*/
 	bool removeEdge(const int &sourc, const int &dest);
-	
+	/**
+	* @brief function to return the nodeMap
+	* @return nodeMap
+	*/
 	hashNodes getNodeMap() const;
+	/**
+	* @brief returns a Edge pointer of the graph specified by its id
+	* @param id Edge's id
+	* @return Edge pointer to the pretended Edge
+	*/
 	Edge* getEdgeById(int id);
+	/**
+	* @brief returns a Node pointer of the graph specified by its id
+	* @param id Node's id
+	* @return Edge pointer to the pretended Node
+	*/
 	Node* getNode(const int &v) const;
+	/**
+	* @brief returns a TransportLine pointer of the transportationLines unorded set specified by its id
+	* @param id TransportLine's id
+	* @return TransportLine pointer to the pretended transportationLine
+	*/
 	TransportLine* getTransportLine(const int &id) const;
+	/**
+	* @brief returns the shortest path between the Node origin and the Node destiny through a vector of PathTo
+	* @param origin source Node's id
+	* @param dest destiny Node's id
+	* @return vector of PathTo wich is a struct containing Node's path, dist and wayToGetThere
+	*/
 	vector<PathTo> getPath(const int &origin, const int &dest);
+	/**
+	* @brief returns the shortest path between the Node origin and the Node destiny through a vector of Node pointers
+	* @param origin source Node's id
+	* @param dest destiny Node's id
+	* @return vector of Node pointers wich refers to the Nodes that the shortest path go through
+	*/
 	vector<Node *> getNodePath(const int &origin, const int &dest);
+	/**
+	* @brief returns the shortest path between the Node origin and the Node destiny through a vector of Node's ids
+	* @param origin source Node's id
+	* @param dest destiny Node's id
+	* @return vector of Node's ids wich refers to the Nodes that the shortest path go through
+	*/
 	vector<int> getPathForSPFA(const int &origin, const int &dest);
+	/**
+	* @brief calculates and returns a vector of the close Nodes, wich is defined by the max_dist
+	* @param n_source source Node
+	* @param max_dist defines the range in meters to include the Nodes
+	* @return vector of near Node's ids 
+	*/
 	vector<int> getCloseNodes(int max_dist, Node * n_source);
+	/**
+	* @brief calculates and returns a vector of the close Edges by reciving a node and a vector of Nodes and creates edges to all of them to allow go on foot
+	* @param origin source Node's id
+	* @param dest destiny Node's id
+	* @return vector of near Node's ids
+	*/
 	vector<Edge *> getCloseEdges(const vector<int>& closeNodes, Node * n_source);
 	vii getCloseEdgesSPFA(vector<int> &closeNodes, Node *src);
 
-	void unweightedShortestPath(const int &v);
-
-	void bellmanFordShortestPath(const int &v);
 
 	bool checkWalkPercentage(const int &origin, const int &dest, float percentage);
 

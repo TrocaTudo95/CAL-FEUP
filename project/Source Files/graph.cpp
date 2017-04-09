@@ -323,61 +323,7 @@ vector<int> Graph::getPathForSPFA(const int &origin, const int &dest) {
 }
 
 
-void Graph::unweightedShortestPath(const int &s) {
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++){
-		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
-	}
 
-	Node* v = getNode(s);
-	v->dist = 0;
-	queue< Node* > q;
-	q.push(v);
-
-	while (!q.empty()) {
-		v = q.front(); q.pop();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = getNode(v->adj[i]->destNode);
-			if (w->dist > v->dist + 1) {
-				w->dist = v->dist + 1;
-				w->path = v;
-				q.push(w);
-			}
-		}
-	}
-}
-
-
-
-void Graph::bellmanFordShortestPath(const int & s)
-{
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++)
-	{
-		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
-	}
-
-	Node* v = getNode(s);
-	v->dist = 0;
-	queue< Node* > q;
-	q.push(v);
-
-	while (!q.empty()) {
-		v = q.front(); q.pop();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = getNode(v->adj[i]->destNode);
-			if (w->dist > v->dist + v->adj[i]->weight) {
-				w->dist = v->dist + v->adj[i]->weight;
-				w->path = v;
-				q.push(w);
-			}
-		}
-	}
-}
 
 
 
