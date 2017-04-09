@@ -230,11 +230,9 @@ void testSPFA(Graph &g, GraphViewer *gv) {
 	double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	cout << "SPFA Distance Calculated In: " << time_spent << " seconds.\n";
 	vector<int> path = g.getPathForSPFA(initialVertex, finalVertex);
-	gv->setVertexColor(initialVertex, "black");
-	for (int i = 0; i < path.size(); i++) {
+	for (int i = 1; i < path.size() - 1; i++) {
 		cout << "Go To Node " << path[i] << ";\n";
 	}
-	gv->setVertexColor(finalVertex, "black");
 	system("pause");
 }
 
@@ -578,6 +576,8 @@ void startMenu(Graph &graph, GraphViewer *gv) {
 		}
 		if (initialVertex != -1 && finalVertex != -1 && option == 2)
 			functions[option](graph, gv);
+		else if (initialVertex != -1 && finalVertex != -1 && option == 3)
+			testSPFA(graph, gv);
 		if (option == 1)
 			functions[option](graph, gv);
 	} while (option != 0);
