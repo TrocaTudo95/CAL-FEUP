@@ -552,7 +552,7 @@ void selectGraphToLoad() {
 		cout << TAB_SPACE << "Selecione Nodes o Mapa desejado:" << endl << endl;
 		cout << TAB_SPACE << "1. Aliados        - N: 820;   A: 850" << endl;
 		cout << TAB_SPACE << "2. FEUP           - N: 1987;  A: 2172" << endl;
-		cout << TAB_SPACE << "3. FEUP2           - N: 3693;  A: 4036" << endl;
+		cout << TAB_SPACE << "3. FEUP2          - N: 3693;  A: 4036" << endl;
 		cout << TAB_SPACE << "4. Campo Alegre   - N: 6739;  A: 7107" << endl;
 		cout << TAB_SPACE << "5. Porto          - N: 13164; A: 14303" << endl;
 		cout << endl << "Escolha uma opcao: ";
