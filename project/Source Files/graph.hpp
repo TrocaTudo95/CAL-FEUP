@@ -222,30 +222,80 @@ public:
 	*/
 	vector<Edge *> getCloseEdges(const vector<int>& closeNodes, Node * n_source);
 	vii getCloseEdgesSPFA(vector<int> &closeNodes, Node *src);
-
-
+	/**
+	* @brief check through the path calculated by the function getNodePath and calculates the percentage of walk distance/time
+	* @param origin source Node's id
+	* @param dest destiny Node's id
+	* @float percentage defines the max_percentage of the way that the person can go on foot
+	* @return true if the percentage calculated is greater than the percentage passed by argument 
+	*/
 	bool checkWalkPercentage(const int &origin, const int &dest, float percentage);
-
 	void SPFAWithAdjacencyList(const int &s,const int &d);
+	/**
+	* @brief processes the graph updating all the nodes with the shortest distance from the Node source in meters using the METER_PER_PIXEL
+	* @param s Node's source id
+	*/
 	void dijkstraShortestDistance(const int & s);
+	/**
+	* @brief processes the graph updating all the nodes with the shortest distance from the Node source optimized by an elipse, this way only some nodes are processed
+	* @param s Node's source id
+	* @param d Node's destiny id
+	*/
 	void dijkstraShortestDistance(const int & s, const int & d);
+	/**
+	* @brief processes the graph updating all the nodes with the shortest time from the Node source, where the time is calculated used constant speeds for the diferents transports
+	* @param s Node's source id
+	*/
 	void dijkstraBestTime(const int & s);
+	/**
+	* @brief processes the graph updating all the nodes with the shortest time from the Node source, where the time is calculated used constant speeds 
+	for the diferents transports and each TransportLine has also a waiting time and a if the max_cost is bigger than 0 the cost is also calculated and if the cost exceeds the max_cost value it forces to go on foot
+	* @param s Node's source id
+	*/
 	void dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cost);
+	/**
+	* @brief processes the graph updating all the nodes with the shortest time from the Node source, where the time is calculated used constant speeds for the diferents transports
+	* @param s Node's source id
+	*/
 	void dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite);
 	void dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int &s, char favorite);
 	void dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int &s, const double &max_cost, char favorite);
+	/**
+	* @brief processes the graph updating all the nodes with the shortest number of transports used from the Node source
+	* @param s Node's source id
+	*/
 	void dijkstraLessTransportsUsed(const int &s);
-
+	/**
+	* @brief add a vector of edges to another one if the edges dont exist yet, this is used to add the walking edges that are created
+	* @param edges vector wich has to be updated 
+	* @param onFoot vector of edges to add
+	*/
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
 	void addEdgesFootSPFA(vii & edges,vii & onFoot);
+	/**
+	* @brief checks if a edge exists or not in a vector of edges
+	* @param edges vector of edges
+	* @param e edge to test
+	* @return true if the edge already exists on the vector
+	*/
 	bool alreadyExists(vector<Edge*> & edges, Edge * e);
 	bool alreadyExistsSPFA(vii & edges, int e);
 	bool isChangingTransport(unordered_set<string> &edgeLines, unordered_set<string> vPathLines);
+	/**
+	* @brief calculates the cost in euros to do a distance in a specified transport
+	* @param distance distance on meters
+	* @param transportation char to specify the way of transport
+	* @return cost in euros
+	*/
 	double calculateCost(double distance, char transportation);
 	
 
 	void preprocessGraphForWaitingTimes();
 	void preprocessGraphForSPFA();
+	/**
+	* @brief function that makes a copy of the current Graph and returns a pointer to it
+	* @return A pointer to an Graph with same  nodeMap, edgeMap and transportationLines
+	*/
 	Graph * copy();
 
 };
