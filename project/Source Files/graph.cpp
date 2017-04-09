@@ -323,61 +323,7 @@ vector<int> Graph::getPathForSPFA(const int &origin, const int &dest) {
 }
 
 
-void Graph::unweightedShortestPath(const int &s) {
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++){
-		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
-	}
 
-	Node* v = getNode(s);
-	v->dist = 0;
-	queue< Node* > q;
-	q.push(v);
-
-	while (!q.empty()) {
-		v = q.front(); q.pop();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = getNode(v->adj[i]->destNode);
-			if (w->dist > v->dist + 1) {
-				w->dist = v->dist + 1;
-				w->path = v;
-				q.push(w);
-			}
-		}
-	}
-}
-
-
-
-void Graph::bellmanFordShortestPath(const int & s)
-{
-	typename hashNodes::iterator it = nodeMap.begin();
-	typename hashNodes::iterator ite = nodeMap.end();
-	for (; it != ite; it++)
-	{
-		it->second->path = NULL;
-		it->second->dist = INT_INFINITY;
-	}
-
-	Node* v = getNode(s);
-	v->dist = 0;
-	queue< Node* > q;
-	q.push(v);
-
-	while (!q.empty()) {
-		v = q.front(); q.pop();
-		for (unsigned int i = 0; i < v->adj.size(); i++) {
-			Node* w = getNode(v->adj[i]->destNode);
-			if (w->dist > v->dist + v->adj[i]->weight) {
-				w->dist = v->dist + v->adj[i]->weight;
-				w->path = v;
-				q.push(w);
-			}
-		}
-	}
-}
 
 
 
@@ -672,24 +618,17 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cos
 				cost = calculateCost(edgeDistance, typeOfTransportLine);
 			}
 			summedCost = v->cost + cost;
-			switch (typeOfTransportLine) {
-			case 'W':
-				deltaTime = edgeDistance / WALK_SPEED;
-				break;
-			case 'B':
-				if (onTransport) {
-					if (summedCost > max_cost) {
-						deltaTime = INT_MAX;
-					}
-					else {
+			if (summedCost > max_cost) {
+				deltaTime = INT_MAX;
+			}
+			else {
+				switch (typeOfTransportLine) {
+				case 'W':
+					deltaTime = edgeDistance / WALK_SPEED;
+					break;
+				case 'B':
+					if (onTransport) {
 						deltaTime = edgeDistance / BUS_SPEED;
-					}
-					
-				}
-				else
-				{
-					if (summedCost > max_cost) {
-						deltaTime = INT_MAX;
 					}
 					else {
 						deltaTime = edgeDistance / BUS_SPEED + currentTransportLine->getWaitTime();
@@ -698,20 +637,19 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cos
 						deltaTime = edgeDistance / WALK_SPEED;
 						typeOfTransportLine = 'W';
 					}
+
+					break;
+				case 'T':
+					if (onTransport) {
+						deltaTime = edgeDistance / METRO_SPEED;
+					}
+					else {
+						deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
+					}
+					break;
 				}
-				break;
-			case 'T':
-				if (onTransport) {
-					deltaTime = edgeDistance / METRO_SPEED;
-				}
-				else {
-					deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
-				}
-				if (summedCost > max_cost) {
-					deltaTime = INT_MAX;
-				}		
-				break;
 			}
+			
 			
 			if (w->dist > v->dist + deltaTime) {
 				w->dist = v->dist + deltaTime;
@@ -882,6 +820,112 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 					pq.push_back(w);
 				}
 				make_heap(pq.begin(), pq.end(), Node_greater_than()); //changed to make instead of push
+			}
+		}
+	}
+}
+
+void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & s, const double & max_cost, char favorite)
+{
+	double cost;
+	int deltaTime, summedCost, edgeDistance;
+	typename hashNodes::iterator it = nodeMap.begin();
+	typename hashNodes::iterator ite = nodeMap.end();
+	for (; it != ite; it++)
+	{
+		it->second->path = NULL;
+		it->second->processing = false;
+		it->second->dist = INT_INFINITY;
+		it->second->wayToGetThere = 'W';
+		it->second->cost = 0;
+	}
+
+	Node* v = getNode(s);
+	v->dist = 0;
+	vector<Node *> pq;
+	pq.push_back(v);
+	vector<Edge* > adja;
+	vector<Edge *> onFoot;
+	vector<int> closeNodes;
+	make_heap(pq.begin(), pq.end(), Node_greater_than());
+	while (!pq.empty()) {
+		v = pq.front();
+		pop_heap(pq.begin(), pq.end(), Node_greater_than());
+		pq.pop_back();
+		adja = v->adj;
+		closeNodes = getCloseNodes(SEARCH_RADIUS, v);
+		onFoot = getCloseEdges(closeNodes, v);
+		addEdgesFoot(adja, onFoot);
+		for (unsigned int i = 0; i < adja.size(); i++) {
+			cost = 0;
+			Edge *edge = adja[i];
+			Node* w = getNode(edge->destNode);
+			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
+			edgeDistance = edge->weight;
+
+			char typeOfTransportLine;
+			bool onTransport = true;
+			if (v->wayToGetThere == 'W') {
+				onTransport = false;
+			}
+
+			if (currentTransportLine != nullptr) {
+				typeOfTransportLine = currentTransportLine->getType();
+			}
+			else typeOfTransportLine = 'W';
+
+			if (max_cost > 0) {
+				cost = calculateCost(edgeDistance, typeOfTransportLine);
+			}
+			summedCost = v->cost + cost;
+			if (summedCost > max_cost) {
+				deltaTime = INT_MAX;
+			}
+			else {
+				switch (typeOfTransportLine) {
+				case 'W':
+					deltaTime = edgeDistance / WALK_SPEED;
+					break;
+				case 'B':
+					if (onTransport) {
+						deltaTime = edgeDistance / BUS_SPEED;
+					}
+					else {
+						deltaTime = edgeDistance / BUS_SPEED + currentTransportLine->getWaitTime();
+					}
+					if (edgeDistance / WALK_SPEED < deltaTime) {
+						deltaTime = edgeDistance / WALK_SPEED;
+						typeOfTransportLine = 'W';
+					}
+
+					break;
+				case 'T':
+					if (onTransport) {
+						deltaTime = edgeDistance / METRO_SPEED;
+					}
+					else {
+						deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
+					}
+					break;
+				}
+			}
+
+			int realTime = deltaTime;
+			if (typeOfTransportLine == favorite) {
+				deltaTime = deltaTime *FAV_TRANSPORT_MULTIPLIER;
+			}
+			if (w->dist > v->dist + deltaTime) {
+				w->dist = v->dist + realTime;
+				w->path = v;
+				w->wayToGetThere = typeOfTransportLine;
+				if (max_cost > 0) {
+					w->cost = summedCost;
+				}
+				if (!w->processing) {
+					w->processing = true;
+					pq.push_back(w);
+				}
+				make_heap(pq.begin(), pq.end(), Node_greater_than());
 			}
 		}
 	}
