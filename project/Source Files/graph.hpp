@@ -95,12 +95,12 @@ public:
 	*/
 	~Graph();
 	/**
-	* @brief intitalizes METER_PER_PIXEL_X that defines the number of meters wich a pixel corresponds to
+	* @brief intitalizes METER_PER_PIXEL_X that defines the number of meters which a pixel corresponds to
 	* @param d value to initialize METER_PER_PIXEL_X
 	*/
 	void setMETER_PER_PIXEL_X(double d);
 	/**
-	* @brief intitalizes METER_PER_PIXEL_Y that defines the number of meters wich a pixel corresponds to
+	* @brief intitalizes METER_PER_PIXEL_Y that defines the number of meters which a pixel corresponds to
 	* @param d value to initialize METER_PER_PIXEL_Y
 	*/
 	void setMETER_PER_PIXEL_Y(double d);
@@ -111,7 +111,7 @@ public:
 	hashNodes* copyNodes();
 	/**
 	* @brief introduces the edges passed by the adjacencies on originalNodes in the graph
-	* @param originalNodes unordered_map containing the Nodes from wich the edges will be added to the graph
+	* @param originalNodes unordered_map containing the Nodes from which the edges will be added to the graph
 	*/
 	void copyEdges(hashNodes originalNodes);
 	/**
@@ -192,25 +192,25 @@ public:
 	* @brief returns the shortest path between the Node origin and the Node destiny through a vector of PathTo
 	* @param origin source Node's id
 	* @param dest destiny Node's id
-	* @return vector of PathTo wich is a struct containing Node's path, dist and wayToGetThere
+	* @return vector of PathTo which is a struct containing Node's path, dist and wayToGetThere
 	*/
 	vector<PathTo> getPath(const int &origin, const int &dest);
 	/**
 	* @brief returns the shortest path between the Node origin and the Node destiny through a vector of Node pointers
 	* @param origin source Node's id
 	* @param dest destiny Node's id
-	* @return vector of Node pointers wich refers to the Nodes that the shortest path go through
+	* @return vector of Node pointers which refers to the Nodes that the shortest path go through
 	*/
 	vector<Node *> getNodePath(const int &origin, const int &dest);
 	/**
 	* @brief returns the shortest path between the Node origin and the Node destiny through a vector of Node's ids
 	* @param origin source Node's id
 	* @param dest destiny Node's id
-	* @return vector of Node's ids wich refers to the Nodes that the shortest path go through
+	* @return vector of Node's ids which refers to the Nodes that the shortest path go through
 	*/
 	vector<int> getPathForSPFA(const int &origin, const int &dest);
 	/**
-	* @brief calculates and returns a vector of the close Nodes, wich is defined by the max_dist
+	* @brief calculates and returns a vector of the close Nodes, which is defined by the max_dist
 	* @param n_source source Node
 	* @param max_dist defines the range in meters to include the Nodes
 	* @return vector of near Node's ids 
@@ -269,7 +269,7 @@ public:
 	void dijkstraLessTransportsUsed(const int &s);
 	/**
 	* @brief add a vector of edges to another one if the edges dont exist yet, this is used to add the walking edges that are created
-	* @param edges vector wich has to be updated 
+	* @param edges vector which has to be updated 
 	* @param onFoot vector of edges to add
 	*/
 	void addEdgesFoot(vector<Edge*> & edges, vector<Edge *> & onFoot);
