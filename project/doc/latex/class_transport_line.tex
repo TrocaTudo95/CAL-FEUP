@@ -1,0 +1,326 @@
+\hypertarget{class_transport_line}{}\section{Transport\+Line Class Reference}
+\label{class_transport_line}\index{Transport\+Line@{Transport\+Line}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_transport_line_a7ac6033c3c626a79c9cabc6957ad984d}{Transport\+Line} (int id, int initial\+Edge\+ID, int final\+Edge\+ID, string name, string bidirectional, int avg\+\_\+wait\+\_\+time)
+\begin{DoxyCompactList}\small\item\em constructor of class \hyperlink{class_transport_line}{Transport\+Line} \end{DoxyCompactList}\item 
+bool \hyperlink{class_transport_line_a28ceb0e37f2773d4f9f95d6539170147}{operator==} (const \hyperlink{class_transport_line}{Transport\+Line} \&b) const
+\begin{DoxyCompactList}\small\item\em Comparates two Transportation\+Lines by theirs initial and final \hyperlink{class_edge}{Edge} Id\textquotesingle{}s. \end{DoxyCompactList}\item 
+void \hyperlink{class_transport_line_aca504818880b0738c8533dda5482d25a}{add\+Lines} (string line)
+\begin{DoxyCompactList}\small\item\em Adds the lines specified in the string line separated by \textquotesingle{},\textquotesingle{} to the unordered\+\_\+set of lines. \end{DoxyCompactList}\item 
+void \hyperlink{class_transport_line_a601961d84ba1b20a1afe84077dc3d9ec}{set\+Lines} (unordered\+\_\+set$<$ string $>$ \&l)
+\begin{DoxyCompactList}\small\item\em Sets the unordered\+\_\+set of lines. \end{DoxyCompactList}\item 
+void \hyperlink{class_transport_line_a134eac7334a92d4efe98092277895580}{set\+Type} (string type)
+\begin{DoxyCompactList}\small\item\em Sets the type of \hyperlink{class_transport_line}{Transport\+Line} by a string read from the parser, the type can be walk, bus or tram defined by a char. \end{DoxyCompactList}\item 
+void \hyperlink{class_transport_line_a18f279b7f0ed3b0bccbdffce4e38ad81}{set\+Type} (char type)
+\begin{DoxyCompactList}\small\item\em Sets the type of \hyperlink{class_transport_line}{Transport\+Line} by a char. \end{DoxyCompactList}\item 
+string \hyperlink{class_transport_line_a4ed5f0b15e7d9893bc24b68f81918b45}{to\+String} () const
+\begin{DoxyCompactList}\small\item\em returns a string that represents a \hyperlink{class_transport_line}{Transport\+Line} \end{DoxyCompactList}\item 
+int \hyperlink{class_transport_line_a54d4e0502f1ee731f474659ca0352dd5}{get\+Id} () const
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_transport_line}{Transport\+Line} id \end{DoxyCompactList}\item 
+int \hyperlink{class_transport_line_a41824facb9ab92f3818b1b6d7ad89df5}{get\+Initial\+Edge\+Id} () const
+\begin{DoxyCompactList}\small\item\em get the Initial \hyperlink{class_edge}{Edge}\textquotesingle{}s id \end{DoxyCompactList}\item 
+int \hyperlink{class_transport_line_abc942221fba63b200afcf955769db7e0}{get\+Final\+Edge\+Id} () const
+\begin{DoxyCompactList}\small\item\em get the Final \hyperlink{class_edge}{Edge}\textquotesingle{}s id \end{DoxyCompactList}\item 
+unordered\+\_\+set$<$ string $>$ \& \hyperlink{class_transport_line_aef5df58c623344ea1d98b0f12fa2ca25}{get\+Lines} ()
+\begin{DoxyCompactList}\small\item\em get the unorded\+\_\+set containing all the lines name \end{DoxyCompactList}\item 
+char \hyperlink{class_transport_line_a0ef38c2c635d278c44aeb88ce6a68d31}{get\+Type} ()
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s type \end{DoxyCompactList}\item 
+int \hyperlink{class_transport_line_a789befa0e492bd2e8e7afe0b58f995b2}{get\+Wait\+Time} ()
+\begin{DoxyCompactList}\small\item\em get the \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s average waiting time \end{DoxyCompactList}\item 
+bool \hyperlink{class_transport_line_a5f521dfc4032d05538b16ce32c04d67c}{is\+Bidirectional} ()
+\begin{DoxyCompactList}\small\item\em returns a boolean indicating if the \hyperlink{class_transport_line}{Transport\+Line} is bidirectional or not \end{DoxyCompactList}\item 
+\hyperlink{class_transport_line}{Transport\+Line} $\ast$ \hyperlink{class_transport_line_ab89ce92ab389a171fbf85be209f24f11}{create\+Reverse\+Walking} (int id, int initial\+Edge\+Id, int final\+Edge\+Id)
+\begin{DoxyCompactList}\small\item\em creates a new \hyperlink{class_transport_line}{Transport\+Line} with the same name and average time of the current \hyperlink{class_transport_line}{Transport\+Line} \end{DoxyCompactList}\item 
+\hyperlink{class_transport_line}{Transport\+Line} $\ast$ \hyperlink{class_transport_line_ac326e35335fd7e50661a62511b5364f4}{create\+Full\+Reverse} (int id, int initial\+Edge\+Id, int final\+Edge\+Id)
+\begin{DoxyCompactList}\small\item\em creates a new \hyperlink{class_transport_line}{Transport\+Line} with the name, average time, type and lines of the current \hyperlink{class_transport_line}{Transport\+Line} \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{class_transport_line_a290cb29505345846dac71ba711e6442c}{get\+Nodes\+Ids} (unordered\+\_\+map$<$ int, pair$<$ \hyperlink{class_edge}{Edge} $\ast$, int $>$$>$ \&edge\+Map)
+\begin{DoxyCompactList}\small\item\em creates a new \hyperlink{class_transport_line}{Transport\+Line} with the name, average time, type and lines of the current \hyperlink{class_transport_line}{Transport\+Line} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_transport_line_ad2c8ba04c9d9989ccbf3c5aba267a3d7}\label{class_transport_line_ad2c8ba04c9d9989ccbf3c5aba267a3d7}} 
+class {\bfseries Edge}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_transport_line_a7ac6033c3c626a79c9cabc6957ad984d}\label{class_transport_line_a7ac6033c3c626a79c9cabc6957ad984d}} 
+\index{Transport\+Line@{Transport\+Line}!Transport\+Line@{Transport\+Line}}
+\index{Transport\+Line@{Transport\+Line}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{Transport\+Line()}{TransportLine()}}
+{\footnotesize\ttfamily Transport\+Line\+::\+Transport\+Line (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{initial\+Edge\+ID,  }\item[{int}]{final\+Edge\+ID,  }\item[{string}]{name,  }\item[{string}]{bidirectional,  }\item[{int}]{avg\+\_\+wait\+\_\+time }\end{DoxyParamCaption})}
+
+
+
+constructor of class \hyperlink{class_transport_line}{Transport\+Line} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s id \\
+\hline
+{\em initial\+Edge\+ID} & represents the id of the first \hyperlink{class_edge}{Edge} contained in the \hyperlink{class_transport_line}{Transport\+Line} \\
+\hline
+{\em final\+Edge\+ID} & represents the id of the last \hyperlink{class_edge}{Edge} contained in the \hyperlink{class_transport_line}{Transport\+Line} \\
+\hline
+{\em name} & \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s name \\
+\hline
+{\em bidirectional} & string that represents a boolean with the value true or false to indicate if the \hyperlink{class_transport_line}{Transport\+Line} is bidirectional \\
+\hline
+{\em avg\+\_\+wait\+\_\+time} & represent the average waiting time on the \hyperlink{class_transport_line}{Transport\+Line} \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_transport_line_aca504818880b0738c8533dda5482d25a}\label{class_transport_line_aca504818880b0738c8533dda5482d25a}} 
+\index{Transport\+Line@{Transport\+Line}!add\+Lines@{add\+Lines}}
+\index{add\+Lines@{add\+Lines}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{add\+Lines()}{addLines()}}
+{\footnotesize\ttfamily void Transport\+Line\+::add\+Lines (\begin{DoxyParamCaption}\item[{string}]{line }\end{DoxyParamCaption})}
+
+
+
+Adds the lines specified in the string line separated by \textquotesingle{},\textquotesingle{} to the unordered\+\_\+set of lines. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em line} & specifies the lines to be added to the \hyperlink{class_transport_line}{Transport\+Line} unordered\+\_\+set of lines \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_transport_line_ac326e35335fd7e50661a62511b5364f4}\label{class_transport_line_ac326e35335fd7e50661a62511b5364f4}} 
+\index{Transport\+Line@{Transport\+Line}!create\+Full\+Reverse@{create\+Full\+Reverse}}
+\index{create\+Full\+Reverse@{create\+Full\+Reverse}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{create\+Full\+Reverse()}{createFullReverse()}}
+{\footnotesize\ttfamily \hyperlink{class_transport_line}{Transport\+Line} $\ast$ Transport\+Line\+::create\+Full\+Reverse (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{initial\+Edge\+Id,  }\item[{int}]{final\+Edge\+Id }\end{DoxyParamCaption})}
+
+
+
+creates a new \hyperlink{class_transport_line}{Transport\+Line} with the name, average time, type and lines of the current \hyperlink{class_transport_line}{Transport\+Line} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s id \\
+\hline
+{\em initial\+Edge\+Id} & id of the initial edge \\
+\hline
+{\em initial\+Edge\+Id} & id of the final edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_transport_line}{Transport\+Line} pointer that points to the created \hyperlink{class_transport_line}{Transport\+Line} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_ab89ce92ab389a171fbf85be209f24f11}\label{class_transport_line_ab89ce92ab389a171fbf85be209f24f11}} 
+\index{Transport\+Line@{Transport\+Line}!create\+Reverse\+Walking@{create\+Reverse\+Walking}}
+\index{create\+Reverse\+Walking@{create\+Reverse\+Walking}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{create\+Reverse\+Walking()}{createReverseWalking()}}
+{\footnotesize\ttfamily \hyperlink{class_transport_line}{Transport\+Line} $\ast$ Transport\+Line\+::create\+Reverse\+Walking (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{initial\+Edge\+Id,  }\item[{int}]{final\+Edge\+Id }\end{DoxyParamCaption})}
+
+
+
+creates a new \hyperlink{class_transport_line}{Transport\+Line} with the same name and average time of the current \hyperlink{class_transport_line}{Transport\+Line} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s id \\
+\hline
+{\em initial\+Edge\+Id} & id of the initial edge \\
+\hline
+{\em initial\+Edge\+Id} & id of the final edge \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_transport_line}{Transport\+Line} pointer that points to the created \hyperlink{class_transport_line}{Transport\+Line} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_abc942221fba63b200afcf955769db7e0}\label{class_transport_line_abc942221fba63b200afcf955769db7e0}} 
+\index{Transport\+Line@{Transport\+Line}!get\+Final\+Edge\+Id@{get\+Final\+Edge\+Id}}
+\index{get\+Final\+Edge\+Id@{get\+Final\+Edge\+Id}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{get\+Final\+Edge\+Id()}{getFinalEdgeId()}}
+{\footnotesize\ttfamily int Transport\+Line\+::get\+Final\+Edge\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get the Final \hyperlink{class_edge}{Edge}\textquotesingle{}s id 
+
+\begin{DoxyReturn}{Returns}
+Final \hyperlink{class_edge}{Edge}\textquotesingle{}s id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a54d4e0502f1ee731f474659ca0352dd5}\label{class_transport_line_a54d4e0502f1ee731f474659ca0352dd5}} 
+\index{Transport\+Line@{Transport\+Line}!get\+Id@{get\+Id}}
+\index{get\+Id@{get\+Id}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{get\+Id()}{getId()}}
+{\footnotesize\ttfamily int Transport\+Line\+::get\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get the \hyperlink{class_transport_line}{Transport\+Line} id 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a41824facb9ab92f3818b1b6d7ad89df5}\label{class_transport_line_a41824facb9ab92f3818b1b6d7ad89df5}} 
+\index{Transport\+Line@{Transport\+Line}!get\+Initial\+Edge\+Id@{get\+Initial\+Edge\+Id}}
+\index{get\+Initial\+Edge\+Id@{get\+Initial\+Edge\+Id}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{get\+Initial\+Edge\+Id()}{getInitialEdgeId()}}
+{\footnotesize\ttfamily int Transport\+Line\+::get\+Initial\+Edge\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+get the Initial \hyperlink{class_edge}{Edge}\textquotesingle{}s id 
+
+\begin{DoxyReturn}{Returns}
+Initial \hyperlink{class_edge}{Edge}\textquotesingle{}s id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_aef5df58c623344ea1d98b0f12fa2ca25}\label{class_transport_line_aef5df58c623344ea1d98b0f12fa2ca25}} 
+\index{Transport\+Line@{Transport\+Line}!get\+Lines@{get\+Lines}}
+\index{get\+Lines@{get\+Lines}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{get\+Lines()}{getLines()}}
+{\footnotesize\ttfamily unordered\+\_\+set$<$ string $>$ \& Transport\+Line\+::get\+Lines (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the unorded\+\_\+set containing all the lines name 
+
+\begin{DoxyReturn}{Returns}
+unorded\+\_\+set containing all the lines names 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a290cb29505345846dac71ba711e6442c}\label{class_transport_line_a290cb29505345846dac71ba711e6442c}} 
+\index{Transport\+Line@{Transport\+Line}!get\+Nodes\+Ids@{get\+Nodes\+Ids}}
+\index{get\+Nodes\+Ids@{get\+Nodes\+Ids}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{get\+Nodes\+Ids()}{getNodesIds()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Transport\+Line\+::get\+Nodes\+Ids (\begin{DoxyParamCaption}\item[{unordered\+\_\+map$<$ int, pair$<$ \hyperlink{class_edge}{Edge} $\ast$, int $>$$>$ \&}]{edge\+Map }\end{DoxyParamCaption})}
+
+
+
+creates a new \hyperlink{class_transport_line}{Transport\+Line} with the name, average time, type and lines of the current \hyperlink{class_transport_line}{Transport\+Line} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edge\+Map} & unorded\+\_\+map containing a pair of pair T\+O\+DO \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of integers representing the unorded\+\_\+map nodes\textquotesingle{} ids 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a0ef38c2c635d278c44aeb88ce6a68d31}\label{class_transport_line_a0ef38c2c635d278c44aeb88ce6a68d31}} 
+\index{Transport\+Line@{Transport\+Line}!get\+Type@{get\+Type}}
+\index{get\+Type@{get\+Type}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{get\+Type()}{getType()}}
+{\footnotesize\ttfamily char Transport\+Line\+::get\+Type (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s type 
+
+\begin{DoxyReturn}{Returns}
+char representing the type of the \hyperlink{class_transport_line}{Transport\+Line} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a789befa0e492bd2e8e7afe0b58f995b2}\label{class_transport_line_a789befa0e492bd2e8e7afe0b58f995b2}} 
+\index{Transport\+Line@{Transport\+Line}!get\+Wait\+Time@{get\+Wait\+Time}}
+\index{get\+Wait\+Time@{get\+Wait\+Time}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{get\+Wait\+Time()}{getWaitTime()}}
+{\footnotesize\ttfamily int Transport\+Line\+::get\+Wait\+Time (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+get the \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s average waiting time 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s average waiting time in seconds 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a5f521dfc4032d05538b16ce32c04d67c}\label{class_transport_line_a5f521dfc4032d05538b16ce32c04d67c}} 
+\index{Transport\+Line@{Transport\+Line}!is\+Bidirectional@{is\+Bidirectional}}
+\index{is\+Bidirectional@{is\+Bidirectional}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{is\+Bidirectional()}{isBidirectional()}}
+{\footnotesize\ttfamily bool Transport\+Line\+::is\+Bidirectional (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+returns a boolean indicating if the \hyperlink{class_transport_line}{Transport\+Line} is bidirectional or not 
+
+\begin{DoxyReturn}{Returns}
+true if the \hyperlink{class_transport_line}{Transport\+Line} is bidirectional 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a28ceb0e37f2773d4f9f95d6539170147}\label{class_transport_line_a28ceb0e37f2773d4f9f95d6539170147}} 
+\index{Transport\+Line@{Transport\+Line}!operator==@{operator==}}
+\index{operator==@{operator==}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Transport\+Line\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{class_transport_line}{Transport\+Line} \&}]{b }\end{DoxyParamCaption}) const}
+
+
+
+Comparates two Transportation\+Lines by theirs initial and final \hyperlink{class_edge}{Edge} Id\textquotesingle{}s. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & \hyperlink{class_transport_line}{Transport\+Line} to comparate with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the two Transport\+Lines have the same initial and final Edges. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_transport_line_a601961d84ba1b20a1afe84077dc3d9ec}\label{class_transport_line_a601961d84ba1b20a1afe84077dc3d9ec}} 
+\index{Transport\+Line@{Transport\+Line}!set\+Lines@{set\+Lines}}
+\index{set\+Lines@{set\+Lines}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{set\+Lines()}{setLines()}}
+{\footnotesize\ttfamily void Transport\+Line\+::set\+Lines (\begin{DoxyParamCaption}\item[{unordered\+\_\+set$<$ string $>$ \&}]{l }\end{DoxyParamCaption})}
+
+
+
+Sets the unordered\+\_\+set of lines. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em l} & unordered\+\_\+set of lines \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_transport_line_a134eac7334a92d4efe98092277895580}\label{class_transport_line_a134eac7334a92d4efe98092277895580}} 
+\index{Transport\+Line@{Transport\+Line}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{set\+Type()}{setType()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Transport\+Line\+::set\+Type (\begin{DoxyParamCaption}\item[{string}]{type }\end{DoxyParamCaption})}
+
+
+
+Sets the type of \hyperlink{class_transport_line}{Transport\+Line} by a string read from the parser, the type can be walk, bus or tram defined by a char. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & type of \hyperlink{class_transport_line}{Transport\+Line} on a string \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_transport_line_a18f279b7f0ed3b0bccbdffce4e38ad81}\label{class_transport_line_a18f279b7f0ed3b0bccbdffce4e38ad81}} 
+\index{Transport\+Line@{Transport\+Line}!set\+Type@{set\+Type}}
+\index{set\+Type@{set\+Type}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{set\+Type()}{setType()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Transport\+Line\+::set\+Type (\begin{DoxyParamCaption}\item[{char}]{type }\end{DoxyParamCaption})}
+
+
+
+Sets the type of \hyperlink{class_transport_line}{Transport\+Line} by a char. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em type} & transport\+Line\textquotesingle{}s type \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_transport_line_a4ed5f0b15e7d9893bc24b68f81918b45}\label{class_transport_line_a4ed5f0b15e7d9893bc24b68f81918b45}} 
+\index{Transport\+Line@{Transport\+Line}!to\+String@{to\+String}}
+\index{to\+String@{to\+String}!Transport\+Line@{Transport\+Line}}
+\subsubsection{\texorpdfstring{to\+String()}{toString()}}
+{\footnotesize\ttfamily string Transport\+Line\+::to\+String (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+returns a string that represents a \hyperlink{class_transport_line}{Transport\+Line} 
+
+\begin{DoxyReturn}{Returns}
+a string containing the name, the type and all the lines on the unorded\+\_\+set 
+\end{DoxyReturn}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/Transport\+Line.\+hpp\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/Transport\+Line.\+cpp\end{DoxyCompactItemize}
