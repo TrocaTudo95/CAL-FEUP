@@ -1,0 +1,1 @@
+g++ -std=c++11 *cpp *hpp *h Utils/* -o app -lws2_32 -lwsock32

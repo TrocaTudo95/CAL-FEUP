@@ -1,0 +1,279 @@
+\hypertarget{class_node}{}\section{Node Class Reference}
+\label{class_node}\index{Node@{Node}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_node_a81f886219d100c03c66848653c0da654}{Node} (int info, \hyperlink{struct_point}{Point} coords)
+\begin{DoxyCompactList}\small\item\em constructor of class \hyperlink{class_node}{Node} \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_node_a02afa9074591a30d2cdb42124686bbf6}\label{class_node_a02afa9074591a30d2cdb42124686bbf6}} 
+vector$<$ \hyperlink{class_edge}{Edge} $\ast$ $>$ {\bfseries get\+Adj} ()
+\item 
+\hyperlink{class_edge}{Edge} $\ast$ \hyperlink{class_node_ac5ca4fd7895f44cf374791717cd239e5}{add\+Edge} (int id, int dest, double w)
+\begin{DoxyCompactList}\small\item\em function to return the Tranportation Line id \end{DoxyCompactList}\item 
+bool \hyperlink{class_node_a9ff3a1149a7e9c427fdba4068c11a42b}{remove\+Edge\+To} (\hyperlink{class_node}{Node} $\ast$d)
+\begin{DoxyCompactList}\small\item\em remove the \hyperlink{class_edge}{Edge} specified by the \hyperlink{class_node}{Node} pointer d (destiny node of the \hyperlink{class_edge}{Edge}) from the adj vector \end{DoxyCompactList}\item 
+int \hyperlink{class_node_a07008db4cafcc0f3df7746992d22bbd3}{get\+Info} () const
+\begin{DoxyCompactList}\small\item\em function to return \hyperlink{class_node}{Node} id \end{DoxyCompactList}\item 
+void \hyperlink{class_node_a877cee0d253352080b00c2441f271dde}{set\+Info} (int info)
+\begin{DoxyCompactList}\small\item\em function to set \hyperlink{class_node}{Node} id \end{DoxyCompactList}\item 
+int \hyperlink{class_node_a0b0c45c65266a320dc0c1c24a226fc12}{get\+Dist} () const
+\begin{DoxyCompactList}\small\item\em function to return the \hyperlink{class_node}{Node} dist \end{DoxyCompactList}\item 
+void \hyperlink{class_node_a4bfac5a526a40c0d41429892760722c6}{set\+Dist} (int dist)
+\begin{DoxyCompactList}\small\item\em function to set \hyperlink{class_node}{Node} id \end{DoxyCompactList}\item 
+bool \hyperlink{class_node_a411b7225b6f0b1a7d0ffe02196dedb86}{get\+Processing} ()
+\begin{DoxyCompactList}\small\item\em function to return the boolean processing that indicates if the \hyperlink{class_node}{Node} is being processed in the heap. \end{DoxyCompactList}\item 
+void \hyperlink{class_node_afe1cac7d39ccadd907caa67013891fb6}{set\+Processing} (bool pro)
+\begin{DoxyCompactList}\small\item\em function to set the boolean processing that indicates if the \hyperlink{class_node}{Node} is being processed \end{DoxyCompactList}\item 
+void \hyperlink{class_node_af5baac137a6dbe502c671c6fef993223}{set\+Coords} (\hyperlink{struct_point}{Point} coords)
+\begin{DoxyCompactList}\small\item\em function to set the \hyperlink{class_node}{Node} cordinates through a struct named \hyperlink{struct_point}{Point} containing the x and y \end{DoxyCompactList}\item 
+\hyperlink{struct_point}{Point} \hyperlink{class_node_a1911ad83f5ebe9ba596e70d6901bb7b5}{get\+Coords} () const
+\begin{DoxyCompactList}\small\item\em function to return \hyperlink{class_node}{Node} cordinates through a struct named \hyperlink{struct_point}{Point} containing the x and y \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{class_node_a9aadeebc828eedfaf8b2a9c2e6fb9e15}{get\+Edges\+Id} ()
+\begin{DoxyCompactList}\small\item\em function to return a vector of ints containing the adjacent Edges\textquotesingle{} Ids \end{DoxyCompactList}\item 
+bool \hyperlink{class_node_a4633c1db13c9623cea114fe1851ae290}{operator==} (const \hyperlink{class_node}{Node} \&b)
+\begin{DoxyCompactList}\small\item\em comparates two edges by theirs ids \end{DoxyCompactList}\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_node_a8557bfd8ff3979e326611dd919f1987d}{copy} ()
+\begin{DoxyCompactList}\small\item\em function that makes a copy of the current \hyperlink{class_node}{Node} and returns it \end{DoxyCompactList}\item 
+char \hyperlink{class_node_ac230b85aee55e214e3c255a044bb3118}{get\+Way\+Toget\+There} ()
+\begin{DoxyCompactList}\small\item\em function to return Way\+Toget\+There that represents after the graph is processed the transportation taken to get to the \hyperlink{class_node}{Node} \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_node_a569c555f532e04a5ef976a54cd3c82a0}\label{class_node_a569c555f532e04a5ef976a54cd3c82a0}} 
+\hyperlink{class_node}{Node} $\ast$ {\bfseries path}
+\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_node_afab89afd724f1b07b1aaad6bdc61c47a}\label{class_node_afab89afd724f1b07b1aaad6bdc61c47a}} 
+class {\bfseries Graph}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_node_a81f886219d100c03c66848653c0da654}\label{class_node_a81f886219d100c03c66848653c0da654}} 
+\index{Node@{Node}!Node@{Node}}
+\index{Node@{Node}!Node@{Node}}
+\subsubsection{\texorpdfstring{Node()}{Node()}}
+{\footnotesize\ttfamily Node\+::\+Node (\begin{DoxyParamCaption}\item[{int}]{info,  }\item[{\hyperlink{struct_point}{Point}}]{coords }\end{DoxyParamCaption})}
+
+
+
+constructor of class \hyperlink{class_node}{Node} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em coords} & represents the x and y, that will be used to calculate distances between nodes. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_node_ac5ca4fd7895f44cf374791717cd239e5}\label{class_node_ac5ca4fd7895f44cf374791717cd239e5}} 
+\index{Node@{Node}!add\+Edge@{add\+Edge}}
+\index{add\+Edge@{add\+Edge}!Node@{Node}}
+\subsubsection{\texorpdfstring{add\+Edge()}{addEdge()}}
+{\footnotesize\ttfamily \hyperlink{class_edge}{Edge} $\ast$ Node\+::add\+Edge (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{dest,  }\item[{double}]{w }\end{DoxyParamCaption})}
+
+
+
+function to return the Tranportation Line id 
+
+\begin{DoxyReturn}{Returns}
+returns the Tranportation Line id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a8557bfd8ff3979e326611dd919f1987d}\label{class_node_a8557bfd8ff3979e326611dd919f1987d}} 
+\index{Node@{Node}!copy@{copy}}
+\index{copy@{copy}!Node@{Node}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Node\+::copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function that makes a copy of the current \hyperlink{class_node}{Node} and returns it 
+
+\begin{DoxyReturn}{Returns}
+A pointer to a node with same Id and Coordinates; 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a1911ad83f5ebe9ba596e70d6901bb7b5}\label{class_node_a1911ad83f5ebe9ba596e70d6901bb7b5}} 
+\index{Node@{Node}!get\+Coords@{get\+Coords}}
+\index{get\+Coords@{get\+Coords}!Node@{Node}}
+\subsubsection{\texorpdfstring{get\+Coords()}{getCoords()}}
+{\footnotesize\ttfamily \hyperlink{struct_point}{Point} Node\+::get\+Coords (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+function to return \hyperlink{class_node}{Node} cordinates through a struct named \hyperlink{struct_point}{Point} containing the x and y 
+
+\begin{DoxyReturn}{Returns}
+struct containing \hyperlink{class_node}{Node}\textquotesingle{}s x and y 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a0b0c45c65266a320dc0c1c24a226fc12}\label{class_node_a0b0c45c65266a320dc0c1c24a226fc12}} 
+\index{Node@{Node}!get\+Dist@{get\+Dist}}
+\index{get\+Dist@{get\+Dist}!Node@{Node}}
+\subsubsection{\texorpdfstring{get\+Dist()}{getDist()}}
+{\footnotesize\ttfamily int Node\+::get\+Dist (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+function to return the \hyperlink{class_node}{Node} dist 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_node}{Node} dist 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a9aadeebc828eedfaf8b2a9c2e6fb9e15}\label{class_node_a9aadeebc828eedfaf8b2a9c2e6fb9e15}} 
+\index{Node@{Node}!get\+Edges\+Id@{get\+Edges\+Id}}
+\index{get\+Edges\+Id@{get\+Edges\+Id}!Node@{Node}}
+\subsubsection{\texorpdfstring{get\+Edges\+Id()}{getEdgesId()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Node\+::get\+Edges\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function to return a vector of ints containing the adjacent Edges\textquotesingle{} Ids 
+
+\begin{DoxyReturn}{Returns}
+vector of ints containing the adjacent Edges\textquotesingle{} Ids 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a07008db4cafcc0f3df7746992d22bbd3}\label{class_node_a07008db4cafcc0f3df7746992d22bbd3}} 
+\index{Node@{Node}!get\+Info@{get\+Info}}
+\index{get\+Info@{get\+Info}!Node@{Node}}
+\subsubsection{\texorpdfstring{get\+Info()}{getInfo()}}
+{\footnotesize\ttfamily int Node\+::get\+Info (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+function to return \hyperlink{class_node}{Node} id 
+
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_node}{Node} id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a411b7225b6f0b1a7d0ffe02196dedb86}\label{class_node_a411b7225b6f0b1a7d0ffe02196dedb86}} 
+\index{Node@{Node}!get\+Processing@{get\+Processing}}
+\index{get\+Processing@{get\+Processing}!Node@{Node}}
+\subsubsection{\texorpdfstring{get\+Processing()}{getProcessing()}}
+{\footnotesize\ttfamily bool Node\+::get\+Processing (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function to return the boolean processing that indicates if the \hyperlink{class_node}{Node} is being processed in the heap. 
+
+\begin{DoxyReturn}{Returns}
+True if it is being processed, False otherwise; 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_ac230b85aee55e214e3c255a044bb3118}\label{class_node_ac230b85aee55e214e3c255a044bb3118}} 
+\index{Node@{Node}!get\+Way\+Toget\+There@{get\+Way\+Toget\+There}}
+\index{get\+Way\+Toget\+There@{get\+Way\+Toget\+There}!Node@{Node}}
+\subsubsection{\texorpdfstring{get\+Way\+Toget\+There()}{getWayTogetThere()}}
+{\footnotesize\ttfamily char Node\+::get\+Way\+Toget\+There (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+function to return Way\+Toget\+There that represents after the graph is processed the transportation taken to get to the \hyperlink{class_node}{Node} 
+
+\begin{DoxyReturn}{Returns}
+way\+To\+Get\+There 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a4633c1db13c9623cea114fe1851ae290}\label{class_node_a4633c1db13c9623cea114fe1851ae290}} 
+\index{Node@{Node}!operator==@{operator==}}
+\index{operator==@{operator==}!Node@{Node}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Node\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{class_node}{Node} \&}]{b }\end{DoxyParamCaption})}
+
+
+
+comparates two edges by theirs ids 
+
+
+\begin{DoxyParams}{Parameters}
+{\em b} & \hyperlink{class_node}{Node} to comparate with \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+True if the two id\textquotesingle{}s are equal, false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_a9ff3a1149a7e9c427fdba4068c11a42b}\label{class_node_a9ff3a1149a7e9c427fdba4068c11a42b}} 
+\index{Node@{Node}!remove\+Edge\+To@{remove\+Edge\+To}}
+\index{remove\+Edge\+To@{remove\+Edge\+To}!Node@{Node}}
+\subsubsection{\texorpdfstring{remove\+Edge\+To()}{removeEdgeTo()}}
+{\footnotesize\ttfamily bool Node\+::remove\+Edge\+To (\begin{DoxyParamCaption}\item[{\hyperlink{class_node}{Node} $\ast$}]{d }\end{DoxyParamCaption})}
+
+
+
+remove the \hyperlink{class_edge}{Edge} specified by the \hyperlink{class_node}{Node} pointer d (destiny node of the \hyperlink{class_edge}{Edge}) from the adj vector 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & \hyperlink{class_node}{Node} pointer to specify the \hyperlink{class_edge}{Edge} destiny to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if successfully removes the \hyperlink{class_edge}{Edge} and false otherwise 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_node_af5baac137a6dbe502c671c6fef993223}\label{class_node_af5baac137a6dbe502c671c6fef993223}} 
+\index{Node@{Node}!set\+Coords@{set\+Coords}}
+\index{set\+Coords@{set\+Coords}!Node@{Node}}
+\subsubsection{\texorpdfstring{set\+Coords()}{setCoords()}}
+{\footnotesize\ttfamily void Node\+::set\+Coords (\begin{DoxyParamCaption}\item[{\hyperlink{struct_point}{Point}}]{coords }\end{DoxyParamCaption})}
+
+
+
+function to set the \hyperlink{class_node}{Node} cordinates through a struct named \hyperlink{struct_point}{Point} containing the x and y 
+
+
+\begin{DoxyParams}{Parameters}
+{\em coords} & struct containing \hyperlink{class_node}{Node}\textquotesingle{}s x and y \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_node_a4bfac5a526a40c0d41429892760722c6}\label{class_node_a4bfac5a526a40c0d41429892760722c6}} 
+\index{Node@{Node}!set\+Dist@{set\+Dist}}
+\index{set\+Dist@{set\+Dist}!Node@{Node}}
+\subsubsection{\texorpdfstring{set\+Dist()}{setDist()}}
+{\footnotesize\ttfamily void Node\+::set\+Dist (\begin{DoxyParamCaption}\item[{int}]{dist }\end{DoxyParamCaption})}
+
+
+
+function to set \hyperlink{class_node}{Node} id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em dist} & \hyperlink{class_node}{Node} distance to the first \hyperlink{class_node}{Node} \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_node_a877cee0d253352080b00c2441f271dde}\label{class_node_a877cee0d253352080b00c2441f271dde}} 
+\index{Node@{Node}!set\+Info@{set\+Info}}
+\index{set\+Info@{set\+Info}!Node@{Node}}
+\subsubsection{\texorpdfstring{set\+Info()}{setInfo()}}
+{\footnotesize\ttfamily void Node\+::set\+Info (\begin{DoxyParamCaption}\item[{int}]{info }\end{DoxyParamCaption})}
+
+
+
+function to set \hyperlink{class_node}{Node} id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em info} & \hyperlink{class_node}{Node} id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_node_afe1cac7d39ccadd907caa67013891fb6}\label{class_node_afe1cac7d39ccadd907caa67013891fb6}} 
+\index{Node@{Node}!set\+Processing@{set\+Processing}}
+\index{set\+Processing@{set\+Processing}!Node@{Node}}
+\subsubsection{\texorpdfstring{set\+Processing()}{setProcessing()}}
+{\footnotesize\ttfamily void Node\+::set\+Processing (\begin{DoxyParamCaption}\item[{bool}]{pro }\end{DoxyParamCaption})}
+
+
+
+function to set the boolean processing that indicates if the \hyperlink{class_node}{Node} is being processed 
+
+
+\begin{DoxyParams}{Parameters}
+{\em pro} & processing value \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/node.\+hpp\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/node.\+cpp\end{DoxyCompactItemize}
