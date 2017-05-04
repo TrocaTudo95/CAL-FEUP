@@ -124,14 +124,14 @@ void readNamesFile(Graph &graph) {
 		if (id!=0) {
 			linestream >> finalEdge;
 			TransportLine * tl = new TransportLine(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%5 +3)*60);
-			
+
 			if (lines.size() > 0) {
 				tl->addLines(lines);
 				tl->setType(typeOfLine);
 			}
 			graph.addTransportationLine(tl);
 			initialEdge = finalEdge;
-			
+
 		}
 		else {
 			linestream >> initialEdge;
@@ -142,7 +142,7 @@ void readNamesFile(Graph &graph) {
 		std::getline(linestream, bidirectional, ';');
 		std::getline(linestream, lines, ';');
 		std::getline(linestream, typeOfLine, ';');
-		
+
 	}
 	inFile.close();
 	graph.setReverseTransportationLines();
@@ -164,7 +164,7 @@ void readFiles(Graph &graph, GraphViewer *gv) {
 	end = clock();
 	time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
 	cout << "Edges Read In: " << time_spent << " seconds.\n";
-	
+
 
 	begin = clock();
 	readNamesFile(graph);
@@ -373,7 +373,7 @@ void cleanScreen() {
 void displayBestTimeWithFavorite(Graph &graph, GraphViewer *gv) {
 	void(*functions[3])(Graph &graph, GraphViewer* gv, char favorite) = {
 		NULL,
-		&testDijkstraBestTimeWithFavoriteTransport, 
+		&testDijkstraBestTimeWithFavoriteTransport,
 		&testDijkstraBestTimeWithFavoriteTransportAndWaitingTime };
 	int option;
 	do
@@ -568,15 +568,32 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 	}
 }
 
+void searchVertexByName(Graph &graph, GraphViewer *gv){
+	int option;
+	cleanScreen();
+	cout << TAB_SPACE << "1. Pesquisa Exata\n";
+	cout << TAB_SPACE << "2. Pesquisa Aproximada\n";
+	cout << TAB_SPACE << "0. Back\n";
+	cout << endl << "Escolha uma opcao: ";
+	cin >> option;
+	if (cin.fail())
+	{
+		cin.clear();
+		cin.ignore(256, '\n');
+	}
+
+}
+
 void startMenu(Graph &graph, GraphViewer *gv) {
-	void(*functions[4])(Graph &graph, GraphViewer* gv) = {NULL, &selectVertex, &displayMenu};
+	void(*functions[4])(Graph &graph, GraphViewer* gv) = {NULL, &selectVertex,&searchVertexByName, &displayMenu};
 	int option;
 	do
 	{
 		cleanScreen();
 		cout << endl << TAB_SPACE_INITIAL << "Bem vindo ao Sistema MultiModal" << endl << endl;
-		cout << TAB_SPACE << "1. Selecione Nodes" << endl;
-		cout << TAB_SPACE << "2. Escolha do Caminho a Percorrer" << endl;
+		cout << TAB_SPACE << "1. Selecione Nodes by ID" << endl;
+		cout << TAB_SPACE << "2. Selecione Nodes by Name" << endl;
+		cout << TAB_SPACE << "3. Escolha do Caminho a Percorrer" << endl;
 		cout << TAB_SPACE << "0. Exit" << endl;
 		cout << endl << "Escolha uma opcao: ";
 
@@ -586,12 +603,15 @@ void startMenu(Graph &graph, GraphViewer *gv) {
 			cin.clear();
 			cin.ignore(256, '\n');
 		}
-		if (initialVertex != -1 && finalVertex != -1 && option == 2)
+		if (initialVertex != -1 && finalVertex != -1 && option == 3)
 			functions[option](graph, gv);
-		else if (initialVertex != -1 && finalVertex != -1 && option == 3)
+		else if (initialVertex != -1 && finalVertex != -1 && option == 4)
 			testSPFA(graph, gv);
 		if (option == 1)
 			functions[option](graph, gv);
+		else if (option ==2){
+			functions[option](graph,gv);
+		}
 	} while (option != 0);
 }
 
