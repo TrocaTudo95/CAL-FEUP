@@ -873,10 +873,8 @@ void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & 
 				cost = calculateCost(edgeDistance, typeOfTransportLine);
 			}
 			summedCost = v->cost + cost;
-			if (summedCost > max_cost) {
-				deltaTime = INT_MAX;
-			}
-			else {
+			
+			
 				switch (typeOfTransportLine) {
 				case 'W':
 					deltaTime = edgeDistance / WALK_SPEED;
@@ -892,6 +890,9 @@ void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & 
 						deltaTime = edgeDistance / WALK_SPEED;
 						typeOfTransportLine = 'W';
 					}
+					if (summedCost > max_cost) {
+						deltaTime = 999999;
+					}
 
 					break;
 				case 'T':
@@ -901,9 +902,12 @@ void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & 
 					else {
 						deltaTime = edgeDistance / METRO_SPEED + currentTransportLine->getWaitTime();
 					}
+					if (summedCost > max_cost) {
+						deltaTime = 999999;
+					}
 					break;
 				}
-			}
+			
 
 			double realTime = deltaTime;
 			if (typeOfTransportLine == favorite) {
