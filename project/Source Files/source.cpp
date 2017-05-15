@@ -571,6 +571,7 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 void searchVertexByName(Graph &graph, GraphViewer *gv){
 	int option;
 	cleanScreen();
+	cout << endl << TAB_SPACE_INITIAL << "Selecione a pesquisa pretendida" << endl << endl;
 	cout << TAB_SPACE << "1. Pesquisa Exata\n";
 	cout << TAB_SPACE << "2. Pesquisa Aproximada\n";
 	cout << TAB_SPACE << "0. Back\n";

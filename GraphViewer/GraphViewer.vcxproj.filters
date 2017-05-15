@@ -36,6 +36,9 @@
     <ClCompile Include="..\project\Source Files\TransportLine.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="..\project\Source Files\string_utils.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\project\Source Files\connection.h">
@@ -57,6 +60,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="..\project\Source Files\TransportLine.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="..\project\Source Files\string_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
