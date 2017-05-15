@@ -1,0 +1,144 @@
+\hypertarget{class_edge}{}\section{Edge Class Reference}
+\label{class_edge}\index{Edge@{Edge}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\hyperlink{class_edge_aab13f63958d70bd9c71da69229088b4c}{Edge} (int id, int destN, double w)
+\begin{DoxyCompactList}\small\item\em Creates an \hyperlink{class_edge}{Edge} with id, destination node and weight;. \end{DoxyCompactList}\item 
+bool \hyperlink{class_edge_a38c76499b14c3ada34f0b485f6e2a5bb}{operator==} (const \hyperlink{class_edge}{Edge} \&e) const
+\begin{DoxyCompactList}\small\item\em Comparates two edges by theirs destination nodes. \end{DoxyCompactList}\item 
+void \hyperlink{class_edge_ad22476bee43fa688e83428d47979faf1}{set\+Transport\+Line} (int transport\+Line\+Id)
+\begin{DoxyCompactList}\small\item\em sets the attribute transport\+Line\+Id. \end{DoxyCompactList}\item 
+int \hyperlink{class_edge_abaec2509b4b51681298960b180b06e25}{get\+Dest} () const
+\begin{DoxyCompactList}\small\item\em function to return the destination node id. \end{DoxyCompactList}\item 
+double \hyperlink{class_edge_a3a776c1ccafacdbdb10fdedd9cb329af}{get\+Weight} ()
+\begin{DoxyCompactList}\small\item\em function to return the \hyperlink{class_edge}{Edge} weight \end{DoxyCompactList}\item 
+int \hyperlink{class_edge_ae7740d633ce6970776aa381cc54fbc18}{get\+Transport\+Line\+Id} ()
+\begin{DoxyCompactList}\small\item\em function to return the Tranportation Line id \end{DoxyCompactList}\item 
+\hyperlink{class_edge}{Edge} $\ast$ \hyperlink{class_edge_a963d13747c8fe31cdd3bba214b1b8c7d}{copy\+Edge} ()
+\begin{DoxyCompactList}\small\item\em function that makes a copy of the current \hyperlink{class_edge}{Edge} and returns it \end{DoxyCompactList}\end{DoxyCompactItemize}
+\subsection*{Friends}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_edge_afab89afd724f1b07b1aaad6bdc61c47a}\label{class_edge_afab89afd724f1b07b1aaad6bdc61c47a}} 
+class {\bfseries Graph}
+\item 
+\mbox{\Hypertarget{class_edge_a6db9d28bd448a131448276ee03de1e6d}\label{class_edge_a6db9d28bd448a131448276ee03de1e6d}} 
+class {\bfseries Node}
+\end{DoxyCompactItemize}
+
+
+\subsection{Constructor \& Destructor Documentation}
+\mbox{\Hypertarget{class_edge_aab13f63958d70bd9c71da69229088b4c}\label{class_edge_aab13f63958d70bd9c71da69229088b4c}} 
+\index{Edge@{Edge}!Edge@{Edge}}
+\index{Edge@{Edge}!Edge@{Edge}}
+\subsubsection{\texorpdfstring{Edge()}{Edge()}}
+{\footnotesize\ttfamily Edge\+::\+Edge (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{int}]{destN,  }\item[{double}]{w }\end{DoxyParamCaption})}
+
+
+
+Creates an \hyperlink{class_edge}{Edge} with id, destination node and weight;. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_edge}{Edge} id \\
+\hline
+{\em destN} & This \hyperlink{class_edge}{Edge} Destination \hyperlink{class_node}{Node} \\
+\hline
+{\em w} & \hyperlink{class_edge}{Edge} weight, should be set as the distance between Source and Destination Nodes. \\
+\hline
+\end{DoxyParams}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_edge_a963d13747c8fe31cdd3bba214b1b8c7d}\label{class_edge_a963d13747c8fe31cdd3bba214b1b8c7d}} 
+\index{Edge@{Edge}!copy\+Edge@{copy\+Edge}}
+\index{copy\+Edge@{copy\+Edge}!Edge@{Edge}}
+\subsubsection{\texorpdfstring{copy\+Edge()}{copyEdge()}}
+{\footnotesize\ttfamily \hyperlink{class_edge}{Edge} $\ast$ Edge\+::copy\+Edge (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function that makes a copy of the current \hyperlink{class_edge}{Edge} and returns it 
+
+\begin{DoxyReturn}{Returns}
+A pointer to an \hyperlink{class_edge}{Edge} with same Id, Destination \hyperlink{class_node}{Node}, weight and transportation line id; 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_abaec2509b4b51681298960b180b06e25}\label{class_edge_abaec2509b4b51681298960b180b06e25}} 
+\index{Edge@{Edge}!get\+Dest@{get\+Dest}}
+\index{get\+Dest@{get\+Dest}!Edge@{Edge}}
+\subsubsection{\texorpdfstring{get\+Dest()}{getDest()}}
+{\footnotesize\ttfamily int Edge\+::get\+Dest (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+function to return the destination node id. 
+
+\begin{DoxyReturn}{Returns}
+the destination node id . 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_ae7740d633ce6970776aa381cc54fbc18}\label{class_edge_ae7740d633ce6970776aa381cc54fbc18}} 
+\index{Edge@{Edge}!get\+Transport\+Line\+Id@{get\+Transport\+Line\+Id}}
+\index{get\+Transport\+Line\+Id@{get\+Transport\+Line\+Id}!Edge@{Edge}}
+\subsubsection{\texorpdfstring{get\+Transport\+Line\+Id()}{getTransportLineId()}}
+{\footnotesize\ttfamily int Edge\+::get\+Transport\+Line\+Id (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function to return the Tranportation Line id 
+
+\begin{DoxyReturn}{Returns}
+the Tranportation Line id 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_a3a776c1ccafacdbdb10fdedd9cb329af}\label{class_edge_a3a776c1ccafacdbdb10fdedd9cb329af}} 
+\index{Edge@{Edge}!get\+Weight@{get\+Weight}}
+\index{get\+Weight@{get\+Weight}!Edge@{Edge}}
+\subsubsection{\texorpdfstring{get\+Weight()}{getWeight()}}
+{\footnotesize\ttfamily double Edge\+::get\+Weight (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})\hspace{0.3cm}{\ttfamily [inline]}}
+
+
+
+function to return the \hyperlink{class_edge}{Edge} weight 
+
+\begin{DoxyReturn}{Returns}
+the \hyperlink{class_edge}{Edge} weight, as distance. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_a38c76499b14c3ada34f0b485f6e2a5bb}\label{class_edge_a38c76499b14c3ada34f0b485f6e2a5bb}} 
+\index{Edge@{Edge}!operator==@{operator==}}
+\index{operator==@{operator==}!Edge@{Edge}}
+\subsubsection{\texorpdfstring{operator==()}{operator==()}}
+{\footnotesize\ttfamily bool Edge\+::operator== (\begin{DoxyParamCaption}\item[{const \hyperlink{class_edge}{Edge} \&}]{e }\end{DoxyParamCaption}) const}
+
+
+
+Comparates two edges by theirs destination nodes. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em e} & \hyperlink{class_edge}{Edge} to comparate with. \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the two edges have the same destination node. 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_edge_ad22476bee43fa688e83428d47979faf1}\label{class_edge_ad22476bee43fa688e83428d47979faf1}} 
+\index{Edge@{Edge}!set\+Transport\+Line@{set\+Transport\+Line}}
+\index{set\+Transport\+Line@{set\+Transport\+Line}!Edge@{Edge}}
+\subsubsection{\texorpdfstring{set\+Transport\+Line()}{setTransportLine()}}
+{\footnotesize\ttfamily void Edge\+::set\+Transport\+Line (\begin{DoxyParamCaption}\item[{int}]{transport\+Line\+Id }\end{DoxyParamCaption})}
+
+
+
+sets the attribute transport\+Line\+Id. 
+
+
+\begin{DoxyParams}{Parameters}
+{\em transport\+Line\+Id} & \hyperlink{class_transport_line}{Transport\+Line} id. \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/edge.\+hpp\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/edge.\+cpp\end{DoxyCompactItemize}
