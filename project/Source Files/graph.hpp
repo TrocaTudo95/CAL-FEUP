@@ -20,7 +20,7 @@
 #include <cassert>
 #include <float.h>
 #include "node.hpp"
-#include "TransportLine.hpp"
+#include "Street.hpp"
 
 
 using namespace std;
@@ -43,11 +43,11 @@ const double FAV_TRANSPORT_MULTIPLIER = 0.01;
 
 class Node;
 class Edge;
-class TransportLine;
+class Street;
 
 typedef unordered_map<int, Node *> hashNodes;
 typedef unordered_map<int, pair<Edge *,int>> hashEdges; //idEdge, pair<Edge*,idNoOrigem>
-typedef unordered_map<int, TransportLine *> hashTL;
+typedef unordered_map<int, Street *> hashTL;
 typedef vector<pair<int, int>> vii; typedef vector<vii> vvii;
 typedef vector<int> vi;
 
@@ -134,6 +134,14 @@ public:
 	* @param tlMap unorded set with the transportations lines
 	*/
 	void setTransportationLines(const hashTL &tlMap);
+
+	//TODO: complete
+
+	/**
+	* @brief 
+	* @return 
+	*/
+	hashTL getStreets();
 	/**
 	* @brief creates a new Node and inserts it in the nodeMap
 	* @param in Node's id
@@ -141,7 +149,7 @@ public:
 	* @return false if node already exists
 	*/
 	bool addNode(const int &in, Point coords);
-	void addTransportationLine(TransportLine *t1);
+	void addTransportationLine(Street *t1);
 	void setReverseTransportationLines();
 	/**
 	* @brief creates a new Edge with the id specified between the source Node and the destiny Node calculating the weight for the Edge
@@ -183,11 +191,11 @@ public:
 	*/
 	Node* getNode(const int &v) const;
 	/**
-	* @brief returns a TransportLine pointer of the transportationLines unorded set specified by its id
-	* @param id TransportLine's id
-	* @return TransportLine pointer to the pretended transportationLine
+	* @brief returns a Street pointer of the transportationLines unorded set specified by its id
+	* @param id Street's id
+	* @return Street pointer to the pretended transportationLine
 	*/
-	TransportLine* getTransportLine(const int &id) const;
+	Street* getTransportLine(const int &id) const;
 	/**
 	* @brief returns the shortest path between the Node origin and the Node destiny through a vector of PathTo
 	* @param origin source Node's id
@@ -251,7 +259,7 @@ public:
 	void dijkstraBestTime(const int & s);
 	/**
 	* @brief processes the graph updating all the nodes with the shortest time from the Node source, where the time is calculated used constant speeds 
-	for the diferents transports and each TransportLine has also a waiting time and a if the max_cost is bigger than 0 the cost is also calculated and if the cost exceeds the max_cost value it forces to go on foot
+	for the diferents transports and each Street has also a waiting time and a if the max_cost is bigger than 0 the cost is also calculated and if the cost exceeds the max_cost value it forces to go on foot
 	* @param s Node's source id
 	*/
 	void dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cost);

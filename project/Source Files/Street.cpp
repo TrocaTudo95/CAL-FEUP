@@ -1,10 +1,10 @@
-#include "TransportLine.hpp"
+#include "Street.hpp"
 
 #define WALK 'W'
 #define BUS 'B'
 #define TRAM 'T'
 
-TransportLine::TransportLine(int transportLineId,int initialEdgeID, int finalEdgeID, string name, string bidirectional, int avg_wait_time) {
+Street::Street(int transportLineId,int initialEdgeID, int finalEdgeID, string name, string bidirectional, int avg_wait_time) {
 	this->id = transportLineId;
 	this->initialEdgeId = initialEdgeID;
 	this->finalEdgeId = finalEdgeID;
@@ -18,12 +18,12 @@ TransportLine::TransportLine(int transportLineId,int initialEdgeID, int finalEdg
 }
 
 
-bool TransportLine::operator==(const TransportLine & b) const
+bool Street::operator==(const Street & b) const
 {
 	return (this->initialEdgeId == b.initialEdgeId && this->finalEdgeId == b.finalEdgeId);
 }
 
-void TransportLine::addLines(string lines)
+void Street::addLines(string lines)
 {
 	stringstream lineStream(lines);
 	string line;
@@ -32,12 +32,12 @@ void TransportLine::addLines(string lines)
 	}
 }
 
-void TransportLine::setLines(unordered_set<string> &l)
+void Street::setLines(unordered_set<string> &l)
 {
 	lines = l;
 }
 
-void TransportLine::setType(string type)
+void Street::setType(string type)
 {
 	if (type == "tram") {
 		this->type = TRAM;
@@ -51,12 +51,12 @@ void TransportLine::setType(string type)
 	}
 }
 
-void TransportLine::setType(char type)
+void Street::setType(char type)
 {
 	this->type = type;
 }
 
-string TransportLine::toString() const
+string Street::toString() const
 {
 	string toReturn = name + "-" + type + "-";
 	unordered_set<string>::const_iterator it = lines.begin();
@@ -67,54 +67,54 @@ string TransportLine::toString() const
 	return toReturn;
 }
 
-int TransportLine::getId() const
+int Street::getId() const
 {
 	return id;
 }
 
-int TransportLine::getInitialEdgeId() const
+int Street::getInitialEdgeId() const
 {
 	return initialEdgeId;
 }
 
-int TransportLine::getFinalEdgeId() const
+int Street::getFinalEdgeId() const
 {
 	return finalEdgeId;
 }
 
-unordered_set<string>& TransportLine::getLines()
+unordered_set<string>& Street::getLines()
 {
 	return lines;
 }
 
-char TransportLine::getType()
+char Street::getType()
 {
 	return type;
 }
 
-int TransportLine::getWaitTime()
+int Street::getWaitTime()
 {
 	return avg_wait_time;
 }
 
-bool TransportLine::isBidirectional() {
+bool Street::isBidirectional() {
 	return bidirectional;
 }
 
-TransportLine * TransportLine::createReverseWalking(int id, int initialEdgeId, int finalEdgeId)
+Street * Street::createReverseWalking(int id, int initialEdgeId, int finalEdgeId)
 {
-	return new TransportLine(id, initialEdgeId, finalEdgeId, name, "False", avg_wait_time);
+	return new Street(id, initialEdgeId, finalEdgeId, name, "False", avg_wait_time);
 }
 
 
-TransportLine * TransportLine::createFullReverse(int id, int initialEdgeId, int finalEdgeId)
-{	TransportLine* tl = new TransportLine(id, initialEdgeId, finalEdgeId, name, "False", avg_wait_time);
+Street * Street::createFullReverse(int id, int initialEdgeId, int finalEdgeId)
+{	Street* tl = new Street(id, initialEdgeId, finalEdgeId, name, "False", avg_wait_time);
 	tl->setType(type);
 	tl->setLines(lines);
 	return tl;
 }
 
-vector<int> TransportLine::getNodesIds(unordered_map<int, pair<Edge*, int>> &edgeMap)
+vector<int> Street::getNodesIds(unordered_map<int, pair<Edge*, int>> &edgeMap)
 {
 	int size = finalEdgeId - initialEdgeId + 1;
 	vector<int> returnNodes(size);

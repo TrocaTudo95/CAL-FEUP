@@ -18,7 +18,7 @@
     <ClCompile Include="..\project\Source Files\graphviewer.cpp" />
     <ClCompile Include="..\project\Source Files\node.cpp" />
     <ClCompile Include="..\project\Source Files\string_utils.cpp" />
-    <ClCompile Include="..\project\Source Files\TransportLine.cpp" />
+    <ClCompile Include="..\project\Source Files\Street.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="..\project\Source Files\connection.h" />
@@ -28,7 +28,7 @@
     <ClInclude Include="..\project\Source Files\graphviewer.h" />
     <ClInclude Include="..\project\Source Files\node.hpp" />
     <ClInclude Include="..\project\Source Files\string_utils.h" />
-    <ClInclude Include="..\project\Source Files\TransportLine.hpp" />
+    <ClInclude Include="..\project\Source Files\Street.hpp" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{49146E35-4524-405C-9603-4773FFBCBF6B}</ProjectGuid>

@@ -100,6 +100,10 @@ void Graph::setTransportationLines(const hashTL &tlMap)
 	highestTransportLineId = tlMap.size();
 }
 
+hashTL Graph::getStreets() {
+	return transportationLines;
+}
+
 
 bool Graph::addNode(const int &in, Point coords) {
 	Node *v1 = new Node(in, coords);
@@ -107,7 +111,7 @@ bool Graph::addNode(const int &in, Point coords) {
 	return insertResponse.second;
 }
 
-void Graph::addTransportationLine(TransportLine * tl)
+void Graph::addTransportationLine(Street * tl)
 {
 	int initialEdge = tl->getInitialEdgeId();
 	int finalEdge = tl->getFinalEdgeId();
@@ -130,7 +134,7 @@ void Graph::setReverseTransportationLines()
 	Node *oriReverse;
 	double weight;
 	bool isBidirectional;
-	TransportLine *tl, *tlReverse;
+	Street *tl, *tlReverse;
 	for (; it != ite; it++) {
 		tl = it->second;
 		isBidirectional = tl->isBidirectional();
@@ -222,7 +226,7 @@ Node* Graph::getNode(const int &v) const {
 	return it->second;
 }
 
-TransportLine * Graph::getTransportLine(const int & id) const
+Street * Graph::getTransportLine(const int & id) const
 {
 	hashTL::const_iterator it = transportationLines.find(id);
 	if (it == transportationLines.end())
@@ -522,7 +526,7 @@ void Graph::dijkstraBestTime(const int & s) {
 			double deltaTime;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
-			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
+			Street * currentTransportLine = getTransportLine(edge->transportLineId);
 			int edgeDistance = edge->weight;
 			char typeOfTransportLine;
 			bool onTransport = true;
@@ -595,7 +599,7 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cos
 			cost = 0;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
-			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
+			Street * currentTransportLine = getTransportLine(edge->transportLineId);
 			edgeDistance = edge->weight;
 
 			char typeOfTransportLine;
@@ -695,7 +699,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransport(const int & s, char favorite)
 			double deltaTime;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
-			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
+			Street * currentTransportLine = getTransportLine(edge->transportLineId);
 			int edgeDistance = edge->weight;
 
 			char typeOfTransportLine;
@@ -765,7 +769,7 @@ void Graph::dijkstraBestTimeWithFavoriteTransportAndWaitingTime(const int & s, c
 			double deltaTime;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
-			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
+			Street * currentTransportLine = getTransportLine(edge->transportLineId);
 			double edgeDistance = edge->weight;
 
 			char typeOfTransportLine;
@@ -855,7 +859,7 @@ void Graph::dijkstraBestTimeWithWaitingTimeCostandFavoriteTransport(const int & 
 			cost = 0;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
-			TransportLine * currentTransportLine = getTransportLine(edge->transportLineId);
+			Street * currentTransportLine = getTransportLine(edge->transportLineId);
 			edgeDistance = edge->weight;
 
 			char typeOfTransportLine;
@@ -963,7 +967,7 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 			int weight = 0;
 			Edge *edge = adja[i];
 			Node* w = getNode(edge->destNode);
-			TransportLine * tl = getTransportLine(edge->transportLineId);
+			Street * tl = getTransportLine(edge->transportLineId);
 			unordered_set<string> edgeLines;
 			char wayToGetToW = v->wayToGetThere;
 			if (tl != nullptr) {
@@ -997,7 +1001,7 @@ void Graph::dijkstraLessTransportsUsed(const int & s)
 void Graph::preprocessGraphForWaitingTimes()
 {
 	for (auto& tlIter : transportationLines) {
-		TransportLine * t = tlIter.second;
+		Street * t = tlIter.second;
 		char typeOfTransport = t->getType();
 		if (typeOfTransport == 'B') {
 			int initialEdgeId = t->getInitialEdgeId();

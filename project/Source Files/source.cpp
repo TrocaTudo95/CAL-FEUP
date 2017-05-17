@@ -14,6 +14,7 @@
 #include <iomanip>
 #include "graphviewer.h"
 #include "graph.hpp"
+#include "string_utils.h"
 
  /*CONSTANTS */
 
@@ -123,7 +124,7 @@ void readNamesFile(Graph &graph) {
 		std::stringstream linestream(line);
 		if (id!=0) {
 			linestream >> finalEdge;
-			TransportLine * tl = new TransportLine(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%5 +3)*60);
+			Street * tl = new Street(id,initialEdge, finalEdge - 1, streetName, bidirectional,(rand()%5 +3)*60);
 
 			if (lines.size() > 0) {
 				tl->addLines(lines);
@@ -568,21 +569,45 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 	}
 }
 
-void searchVertexByName(Graph &graph, GraphViewer *gv){
-	int option;
-	cleanScreen();
-	cout << endl << TAB_SPACE_INITIAL << "Selecione a pesquisa pretendida" << endl << endl;
-	cout << TAB_SPACE << "1. Pesquisa Exata\n";
-	cout << TAB_SPACE << "2. Pesquisa Aproximada\n";
-	cout << TAB_SPACE << "0. Back\n";
-	cout << endl << "Escolha uma opcao: ";
-	cin >> option;
-	if (cin.fail())
-	{
-		cin.clear();
-		cin.ignore(256, '\n');
-	}
 
+
+void searchVertexByName(Graph &graph, GraphViewer *gv){
+	vector<Street*>(*functions[3])(const hashTL &streets,const string &streetName) = { NULL, NULL, &aproximado};
+	int option;
+	do
+	{
+		cleanScreen();
+		cout << endl << TAB_SPACE_INITIAL << "Selecione a pesquisa pretendida" << endl << endl;
+		cout << TAB_SPACE << "1. Pesquisa Exata\n";
+		cout << TAB_SPACE << "2. Pesquisa Aproximada\n";
+		cout << TAB_SPACE << "0. Back\n";
+		cout << endl << "Escolha uma opcao: ";
+		cin >> option;
+		if (cin.fail())
+		{
+			cin.clear();
+			cin.ignore(256, '\n');
+		}
+		if (option > 0 && option < 3)
+		{
+			string streetName;
+			cout << "Insera o nome da rua\n";
+			cin.ignore();
+			getline(cin, streetName);
+			while (streetName.size() == 0)
+			{
+				cin.ignore();
+				getline(cin, streetName);
+			}
+			vector<Street *> topStreets =
+				functions[option](graph.getStreets(), streetName);
+
+			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.begin(); it++)
+			{
+				cout << (*it)->getName() << endl;
+			}
+		}
+	} while (option != 0);
 }
 
 void startMenu(Graph &graph, GraphViewer *gv) {

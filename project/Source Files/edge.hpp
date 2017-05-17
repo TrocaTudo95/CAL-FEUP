@@ -6,7 +6,7 @@
 
 class Node;
 class Graph;
-class TransportLine;
+class Street;
 
 /* ================================================================================================
 * Class Edge
@@ -37,7 +37,7 @@ public:
 	bool operator==(const Edge& e) const;
 	/**
 	* @brief sets the attribute transportLineId.
-	* @param transportLineId TransportLine id.
+	* @param transportLineId Street id.
 	*/
 	void setTransportLine(int transportLineId);
 	/**

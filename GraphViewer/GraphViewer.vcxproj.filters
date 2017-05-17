@@ -33,10 +33,10 @@
     <ClCompile Include="..\project\Source Files\source.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\project\Source Files\TransportLine.cpp">
+    <ClCompile Include="..\project\Source Files\string_utils.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\project\Source Files\string_utils.cpp">
+    <ClCompile Include="..\project\Source Files\Street.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -59,10 +59,10 @@
     <ClInclude Include="..\project\Source Files\node.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\project\Source Files\TransportLine.hpp">
+    <ClInclude Include="..\project\Source Files\string_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\project\Source Files\string_utils.h">
+    <ClInclude Include="..\project\Source Files\Street.hpp">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
