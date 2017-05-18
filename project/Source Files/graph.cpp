@@ -104,6 +104,11 @@ hashTL Graph::getStreets() {
 	return transportationLines;
 }
 
+StreetCleaned Graph::getStreetClean()
+{
+	return streetClean;
+}
+
 
 bool Graph::addNode(const int &in, Point coords) {
 	Node *v1 = new Node(in, coords);
@@ -1058,6 +1063,7 @@ void Graph::preprocessGraphForSPFA()
 	}
 
 }
+
 
 Graph * Graph::copy()
 {

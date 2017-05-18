@@ -124,7 +124,7 @@ public:
 	*/
 	vector<int> getNodesIds(unordered_map<int,pair<Edge*,int>> &edgeMap);
 
-	string getName() {
+	string getName() const{
 		return name;
 	}
 };

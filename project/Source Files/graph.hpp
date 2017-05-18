@@ -38,7 +38,16 @@ const double METRO_SPEED = 20.0;
 
 const double FAV_TRANSPORT_MULTIPLIER = 0.01;
 
+struct streetCompare
+{
+	size_t operator()(Street* a) const{
+		return a->getName().size();
+	}
 
+	bool operator()(Street* a, Street* b ) const{
+		return a->getName() == b->getName();
+	}
+};
 
 
 class Node;
@@ -48,6 +57,7 @@ class Street;
 typedef unordered_map<int, Node *> hashNodes;
 typedef unordered_map<int, pair<Edge *,int>> hashEdges; //idEdge, pair<Edge*,idNoOrigem>
 typedef unordered_map<int, Street *> hashTL;
+typedef unordered_set<Street*, streetCompare, streetCompare> StreetCleaned;
 typedef vector<pair<int, int>> vii; typedef vector<vii> vvii;
 typedef vector<int> vi;
 
@@ -86,6 +96,7 @@ private:
 
 
 public:
+	StreetCleaned streetClean;
 	/**
 	* @brief Creates a Graph initializing highestEdgeId and highestTransportLineId to 0.
 	*/
@@ -142,6 +153,8 @@ public:
 	* @return 
 	*/
 	hashTL getStreets();
+
+	StreetCleaned getStreetClean();
 	/**
 	* @brief creates a new Node and inserts it in the nodeMap
 	* @param in Node's id
@@ -306,6 +319,9 @@ public:
 	* @brief function that makes a copy of the current Graph and returns a pointer to it
 	* @return A pointer to an Graph with same  nodeMap, edgeMap and transportationLines
 	*/
+
+
+
 	Graph * copy();
 
 };

@@ -7,15 +7,53 @@
 #include <algorithm>
 #include <fstream>
 #include <sstream>
+#include <iterator>
+#include "string_utils.h"
 using namespace std;
 
+vector<string> splitSentence(string sentence) {
+	istringstream iss(sentence);
+	vector<string> tokens{ istream_iterator<string>{iss},
+		istream_iterator<string>{} };
+
+	if (tokens.size() == 0) {
+		tokens.push_back("");
+	}
+	return tokens;
+}
+
+int aproximate_matching(string pattern, string text) {
+	vector<string> textSplitted = splitSentence(text);
+	vector<string> patternSplitted = splitSentence(pattern);
+	int totalEditDistance = 0;
+	int currentMinDistance;
+	int currentEditDistance;
+	for (vector<string>::iterator itP = patternSplitted.begin(); itP != patternSplitted.end(); itP++) {
+		currentMinDistance = 9999;
+		for (vector<string>::iterator itT = textSplitted.begin(); itT != textSplitted.end(); itT++) {
+			currentEditDistance = editDistance(*itP, *itT);
+			if (currentEditDistance == 0) {
+				currentMinDistance = 0;
+				break;
+			}
+			if (currentEditDistance < currentMinDistance) {
+				currentMinDistance = currentEditDistance;
+			}
+		}
+		totalEditDistance += currentMinDistance;
+	}
+	if (textSplitted.size() > patternSplitted.size()) {
+		totalEditDistance += (textSplitted.size() - patternSplitted.size());
+	}
+	return totalEditDistance;
+}
 void pre_kmp(string pattern, vector<int> & prefix) {
 	int m = pattern.length();
 	prefix[0] = -1;
 	int k = -1;
-	for (int q = 1; q<m; q++)
+	for (int q = 1; q < m; q++)
 	{
-		while (k>-1 && pattern[k + 1] != pattern[q])
+		while (k > -1 && pattern[k + 1] != pattern[q])
 			k = prefix[k];
 		if (pattern[k + 1] == pattern[q]) k = k + 1;
 		prefix[q] = k;
@@ -31,9 +69,9 @@ int kmp(string text, string pattern) {
 	int n = text.length();
 
 	int q = -1;
-	for (int i = 0; i<n; i++)
+	for (int i = 0; i < n; i++)
 	{
-		while (q>-1 && pattern[q + 1] != text[i])
+		while (q > -1 && pattern[q + 1] != text[i])
 			q = prefix[q];
 		if (pattern[q + 1] == text[i])
 			q++;
@@ -120,5 +158,41 @@ float numApproximateStringMatching(string filename, string toSearch) {
 	float res = (float)num / nwords;
 	return res;
 }
+
+
+
+vector<Street *> aproximado(const StreetCleaned &streets, const string &nameStreet) {
+	int minValue = INT_MAX;
+	APR current;
+	vector<APR> heap;
+	vector<Street *> topToReturn;
+	for (StreetCleaned::const_iterator it = streets.begin(); it != streets.end(); it++)
+	{
+		string temp = (*it)->getName();
+		int actualValue = aproximate_matching(nameStreet, (*it)->getName());
+
+		current.first = actualValue;
+		current.second = (*it);
+		heap.push_back(current);
+	}
+	make_heap(heap.begin(), heap.end(), APR_Greater_Than());
+	heap = vector<APR>(heap.begin(), heap.begin() + 10);
+	for (vector<APR>::iterator it = heap.begin(); it != heap.end(); it++)
+	{
+		topToReturn.push_back(it->second);
+	}
+	return topToReturn;
+}
+/*
+hashTL exata(hashTL transportatingLines, string nameStreet) {
+	for (hashTL::iterator it = transportatingLines.begin(); it != transportatingLines.end(); it++)
+	{
+
+	}
+}
+*/
+
+
+
 
 

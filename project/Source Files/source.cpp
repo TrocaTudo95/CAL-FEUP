@@ -12,6 +12,7 @@
 #include <sstream>
 #include <ctime>
 #include <iomanip>
+#include <thread>
 #include "graphviewer.h"
 #include "graph.hpp"
 #include "string_utils.h"
@@ -571,8 +572,8 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 
 
 
-void searchVertexByName(Graph &graph, GraphViewer *gv){
-	vector<Street*>(*functions[3])(const hashTL &streets,const string &streetName) = { NULL, NULL, &aproximado};
+void searchVertexByName(Graph &graph, GraphViewer *gv, thread* T){
+	vector<Street*>(*functions[3])(const StreetCleaned &streets,const string &streetName) = { NULL, NULL, &aproximado};
 	int option;
 	do
 	{
@@ -599,19 +600,31 @@ void searchVertexByName(Graph &graph, GraphViewer *gv){
 				cin.ignore();
 				getline(cin, streetName);
 			}
+			(*T).join();
 			vector<Street *> topStreets =
-				functions[option](graph.getStreets(), streetName);
+				functions[option](graph.getStreetClean(), streetName);
 
-			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.begin(); it++)
+			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
 			{
 				cout << (*it)->getName() << endl;
 			}
+			system("pause");
 		}
 	} while (option != 0);
 }
 
+void  preprocessStreets(Graph * graph)
+{
+	graph->streetClean.clear();
+	hashTL temp = graph->getStreets();
+	for (auto ite = temp.begin(); ite != temp.end(); ite++) {
+		graph->streetClean.insert(ite->second);
+	}
+	cout << "Preprocess Done\n";
+}
+
 void startMenu(Graph &graph, GraphViewer *gv) {
-	void(*functions[4])(Graph &graph, GraphViewer* gv) = {NULL, &selectVertex,&searchVertexByName, &displayMenu};
+	void(*functions[4])(Graph &graph, GraphViewer* gv) = {NULL, &selectVertex, NULL, &displayMenu};
 	int option;
 	do
 	{
@@ -636,7 +649,8 @@ void startMenu(Graph &graph, GraphViewer *gv) {
 		if (option == 1)
 			functions[option](graph, gv);
 		else if (option ==2){
-			functions[option](graph,gv);
+			thread T(preprocessStreets, &graph);
+			searchVertexByName(graph,gv, &T);
 		}
 	} while (option != 0);
 }
