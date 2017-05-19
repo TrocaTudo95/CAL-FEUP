@@ -604,11 +604,16 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 				T.join();
 			vector<Street *> topStreets =
 				functions[option](graph.getStreetClean(), streetName);
-
+			int option_count = 1;
+			cout << endl << TAB_SPACE_INITIAL << "Selecione a pesquisa pretendida" << endl << endl;
+			cout << endl << "Escolha uma opcao: ";
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
 			{
+				cout << TAB_SPACE <<option_count<< ". ";
 				cout << (*it)->getName() << endl;
 			}
+
+
 			system("pause");
 		}
 	} while (option != 0);

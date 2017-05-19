@@ -212,7 +212,7 @@ vector<Street *> aproximado(const StreetCleaned &streets, const string &nameStre
 		heap.push_back(current);
 	}
 	make_heap(heap.begin(), heap.end(), APR_Greater_Than());
-	heap = vector<APR>(heap.begin(), heap.begin() + 10);
+	heap = vector<APR>(heap.begin(), heap.begin() + 5);
 	for (vector<APR>::iterator it = heap.begin(); it != heap.end(); it++)
 	{
 		topToReturn.push_back(it->second);
