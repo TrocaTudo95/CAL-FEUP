@@ -22,7 +22,7 @@
 210;Rua de Sao Tome;True;300,301,;bus
 226;Estrada da Circunvalacao;True;204,604,704,301,;bus
 227;Rua do Bairro da Areosa;True;;
-233;alameda Professor Hernani Monteiro;False;111,204,300,;bus
+233;Alameda Professor Hernani Monteiro;False;111,204,300,;bus
 234;Rua da Arroteia;False;604,;bus
 238;Travessa da Asprela;False;;
 246;Rua Doutor Placido da Costa;False;;
@@ -46,7 +46,7 @@
 369;;True;;
 373;Travessa da Fonte do Outeiro;True;;
 375;;True;;
-385;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+385;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
 392;Rua Conde de Avranches;False;300,301,;bus
 395;Rua Coronel Almeida Valente;True;;
 402;Rua de Leonardo Coimbra;False;;
@@ -121,7 +121,7 @@
 740;;False;;
 741;Rua Cidade de Vigo;False;;
 749;Travessa da Tapada de Santo Antonio;False;;
-754;acesso consultas externas;False;;
+754;Acesso consultas externas;False;;
 763;;False;;
 769;;False;;
 771;;False;;
@@ -135,13 +135,13 @@
 797;;True;;
 808;;True;;
 813;;True;;
-816;alameda Professor Hernani Monteiro;True;204,604,300,;bus
+816;Alameda Professor Hernani Monteiro;True;204,604,300,;bus
 818;Estrada Interior da Circunvalacao;False;205,704,205,;bus
 820;Estrada Exterior da Circunvalacao;False;10,205,;bus
 850;Estrada Interior da Circunvalacao;False;205,205,;bus
 859;Estrada Interior da Circunvalacao;False;205,704,205,;bus
-863;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-871;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+863;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+871;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
 873;Rua Conde de Aurora;False;;
 875;;False;;
 877;;False;;
@@ -159,7 +159,7 @@
 927;Rua Conde de Avranches;True;;
 930;Rua Conde de Avranches;False;;
 931;Rua Doutor Roberto Frias;False;204,604,301,;bus
-932;alameda Professor Hernani Monteiro;False;111,204,604,300,;bus
+932;Alameda Professor Hernani Monteiro;False;111,204,604,300,;bus
 935;Rua Raul Castro;False;;
 938;Rua Raul Castro;False;;
 941;;False;;
@@ -175,7 +175,7 @@
 985;;False;;
 992;Rua Doutor Roberto Frias;True;204,300,301,;bus
 999;Rua de Cassiano Branco;True;;
-1003;alameda Professor Hernani Monteiro;True;111,204,604,300,;bus
+1003;Alameda Professor Hernani Monteiro;True;111,204,604,300,;bus
 1007;;False;D,;tram
 1016;;False;D,;tram
 1027;;False;D,;tram
@@ -224,19 +224,19 @@
 1179;;False;;
 1185;;False;;
 1193;;False;;
-1201;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1202;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1204;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1206;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1208;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1210;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1213;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1216;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1219;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1222;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1225;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1231;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
-1238;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1201;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1202;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1204;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1206;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1208;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1210;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1213;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1216;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1219;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1222;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1225;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1231;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1238;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
 1246;;False;;
 1258;;False;;
 1266;;False;;
@@ -249,7 +249,7 @@
 1314;;False;;
 1316;;False;;
 1318;;False;;
-1323;alameda Professor Hernani Monteiro;False;111,204,604,300,;bus
+1323;Alameda Professor Hernani Monteiro;False;111,204,604,300,;bus
 1325;Estrada Interior da Circunvalacao;False;111,205,704,300,205,;bus
 1346;Estrada Exterior da Circunvalacao;False;204,704,301,205,;bus
 1389;Rua Doutor Antonio Bernardino de Almeida;False;;
@@ -417,7 +417,7 @@
 1976;;False;;
 1983;;False;;
 1985;;False;;
-1988;alameda 25 de Abril;False;;
+1988;Alameda 25 de Abril;False;;
 1989;;False;;
 1993;;False;;
 1996;;False;;
