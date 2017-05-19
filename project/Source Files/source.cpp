@@ -572,7 +572,7 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 
 
 
-void searchVertexByName(Graph &graph, GraphViewer *gv, thread* T){
+void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 	vector<Street*>(*functions[3])(const StreetCleaned &streets,const string &streetName) = { NULL, NULL, &aproximado};
 	int option;
 	do
@@ -600,7 +600,8 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread* T){
 				cin.ignore();
 				getline(cin, streetName);
 			}
-			(*T).join();
+			if(T.joinable())
+				T.join();
 			vector<Street *> topStreets =
 				functions[option](graph.getStreetClean(), streetName);
 
@@ -650,7 +651,7 @@ void startMenu(Graph &graph, GraphViewer *gv) {
 			functions[option](graph, gv);
 		else if (option ==2){
 			thread T(preprocessStreets, &graph);
-			searchVertexByName(graph,gv, &T);
+			searchVertexByName(graph,gv, T);
 		}
 	} while (option != 0);
 }
