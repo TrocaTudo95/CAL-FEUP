@@ -28,8 +28,6 @@ string to_lower(string &text) {
 	for (size_t i = 0; i < text.size(); i++)
 	{
 		text[i] = tolower(text[i]);
-		cout << text[i];
-
 	}
 	return text;
 }
