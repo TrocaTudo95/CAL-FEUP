@@ -16,7 +16,7 @@
 161;Rua de Leonardo Coimbra;False;;
 168;Rua Alfredo Allen;True;;
 176;Rua Alfredo Allen;False;;
-180;Rua JUlio Amaral de Carvalho;False;;
+180;Rua Julio Amaral de Carvalho;False;;
 196;Rua do Doutor Roberto Frias;True;204,300,301,;bus
 207;Rua Alfredo Allen;False;;
 210;Rua de Sao Tome;True;300,301,;bus
@@ -98,7 +98,7 @@
 641;Urgencia Adultos;True;;
 648;Urgencia Adultos;True;;
 653;Urgencia Neonatologia;True;;
-658;Entrada Urgencias;False;;
+658;Entrada #rgencias;False;;
 661;Urgencia Pediatria;True;;
 664;Urgencia Pediatria;True;;
 672;Rua do Amial;True;30,704,600,600,;bus
@@ -190,8 +190,8 @@
 1049;Rua do Mestre Guilherme Camarinha;False;;
 1051;;False;;
 1056;;False;;
-1062;Entrada Urgencias;False;;
-1073;Entrada Urgencias;False;;
+1062;Entrada #rgencias;False;;
+1073;Entrada #rgencias;False;;
 1075;Estrada Exterior da Circunvalacao;False;204,704,205,;bus
 1076;Estrada Interior da Circunvalacao;False;111,205,205,;bus
 1077;Estrada Interior da Circunvalacao;False;111,205,205,;bus
@@ -397,7 +397,7 @@
 1887;Rua Henrique de Sousa Reis;False;;
 1895;;False;;
 1900;;False;;
-1907;Rua Doutor JUlio de Matos;False;;
+1907;Rua Doutor Julio de Matos;False;;
 1909;Rua da Fonte do Outeiro;False;;
 1916;;False;;
 1917;Travessa Padre Antonio Vieira;False;;
@@ -439,7 +439,7 @@
 2060;Viela da Bouca;False;;
 2066;Travessa da Bouca;False;;
 2068;Travessa da Bouca;False;;
-2069;Rua do Doutor JUlio de Matos;False;;
+2069;Rua do Doutor Julio de Matos;False;;
 2078;Rua do Doutor Manuel Pereira da Silva;False;;
 2091;Travessa de Lamas;False;;
 2102;Travessa de Lamas;False;;
