@@ -573,7 +573,7 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 
 
 void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
-	vector<Street*>(*functions[3])(const StreetCleaned &streets,const string &streetName) = { NULL, NULL, &aproximado};
+	vector<Street*>(*functions[3])(const StreetCleaned &streets,const string &streetName) = { NULL, &exata, &aproximado};
 	int option;
 	do
 	{
