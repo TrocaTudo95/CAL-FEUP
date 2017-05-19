@@ -266,14 +266,14 @@ void testDijkstraBestTime(Graph &g, GraphViewer *gv) {
 
 void testDijkstraBestTimeWithWaitingTime(Graph &g, GraphViewer *gv) {
 	double option;
-	cout << endl << "Custo Máximo da viagem? (0 - Significa sem limite de Custo)" << endl;
+	cout << endl << "Custo Maximo da viagem? (0 - Significa sem limite de Custo)" << endl;
 	cin >> option;
 	while (cin.fail() || option <= 0)
 	{
 		cout << endl << "Introduza uma opcao valida!" << endl;
 		cin.clear();
 		cin.ignore(256, '\n');
-		cout << endl << "Custo Máximo da viagem?" << endl;
+		cout << endl << "Custo Maximo da viagem?" << endl;
 		cin >> option;
 	}
 	clock_t begin, end; double time_spent;
@@ -504,7 +504,7 @@ void displayMenu(Graph &graph, GraphViewer *gv) {
 	{
 		cleanScreen();
 		cout << endl << TAB_SPACE_INITIAL << "Escolha a Minimizacao a efetuar:" << endl << endl;
-		cout << TAB_SPACE << "1. Minimizacao da distância a percorrer" << endl;
+		cout << TAB_SPACE << "1. Minimizacao da distancia a percorrer" << endl;
 		cout << TAB_SPACE << "2. Minimizacao do tempo de viagem" << endl;
 		cout << TAB_SPACE << "3. Minimizacao das mudancas de linha de transporte" << endl;
 		cout << TAB_SPACE << "4. Minimizacao do Custo" << endl;
@@ -555,13 +555,13 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 		}
 		if (graph.getNode(initialVertex) == NULL)
 		{
-			cout << "Nó de Origem não encontrado\n";
+			cout << "Nó de Origem nao encontrado\n";
 			initialVertex = -1;
 			system("pause");
 		}
 		else if (graph.getNode(finalVertex) == NULL)
 		{
-			cout << "Nó de Destino não encontrado\n";
+			cout << "Nó de Destino nao encontrado\n";
 			finalVertex = -1;
 			system("pause");
 		}
