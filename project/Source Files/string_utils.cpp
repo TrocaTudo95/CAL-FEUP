@@ -22,9 +22,17 @@ vector<string> splitSentence(string sentence) {
 	return tokens;
 }
 
+string to_lower(string &text) {
+	for (size_t i = 0; i < text.size(); i++)
+	{
+		text[i] = tolower(text[i]);
+	}
+	return text;
+}
+
 int aproximate_matching(string pattern, string text) {
-	vector<string> textSplitted = splitSentence(text);
-	vector<string> patternSplitted = splitSentence(pattern);
+	vector<string> textSplitted = splitSentence(to_lower(text));
+	vector<string> patternSplitted = splitSentence(to_lower(pattern));
 	int totalEditDistance = 0;
 	int currentMinDistance;
 	int currentEditDistance;

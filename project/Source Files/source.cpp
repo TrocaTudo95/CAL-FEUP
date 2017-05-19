@@ -619,7 +619,8 @@ void  preprocessStreets(Graph * graph)
 	graph->streetClean.clear();
 	hashTL temp = graph->getStreets();
 	for (auto ite = temp.begin(); ite != temp.end(); ite++) {
-		graph->streetClean.insert(ite->second);
+		if(ite->second->getName() != "")
+			graph->streetClean.insert(ite->second);
 	}
 	cout << "Preprocess Done\n";
 }
