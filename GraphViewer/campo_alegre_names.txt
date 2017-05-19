@@ -147,7 +147,7 @@
 753;Rua de Anibal Cunha;False;602,602,300,;bus
 761;Rua do Carmo;False;201,207,200,30,104,602,300,;bus
 762;Rua de Sao Joao;False;;
-764;Rua de Camões;False;;
+764;Rua de Camoes;False;;
 768;Rua de Coelho Neto;False;;
 770;;False;30,600,;bus
 773;Travessa da Fontinha;False;;
@@ -317,7 +317,7 @@
 1689;;False;;
 1690;;False;;
 1691;Tunel dos Almadas;False;;
-1693;Rua de Camões;False;30,3M,600,;bus
+1693;Rua de Camoes;False;30,3M,600,;bus
 1696;Viaduto de Goncalo Cristovao;True;10,;bus
 1697;Praca da Republica;False;30,10,3M,3M,600,;bus
 1731;Rua Nova da Alfandega;True;500,;bus
@@ -484,7 +484,7 @@
 2592;Largo de Ferreira Lapa;False;;
 2593;Largo de Ferreira Lapa;False;204,104,;bus
 2596;Largo de Ferreira Lapa;False;;
-2599;Rua de Camões;False;30,3M,600,;bus
+2599;Rua de Camoes;False;30,3M,600,;bus
 2602;Rua de Agramonte;False;;
 2603;Rua de Agramonte;False;;
 2607;Rua de Dom Manuel II;False;201,207,200,104,;bus
@@ -589,7 +589,7 @@
 3017;Rua do Corpo da Guarda;True;;
 3030;Travessa da Bainharia;False;;
 3034;Rua da Bainharia;False;;
-3049;Calcada de Dom Pedro Pitões;True;;
+3049;Calcada de Dom Pedro Pitoes;True;;
 3051;Rua de Sao Sebastiao;False;;
 3056;Rua de Sao Sebastiao;False;;
 3059;;False;;
@@ -598,7 +598,7 @@
 3068;Rua de Santa Ana;True;;
 3075;;True;;
 3076;Rua de Goncalo Cristovao;False;10,;bus
-3080;Rua de Camões;False;30,3M,600,;bus
+3080;Rua de Camoes;False;30,3M,600,;bus
 3082;Largo da Lapa;False;30,600,;bus
 3083;Rua de Joao das Regras;False;30,3M,600,;bus
 3084;Rua do Paraiso;True;;
@@ -672,7 +672,7 @@
 3529;;True;;
 3534;;False;;
 3537;;False;;
-3538;Travessa da Figueirôa;False;;
+3538;Travessa da Figueiroa;False;;
 3543;;True;;
 3550;Rua Doutor Antonio Sousa Macedo;False;;
 3561;Largo de Sao Pedro de Miragaia;False;;
@@ -972,7 +972,7 @@
 5405;;False;E,C,A,F,B,;tram
 5406;;False;;
 5412;;False;;
-5418;Rua de Camões;True;30,3M,3M,600,600,;bus
+5418;Rua de Camoes;True;30,3M,3M,600,600,;bus
 5419;;True;;
 5423;;True;;
 5425;;True;;
@@ -1224,8 +1224,8 @@
 6449;Rua de Dom Manuel II;True;201,207,200,104,602,301,;bus
 6451;Avenida dos Aliados;False;30,3M,3M,600,;bus
 6461;Rua da Boavista;False;;
-6463;Rua de Camões;False;;
-6464;Rua de Camões;False;3M,;bus
+6463;Rua de Camoes;False;;
+6464;Rua de Camoes;False;3M,;bus
 6467;Rua de Goncalo Cristovao;False;10,3M,;bus
 6479;Rua de Joao das Regras;False;30,600,;bus
 6480;Rua de Fernandes Tomas;False;300,;bus

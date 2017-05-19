@@ -195,7 +195,7 @@
 1009;Travessa Eca de Queiros;False;;
 1010;Rua Os Leais de Pedroucos;False;;
 1014;Rua 9 de Julho;False;;
-1019;Rua Antonio Simões;False;10,;bus
+1019;Rua Antonio Simoes;False;10,;bus
 1020;Avenida Nossa Senhora da Natividade;True;;
 1023;Travessa Fernando Namora;True;;
 1024;Rua Padre Antonio Vieira;True;;
@@ -207,7 +207,7 @@
 1071;Estrada da Circunvalacao;False;10,;bus
 1075;Rua do Tejo;False;;
 1080;Rua do Tamega;False;;
-1083;Rua do Côa;False;;
+1083;Rua do Coa;False;;
 1084;Rua do agueda;False;;
 1087;Rua do Sado;False;;
 1089;;False;204,;bus
@@ -339,7 +339,7 @@
 1722;Rua Goncalo Mendes da Maia;False;10,;bus
 1741;Estrada Interior da Circunvalacao;False;10,205,205,;bus
 1747;Estrada Exterior da Circunvalacao;False;10,205,;bus
-1777;Rua de alvaro Castelões;False;;
+1777;Rua de alvaro Casteloes;False;;
 1778;Estrada Interior da Circunvalacao;False;205,205,;bus
 1787;Estrada Interior da Circunvalacao;False;205,704,205,;bus
 1791;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
@@ -707,7 +707,7 @@
 3341;Rua Fernando Namora;False;;
 3366;Praca Nove de Abril;True;30,704,600,600,;bus
 3369;Rua 1º de Dezembro;False;;
-3373;Rua Antonio Simões;False;10,;bus
+3373;Rua Antonio Simoes;False;10,;bus
 3375;;False;;
 3377;;False;;
 3378;;False;;

@@ -30,6 +30,28 @@
     <ClInclude Include="..\project\Source Files\string_utils.h" />
     <ClInclude Include="..\project\Source Files\Street.hpp" />
   </ItemGroup>
+  <ItemGroup>
+    <Text Include="..\project\aliados_arestas.txt" />
+    <Text Include="..\project\aliados_meter_per_pixel.txt" />
+    <Text Include="..\project\aliados_names.txt" />
+    <Text Include="..\project\aliados_nos.txt" />
+    <Text Include="..\project\campo_alegre_arestas.txt" />
+    <Text Include="..\project\campo_alegre_meter_per_pixel.txt" />
+    <Text Include="..\project\campo_alegre_names.txt" />
+    <Text Include="..\project\campo_alegre_nos.txt" />
+    <Text Include="..\project\centro_arestas.txt" />
+    <Text Include="..\project\centro_meter_per_pixel.txt" />
+    <Text Include="..\project\centro_names.txt" />
+    <Text Include="..\project\centro_nos.txt" />
+    <Text Include="..\project\feup2_arestas.txt" />
+    <Text Include="..\project\feup2_meter_per_pixel.txt" />
+    <Text Include="..\project\feup2_names.txt" />
+    <Text Include="..\project\feup2_nos.txt" />
+    <Text Include="..\project\feup_arestas.txt" />
+    <Text Include="..\project\feup_meter_per_pixel.txt" />
+    <Text Include="..\project\feup_names.txt" />
+    <Text Include="..\project\feup_nos.txt" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <ProjectGuid>{49146E35-4524-405C-9603-4773FFBCBF6B}</ProjectGuid>
     <RootNamespace>GraphViewer</RootNamespace>
