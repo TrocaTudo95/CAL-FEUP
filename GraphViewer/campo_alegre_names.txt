@@ -1,4 +1,4 @@
-﻿1;Rua de Ramalho Ortigao;False;;
+1;Rua de Ramalho Ortigao;False;;
 3;Rua da Conceicao;False;;
 5;Rua de Jose Falcao;False;;
 10;Rua de Avis;False;;
@@ -6,7 +6,7 @@
 14;Rua do Rosario;False;602,300,;bus
 27;Rua do Breyner;False;301,;bus
 30;Praca da Republica;False;30,10,3M,600,;bus
-38;Rua alvares Cabral;False;3M,;bus
+38;Rua Alvares Cabral;False;3M,;bus
 41;Rua dos Bragas;False;;
 46;;False;;
 47;Rua da Boa Hora;False;602,602,300,;bus
@@ -211,7 +211,7 @@
 1053;Largo do Priorado;False;602,3M,301,;bus
 1062;Rua de Sao Martinho;False;;
 1066;Rua Padre Luis Rodrigues;False;;
-1070;Travessa das aguas Ferreas;False;;
+1070;Travessa das Aguas Ferreas;False;;
 1071;Alameda dos Capitaes de Abril;False;;
 1078;;False;;
 1080;Rua da Liberdade;False;;
@@ -493,7 +493,7 @@
 2620;Rua de Julio Dinis;False;201,204,104,;bus
 2627;Rua de Julio Dinis;False;204,104,;bus
 2633;Rua do Melo;False;;
-2634;Rua das aguas Ferreas;False;;
+2634;Rua das Aguas Ferreas;False;;
 2636;Rua dos Vanzeleres;False;;
 2637;Via Panoramica;False;;
 2654;;False;;
@@ -672,7 +672,7 @@
 3529;;True;;
 3534;;False;;
 3537;;False;;
-3538;Travessa da Figueiroa;False;;
+3538;Travessa da Figueirôa;False;;
 3543;;True;;
 3550;Rua Doutor Antonio Sousa Macedo;False;;
 3561;Largo de Sao Pedro de Miragaia;False;;
@@ -762,7 +762,7 @@
 4020;;True;;
 4026;;True;;
 4036;;False;;
-4040;Rua do Estêvao;False;;
+4040;Rua do Estevao;False;;
 4048;;False;;
 4053;Rua de Sao Bras;False;;
 4054;;False;;
@@ -1036,7 +1036,7 @@
 5674;;False;;
 5676;;False;;
 5677;;False;;
-5678;Rua das aguas Ferreas;False;;
+5678;Rua das Aguas Ferreas;False;;
 5681;Calcada da Boa Viagem;False;;
 5685;Calcada da Boa Viagem;False;;
 5688;;False;;

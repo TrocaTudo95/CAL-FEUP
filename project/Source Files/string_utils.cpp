@@ -22,8 +22,6 @@ vector<string> splitSentence(string sentence) {
 	return tokens;
 }
 
-
-
 string to_lower(string &text) {
 	for (size_t i = 0; i < text.size(); i++)
 	{
