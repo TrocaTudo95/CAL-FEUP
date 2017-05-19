@@ -627,9 +627,6 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 
 			}
 
-
-
-
 			system("pause");
 		}
 	} while (option != 0);
