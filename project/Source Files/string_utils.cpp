@@ -183,16 +183,11 @@ vector<Street *> aproximado(const StreetCleaned &streets, const string &nameStre
 	}
 	return topToReturn;
 }
-/*
-hashTL exata(hashTL transportatingLines, string nameStreet) {
-	for (hashTL::iterator it = transportatingLines.begin(); it != transportatingLines.end(); it++)
-	{
 
+vector<Street*> exata(const StreetCleaned &streets, const string &nameStreet) {
+	vector<Street *> topToReturn;
+	for (StreetCleaned::const_iterator it = streets.begin(); it != streets.end(); it++)
+	{
+		
 	}
 }
-*/
-
-
-
-
-
