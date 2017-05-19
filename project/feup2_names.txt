@@ -873,4 +873,4 @@
 4002;Rua de Costa Cabral;True;10,;bus
 4006;Rua Doutor Américo Cardoso;True;;
 4007;Rua Artur Neves;False;;
-4027;Rua João de Deus;False;;
+4027;Rua Joao de Deus;False;;

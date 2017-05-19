@@ -1394,5 +1394,5 @@
 7096;Via de Cintura Interna;False;A 1,IC 1,;road
 7098;Rua do Cativo;False;;
 7102;Rua da Madeira;True;;
-7104;Passeio das Fontaínhas;True;;
-7107;Praça do Conde de Samodães;False;;
+7104;Passeio das Fontainhas;True;;
+7107;Praca do Conde de Samodaes;False;;
