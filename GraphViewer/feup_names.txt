@@ -98,7 +98,7 @@
 641;Urgencia Adultos;True;;
 648;Urgencia Adultos;True;;
 653;Urgencia Neonatologia;True;;
-658;Entrada #rgencias;False;;
+658;Entrada Urgencias;False;;
 661;Urgencia Pediatria;True;;
 664;Urgencia Pediatria;True;;
 672;Rua do Amial;True;30,704,600,600,;bus
@@ -151,7 +151,7 @@
 904;;False;;
 908;Rua Professor Armando de Castro;True;;
 911;Rua do Carrical;False;;
-916;Rua de Silva Brinco (antiga EN 14);False;30,600,600,;bus
+916;Rua de Silva Brinco (Antiga EN 14);False;30,600,600,;bus
 917;Rua do Carrical;False;;
 919;Rua Benjamim Gouveia;False;;
 921;Rua do Amial;True;30,704,300,600,600,;bus
@@ -190,8 +190,8 @@
 1049;Rua do Mestre Guilherme Camarinha;False;;
 1051;;False;;
 1056;;False;;
-1062;Entrada #rgencias;False;;
-1073;Entrada #rgencias;False;;
+1062;Entrada Urgencias;False;;
+1073;Entrada Urgencias;False;;
 1075;Estrada Exterior da Circunvalacao;False;204,704,205,;bus
 1076;Estrada Interior da Circunvalacao;False;111,205,205,;bus
 1077;Estrada Interior da Circunvalacao;False;111,205,205,;bus
