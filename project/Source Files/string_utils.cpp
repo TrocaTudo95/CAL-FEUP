@@ -22,10 +22,123 @@ vector<string> splitSentence(string sentence) {
 	return tokens;
 }
 
+void apagaAcentos(char &ch) {
+	switch (ch)
+	{
+	case 'Ã':
+		ch = 'A';
+		break;
+	case 'Á':
+		ch = 'A';
+		break;
+	case 'À':
+		ch = 'A';
+		break;
+	case 'Â':
+		ch = 'A';
+		break;
+	case 'ã':
+		ch = 'a';
+		break;
+	case 'á':
+		ch = 'a';
+		break;
+	case 'à':
+		ch = 'a';
+		break;
+	case 'â':
+		ch = 'a';
+		break;
+	case 'Ê':
+		ch = 'E';
+		break;
+	case 'É':
+		ch = 'E';
+		break;
+	case 'È':
+		ch = 'E';
+		break;
+	case 'ê':
+		ch = 'e';
+		break;
+	case 'é':
+		ch = 'e';
+		break;
+	case 'è':
+		ch = 'e';
+		break;
+	case 'Í':
+		ch = 'I';
+		break;
+	case 'Ì':
+		ch = 'I';
+		break;
+	case 'Î':
+		ch = 'I';
+		break;
+	case 'í':
+		ch = 'i';
+		break;
+	case 'ì':
+		ch = 'i';
+		break;
+	case 'î':
+		ch = 'i';
+		break;
+	case 'Õ':
+		ch = 'O';
+		break;
+	case 'Ô':
+		ch = 'O';
+		break;
+	case 'Ó':
+		ch = 'O';
+		break;
+	case 'Ò':
+		ch = 'O';
+		break;
+	case 'õ':
+		ch = 'o';
+		break;
+	case 'ô':
+		ch = 'o';
+		break;
+	case 'ó':
+		ch = 'o';
+		break;
+	case 'ò':
+		ch = 'o';
+		break;
+	case 'Û':
+		ch = 'U';
+		break;
+	case 'Ú':
+		ch = 'U';
+		break;
+	case 'Ù':
+		ch = 'U';
+		break;
+	case 'û':
+		ch = 'u';
+		break;
+	case 'ú':
+		ch = 'u';
+		break;
+	case 'ù':
+		ch = 'u';
+		break;
+	default:
+		break;
+	}
+}
+
 string to_lower(string &text) {
 	for (size_t i = 0; i < text.size(); i++)
 	{
+		apagaAcentos(text[i]);
 		text[i] = tolower(text[i]);
+		cout << text[i];
+		
 	}
 	return text;
 }
@@ -55,6 +168,7 @@ int aproximate_matching(string pattern, string text) {
 	}
 	return totalEditDistance;
 }
+
 void pre_kmp(string pattern, vector<int> & prefix) {
 	int m = pattern.length();
 	prefix[0] = -1;
@@ -93,27 +207,6 @@ int kmp(string text, string pattern) {
 	return num;
 }
 
-
-int numStringMatching(string filename, string toSearch) {
-	ifstream fich(filename.c_str());
-	if (!fich)
-	{
-		cout << "Erro a abrir ficheiro de leitura\n"; return 0;
-	}
-
-	string line1;
-	int num = 0;
-
-	while (!fich.eof())
-	{
-		getline(fich, line1);
-		num += kmp(line1, toSearch);
-	}
-	fich.close();
-	return num;
-}
-
-
 int editDistance(string pattern, string text) {
 	int n = text.length();
 	vector<int> d(n + 1);
@@ -140,34 +233,6 @@ int editDistance(string pattern, string text) {
 	}
 	return d[n];
 }
-
-float numApproximateStringMatching(string filename, string toSearch) {
-	ifstream fich(filename.c_str());
-	if (!fich)
-	{
-		cout << "Erro a abrir ficheiro de leitura\n"; return 0;
-	}
-
-	string line1, word1;
-	int num = 0, nwords = 0;
-
-	while (!fich.eof())
-	{
-		getline(fich, line1);
-		stringstream s1(line1);
-		while (!s1.eof())
-		{
-			s1 >> word1;
-			num += editDistance(toSearch, word1);
-			nwords++;
-		}
-	}
-	fich.close();
-	float res = (float)num / nwords;
-	return res;
-}
-
-
 
 vector<Street *> aproximado(const StreetCleaned &streets, const string &nameStreet) {
 	int minValue = INT_MAX;
