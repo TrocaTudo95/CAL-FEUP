@@ -10,22 +10,22 @@
 125;Rua do Salgueiral;False;;
 132;Rua da Telheira;True;300,301,;bus
 148;Rua do Engenheiro Carlos Amarante;True;;
-158;Estrada Exterior da CircunvalacAo;False;205,;bus
-159;Estrada Interior da CircunvalacAo;False;205,205,;bus
-160;Estrada Interior da CircunvalacAo;False;205,205,;bus
+158;Estrada Exterior da Circunvalacao;False;205,;bus
+159;Estrada Interior da Circunvalacao;False;205,205,;bus
+160;Estrada Interior da Circunvalacao;False;205,205,;bus
 161;Rua de Leonardo Coimbra;False;;
 168;Rua Alfredo Allen;True;;
 176;Rua Alfredo Allen;False;;
 180;Rua JUlio Amaral de Carvalho;False;;
 196;Rua do Doutor Roberto Frias;True;204,300,301,;bus
 207;Rua Alfredo Allen;False;;
-210;Rua de SAo Tome;True;300,301,;bus
-226;Estrada da CircunvalacAo;True;204,604,704,301,;bus
+210;Rua de Sao Tome;True;300,301,;bus
+226;Estrada da Circunvalacao;True;204,604,704,301,;bus
 227;Rua do Bairro da Areosa;True;;
-233;Alameda Professor HernAni Monteiro;False;111,204,300,;bus
+233;alameda Professor Hernani Monteiro;False;111,204,300,;bus
 234;Rua da Arroteia;False;604,;bus
 238;Travessa da Asprela;False;;
-246;Rua Doutor PlAcido da Costa;False;;
+246;Rua Doutor Placido da Costa;False;;
 257;Rua do Mestre Guilherme Camarinha;False;;
 262;Rua do Mestre Guilherme Camarinha;False;;
 264;Caminho da Asprela;False;;
@@ -37,7 +37,7 @@
 288;Rua Nova do Tronco;False;;
 306;Travessa Doutor Barros;True;;
 313;Rua da Asprela;False;;
-316;Rua AmAndio Galhano;False;;
+316;Rua Amandio Galhano;False;;
 317;;True;;
 318;Rua Goncalo Mendes da Maia;False;;
 347;Rua Goncalo Mendes da Maia;False;;
@@ -46,7 +46,7 @@
 369;;True;;
 373;Travessa da Fonte do Outeiro;True;;
 375;;True;;
-385;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+385;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
 392;Rua Conde de Avranches;False;300,301,;bus
 395;Rua Coronel Almeida Valente;True;;
 402;Rua de Leonardo Coimbra;False;;
@@ -55,7 +55,7 @@
 421;;False;;
 422;;False;;
 423;Rua Doutor Carlos Ramos;False;300,;bus
-426;Rua SA de Miranda;False;;
+426;Rua Sa de Miranda;False;;
 431;;False;;
 432;Rua do Mestre Guilherme Camarinha;False;;
 433;;False;;
@@ -68,16 +68,16 @@
 475;Rua da Ribeira Grande;False;;
 477;Rua Armando Cardoso;False;;
 479;Rua do Carrical;False;;
-483;Rua de MArio Bonito;False;;
+483;Rua de Mario Bonito;False;;
 487;Rua Agra do Amial;False;;
-495;Rua do Arquitecto LobAo Vital;False;;
+495;Rua do Arquitecto Lobao Vital;False;;
 506;;False;;
 509;;False;;
 510;;False;;
 511;Rua Padre Antonio Vieira;True;;
 518;;False;204,;bus
-520;Estrada da CircunvalacAo;False;301,;bus
-522;Estrada da CircunvalacAo;False;;
+520;Estrada da Circunvalacao;False;301,;bus
+522;Estrada da Circunvalacao;False;;
 525;;True;;
 529;;True;;
 532;Rua de Dionisio dos Santos Silva;True;;
@@ -103,14 +103,14 @@
 664;Urgencia Pediatria;True;;
 672;Rua do Amial;True;30,704,600,600,;bus
 681;Rua do Amial;True;30,704,600,600,;bus
-682;Estrada Exterior da CircunvalacAo;False;205,;bus
-685;Rua JoAo Allen;False;;
+682;Estrada Exterior da Circunvalacao;False;205,;bus
+685;Rua Joao Allen;False;;
 692;Rua do Sal;False;;
 694;Rua do Fogo;False;;
 698;Rua de Santiago;False;;
 705;Rua do Pico;False;;
 708;Rua da Ilha Terceira;False;;
-715;Rua de Santo AntAo;False;;
+715;Rua de Santo Antao;False;;
 717;Rua da Santa Maria;False;;
 720;Rua do Corvo;False;;
 723;Rua do Principe;False;;
@@ -121,7 +121,7 @@
 740;;False;;
 741;Rua Cidade de Vigo;False;;
 749;Travessa da Tapada de Santo Antonio;False;;
-754;Acesso consultas externas;False;;
+754;acesso consultas externas;False;;
 763;;False;;
 769;;False;;
 771;;False;;
@@ -135,13 +135,13 @@
 797;;True;;
 808;;True;;
 813;;True;;
-816;Alameda Professor HernAni Monteiro;True;204,604,300,;bus
-818;Estrada Interior da CircunvalacAo;False;205,704,205,;bus
-820;Estrada Exterior da CircunvalacAo;False;10,205,;bus
-850;Estrada Interior da CircunvalacAo;False;205,205,;bus
-859;Estrada Interior da CircunvalacAo;False;205,704,205,;bus
-863;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-871;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+816;alameda Professor Hernani Monteiro;True;204,604,300,;bus
+818;Estrada Interior da Circunvalacao;False;205,704,205,;bus
+820;Estrada Exterior da Circunvalacao;False;10,205,;bus
+850;Estrada Interior da Circunvalacao;False;205,205,;bus
+859;Estrada Interior da Circunvalacao;False;205,704,205,;bus
+863;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+871;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
 873;Rua Conde de Aurora;False;;
 875;;False;;
 877;;False;;
@@ -151,7 +151,7 @@
 904;;False;;
 908;Rua Professor Armando de Castro;True;;
 911;Rua do Carrical;False;;
-916;Rua de Silva Brinco (Antiga EN 14);False;30,600,600,;bus
+916;Rua de Silva Brinco (antiga EN 14);False;30,600,600,;bus
 917;Rua do Carrical;False;;
 919;Rua Benjamim Gouveia;False;;
 921;Rua do Amial;True;30,704,300,600,600,;bus
@@ -159,31 +159,31 @@
 927;Rua Conde de Avranches;True;;
 930;Rua Conde de Avranches;False;;
 931;Rua Doutor Roberto Frias;False;204,604,301,;bus
-932;Alameda Professor HernAni Monteiro;False;111,204,604,300,;bus
+932;alameda Professor Hernani Monteiro;False;111,204,604,300,;bus
 935;Rua Raul Castro;False;;
 938;Rua Raul Castro;False;;
 941;;False;;
 945;Rua Professor Armando de Castro;False;;
 946;;False;;
 950;Rua Raul Castro;False;;
-951;Estrada da CircunvalacAo;False;;
+951;Estrada da Circunvalacao;False;;
 952;Rua das Desertas;False;;
 953;Rua de Maio;False;;
 955;Rua de Porto Santo;False;;
-958;Rua de SAo Jorge;False;;
+958;Rua de Sao Jorge;False;;
 966;Rua das Berlengas;False;;
 985;;False;;
 992;Rua Doutor Roberto Frias;True;204,300,301,;bus
 999;Rua de Cassiano Branco;True;;
-1003;Alameda Professor HernAni Monteiro;True;111,204,604,300,;bus
+1003;alameda Professor Hernani Monteiro;True;111,204,604,300,;bus
 1007;;False;D,;tram
 1016;;False;D,;tram
 1027;;False;D,;tram
 1038;Linha D;True;;
 1039;;False;D,;tram
 1040;Linha D;False;;
-1041;Rua Doutor PlAcido da Costa;False;;
-1043;Rua Doutor PlAcido da Costa;False;;
+1041;Rua Doutor Placido da Costa;False;;
+1043;Rua Doutor Placido da Costa;False;;
 1045;Rua do Mestre Guilherme Camarinha;False;;
 1046;Rua do Mestre Guilherme Camarinha;False;;
 1047;Rua do Mestre Guilherme Camarinha;False;;
@@ -192,9 +192,9 @@
 1056;;False;;
 1062;Entrada Urgencias;False;;
 1073;Entrada Urgencias;False;;
-1075;Estrada Exterior da CircunvalacAo;False;204,704,205,;bus
-1076;Estrada Interior da CircunvalacAo;False;111,205,205,;bus
-1077;Estrada Interior da CircunvalacAo;False;111,205,205,;bus
+1075;Estrada Exterior da Circunvalacao;False;204,704,205,;bus
+1076;Estrada Interior da Circunvalacao;False;111,205,205,;bus
+1077;Estrada Interior da Circunvalacao;False;111,205,205,;bus
 1081;Travessa Goncalo Mendes da Maia;True;;
 1100;;True;;
 1111;;True;;
@@ -224,19 +224,19 @@
 1179;;False;;
 1185;;False;;
 1193;;False;;
-1201;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1202;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1204;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1206;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1208;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1210;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1213;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1216;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1219;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1222;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1225;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1231;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
-1238;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
+1201;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1202;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1204;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1206;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1208;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1210;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1213;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1216;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1219;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1222;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1225;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1231;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
+1238;autoestrada de Entre-Douro-e-Minho;False;a 3,IP 1,E 01,;road
 1246;;False;;
 1258;;False;;
 1266;;False;;
@@ -249,9 +249,9 @@
 1314;;False;;
 1316;;False;;
 1318;;False;;
-1323;Alameda Professor HernAni Monteiro;False;111,204,604,300,;bus
-1325;Estrada Interior da CircunvalacAo;False;111,205,704,300,205,;bus
-1346;Estrada Exterior da CircunvalacAo;False;204,704,301,205,;bus
+1323;alameda Professor Hernani Monteiro;False;111,204,604,300,;bus
+1325;Estrada Interior da Circunvalacao;False;111,205,704,300,205,;bus
+1346;Estrada Exterior da Circunvalacao;False;204,704,301,205,;bus
 1389;Rua Doutor Antonio Bernardino de Almeida;False;;
 1390;Rua Doutor Antonio Bernardino de Almeida;False;;
 1396;;False;;
@@ -379,7 +379,7 @@
 1825;;False;;
 1826;;False;;
 1828;Rua do Bairro da Areosa;False;;
-1831;Rua HorAcio Marcal;False;;
+1831;Rua Horacio Marcal;False;;
 1837;;False;;
 1842;;False;;
 1844;;False;;
@@ -417,7 +417,7 @@
 1976;;False;;
 1983;;False;;
 1985;;False;;
-1988;Alameda 25 de Abril;False;;
+1988;alameda 25 de Abril;False;;
 1989;;False;;
 1993;;False;;
 1996;;False;;
@@ -427,9 +427,9 @@
 2018;;False;;
 2021;;False;;
 2024;;False;;
-2026;Rua SA de Miranda;False;;
-2027;Rua SA de Miranda;False;;
-2028;Rua SA de Miranda;False;;
+2026;Rua Sa de Miranda;False;;
+2027;Rua Sa de Miranda;False;;
+2028;Rua Sa de Miranda;False;;
 2030;;False;;
 2031;;False;;
 2038;;False;;
@@ -448,7 +448,7 @@
 2119;;False;;
 2130;;False;;
 2133;;False;;
-2136;Estrada Interior da CircunvalacAo;False;205,704,205,;bus
+2136;Estrada Interior da Circunvalacao;False;205,704,205,;bus
 2142;;False;;
 2146;;False;;
 2162;;False;;
