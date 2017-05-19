@@ -10,9 +10,9 @@
 125;Rua do Salgueiral;False;;
 132;Rua da Telheira;True;300,301,;bus
 148;Rua do Engenheiro Carlos Amarante;True;;
-158;Estrada Exterior da CircunvalaçAo;False;205,;bus
-159;Estrada Interior da CircunvalaçAo;False;205,205,;bus
-160;Estrada Interior da CircunvalaçAo;False;205,205,;bus
+158;Estrada Exterior da CircunvalacAo;False;205,;bus
+159;Estrada Interior da CircunvalacAo;False;205,205,;bus
+160;Estrada Interior da CircunvalacAo;False;205,205,;bus
 161;Rua de Leonardo Coimbra;False;;
 168;Rua Alfredo Allen;True;;
 176;Rua Alfredo Allen;False;;
@@ -20,7 +20,7 @@
 196;Rua do Doutor Roberto Frias;True;204,300,301,;bus
 207;Rua Alfredo Allen;False;;
 210;Rua de SAo Tome;True;300,301,;bus
-226;Estrada da CircunvalaçAo;True;204,604,704,301,;bus
+226;Estrada da CircunvalacAo;True;204,604,704,301,;bus
 227;Rua do Bairro da Areosa;True;;
 233;Alameda Professor HernAni Monteiro;False;111,204,300,;bus
 234;Rua da Arroteia;False;604,;bus
@@ -30,17 +30,17 @@
 262;Rua do Mestre Guilherme Camarinha;False;;
 264;Caminho da Asprela;False;;
 266;Rua Particular da Arroteia;False;;
-273;Rua Bouça da Cavadinha;True;;
+273;Rua Bouca da Cavadinha;True;;
 279;Rua da Arroteia;True;;
-281;Rua do Carriçal;False;;
+281;Rua do Carrical;False;;
 283;Rua Joaquim Teixeira Leite;False;;
 288;Rua Nova do Tronco;False;;
 306;Travessa Doutor Barros;True;;
 313;Rua da Asprela;False;;
 316;Rua AmAndio Galhano;False;;
 317;;True;;
-318;Rua Gonçalo Mendes da Maia;False;;
-347;Rua Gonçalo Mendes da Maia;False;;
+318;Rua Goncalo Mendes da Maia;False;;
+347;Rua Goncalo Mendes da Maia;False;;
 351;Rua Dom Frei Vicente da Soledade e Castro;True;;
 360;Rua do Doutor Manuel Pereira da Silva;True;;
 369;;True;;
@@ -50,7 +50,7 @@
 392;Rua Conde de Avranches;False;300,301,;bus
 395;Rua Coronel Almeida Valente;True;;
 402;Rua de Leonardo Coimbra;False;;
-403;Travessa da Bouça da Cavadinha;False;;
+403;Travessa da Bouca da Cavadinha;False;;
 410;Travessa da Arroteia;False;;
 421;;False;;
 422;;False;;
@@ -67,7 +67,7 @@
 467;Rua da Azenha;False;;
 475;Rua da Ribeira Grande;False;;
 477;Rua Armando Cardoso;False;;
-479;Rua do Carriçal;False;;
+479;Rua do Carrical;False;;
 483;Rua de MArio Bonito;False;;
 487;Rua Agra do Amial;False;;
 495;Rua do Arquitecto LobAo Vital;False;;
@@ -76,8 +76,8 @@
 510;;False;;
 511;Rua Padre Antonio Vieira;True;;
 518;;False;204,;bus
-520;Estrada da CircunvalaçAo;False;301,;bus
-522;Estrada da CircunvalaçAo;False;;
+520;Estrada da CircunvalacAo;False;301,;bus
+522;Estrada da CircunvalacAo;False;;
 525;;True;;
 529;;True;;
 532;Rua de Dionisio dos Santos Silva;True;;
@@ -91,8 +91,8 @@
 603;Rua Professor Antonio Cruz;True;;
 610;;True;;
 611;Rua da Arroteia;True;;
-613;Travessa Gonçalo Mendes da Maia;True;;
-628;Travessa Gonçalo Mendes da Maia;True;;
+613;Travessa Goncalo Mendes da Maia;True;;
+628;Travessa Goncalo Mendes da Maia;True;;
 637;Rua Doutor Antonio Bernardino de Almeida;False;;
 639;Rua do Mestre Guilherme Camarinha;False;;
 641;Urgencia Adultos;True;;
@@ -103,7 +103,7 @@
 664;Urgencia Pediatria;True;;
 672;Rua do Amial;True;30,704,600,600,;bus
 681;Rua do Amial;True;30,704,600,600,;bus
-682;Estrada Exterior da CircunvalaçAo;False;205,;bus
+682;Estrada Exterior da CircunvalacAo;False;205,;bus
 685;Rua JoAo Allen;False;;
 692;Rua do Sal;False;;
 694;Rua do Fogo;False;;
@@ -115,7 +115,7 @@
 720;Rua do Corvo;False;;
 723;Rua do Principe;False;;
 725;;False;;
-729;Praça da Ilha Brava;False;;
+729;Praca da Ilha Brava;False;;
 732;Rua da Ilha Verde;False;;
 734;;False;;
 740;;False;;
@@ -136,10 +136,10 @@
 808;;True;;
 813;;True;;
 816;Alameda Professor HernAni Monteiro;True;204,604,300,;bus
-818;Estrada Interior da CircunvalaçAo;False;205,704,205,;bus
-820;Estrada Exterior da CircunvalaçAo;False;10,205,;bus
-850;Estrada Interior da CircunvalaçAo;False;205,205,;bus
-859;Estrada Interior da CircunvalaçAo;False;205,704,205,;bus
+818;Estrada Interior da CircunvalacAo;False;205,704,205,;bus
+820;Estrada Exterior da CircunvalacAo;False;10,205,;bus
+850;Estrada Interior da CircunvalacAo;False;205,205,;bus
+859;Estrada Interior da CircunvalacAo;False;205,704,205,;bus
 863;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
 871;Autoestrada de Entre-Douro-e-Minho;False;A 3,IP 1,E 01,;road
 873;Rua Conde de Aurora;False;;
@@ -150,9 +150,9 @@
 893;Rua Coronel Almeida Valente;False;301,;bus
 904;;False;;
 908;Rua Professor Armando de Castro;True;;
-911;Rua do Carriçal;False;;
+911;Rua do Carrical;False;;
 916;Rua de Silva Brinco (Antiga EN 14);False;30,600,600,;bus
-917;Rua do Carriçal;False;;
+917;Rua do Carrical;False;;
 919;Rua Benjamim Gouveia;False;;
 921;Rua do Amial;True;30,704,300,600,600,;bus
 924;Rua do Amial;True;30,704,600,600,;bus
@@ -166,7 +166,7 @@
 945;Rua Professor Armando de Castro;False;;
 946;;False;;
 950;Rua Raul Castro;False;;
-951;Estrada da CircunvalaçAo;False;;
+951;Estrada da CircunvalacAo;False;;
 952;Rua das Desertas;False;;
 953;Rua de Maio;False;;
 955;Rua de Porto Santo;False;;
@@ -192,10 +192,10 @@
 1056;;False;;
 1062;Entrada Urgencias;False;;
 1073;Entrada Urgencias;False;;
-1075;Estrada Exterior da CircunvalaçAo;False;204,704,205,;bus
-1076;Estrada Interior da CircunvalaçAo;False;111,205,205,;bus
-1077;Estrada Interior da CircunvalaçAo;False;111,205,205,;bus
-1081;Travessa Gonçalo Mendes da Maia;True;;
+1075;Estrada Exterior da CircunvalacAo;False;204,704,205,;bus
+1076;Estrada Interior da CircunvalacAo;False;111,205,205,;bus
+1077;Estrada Interior da CircunvalacAo;False;111,205,205,;bus
+1081;Travessa Goncalo Mendes da Maia;True;;
 1100;;True;;
 1111;;True;;
 1112;;True;;
@@ -250,8 +250,8 @@
 1316;;False;;
 1318;;False;;
 1323;Alameda Professor HernAni Monteiro;False;111,204,604,300,;bus
-1325;Estrada Interior da CircunvalaçAo;False;111,205,704,300,205,;bus
-1346;Estrada Exterior da CircunvalaçAo;False;204,704,301,205,;bus
+1325;Estrada Interior da CircunvalacAo;False;111,205,704,300,205,;bus
+1346;Estrada Exterior da CircunvalacAo;False;204,704,301,205,;bus
 1389;Rua Doutor Antonio Bernardino de Almeida;False;;
 1390;Rua Doutor Antonio Bernardino de Almeida;False;;
 1396;;False;;
@@ -379,7 +379,7 @@
 1825;;False;;
 1826;;False;;
 1828;Rua do Bairro da Areosa;False;;
-1831;Rua HorAcio Marçal;False;;
+1831;Rua HorAcio Marcal;False;;
 1837;;False;;
 1842;;False;;
 1844;;False;;
@@ -387,7 +387,7 @@
 1852;;False;;
 1863;;False;;
 1870;Rua Agra do Amial;False;;
-1872;Travessa da Bouça;True;;
+1872;Travessa da Bouca;True;;
 1876;Rua Doutor Antonio Bernardino de Almeida;False;;
 1877;Rua Doutor Antonio Bernardino de Almeida;False;;
 1878;Rua Conde de Aurora;False;;
@@ -435,10 +435,10 @@
 2038;;False;;
 2043;;False;;
 2048;;False;;
-2055;Travessa da Bouça;False;;
-2060;Viela da Bouça;False;;
-2066;Travessa da Bouça;False;;
-2068;Travessa da Bouça;False;;
+2055;Travessa da Bouca;False;;
+2060;Viela da Bouca;False;;
+2066;Travessa da Bouca;False;;
+2068;Travessa da Bouca;False;;
 2069;Rua do Doutor JUlio de Matos;False;;
 2078;Rua do Doutor Manuel Pereira da Silva;False;;
 2091;Travessa de Lamas;False;;
@@ -448,7 +448,7 @@
 2119;;False;;
 2130;;False;;
 2133;;False;;
-2136;Estrada Interior da CircunvalaçAo;False;205,704,205,;bus
+2136;Estrada Interior da CircunvalacAo;False;205,704,205,;bus
 2142;;False;;
 2146;;False;;
 2162;;False;;

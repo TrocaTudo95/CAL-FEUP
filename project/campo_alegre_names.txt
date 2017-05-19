@@ -1,11 +1,11 @@
 ﻿1;Rua de Ramalho Ortigao;False;;
-3;Rua da Conceiçao;False;;
+3;Rua da Conceicao;False;;
 5;Rua de Jose Falcao;False;;
 10;Rua de Avis;False;;
 13;Rua da Maternidade;False;602,;bus
 14;Rua do Rosario;False;602,300,;bus
 27;Rua do Breyner;False;301,;bus
-30;Praça da Republica;False;30,10,3M,600,;bus
+30;Praca da Republica;False;30,10,3M,600,;bus
 38;Rua alvares Cabral;False;3M,;bus
 41;Rua dos Bragas;False;;
 46;;False;;
@@ -13,7 +13,7 @@
 49;Rua do Padre Cruz;False;;
 51;Rua de Carlos Alberto;True;;
 53;Rua da Boavista;False;3M,;bus
-62;Rua da Regeneraçao;False;30,600,;bus
+62;Rua da Regeneracao;False;30,600,;bus
 64;Rua do Alferes Malheiro;False;;
 67;Rua do Bonjardim;False;;
 90;Rua da Firmeza;False;;
@@ -40,23 +40,23 @@
 197;Rua da Piedade;False;;
 199;;False;201,207,200,104,602,301,;bus
 201;Rua de Alberto Aires de Gouveia;False;201,207,200,104,602,301,;bus
-203;Rua da Restauraçao;False;;
+203;Rua da Restauracao;False;;
 205;;False;;
 210;Rua das Musas;False;;
 214;Tunel do Campo Alegre;False;;
 216;Rua de Entre Campos;False;;
 219;Via Panoramica;False;;
-224;Praça do Bom Sucesso;False;204,104,508,;bus
-225;Praça do Bom Sucesso;False;;
+224;Praca do Bom Sucesso;False;204,104,508,;bus
+225;Praca do Bom Sucesso;False;;
 228;;False;;
 230;Rua Arquitecto Marques da Silva;False;;
 235;Avenida da Boavista;False;;
 238;Avenida da Boavista;False;;
 240;;False;D,;tram
 244;Rua do Bom Sucesso;False;;
-246;Rua Gonçalo Sampaio;True;;
+246;Rua Goncalo Sampaio;True;;
 254;Largo de Ferreira Lapa;False;204,104,508,;bus
-259;Praça do Bom Sucesso;False;204,104,508,;bus
+259;Praca do Bom Sucesso;False;204,104,508,;bus
 260;Rua de Sao Filipe de Nery;False;201,207,200,30,301,;bus
 273;Rua Doutor Ferreira da Silva;True;104,602,;bus
 277;Campo dos Martires da Patria;False;201,207,200,30,104,602,301,;bus
@@ -71,11 +71,11 @@
 336;Avenida de Rodrigues de Freitas;True;207,;bus
 341;Rua Dom Joao IV;False;;
 353;Rua de Santo Ildefonso;False;;
-355;Praça dos Poveiros;False;;
+355;Praca dos Poveiros;False;;
 356;Rua do Campinho;False;;
 363;Rua de Entreparedes;False;;
 369;Rua de Fernandes Tomas;False;800,300,;bus
-387;Rua Moreira da Assunçao;False;;
+387;Rua Moreira da Assuncao;False;;
 388;Rua de Santa Helena;False;;
 391;Rua da Alegria;False;;
 396;Largo da Lapa;False;30,600,;bus
@@ -88,8 +88,8 @@
 446;Rua Cha;False;;
 456;Rua do Morgado de Mateus;False;;
 464;Rua de Sao Victor;False;;
-466;Rua de Olivença;False;;
-467;Praça Guilherme Gomes Fernandes;False;201,207,200,30,300,;bus
+466;Rua de Olivenca;False;;
+467;Praca Guilherme Gomes Fernandes;False;201,207,200,30,300,;bus
 475;Rua Doutor Tiago de Almeida;False;;
 483;Tunel dos Almadas;False;;
 484;Rua Elisio de Melo;False;201,207,200,30,300,;bus
@@ -108,7 +108,7 @@
 576;Rua de Clemente Meneres;False;201,207,200,104,;bus
 579;Rua de Monchique;True;500,;bus
 586;Rua das Taipas;True;;
-591;Rua da Meditaçao;False;;
+591;Rua da Meditacao;False;;
 600;Rua Guerra Junqueiro;False;504,;bus
 608;Rua da Torrinha;False;;
 610;Rua Joaquim de Vasconcelos;False;;
@@ -136,9 +136,9 @@
 712;Rua Joao de Oliveira Ramos;False;10,;bus
 713;Tunel Ferroviario da Lapa;False;E,C,A,F,B,;tram
 714;Rua de Santa Catarina;False;10,;bus
-718;Rua de Gonçalo Cristovao;False;30,10,3M,600,;bus
+718;Rua de Goncalo Cristovao;False;30,10,3M,600,;bus
 725;Rua do Almada;False;;
-736;Praça da Republica;False;10,3M,;bus
+736;Praca da Republica;False;10,3M,;bus
 739;Rua das Doze Casas;False;;
 743;Rua Sacadura Cabral;False;3M,301,;bus
 745;Largo da Paz;False;;
@@ -183,20 +183,20 @@
 889;Rua das Carvalheiras;False;;
 906;Rua da Trindade;False;30,3M,600,;bus
 919;Rua de Faria Guimaraes;False;;
-920;Rua de Gonçalo Cristovao;False;10,;bus
-926;Rua de Gonçalo Cristovao;False;10,;bus
-928;Rua de Gonçalo Cristovao;False;;
+920;Rua de Goncalo Cristovao;False;10,;bus
+926;Rua de Goncalo Cristovao;False;10,;bus
+928;Rua de Goncalo Cristovao;False;;
 932;;False;;
 935;Rua do Bonjardim;False;;
 940;Rua da Firmeza;False;200,;bus
-942;Praça da Republica;False;30,600,;bus
+942;Praca da Republica;False;30,600,;bus
 944;Travessa dos Campos;False;;
-954;Travessa da Senhora da Conceiçao;False;;
+954;Travessa da Senhora da Conceicao;False;;
 969;Rua da Senhora da Lapa;False;;
 975;Rua da Gloria;False;;
 983;Travessa da Senhora da Lapa;False;;
 985;Rua do Monte da Lapa;False;;
-990;Calçada da Lapa;False;;
+990;Calcada da Lapa;False;;
 991;Rua dos Burgaes;False;;
 995;Rua do Melo;False;;
 1007;Rua do Monte Cativo;True;;
@@ -204,7 +204,7 @@
 1011;Rua de Cervantes;True;;
 1021;Rua de Alves Redol;True;;
 1025;Rua Augusto Luso;False;602,3M,301,;bus
-1027;Praça de Pedro Nunes;False;;
+1027;Praca de Pedro Nunes;False;;
 1042;Rua do Instituto de Cegos de Sao Manuel;False;;
 1047;Rua de Santa Isabel;False;;
 1048;Travessa da Paz;False;;
@@ -232,22 +232,22 @@
 1157;Rua Doutor Barbosa de Castro;False;;
 1174;Rua de Azevedo de Albuquerque;False;;
 1182;Passeio das Virtudes;False;;
-1194;Calçada das Virtudes;True;;
+1194;Calcada das Virtudes;True;;
 1199;Largo do Viriato;False;;
 1200;Rua do Monte dos Judeus;False;;
 1212;Rua de Sobre-o-Douro;False;;
-1226;Calçada de Monchique;False;;
+1226;Calcada de Monchique;False;;
 1236;Rua de Miragaia;False;;
 1239;Cais da Estiva;False;;
 1246;Rua do Cais da Ribeira;True;;
 1264;Travessa de Sao Sebastiao;False;;
-1269;Calçada da Vandoma;True;;
+1269;Calcada da Vandoma;True;;
 1274;Rua dos Pelames;True;;
 1281;Rua de Sao Sebastiao;False;;
 1284;Rua de Dom Hugo;False;;
 1309;Rua de Coelho Lousada;False;;
 1312;Rua do Arcediago Van Zeller;True;;
-1314;Rua do Abade de Baçal;False;;
+1314;Rua do Abade de Bacal;False;;
 1316;Beco de Sao Macario;True;;
 1319;;True;;
 1320;Via Particular;False;;
@@ -256,21 +256,21 @@
 1353;Alameda de Basilo Teles;False;;
 1355;Rua do Outeiro;False;;
 1361;Largo do Adro;False;;
-1364;Calçada de Sobre-o-Douro;False;;
+1364;Calcada de Sobre-o-Douro;False;;
 1376;Rua do Cristelo;False;;
 1380;Rua do Cais das Pedras;False;;
 1404;;False;;
-1408;Rua da Restauraçao;False;;
+1408;Rua da Restauracao;False;;
 1413;Rua da Boa Viagem;False;;
 1433;Rua Capitao Salgueiro Maia;False;;
-1438;Calçada da Boa Viagem;False;;
+1438;Calcada da Boa Viagem;False;;
 1441;Rua da Rainha Dona Estefania;False;;
 1452;Rua Professor Abel Salazar;False;;
 1456;Travessa da Pena;False;;
 1463;Rua da Pena;False;;
 1470;;False;;
 1474;Via Panoramica;False;;
-1476;Calçada da Arrabida;False;;
+1476;Calcada da Arrabida;False;;
 1478;Rua do Bicalho;False;;
 1491;;False;;
 1493;Via Panoramica Edgar Cardoso;False;;
@@ -286,8 +286,8 @@
 1543;Rua da Bela da Fontinha;False;;
 1545;Rua da Fontinha;False;;
 1547;Travessa das Musas;False;;
-1551;Calçada do Leal;False;;
-1553;Calçada do Leal;False;;
+1551;Calcada do Leal;False;;
+1553;Calcada do Leal;False;;
 1555;Rua de Santo Isidro;False;;
 1556;Rua do Monte dos Congregados;False;;
 1561;Travessa do Monte de Tadeu;False;;
@@ -318,8 +318,8 @@
 1690;;False;;
 1691;Tunel dos Almadas;False;;
 1693;Rua de Camões;False;30,3M,600,;bus
-1696;Viaduto de Gonçalo Cristovao;True;10,;bus
-1697;Praça da Republica;False;30,10,3M,3M,600,;bus
+1696;Viaduto de Goncalo Cristovao;True;10,;bus
+1697;Praca da Republica;False;30,10,3M,3M,600,;bus
 1731;Rua Nova da Alfandega;True;500,;bus
 1750;Rua Cabo Simao;True;;
 1754;;True;;
@@ -411,7 +411,7 @@
 2189;Rua de Arnaldo Gama;True;;
 2193;Rua de Sao Joao;False;500,;bus
 2197;Rua de Alexandre Braga;False;800,;bus
-2200;Praça Gen. Humberto Delgado;False;;
+2200;Praca Gen. Humberto Delgado;False;;
 2205;Rua Formosa;False;;
 2213;Rua de Sao Joao Novo;False;;
 2215;Rua de Sao Bento da Vitoria;False;;
@@ -435,10 +435,10 @@
 2302;Largo do Priorado;False;;
 2306;Rua de Anibal Cunha;False;602,300,;bus
 2309;Rua de Anibal Cunha;False;602,300,;bus
-2311;Praça de Pedro Nunes;False;;
+2311;Praca de Pedro Nunes;False;;
 2317;Tunel do Campo Alegre;False;;
 2318;Rua da Pena;False;;
-2335;Rua Gonçalo Sampaio;False;;
+2335;Rua Goncalo Sampaio;False;;
 2344;;False;;
 2348;Rua de Entre Campos;False;;
 2355;Rua do Campo Alegre;True;207,200,204,;bus
@@ -451,8 +451,8 @@
 2380;Viela da Carvalhosa;False;;
 2385;Largo da Maternidade de Julio Dinis;False;602,;bus
 2395;Rua Adolfo Casais Monteiro;False;602,301,;bus
-2397;Praça de Carlos Alberto;False;;
-2411;Praça Coronel Pacheco;False;;
+2397;Praca de Carlos Alberto;False;;
+2411;Praca Coronel Pacheco;False;;
 2434;Rua do Pinheiro;False;;
 2437;Rua dos Martires da Liberdade;False;;
 2440;Travessa de Sao Carlos;False;;
@@ -463,7 +463,7 @@
 2462;Rua da Bandeirinha;False;;
 2483;Largo Primeiro de Dezembro;False;;
 2489;Rua da Corticeira;True;;
-2500;Praça da Alegria;False;;
+2500;Praca da Alegria;False;;
 2504;Rua de Santa Catarina;False;207,;bus
 2506;Rua de Passos Manuel;False;207,;bus
 2518;Rua 31 de Janeiro;False;;
@@ -476,10 +476,10 @@
 2565;Rua de Dom Manuel II;True;201,207,200,104,;bus
 2570;;False;;
 2572;;False;201,207,200,104,;bus
-2575;Beco do Paço;False;;
+2575;Beco do Paco;False;;
 2582;;False;D,;tram
 2585;;False;;
-2587;Calçada da Arrabida;False;;
+2587;Calcada da Arrabida;False;;
 2591;Largo de Ferreira Lapa;False;204,104,;bus
 2592;Largo de Ferreira Lapa;False;;
 2593;Largo de Ferreira Lapa;False;204,104,;bus
@@ -512,7 +512,7 @@
 2689;;False;;
 2693;;False;;
 2696;;False;;
-2698;Calçada da Arrabida;False;;
+2698;Calcada da Arrabida;False;;
 2707;;False;;
 2710;;True;;
 2713;;False;;
@@ -521,17 +521,17 @@
 2726;;False;;
 2732;;False;;
 2738;;False;;
-2739;Travessa da Regeneraçao;False;;
+2739;Travessa da Regeneracao;False;;
 2750;Ponte Infante Dom Henrique;False;;
 2751;;False;;
 2755;Rua de Agramonte;False;;
 2757;;False;;
-2760;Rua de Gonçalo Cristovao;False;10,;bus
+2760;Rua de Goncalo Cristovao;False;10,;bus
 2763;Rua de Santa Catarina;False;;
 2766;Rua da Fabrica;False;;
 2768;Rua da Cooperativa do Povo Portuense;False;;
 2769;Rua de Santa Catarina;False;10,;bus
-2770;Praça Mouzinho de Albuquerque;False;201,203,204,104,504,704,508,508,;bus
+2770;Praca Mouzinho de Albuquerque;False;201,203,204,104,504,704,508,508,;bus
 2814;Rua Doutor Magalhaes Lemos;False;201,207,200,300,;bus
 2820;Rua de Jose Falcao;False;201,207,200,30,300,;bus
 2821;Rua do Loureiro;True;;
@@ -547,8 +547,8 @@
 2855;;False;;
 2860;;False;;
 2863;;False;;
-2869;Avenida da França;False;203,204,104,504,;bus
-2871;Praça da Galiza;True;207,200,;bus
+2869;Avenida da Franca;False;203,204,104,504,;bus
+2871;Praca da Galiza;True;207,200,;bus
 2873;;True;;
 2875;Rua de Artur Napoleao;False;;
 2876;;False;;
@@ -576,7 +576,7 @@
 2955;Rua de Sa da Bandeira;False;;
 2957;Patio do Bonjardim;True;;
 2966;Rua Rodrigues Sampaio;False;;
-2968;Praça de Almeida Garrett;False;201,200,301,;bus
+2968;Praca de Almeida Garrett;False;201,200,301,;bus
 2970;Travessa de Passos Manuel;True;;
 2977;Travessa de Cimo de Vila;False;;
 2979;Rua do Cativo;False;;
@@ -589,7 +589,7 @@
 3017;Rua do Corpo da Guarda;True;;
 3030;Travessa da Bainharia;False;;
 3034;Rua da Bainharia;False;;
-3049;Calçada de Dom Pedro Pitões;True;;
+3049;Calcada de Dom Pedro Pitões;True;;
 3051;Rua de Sao Sebastiao;False;;
 3056;Rua de Sao Sebastiao;False;;
 3059;;False;;
@@ -597,27 +597,27 @@
 3067;;False;;
 3068;Rua de Santa Ana;True;;
 3075;;True;;
-3076;Rua de Gonçalo Cristovao;False;10,;bus
+3076;Rua de Goncalo Cristovao;False;10,;bus
 3080;Rua de Camões;False;30,3M,600,;bus
 3082;Largo da Lapa;False;30,600,;bus
 3083;Rua de Joao das Regras;False;30,3M,600,;bus
 3084;Rua do Paraiso;True;;
 3085;Rua de Antero de Quental;False;30,600,;bus
-3086;Rua de Gonçalo Cristovao;False;10,;bus
-3101;Praça de Almeida Garrett;False;207,500,;bus
+3086;Rua de Goncalo Cristovao;False;10,;bus
+3101;Praca de Almeida Garrett;False;207,500,;bus
 3106;Rua Guedes de Azevedo;False;200,;bus
-3109;Praça da Batalha;False;207,;bus
+3109;Praca da Batalha;False;207,;bus
 3127;Largo de Sao Domingos;False;500,;bus
 3129;Largo de Sao Domingos;False;;
 3132;Largo de Sao Domingos;False;500,;bus
 3136;Largo do Terreiro;False;;
-3144;Praça da Ribeira;False;;
-3152;Praça da Ribeira;False;;
+3144;Praca da Ribeira;False;;
+3152;Praca da Ribeira;False;;
 3159;Rua de Belomonte;False;;
 3162;;False;;
 3166;Largo de Sao Joao Novo;False;;
 3182;;False;;
-3192;Largo da Esperança;False;;
+3192;Largo da Esperanca;False;;
 3200;;False;;
 3207;;False;;
 3209;Rua das Taipas;False;;
@@ -627,8 +627,8 @@
 3260;;False;;
 3263;;False;;
 3269;;False;;
-3275;Praça da Republica;False;3M,;bus
-3280;Praça da Republica;False;;
+3275;Praca da Republica;False;3M,;bus
+3280;Praca da Republica;False;;
 3283;Campo dos Martires da Patria;False;201,207,200,30,104,602,301,;bus
 3286;Largo Actor Dias;False;;
 3288;Largo Actor Dias;False;;
@@ -646,22 +646,22 @@
 3385;;False;;
 3391;;False;;
 3400;Rua de Julio Dinis;True;201,207,200,204,104,;bus
-3402;Praça da Galiza;False;204,;bus
+3402;Praca da Galiza;False;204,;bus
 3405;;False;;
 3410;;False;;
 3412;;False;;
 3423;;False;;
 3435;;False;;
 3437;;False;;
-3447;Praça da Liberdade;False;;
+3447;Praca da Liberdade;False;;
 3455;Avenida dos Aliados;False;3M,600,;bus
 3463;;False;201,207,200,300,;bus
 3465;Rua da Fabrica;False;;
-3467;Praça Dona Filipa de Lencastre;False;201,207,200,30,300,;bus
+3467;Praca Dona Filipa de Lencastre;False;201,207,200,30,300,;bus
 3470;;False;;
 3478;Rua das Carmelitas;False;;
 3486;;False;;
-3496;Praça Gomes Teixeira;False;104,602,;bus
+3496;Praca Gomes Teixeira;False;104,602,;bus
 3500;;False;;
 3508;;False;104,602,;bus
 3511;;False;;
@@ -683,9 +683,9 @@
 3587;Largo da Alfandega;False;;
 3608;Rua de Mouzinho da Silveira;True;500,;bus
 3615;Rua Trindade Coelho;False;500,;bus
-3618;Praça de Gomes Teixeira;False;201,207,200,30,104,602,300,;bus
+3618;Praca de Gomes Teixeira;False;201,207,200,30,104,602,300,;bus
 3627;Avenida dos Aliados;False;30,3M,600,;bus
-3634;Praça da Liberdade;False;201,207,200,30,500,301,;bus
+3634;Praca da Liberdade;False;201,207,200,30,500,301,;bus
 3642;Rua de Mouzinho da Silveira;True;;
 3653;Largo do Viriato;False;;
 3655;Largo do Viriato;False;;
@@ -710,15 +710,15 @@
 3759;;False;;
 3799;;False;;
 3800;Rua de Miragaia;True;;
-3812;Avenida da França;False;203,204,104,504,704,;bus
+3812;Avenida da Franca;False;203,204,104,504,704,;bus
 3820;;False;;
 3824;Rua do Doutor Alfredo de Magalhaes;False;30,3M,600,;bus
 3827;Rua de Sa da Bandeira;True;200,300,301,;bus
 3831;Rua do Doutor Alfredo Magalhaes;False;30,3M,600,;bus
-3836;Rua de Gonçalo Cristovao;False;10,;bus
+3836;Rua de Goncalo Cristovao;False;10,;bus
 3837;;False;;
-3839;Rua da Associaçao de Moradores de Sao Victor;False;;
-3845;Rua da Associaçao Moradores de Sao Victor;False;;
+3839;Rua da Associacao de Moradores de Sao Victor;False;;
+3845;Rua da Associacao Moradores de Sao Victor;False;;
 3846;Passeio das Fontainhas;True;;
 3859;;True;;
 3863;;False;;
@@ -732,7 +732,7 @@
 3902;;True;;
 3903;;True;;
 3904;;True;;
-3907;Rua Gonçalo Sampaio;True;;
+3907;Rua Goncalo Sampaio;True;;
 3910;Avenida da Boavista;False;201,203,;bus
 3913;Rua Doutor Antonio E. Magalhaes;False;;
 3914;;False;;
@@ -786,13 +786,13 @@
 4135;;False;;
 4137;;False;;
 4139;;False;;
-4144;Praça de Carlos Alberto;False;;
+4144;Praca de Carlos Alberto;False;;
 4146;;False;;
 4147;;False;;
 4152;;False;;
 4156;Rua 5 de Outubro;False;;
 4159;Travessa do Carregal;False;;
-4167;Calçada do Carregal;True;;
+4167;Calcada do Carregal;True;;
 4169;;True;;
 4170;;True;;
 4171;;False;;
@@ -850,8 +850,8 @@
 4584;Avenida da Boavista;False;201,203,504,;bus
 4588;Avenida da Boavista;False;201,203,504,;bus
 4589;Avenida de Paiva Couceiro;True;;
-4590;Rua da Restauraçao;True;;
-4592;Rua da Restauraçao;True;;
+4590;Rua da Restauracao;True;;
+4592;Rua da Restauracao;True;;
 4597;Rua da Torrinha;False;;
 4598;Rua da Piedade;False;;
 4600;Rua do Padre Cruz;False;;
@@ -879,7 +879,7 @@
 4707;;False;;
 4727;;False;;
 4728;;False;;
-4734;Rua do Abade de Baçal;False;;
+4734;Rua do Abade de Bacal;False;;
 4744;;False;;
 4766;;False;;
 4773;;False;;
@@ -914,11 +914,11 @@
 5091;;False;;
 5095;Avenida Mestre Jose Rodrigues;False;;
 5114;Avenida Mestre Jose Rodrigues;False;;
-5117;Rua da Restauraçao;False;201,207,200,104,602,301,;bus
+5117;Rua da Restauracao;False;201,207,200,104,602,301,;bus
 5122;;False;;
 5129;Ilha;False;;
 5133;;False;;
-5135;Rua da Restauraçao;True;;
+5135;Rua da Restauracao;True;;
 5156;;False;;
 5159;Rua de Calouste Gulbenkian;False;;
 5169;Rua de Calouste Gulbenkian;False;;
@@ -994,7 +994,7 @@
 5469;;False;;
 5471;;False;;
 5473;Rua do Campo Alegre;False;207,200,204,;bus
-5475;Rua Gonçalo Sampaio;False;;
+5475;Rua Goncalo Sampaio;False;;
 5478;;False;;
 5485;Rua do Bom Sucesso;True;;
 5486;Rua de Agramonte;False;;
@@ -1015,7 +1015,7 @@
 5563;Rua de Cervantes;False;;
 5564;;False;;
 5572;;False;;
-5575;Praça de Almeida Garrett;False;207,500,;bus
+5575;Praca de Almeida Garrett;False;207,500,;bus
 5579;;False;;
 5591;;False;;
 5596;;False;;
@@ -1037,13 +1037,13 @@
 5676;;False;;
 5677;;False;;
 5678;Rua das aguas Ferreas;False;;
-5681;Calçada da Boa Viagem;False;;
-5685;Calçada da Boa Viagem;False;;
+5681;Calcada da Boa Viagem;False;;
+5685;Calcada da Boa Viagem;False;;
 5688;;False;;
 5722;;False;;
 5729;;False;;
 5730;;False;;
-5731;Rua da Restauraçao;False;;
+5731;Rua da Restauracao;False;;
 5735;;False;;
 5736;;False;;
 5737;;False;;
@@ -1056,7 +1056,7 @@
 5754;;True;;
 5761;;True;;
 5763;Alameda de Basilo Teles;True;;
-5765;Rua da Restauraçao;False;;
+5765;Rua da Restauracao;False;;
 5770;;False;;
 5771;;False;;
 5773;;False;;
@@ -1169,8 +1169,8 @@
 6223;;False;;
 6232;Largo Doutor Pedro Vitorino;True;;
 6235;Largo de Sao Domingos;False;500,;bus
-6238;Praça de Carlos Alberto;False;;
-6240;Praça de Carlos Alberto;False;;
+6238;Praca de Carlos Alberto;False;;
+6240;Praca de Carlos Alberto;False;;
 6245;Rua dos Caldeireiros;False;;
 6246;Rua de Agramonte;True;;
 6252;Rua de Agramonte;False;;
@@ -1226,7 +1226,7 @@
 6461;Rua da Boavista;False;;
 6463;Rua de Camões;False;;
 6464;Rua de Camões;False;3M,;bus
-6467;Rua de Gonçalo Cristovao;False;10,3M,;bus
+6467;Rua de Goncalo Cristovao;False;10,3M,;bus
 6479;Rua de Joao das Regras;False;30,600,;bus
 6480;Rua de Fernandes Tomas;False;300,;bus
 6482;Rua de Sa da Bandeira;True;200,;bus
@@ -1240,14 +1240,14 @@
 6512;Rua do Golgota;False;;
 6513;Rua de Dom Antonio Barroso;False;;
 6516;;False;;
-6518;Praça de Almeida Garrett;False;201,207,200,500,301,;bus
+6518;Praca de Almeida Garrett;False;201,207,200,500,301,;bus
 6519;Rua de Sa da Bandeira;False;201,200,301,;bus
 6536;Rua de Dom Manuel II;False;201,207,200,104,;bus
-6540;Praça do Bom Sucesso;False;204,104,508,;bus
+6540;Praca do Bom Sucesso;False;204,104,508,;bus
 6545;Via Panoramica Edgar Cardoso;False;;
 6547;Rua de Nossa Senhora de Fatima;False;508,508,;bus
-6555;Avenida da França;False;;
-6559;Calçada da Arrabida;False;;
+6555;Avenida da Franca;False;;
+6559;Calcada da Arrabida;False;;
 6561;;False;;
 6564;;False;;
 6565;;False;;
@@ -1257,7 +1257,7 @@
 6578;Rua do Bonjardim;False;;
 6587;Rua das Musas;True;;
 6591;Largo da Fontinha;False;;
-6593;Praça dos Poveiros;False;;
+6593;Praca dos Poveiros;False;;
 6605;Rua do Bicalho;False;;
 6608;Rua do Bicalho;False;;
 6610;Rua da Boa Viagem;False;;
@@ -1366,8 +1366,8 @@
 6965;Rua do Campo Alegre;True;207,200,204,;bus
 6967;Rua do Campo Alegre;True;207,200,204,;bus
 6969;Rua do Campo Alegre;True;207,200,204,;bus
-6970;Rua Gonçalo Sampaio;True;;
-6971;Rua Gonçalo Sampaio;True;;
+6970;Rua Goncalo Sampaio;True;;
+6971;Rua Goncalo Sampaio;True;;
 6973;;False;207,200,204,;bus
 6975;Rua do Campo Alegre;False;207,200,204,;bus
 6977;;False;;
@@ -1380,8 +1380,8 @@
 6988;Rua de Julio Dinis;True;201,204,104,;bus
 6989;Rua de Julio Dinis;True;201,207,200,104,;bus
 6991;Rua de Julio Dinis;True;201,207,200,104,;bus
-6995;Praça da Galiza;False;204,;bus
-6997;Praça da Galiza;True;207,200,;bus
+6995;Praca da Galiza;False;204,;bus
+6997;Praca da Galiza;True;207,200,;bus
 7001;Rua Duque de Loule;True;207,;bus
 7010;;True;;
 7011;;True;;
@@ -1395,4 +1395,4 @@
 7098;Rua do Cativo;False;;
 7102;Rua da Madeira;True;;
 7104;Passeio das Fontainhas;True;;
-7107;Praça do Conde de Samodaes;False;;
+7107;Praca do Conde de Samodaes;False;;
