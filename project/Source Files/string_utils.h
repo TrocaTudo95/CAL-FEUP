@@ -11,3 +11,4 @@ struct APR_Greater_Than {
 };
 vector<Street *> aproximado(const StreetCleaned &streets, const string &nameStreet);
 int editDistance(string pattern, string text);
+vector<Street*> exata(const StreetCleaned &streets, const string &nameStreet);

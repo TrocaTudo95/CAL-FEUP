@@ -22,123 +22,12 @@ vector<string> splitSentence(string sentence) {
 	return tokens;
 }
 
-void apagaAcentos(char &ch) {
-	switch (ch)
-	{
-	case '�':
-		ch = 'A';
-		break;
-	case '�':
-		ch = 'A';
-		break;
-	case '�':
-		ch = 'A';
-		break;
-	case '�':
-		ch = 'A';
-		break;
-	case '�':
-		ch = 'a';
-		break;
-	case '�':
-		ch = 'a';
-		break;
-	case '�':
-		ch = 'a';
-		break;
-	case '�':
-		ch = 'a';
-		break;
-	case '�':
-		ch = 'E';
-		break;
-	case '�':
-		ch = 'E';
-		break;
-	case '�':
-		ch = 'E';
-		break;
-	case '�':
-		ch = 'e';
-		break;
-	case '�':
-		ch = 'e';
-		break;
-	case '�':
-		ch = 'e';
-		break;
-	case '�':
-		ch = 'I';
-		break;
-	case '�':
-		ch = 'I';
-		break;
-	case '�':
-		ch = 'I';
-		break;
-	case '�':
-		ch = 'i';
-		break;
-	case '�':
-		ch = 'i';
-		break;
-	case '�':
-		ch = 'i';
-		break;
-	case '�':
-		ch = 'O';
-		break;
-	case '�':
-		ch = 'O';
-		break;
-	case '�':
-		ch = 'O';
-		break;
-	case '�':
-		ch = 'O';
-		break;
-	case '�':
-		ch = 'o';
-		break;
-	case '�':
-		ch = 'o';
-		break;
-	case '�':
-		ch = 'o';
-		break;
-	case '�':
-		ch = 'o';
-		break;
-	case '�':
-		ch = 'U';
-		break;
-	case '�':
-		ch = 'U';
-		break;
-	case '�':
-		ch = 'U';
-		break;
-	case '�':
-		ch = 'u';
-		break;
-	case '�':
-		ch = 'u';
-		break;
-	case '�':
-		ch = 'u';
-		break;
-	default:
-		break;
-	}
-}
+
 
 string to_lower(string &text) {
 	for (size_t i = 0; i < text.size(); i++)
 	{
-		apagaAcentos(text[i]);
 		text[i] = tolower(text[i]);
-		cout << text[i];
-
 	}
 	return text;
 }
@@ -212,7 +101,7 @@ vector<Street *> aproximado(const StreetCleaned &streets, const string &nameStre
 		heap.push_back(current);
 	}
 	make_heap(heap.begin(), heap.end(), APR_Greater_Than());
-	heap = vector<APR>(heap.begin(), heap.begin() + 10);
+	heap = vector<APR>(heap.begin(), heap.begin() + 5);
 	for (vector<APR>::iterator it = heap.begin(); it != heap.end(); it++)
 	{
 		topToReturn.push_back(it->second);
@@ -263,9 +152,12 @@ int kmp(string text, string pattern) {
 vector<Street*> exata(const StreetCleaned &streets, const string &nameStreet) {
 	vector<Street *> topToReturn;
 	int foundMatch;
+	string temp;
 	for (StreetCleaned::const_iterator it = streets.begin(); it != streets.end(); it++)
 	{
-		foundMatch = kmp(to_lower((*it)->getName()),to_lower(nameStreet));
+		temp = nameStreet;
+		temp = to_lower(temp);
+		foundMatch = kmp(to_lower((*it)->getName()),temp);
 		if (foundMatch){
 			topToReturn.push_back((*it));
 		}
