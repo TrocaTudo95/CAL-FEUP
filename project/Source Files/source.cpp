@@ -622,7 +622,9 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 				cin.ignore(256, '\n');
 			}
 			if (option_rua >= 1 && option_rua <= 5) {
-				initialVertex = topStreets[option_rua - 1]->getInitialEdgeId();
+				int temp = topStreets[option_rua - 1]->getInitialEdgeId();
+
+				initialVertex = graph.getEdgeById(temp)->getDest();
 			}
 
 			cout << TAB_SPACE << "Selecione o Nó de Destino" << endl;
@@ -637,7 +639,6 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			 topStreets =
 				functions[option](graph.getStreetClean(), streetName);
 			option_count = 1;
-
 
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
 			{
@@ -654,7 +655,10 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 				cin.ignore(256, '\n');
 			}
 			if (option_rua >= 1 && option_rua <= 5) {
-			finalVertex = topStreets[option_rua - 1]->getInitialEdgeId();
+			int temp = topStreets[option_rua - 1]->getInitialEdgeId();
+			
+			finalVertex = graph.getEdgeById(temp)->getDest();
+			//cout << finalVertex<<endl;
 			}
 
 
