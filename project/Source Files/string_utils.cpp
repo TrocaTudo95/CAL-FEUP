@@ -133,14 +133,10 @@ void pre_kmp(string pattern, vector<int> & prefix) {
 	}
 }
 
-int kmp(string text, string pattern) {
+int kmp(string text, string pattern,const vector<int> &prefix) {
 	int num = 0;
 	int m = pattern.length();
-	vector<int> prefix(m);
-	pre_kmp(pattern, prefix);
-
 	int n = text.length();
-
 	int q = -1;
 	for (int i = 0; i < n; i++)
 	{
@@ -162,12 +158,15 @@ int kmp(string text, string pattern) {
 vector<Street*> exata(const StreetCleaned &streets, const string &nameStreet) {
 	vector<Street *> topToReturn;
 	int foundMatch;
-	string temp;
+
+	string userInput = to_lower(nameStreet);
+	vector<int> prefix(userInput.length());
+	pre_kmp(userInput, prefix);
+
 	for (StreetCleaned::const_iterator it = streets.begin(); it != streets.end(); it++)
 	{
-		temp = nameStreet;
-		temp = to_lower(temp);
-		foundMatch = kmp(to_lower((*it)->getName()),temp);
+
+		foundMatch = kmp(to_lower((*it)->getName()),userInput,prefix);
 		if (foundMatch){
 			topToReturn.push_back((*it));
 		}
