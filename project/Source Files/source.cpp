@@ -606,6 +606,11 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			vector<Street *> topStreets =
 				functions[option](graph.getStreetClean(), streetName);
 			int option_count = 1;
+			if (topStreets.size() == 0){
+				cout << "Lugar Desconhecido\n";
+				system("pause");
+				return;
+			}
 
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
 			{
@@ -658,7 +663,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			}
 			if (option_rua >= 1 && option_rua <= 5) {
 			int temp = topStreets[option_rua - 1]->getInitialEdgeId();
-			
+
 			finalVertex = graph.getEdgeById(temp)->getDest();
 			//cout << finalVertex<<endl;
 			}
@@ -675,7 +680,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 				T.join();
 			break;
 		}
-		
+
 	} while (option != 0);
 
 }
