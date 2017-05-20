@@ -1,6 +1,3 @@
-/*
-* matcher.cpp
-*/
 #include <string>
 #include <vector>
 #include <iostream>
@@ -8,6 +5,7 @@
 #include <fstream>
 #include <sstream>
 #include <iterator>
+#include <cmath>
 #include "string_utils.h"
 using namespace std;
 
@@ -51,8 +49,8 @@ int aproximate_matching(string pattern,string text){
 	int currentTotalDistance = 0;
   vector<string> textSplitted = splitSentence(text);
   vector<string> patternSplitted = splitSentence(pattern);
-	if (textSplitted.size() > patternSplitted.size()){
-		totalEditDistance += (textSplitted.size() - patternSplitted.size());
+	if (textSplitted.size() != patternSplitted.size()){
+		totalEditDistance += abs(textSplitted.size() - patternSplitted.size());
 	}
 	eliminateRedudantWords(textSplitted);
 	eliminateRedudantWords(patternSplitted);
