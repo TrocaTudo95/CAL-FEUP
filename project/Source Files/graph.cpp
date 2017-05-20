@@ -336,7 +336,7 @@ void Graph::SPFAWithAdjacencyList(const int & s, const int &d)
 {
 	int v, w, weight;
 	for (int i = 0; i < dist.size(); i++) {
-		dist[i] = INT_MAX;
+		dist[i] = 99999;
 		in_queue[i] = 0;
 		path[i] = 0;
 	}
@@ -623,7 +623,7 @@ void Graph::dijkstraBestTimeWithWaitingTime(const int &s, const double & max_cos
 			}
 			summedCost = v->cost + cost;
 			if (summedCost > max_cost) {
-				deltaTime = INT_MAX;
+				deltaTime = 99999;
 			}
 			else {
 				switch (typeOfTransportLine) {

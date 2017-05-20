@@ -158,8 +158,9 @@ int kmp(string text, string pattern,const vector<int> &prefix) {
 vector<Street*> exata(const StreetCleaned &streets, const string &nameStreet) {
 	vector<Street *> topToReturn;
 	int foundMatch;
-
-	string userInput = to_lower(nameStreet);
+	string temp;
+	temp = nameStreet;
+	string userInput = to_lower(temp);
 	vector<int> prefix(userInput.length());
 	pre_kmp(userInput, prefix);
 
