@@ -47,8 +47,8 @@ void eliminateRedudantWords(vector<string> &text){
 int aproximate_matching(string pattern,string text){
 
 	int totalEditDistance = 0;
-	int currentMinDistance;
   int currentEditDistance;
+	int currentTotalDistance = 0;
   vector<string> textSplitted = splitSentence(text);
   vector<string> patternSplitted = splitSentence(pattern);
 	if (textSplitted.size() > patternSplitted.size()){
@@ -57,19 +57,15 @@ int aproximate_matching(string pattern,string text){
 	eliminateRedudantWords(textSplitted);
 	eliminateRedudantWords(patternSplitted);
   for (vector<string>::iterator itP = patternSplitted.begin(); itP != patternSplitted.end(); itP++){
-    currentMinDistance = 9999;
     for (vector<string>::iterator itT = textSplitted.begin(); itT != textSplitted.end(); itT++ ){
       currentEditDistance = editDistance(*itP,*itT);
-			cout << "Current editDistance= " << currentEditDistance << endl;
-      if (currentEditDistance == 0){
-        currentMinDistance = 0;
-        break;
-      }
-      if (currentEditDistance < currentMinDistance){
-        currentMinDistance = currentEditDistance;
-      }
+			if (currentEditDistance == 0){
+				currentTotalDistance = currentTotalDistance/2;
+				break;
+			}
+			currentTotalDistance += currentEditDistance;
     }
-    totalEditDistance += currentMinDistance;
+		totalEditDistance+=currentTotalDistance;
   }
 
   return totalEditDistance;
