@@ -50,7 +50,7 @@ int aproximate_matching(string pattern,string text){
   vector<string> textSplitted = splitSentence(text);
   vector<string> patternSplitted = splitSentence(pattern);
 	if (textSplitted.size() != patternSplitted.size()){
-		totalEditDistance += abs(textSplitted.size() - patternSplitted.size());
+		totalEditDistance += abs((int)(textSplitted.size() - patternSplitted.size()));
 	}
 	eliminateRedudantWords(textSplitted);
 	eliminateRedudantWords(patternSplitted);

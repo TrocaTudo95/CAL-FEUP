@@ -595,6 +595,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			string streetName;
 			cout << endl << TAB_SPACE_INITIAL << "Selecao de Nos" << endl << endl;
 			cout << TAB_SPACE << "Selecione a rua de origem:" << endl;
+			cin.ignore();
 			getline(cin, streetName);
 			while (streetName.size() == 0)
 			{
@@ -611,13 +612,16 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 				system("pause");
 				return;
 			}
-
+			int counter = 0;
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
 			{
 				cout << TAB_SPACE <<option_count<< ". ";
 				cout << (*it)->getName() << endl;
 				option_count++;
+				if (counter == 7)
+					break;
 			}
+			counter = 0;
 
 			int option_rua;
 
@@ -646,12 +650,15 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			 topStreets =
 				functions[option](graph.getStreetClean(), streetName);
 			option_count = 1;
-
+			
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
 			{
 				cout << TAB_SPACE << option_count << ". ";
 				cout << (*it)->getName() << endl;
 				option_count++;
+				counter++;
+				if (counter == 7)
+					break;
 			}
 
 
