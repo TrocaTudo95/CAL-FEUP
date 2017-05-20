@@ -584,6 +584,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 		cout << TAB_SPACE << "0. Back\n";
 		cout << endl << "Escolha uma opcao: ";
 		cin >> option;
+
 		if (cin.fail())
 		{
 			cin.clear();
@@ -669,8 +670,14 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 
 			system("pause");
 		}
+		else {
+			if (T.joinable())
+				T.join();
+			break;
+		}
 		
 	} while (option != 0);
+
 }
 
 void  preprocessStreets(Graph * graph)
