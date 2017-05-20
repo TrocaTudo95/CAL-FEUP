@@ -30,30 +30,49 @@ string to_lower(string &text) {
 	return text;
 }
 
-int aproximate_matching(string pattern, string text) {
-	vector<string> textSplitted = splitSentence(to_lower(text));
-	vector<string> patternSplitted = splitSentence(to_lower(pattern));
+void eliminateRedudantWords(vector<string> &text){
+	for (auto it = text.begin(); it!=text.end();it++){
+		string current = (*it);
+		if (current == "Rua" || current == "Avenida" || current == "Praca" || current == "Largo" || current == "Patio" || current == "Beco" || current == "Tunel"){
+			text.erase(it);
+			it--;
+		}
+		else if (current == "de" || current == "do" || current == "da" || current == "dos" || current == "das"){
+			text.erase(it);
+			it--;
+		}
+	}
+}
+
+int aproximate_matching(string pattern,string text){
+
 	int totalEditDistance = 0;
 	int currentMinDistance;
-	int currentEditDistance;
-	for (vector<string>::iterator itP = patternSplitted.begin(); itP != patternSplitted.end(); itP++) {
-		currentMinDistance = 9999;
-		for (vector<string>::iterator itT = textSplitted.begin(); itT != textSplitted.end(); itT++) {
-			currentEditDistance = editDistance(*itP, *itT);
-			if (currentEditDistance == 0) {
-				currentMinDistance = 0;
-				break;
-			}
-			if (currentEditDistance < currentMinDistance) {
-				currentMinDistance = currentEditDistance;
-			}
-		}
-		totalEditDistance += currentMinDistance;
-	}
-	if (textSplitted.size() > patternSplitted.size()) {
+  int currentEditDistance;
+  vector<string> textSplitted = splitSentence(text);
+  vector<string> patternSplitted = splitSentence(pattern);
+	if (textSplitted.size() > patternSplitted.size()){
 		totalEditDistance += (textSplitted.size() - patternSplitted.size());
 	}
-	return totalEditDistance;
+	eliminateRedudantWords(textSplitted);
+	eliminateRedudantWords(patternSplitted);
+  for (vector<string>::iterator itP = patternSplitted.begin(); itP != patternSplitted.end(); itP++){
+    currentMinDistance = 9999;
+    for (vector<string>::iterator itT = textSplitted.begin(); itT != textSplitted.end(); itT++ ){
+      currentEditDistance = editDistance(*itP,*itT);
+			cout << "Current editDistance= " << currentEditDistance << endl;
+      if (currentEditDistance == 0){
+        currentMinDistance = 0;
+        break;
+      }
+      if (currentEditDistance < currentMinDistance){
+        currentMinDistance = currentEditDistance;
+      }
+    }
+    totalEditDistance += currentMinDistance;
+  }
+
+  return totalEditDistance;
 }
 
 
