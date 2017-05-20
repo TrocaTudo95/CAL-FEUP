@@ -137,7 +137,6 @@ int kmp(string text, string pattern) {
 			q++;
 		if (q == m - 1)
 		{
-			cout << "pattern occurs with shift" << i - m + 1 << endl;
 			num++;
 			q = prefix[q];
 		}

@@ -589,7 +589,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			cin.clear();
 			cin.ignore(256, '\n');
 		}
-		if (option > 0 && option < 3)
+		if (option ==2 || option==1)
 		{
 			string streetName;
 			cout << endl << TAB_SPACE_INITIAL << "Selecao de Nos" << endl << endl;
@@ -628,6 +628,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			}
 
 			cout << TAB_SPACE << "Selecione o Nó de Destino" << endl;
+			cin.ignore();
 			getline(cin, streetName);
 			while (streetName.size() == 0)
 			{
@@ -668,6 +669,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 
 			system("pause");
 		}
+		
 	} while (option != 0);
 }
 
