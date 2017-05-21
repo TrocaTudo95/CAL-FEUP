@@ -616,14 +616,19 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			}
 			if(T.joinable())
 				T.join();
-			clock_t begin = clock();
-			//Testing dijkstra optimized by Elipse
-			vector<Street *> topStreets =
-				functions[option](graph.getStreetClean(), streetName);
-			clock_t end = clock();
-			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-			cout << "Dijkstra Shortest Distance Calculated In: " << time_spent << " seconds.\n";
 			
+			
+				auto start = std::chrono::high_resolution_clock::now();
+				vector<Street *> topStreets =
+				functions[option](graph.getStreetClean(), streetName);
+			auto elapsed = std::chrono::high_resolution_clock::now() - start;
+
+			long long microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+
+
+			// time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+			cout << "Dijkstra Shortest Distance Calculated In: " << microseconds << " microseconds.\n";
+				
 			int option_count = 1;
 			if (topStreets.size() == 0){
 				cout << "Lugar Desconhecido\n";
@@ -665,13 +670,18 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			}
 			if (T.joinable())
 				T.join();
-			 begin = clock();
+			 //begin = clock();
 			//Testing dijkstra optimized by Elipse
+			  start = std::chrono::high_resolution_clock::now();
 			 topStreets =
-				functions[option](graph.getStreetClean(), streetName);
-			 end = clock();
-			 time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-			cout << "Dijkstra Shortest Distance Calculated In: " << time_spent << " seconds.\n";
+				 functions[option](graph.getStreetClean(), streetName);
+			elapsed = std::chrono::high_resolution_clock::now() - start;
+
+			microseconds = std::chrono::duration_cast<std::chrono::microseconds>(elapsed).count();
+			
+			 
+			// time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+			cout << "Dijkstra Shortest Distance Calculated In: " << microseconds << " microseconds.\n";
 			option_count = 1;
 			
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
@@ -723,7 +733,7 @@ void  preprocessStreets(Graph * graph)
 		if(ite->second->getName() != "")
 			graph->streetClean.insert(ite->second);
 	}
-	cout << "Preprocess Done\n";
+
 }
 
 void startMenu(Graph &graph, GraphViewer *gv) {
