@@ -574,9 +574,21 @@ void selectVertex(Graph &graph, GraphViewer* gv) {
 
 void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 	vector<Street*>(*functions[3])(const StreetCleaned &streets,const string &streetName) = { NULL, &exata, &aproximado};
+	if (initialVertex != -1)
+	{
+		gv->setVertexColor(initialVertex, VERTEX_COLOR_DEFAULT);
+		initialVertex = -1;
+	}
+	if (finalVertex != -1)
+	{
+		gv->setVertexColor(finalVertex, VERTEX_COLOR_DEFAULT);
+		finalVertex = -1;
+	}
+
 	int option;
 	do
 	{
+		
 		cleanScreen();
 		cout << endl << TAB_SPACE_INITIAL << "Selecione a pesquisa pretendida" << endl << endl;
 		cout << TAB_SPACE << "1. Pesquisa Exata\n";
@@ -604,8 +616,14 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			}
 			if(T.joinable())
 				T.join();
+			clock_t begin = clock();
+			//Testing dijkstra optimized by Elipse
 			vector<Street *> topStreets =
 				functions[option](graph.getStreetClean(), streetName);
+			clock_t end = clock();
+			double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+			cout << "Dijkstra Shortest Distance Calculated In: " << time_spent << " seconds.\n";
+			
 			int option_count = 1;
 			if (topStreets.size() == 0){
 				cout << "Lugar Desconhecido\n";
@@ -647,8 +665,13 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			}
 			if (T.joinable())
 				T.join();
+			 begin = clock();
+			//Testing dijkstra optimized by Elipse
 			 topStreets =
 				functions[option](graph.getStreetClean(), streetName);
+			 end = clock();
+			 time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+			cout << "Dijkstra Shortest Distance Calculated In: " << time_spent << " seconds.\n";
 			option_count = 1;
 			
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
@@ -679,7 +702,6 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 
 			gv->setVertexColor(initialVertex, RED);
 			gv->setVertexColor(finalVertex, RED);
-
 			system("pause");
 		}
 		else {
@@ -689,6 +711,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 		}
 
 	} while (option != 0);
+	gv->rearrange();
 
 }
 
