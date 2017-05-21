@@ -1,0 +1,666 @@
+\hypertarget{class_graph}{}\section{Graph Class Reference}
+\label{class_graph}\index{Graph@{Graph}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}\label{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}} 
+\hyperlink{class_graph_ae4c72b8ac4d693c49800a4c7e273654f}{Graph} ()
+\begin{DoxyCompactList}\small\item\em Creates a \hyperlink{class_graph}{Graph} initializing highest\+Edge\+Id and highest\+Transport\+Line\+Id to 0. \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_a902c5b3eacb66d60752525ab23297a95}\label{class_graph_a902c5b3eacb66d60752525ab23297a95}} 
+\hyperlink{class_graph_a902c5b3eacb66d60752525ab23297a95}{$\sim$\+Graph} ()
+\begin{DoxyCompactList}\small\item\em \hyperlink{class_graph}{Graph}\textquotesingle{}s destructor to free memory alocated by a graph. \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a4e0ee1d777ad38c4664ce9ee3da550a4}{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X} (double d)
+\begin{DoxyCompactList}\small\item\em intitalizes M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X that defines the number of meters which a pixel corresponds to \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a50555f842e74cb9983db26cfff9bff19}{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y} (double d)
+\begin{DoxyCompactList}\small\item\em intitalizes M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y that defines the number of meters which a pixel corresponds to \end{DoxyCompactList}\item 
+hash\+Nodes $\ast$ \hyperlink{class_graph_a02b0af25356896f49a3941e8f1bac3b8}{copy\+Nodes} ()
+\begin{DoxyCompactList}\small\item\em creates a copy of the variable node\+Map and returns a pointer to it \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a297bab836a9397ef5732b3924deeafb4}{copy\+Edges} (hash\+Nodes original\+Nodes)
+\begin{DoxyCompactList}\small\item\em introduces the edges passed by the adjacencies on original\+Nodes in the graph \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a342c1bc740c82046683166667588899d}{set\+Node\+Map} (hash\+Nodes $\ast$map)
+\begin{DoxyCompactList}\small\item\em initializes node\+Map with map \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_abce5f69b8757a18b52f17505b2b87b0e}{set\+Edge\+Map} (hash\+Edges map)
+\begin{DoxyCompactList}\small\item\em initializes edge\+Map with map \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_ab52ab0dd69a65e534ef447af5efadb7e}{set\+Highest\+Edge\+Id} (int id)
+\begin{DoxyCompactList}\small\item\em initializes highest\+Edge\+Id that represents the highest \hyperlink{class_edge}{Edge} id \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_abfb876ce751334f9d07ee4b8b6bd5370}{set\+Transportation\+Lines} (const hash\+TL \&tl\+Map)
+\begin{DoxyCompactList}\small\item\em initializes transportation\+Lines with the unorded set passed by argument \end{DoxyCompactList}\item 
+bool \hyperlink{class_graph_abcc536231b6a29829e207e2177fb9f2e}{add\+Node} (const int \&in, \hyperlink{struct_point}{Point} coords)
+\begin{DoxyCompactList}\small\item\em creates a new \hyperlink{class_node}{Node} and inserts it in the node\+Map \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_ad91ffd436c73c1864b4f89689a765cab}\label{class_graph_ad91ffd436c73c1864b4f89689a765cab}} 
+void {\bfseries add\+Transportation\+Line} (\hyperlink{class_transport_line}{Transport\+Line} $\ast$t1)
+\item 
+\mbox{\Hypertarget{class_graph_ac562fcd5bd174ccd827d80fdc9ccba60}\label{class_graph_ac562fcd5bd174ccd827d80fdc9ccba60}} 
+void {\bfseries set\+Reverse\+Transportation\+Lines} ()
+\item 
+bool \hyperlink{class_graph_a0941096cc5dc9217a412354881027f56}{add\+Edge} (int id, const int \&sourc, const int \&dest, double w=0)
+\begin{DoxyCompactList}\small\item\em creates a new \hyperlink{class_edge}{Edge} with the id specified between the source \hyperlink{class_node}{Node} and the destiny \hyperlink{class_node}{Node} calculating the weight for the \hyperlink{class_edge}{Edge} \end{DoxyCompactList}\item 
+bool \hyperlink{class_graph_a93055dfe99fb1bb404035db6b47a3041}{remove\+Node} (const int \&in)
+\begin{DoxyCompactList}\small\item\em removes the node specified by its id \end{DoxyCompactList}\item 
+bool \hyperlink{class_graph_a7a5c1d9d236c0adb8bb3a97dfde7e0bb}{remove\+Edge} (const int \&sourc, const int \&dest)
+\begin{DoxyCompactList}\small\item\em removes the \hyperlink{class_edge}{Edge} that links the nodes passed by argument through theirs id\textquotesingle{}s \end{DoxyCompactList}\item 
+hash\+Nodes \hyperlink{class_graph_ad0e4a55a991de20c7d1ad31210cfc575}{get\+Node\+Map} () const
+\begin{DoxyCompactList}\small\item\em function to return the node\+Map \end{DoxyCompactList}\item 
+\hyperlink{class_edge}{Edge} $\ast$ \hyperlink{class_graph_a24ab353dedffc675eda551aabb6e2ed1}{get\+Edge\+By\+Id} (int id)
+\begin{DoxyCompactList}\small\item\em returns a \hyperlink{class_edge}{Edge} pointer of the graph specified by its id \end{DoxyCompactList}\item 
+\hyperlink{class_node}{Node} $\ast$ \hyperlink{class_graph_ae36f4cc1d89f8ea4fa79047769df3d81}{get\+Node} (const int \&v) const
+\begin{DoxyCompactList}\small\item\em returns a \hyperlink{class_node}{Node} pointer of the graph specified by its id \end{DoxyCompactList}\item 
+\hyperlink{class_transport_line}{Transport\+Line} $\ast$ \hyperlink{class_graph_a5256503fd14b7a56bce1da737ec223c1}{get\+Transport\+Line} (const int \&id) const
+\begin{DoxyCompactList}\small\item\em returns a \hyperlink{class_transport_line}{Transport\+Line} pointer of the transportation\+Lines unorded set specified by its id \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{struct_path_to}{Path\+To} $>$ \hyperlink{class_graph_a85090885772616dc5865c500a9af81b6}{get\+Path} (const int \&origin, const int \&dest)
+\begin{DoxyCompactList}\small\item\em returns the shortest path between the \hyperlink{class_node}{Node} origin and the \hyperlink{class_node}{Node} destiny through a vector of \hyperlink{struct_path_to}{Path\+To} \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_node}{Node} $\ast$ $>$ \hyperlink{class_graph_a3afc621123c6232274a883df378e4b72}{get\+Node\+Path} (const int \&origin, const int \&dest)
+\begin{DoxyCompactList}\small\item\em returns the shortest path between the \hyperlink{class_node}{Node} origin and the \hyperlink{class_node}{Node} destiny through a vector of \hyperlink{class_node}{Node} pointers \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{class_graph_a82d46b15dc3938a1f8b9baa465dda9d1}{get\+Path\+For\+S\+P\+FA} (const int \&origin, const int \&dest)
+\begin{DoxyCompactList}\small\item\em returns the shortest path between the \hyperlink{class_node}{Node} origin and the \hyperlink{class_node}{Node} destiny through a vector of \hyperlink{class_node}{Node}\textquotesingle{}s ids \end{DoxyCompactList}\item 
+vector$<$ int $>$ \hyperlink{class_graph_aafb88743e904e0bd0021552d6e04aa78}{get\+Close\+Nodes} (int max\+\_\+dist, \hyperlink{class_node}{Node} $\ast$n\+\_\+source)
+\begin{DoxyCompactList}\small\item\em calculates and returns a vector of the close Nodes, which is defined by the max\+\_\+dist \end{DoxyCompactList}\item 
+vector$<$ \hyperlink{class_edge}{Edge} $\ast$ $>$ \hyperlink{class_graph_aae706b755ac7ac2c155ac06dc52f25be}{get\+Close\+Edges} (const vector$<$ int $>$ \&close\+Nodes, \hyperlink{class_node}{Node} $\ast$n\+\_\+source)
+\begin{DoxyCompactList}\small\item\em calculates and returns a vector of the close Edges by reciving a node and a vector of Nodes and creates edges to all of them to allow go on foot \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_a327ba698833edb0e854bd875d9be1ffc}\label{class_graph_a327ba698833edb0e854bd875d9be1ffc}} 
+vii {\bfseries get\+Close\+Edges\+S\+P\+FA} (vector$<$ int $>$ \&close\+Nodes, \hyperlink{class_node}{Node} $\ast$src)
+\item 
+bool \hyperlink{class_graph_aa8ec47961beb1b619d1d72e8205ebb63}{check\+Walk\+Percentage} (const int \&origin, const int \&dest, float percentage)
+\begin{DoxyCompactList}\small\item\em check through the path calculated by the function get\+Node\+Path and calculates the percentage of walk distance/time \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_a9139bc65d5edb348d7e283e4468e5a3e}\label{class_graph_a9139bc65d5edb348d7e283e4468e5a3e}} 
+void {\bfseries S\+P\+F\+A\+With\+Adjacency\+List} (const int \&s, const int \&d)
+\item 
+void \hyperlink{class_graph_ab8c22a8531c0fccd1e7e555ece7b388d}{dijkstra\+Shortest\+Distance} (const int \&s)
+\begin{DoxyCompactList}\small\item\em processes the graph updating all the nodes with the shortest distance from the \hyperlink{class_node}{Node} source in meters using the M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+EL \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_aa7ed404a514a3c1bbbd7b9404b715b85}{dijkstra\+Shortest\+Distance} (const int \&s, const int \&d)
+\begin{DoxyCompactList}\small\item\em processes the graph updating all the nodes with the shortest distance from the \hyperlink{class_node}{Node} source optimized by an elipse, this way only some nodes are processed \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a19c3559dc86f0dd1da72a157f864f449}{dijkstra\+Best\+Time} (const int \&s)
+\begin{DoxyCompactList}\small\item\em processes the graph updating all the nodes with the shortest time from the \hyperlink{class_node}{Node} source, where the time is calculated used constant speeds for the diferents transports \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_ae1ed9f85f6201ed1b4f095cf4533eb9c}{dijkstra\+Best\+Time\+With\+Waiting\+Time} (const int \&s, const double \&max\+\_\+cost)
+\begin{DoxyCompactList}\small\item\em processes the graph updating all the nodes with the shortest time from the \hyperlink{class_node}{Node} source, where the time is calculated used constant speeds for the diferents transports and each \hyperlink{class_transport_line}{Transport\+Line} has also a waiting time and a if the max\+\_\+cost is bigger than 0 the cost is also calculated and if the cost exceeds the max\+\_\+cost value it forces to go on foot \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a7bc7e3e61b1a753e8e043cf3e713cdc4}{dijkstra\+Best\+Time\+With\+Favorite\+Transport} (const int \&s, char favorite)
+\begin{DoxyCompactList}\small\item\em processes the graph updating all the nodes with the shortest time from the \hyperlink{class_node}{Node} source, where the time is calculated used constant speeds for the diferents transports \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_a49569935f28e3b752fce50791261024a}\label{class_graph_a49569935f28e3b752fce50791261024a}} 
+void {\bfseries dijkstra\+Best\+Time\+With\+Favorite\+Transport\+And\+Waiting\+Time} (const int \&s, char favorite)
+\item 
+\mbox{\Hypertarget{class_graph_ab5d1ba036189b0007c48aad9725e6d05}\label{class_graph_ab5d1ba036189b0007c48aad9725e6d05}} 
+void {\bfseries dijkstra\+Best\+Time\+With\+Waiting\+Time\+Costand\+Favorite\+Transport} (const int \&s, const double \&max\+\_\+cost, char favorite)
+\item 
+void \hyperlink{class_graph_a747e004c927e230f380d58a399ce9e72}{dijkstra\+Less\+Transports\+Used} (const int \&s)
+\begin{DoxyCompactList}\small\item\em processes the graph updating all the nodes with the shortest number of transports used from the \hyperlink{class_node}{Node} source \end{DoxyCompactList}\item 
+void \hyperlink{class_graph_a35ecca558e2ec589407bc00c28f8542a}{add\+Edges\+Foot} (vector$<$ \hyperlink{class_edge}{Edge} $\ast$$>$ \&edges, vector$<$ \hyperlink{class_edge}{Edge} $\ast$$>$ \&on\+Foot)
+\begin{DoxyCompactList}\small\item\em add a vector of edges to another one if the edges dont exist yet, this is used to add the walking edges that are created \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_a2db1cad9dd498ec17243351ef02ea591}\label{class_graph_a2db1cad9dd498ec17243351ef02ea591}} 
+void {\bfseries add\+Edges\+Foot\+S\+P\+FA} (vii \&edges, vii \&on\+Foot)
+\item 
+bool \hyperlink{class_graph_ac2c3047c6f7bd231ad43368b60426b82}{already\+Exists} (vector$<$ \hyperlink{class_edge}{Edge} $\ast$$>$ \&edges, \hyperlink{class_edge}{Edge} $\ast$e)
+\begin{DoxyCompactList}\small\item\em checks if a edge exists or not in a vector of edges \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_aa164ff7b6c2ae11808f67b40f6d9db35}\label{class_graph_aa164ff7b6c2ae11808f67b40f6d9db35}} 
+bool {\bfseries already\+Exists\+S\+P\+FA} (vii \&edges, int e)
+\item 
+\mbox{\Hypertarget{class_graph_a5d63f8f19e570b084cffa12cd57d1bc4}\label{class_graph_a5d63f8f19e570b084cffa12cd57d1bc4}} 
+bool {\bfseries is\+Changing\+Transport} (unordered\+\_\+set$<$ string $>$ \&edge\+Lines, unordered\+\_\+set$<$ string $>$ v\+Path\+Lines)
+\item 
+double \hyperlink{class_graph_ade91157ec8ddc4d67c30c1009277923e}{calculate\+Cost} (double distance, char transportation)
+\begin{DoxyCompactList}\small\item\em calculates the cost in euros to do a distance in a specified transport \end{DoxyCompactList}\item 
+\mbox{\Hypertarget{class_graph_a5ed67a73ecadc9d037896813c76ca7d6}\label{class_graph_a5ed67a73ecadc9d037896813c76ca7d6}} 
+void {\bfseries preprocess\+Graph\+For\+Waiting\+Times} ()
+\item 
+\mbox{\Hypertarget{class_graph_a50505f54296c57b066a5356f0a26b734}\label{class_graph_a50505f54296c57b066a5356f0a26b734}} 
+void {\bfseries preprocess\+Graph\+For\+S\+P\+FA} ()
+\item 
+\hyperlink{class_graph}{Graph} $\ast$ \hyperlink{class_graph_ad8969dae6fcb6f982338c79f67fdbbda}{copy} ()
+\begin{DoxyCompactList}\small\item\em function that makes a copy of the current \hyperlink{class_graph}{Graph} and returns a pointer to it \end{DoxyCompactList}\end{DoxyCompactItemize}
+
+
+\subsection{Member Function Documentation}
+\mbox{\Hypertarget{class_graph_a0941096cc5dc9217a412354881027f56}\label{class_graph_a0941096cc5dc9217a412354881027f56}} 
+\index{Graph@{Graph}!add\+Edge@{add\+Edge}}
+\index{add\+Edge@{add\+Edge}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{add\+Edge()}{addEdge()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Edge (\begin{DoxyParamCaption}\item[{int}]{id,  }\item[{const int \&}]{sourc,  }\item[{const int \&}]{dest,  }\item[{double}]{w = {\ttfamily 0} }\end{DoxyParamCaption})}
+
+
+
+creates a new \hyperlink{class_edge}{Edge} with the id specified between the source \hyperlink{class_node}{Node} and the destiny \hyperlink{class_node}{Node} calculating the weight for the \hyperlink{class_edge}{Edge} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_edge}{Edge}\textquotesingle{}s id \\
+\hline
+{\em sourc} & source \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em dest} & destiny \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em w} & \hyperlink{class_edge}{Edge}\textquotesingle{}s weight \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if the destiny or the source \hyperlink{class_node}{Node} is the last one 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a35ecca558e2ec589407bc00c28f8542a}\label{class_graph_a35ecca558e2ec589407bc00c28f8542a}} 
+\index{Graph@{Graph}!add\+Edges\+Foot@{add\+Edges\+Foot}}
+\index{add\+Edges\+Foot@{add\+Edges\+Foot}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{add\+Edges\+Foot()}{addEdgesFoot()}}
+{\footnotesize\ttfamily void Graph\+::add\+Edges\+Foot (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_edge}{Edge} $\ast$$>$ \&}]{edges,  }\item[{vector$<$ \hyperlink{class_edge}{Edge} $\ast$$>$ \&}]{on\+Foot }\end{DoxyParamCaption})}
+
+
+
+add a vector of edges to another one if the edges dont exist yet, this is used to add the walking edges that are created 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edges} & vector which has to be updated \\
+\hline
+{\em on\+Foot} & vector of edges to add \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_abcc536231b6a29829e207e2177fb9f2e}\label{class_graph_abcc536231b6a29829e207e2177fb9f2e}} 
+\index{Graph@{Graph}!add\+Node@{add\+Node}}
+\index{add\+Node@{add\+Node}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{add\+Node()}{addNode()}}
+{\footnotesize\ttfamily bool Graph\+::add\+Node (\begin{DoxyParamCaption}\item[{const int \&}]{in,  }\item[{\hyperlink{struct_point}{Point}}]{coords }\end{DoxyParamCaption})}
+
+
+
+creates a new \hyperlink{class_node}{Node} and inserts it in the node\+Map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em coords} & struct containing x and y to create the \hyperlink{class_node}{Node} \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if node already exists 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_ac2c3047c6f7bd231ad43368b60426b82}\label{class_graph_ac2c3047c6f7bd231ad43368b60426b82}} 
+\index{Graph@{Graph}!already\+Exists@{already\+Exists}}
+\index{already\+Exists@{already\+Exists}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{already\+Exists()}{alreadyExists()}}
+{\footnotesize\ttfamily bool Graph\+::already\+Exists (\begin{DoxyParamCaption}\item[{vector$<$ \hyperlink{class_edge}{Edge} $\ast$$>$ \&}]{edges,  }\item[{\hyperlink{class_edge}{Edge} $\ast$}]{e }\end{DoxyParamCaption})}
+
+
+
+checks if a edge exists or not in a vector of edges 
+
+
+\begin{DoxyParams}{Parameters}
+{\em edges} & vector of edges \\
+\hline
+{\em e} & edge to test \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the edge already exists on the vector 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_ade91157ec8ddc4d67c30c1009277923e}\label{class_graph_ade91157ec8ddc4d67c30c1009277923e}} 
+\index{Graph@{Graph}!calculate\+Cost@{calculate\+Cost}}
+\index{calculate\+Cost@{calculate\+Cost}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{calculate\+Cost()}{calculateCost()}}
+{\footnotesize\ttfamily double Graph\+::calculate\+Cost (\begin{DoxyParamCaption}\item[{double}]{distance,  }\item[{char}]{transportation }\end{DoxyParamCaption})}
+
+
+
+calculates the cost in euros to do a distance in a specified transport 
+
+
+\begin{DoxyParams}{Parameters}
+{\em distance} & distance on meters \\
+\hline
+{\em transportation} & char to specify the way of transport \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+cost in euros 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_aa8ec47961beb1b619d1d72e8205ebb63}\label{class_graph_aa8ec47961beb1b619d1d72e8205ebb63}} 
+\index{Graph@{Graph}!check\+Walk\+Percentage@{check\+Walk\+Percentage}}
+\index{check\+Walk\+Percentage@{check\+Walk\+Percentage}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{check\+Walk\+Percentage()}{checkWalkPercentage()}}
+{\footnotesize\ttfamily bool Graph\+::check\+Walk\+Percentage (\begin{DoxyParamCaption}\item[{const int \&}]{origin,  }\item[{const int \&}]{dest,  }\item[{float}]{percentage }\end{DoxyParamCaption})}
+
+
+
+check through the path calculated by the function get\+Node\+Path and calculates the percentage of walk distance/time 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & source \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em dest} & destiny \hyperlink{class_node}{Node}\textquotesingle{}s id  percentage defines the max\+\_\+percentage of the way that the person can go on foot \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+true if the percentage calculated is greater than the percentage passed by argument 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_ad8969dae6fcb6f982338c79f67fdbbda}\label{class_graph_ad8969dae6fcb6f982338c79f67fdbbda}} 
+\index{Graph@{Graph}!copy@{copy}}
+\index{copy@{copy}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{copy()}{copy()}}
+{\footnotesize\ttfamily \hyperlink{class_graph}{Graph} $\ast$ Graph\+::copy (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+function that makes a copy of the current \hyperlink{class_graph}{Graph} and returns a pointer to it 
+
+\begin{DoxyReturn}{Returns}
+A pointer to an \hyperlink{class_graph}{Graph} with same node\+Map, edge\+Map and transportation\+Lines 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a297bab836a9397ef5732b3924deeafb4}\label{class_graph_a297bab836a9397ef5732b3924deeafb4}} 
+\index{Graph@{Graph}!copy\+Edges@{copy\+Edges}}
+\index{copy\+Edges@{copy\+Edges}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{copy\+Edges()}{copyEdges()}}
+{\footnotesize\ttfamily void Graph\+::copy\+Edges (\begin{DoxyParamCaption}\item[{hash\+Nodes}]{original\+Nodes }\end{DoxyParamCaption})}
+
+
+
+introduces the edges passed by the adjacencies on original\+Nodes in the graph 
+
+
+\begin{DoxyParams}{Parameters}
+{\em original\+Nodes} & unordered\+\_\+map containing the Nodes from which the edges will be added to the graph \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a02b0af25356896f49a3941e8f1bac3b8}\label{class_graph_a02b0af25356896f49a3941e8f1bac3b8}} 
+\index{Graph@{Graph}!copy\+Nodes@{copy\+Nodes}}
+\index{copy\+Nodes@{copy\+Nodes}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{copy\+Nodes()}{copyNodes()}}
+{\footnotesize\ttfamily hash\+Nodes $\ast$ Graph\+::copy\+Nodes (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+
+
+creates a copy of the variable node\+Map and returns a pointer to it 
+
+\begin{DoxyReturn}{Returns}
+a pointer to a copy of the node\+Map \hyperlink{class_graph}{Graph}\textquotesingle{}s variable 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a19c3559dc86f0dd1da72a157f864f449}\label{class_graph_a19c3559dc86f0dd1da72a157f864f449}} 
+\index{Graph@{Graph}!dijkstra\+Best\+Time@{dijkstra\+Best\+Time}}
+\index{dijkstra\+Best\+Time@{dijkstra\+Best\+Time}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{dijkstra\+Best\+Time()}{dijkstraBestTime()}}
+{\footnotesize\ttfamily void Graph\+::dijkstra\+Best\+Time (\begin{DoxyParamCaption}\item[{const int \&}]{s }\end{DoxyParamCaption})}
+
+
+
+processes the graph updating all the nodes with the shortest time from the \hyperlink{class_node}{Node} source, where the time is calculated used constant speeds for the diferents transports 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{class_node}{Node}\textquotesingle{}s source id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a7bc7e3e61b1a753e8e043cf3e713cdc4}\label{class_graph_a7bc7e3e61b1a753e8e043cf3e713cdc4}} 
+\index{Graph@{Graph}!dijkstra\+Best\+Time\+With\+Favorite\+Transport@{dijkstra\+Best\+Time\+With\+Favorite\+Transport}}
+\index{dijkstra\+Best\+Time\+With\+Favorite\+Transport@{dijkstra\+Best\+Time\+With\+Favorite\+Transport}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{dijkstra\+Best\+Time\+With\+Favorite\+Transport()}{dijkstraBestTimeWithFavoriteTransport()}}
+{\footnotesize\ttfamily void Graph\+::dijkstra\+Best\+Time\+With\+Favorite\+Transport (\begin{DoxyParamCaption}\item[{const int \&}]{s,  }\item[{char}]{favorite }\end{DoxyParamCaption})}
+
+
+
+processes the graph updating all the nodes with the shortest time from the \hyperlink{class_node}{Node} source, where the time is calculated used constant speeds for the diferents transports 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{class_node}{Node}\textquotesingle{}s source id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_ae1ed9f85f6201ed1b4f095cf4533eb9c}\label{class_graph_ae1ed9f85f6201ed1b4f095cf4533eb9c}} 
+\index{Graph@{Graph}!dijkstra\+Best\+Time\+With\+Waiting\+Time@{dijkstra\+Best\+Time\+With\+Waiting\+Time}}
+\index{dijkstra\+Best\+Time\+With\+Waiting\+Time@{dijkstra\+Best\+Time\+With\+Waiting\+Time}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{dijkstra\+Best\+Time\+With\+Waiting\+Time()}{dijkstraBestTimeWithWaitingTime()}}
+{\footnotesize\ttfamily void Graph\+::dijkstra\+Best\+Time\+With\+Waiting\+Time (\begin{DoxyParamCaption}\item[{const int \&}]{s,  }\item[{const double \&}]{max\+\_\+cost }\end{DoxyParamCaption})}
+
+
+
+processes the graph updating all the nodes with the shortest time from the \hyperlink{class_node}{Node} source, where the time is calculated used constant speeds for the diferents transports and each \hyperlink{class_transport_line}{Transport\+Line} has also a waiting time and a if the max\+\_\+cost is bigger than 0 the cost is also calculated and if the cost exceeds the max\+\_\+cost value it forces to go on foot 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{class_node}{Node}\textquotesingle{}s source id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a747e004c927e230f380d58a399ce9e72}\label{class_graph_a747e004c927e230f380d58a399ce9e72}} 
+\index{Graph@{Graph}!dijkstra\+Less\+Transports\+Used@{dijkstra\+Less\+Transports\+Used}}
+\index{dijkstra\+Less\+Transports\+Used@{dijkstra\+Less\+Transports\+Used}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{dijkstra\+Less\+Transports\+Used()}{dijkstraLessTransportsUsed()}}
+{\footnotesize\ttfamily void Graph\+::dijkstra\+Less\+Transports\+Used (\begin{DoxyParamCaption}\item[{const int \&}]{s }\end{DoxyParamCaption})}
+
+
+
+processes the graph updating all the nodes with the shortest number of transports used from the \hyperlink{class_node}{Node} source 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{class_node}{Node}\textquotesingle{}s source id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_ab8c22a8531c0fccd1e7e555ece7b388d}\label{class_graph_ab8c22a8531c0fccd1e7e555ece7b388d}} 
+\index{Graph@{Graph}!dijkstra\+Shortest\+Distance@{dijkstra\+Shortest\+Distance}}
+\index{dijkstra\+Shortest\+Distance@{dijkstra\+Shortest\+Distance}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{dijkstra\+Shortest\+Distance()}{dijkstraShortestDistance()}\hspace{0.1cm}{\footnotesize\ttfamily [1/2]}}
+{\footnotesize\ttfamily void Graph\+::dijkstra\+Shortest\+Distance (\begin{DoxyParamCaption}\item[{const int \&}]{s }\end{DoxyParamCaption})}
+
+
+
+processes the graph updating all the nodes with the shortest distance from the \hyperlink{class_node}{Node} source in meters using the M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+EL 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{class_node}{Node}\textquotesingle{}s source id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_aa7ed404a514a3c1bbbd7b9404b715b85}\label{class_graph_aa7ed404a514a3c1bbbd7b9404b715b85}} 
+\index{Graph@{Graph}!dijkstra\+Shortest\+Distance@{dijkstra\+Shortest\+Distance}}
+\index{dijkstra\+Shortest\+Distance@{dijkstra\+Shortest\+Distance}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{dijkstra\+Shortest\+Distance()}{dijkstraShortestDistance()}\hspace{0.1cm}{\footnotesize\ttfamily [2/2]}}
+{\footnotesize\ttfamily void Graph\+::dijkstra\+Shortest\+Distance (\begin{DoxyParamCaption}\item[{const int \&}]{s,  }\item[{const int \&}]{d }\end{DoxyParamCaption})}
+
+
+
+processes the graph updating all the nodes with the shortest distance from the \hyperlink{class_node}{Node} source optimized by an elipse, this way only some nodes are processed 
+
+
+\begin{DoxyParams}{Parameters}
+{\em s} & \hyperlink{class_node}{Node}\textquotesingle{}s source id \\
+\hline
+{\em d} & \hyperlink{class_node}{Node}\textquotesingle{}s destiny id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_aae706b755ac7ac2c155ac06dc52f25be}\label{class_graph_aae706b755ac7ac2c155ac06dc52f25be}} 
+\index{Graph@{Graph}!get\+Close\+Edges@{get\+Close\+Edges}}
+\index{get\+Close\+Edges@{get\+Close\+Edges}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Close\+Edges()}{getCloseEdges()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_edge}{Edge} $\ast$ $>$ Graph\+::get\+Close\+Edges (\begin{DoxyParamCaption}\item[{const vector$<$ int $>$ \&}]{close\+Nodes,  }\item[{\hyperlink{class_node}{Node} $\ast$}]{n\+\_\+source }\end{DoxyParamCaption})}
+
+
+
+calculates and returns a vector of the close Edges by reciving a node and a vector of Nodes and creates edges to all of them to allow go on foot 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & source \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em dest} & destiny \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of near \hyperlink{class_node}{Node}\textquotesingle{}s ids 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_aafb88743e904e0bd0021552d6e04aa78}\label{class_graph_aafb88743e904e0bd0021552d6e04aa78}} 
+\index{Graph@{Graph}!get\+Close\+Nodes@{get\+Close\+Nodes}}
+\index{get\+Close\+Nodes@{get\+Close\+Nodes}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Close\+Nodes()}{getCloseNodes()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Graph\+::get\+Close\+Nodes (\begin{DoxyParamCaption}\item[{int}]{max\+\_\+dist,  }\item[{\hyperlink{class_node}{Node} $\ast$}]{n\+\_\+source }\end{DoxyParamCaption})}
+
+
+
+calculates and returns a vector of the close Nodes, which is defined by the max\+\_\+dist 
+
+
+\begin{DoxyParams}{Parameters}
+{\em n\+\_\+source} & source \hyperlink{class_node}{Node} \\
+\hline
+{\em max\+\_\+dist} & defines the range in meters to include the Nodes \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of near \hyperlink{class_node}{Node}\textquotesingle{}s ids 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a24ab353dedffc675eda551aabb6e2ed1}\label{class_graph_a24ab353dedffc675eda551aabb6e2ed1}} 
+\index{Graph@{Graph}!get\+Edge\+By\+Id@{get\+Edge\+By\+Id}}
+\index{get\+Edge\+By\+Id@{get\+Edge\+By\+Id}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Edge\+By\+Id()}{getEdgeById()}}
+{\footnotesize\ttfamily \hyperlink{class_edge}{Edge} $\ast$ Graph\+::get\+Edge\+By\+Id (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+returns a \hyperlink{class_edge}{Edge} pointer of the graph specified by its id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_edge}{Edge}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_edge}{Edge} pointer to the pretended \hyperlink{class_edge}{Edge} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_ae36f4cc1d89f8ea4fa79047769df3d81}\label{class_graph_ae36f4cc1d89f8ea4fa79047769df3d81}} 
+\index{Graph@{Graph}!get\+Node@{get\+Node}}
+\index{get\+Node@{get\+Node}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Node()}{getNode()}}
+{\footnotesize\ttfamily \hyperlink{class_node}{Node} $\ast$ Graph\+::get\+Node (\begin{DoxyParamCaption}\item[{const int \&}]{v }\end{DoxyParamCaption}) const}
+
+
+
+returns a \hyperlink{class_node}{Node} pointer of the graph specified by its id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_edge}{Edge} pointer to the pretended \hyperlink{class_node}{Node} 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_ad0e4a55a991de20c7d1ad31210cfc575}\label{class_graph_ad0e4a55a991de20c7d1ad31210cfc575}} 
+\index{Graph@{Graph}!get\+Node\+Map@{get\+Node\+Map}}
+\index{get\+Node\+Map@{get\+Node\+Map}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Node\+Map()}{getNodeMap()}}
+{\footnotesize\ttfamily hash\+Nodes Graph\+::get\+Node\+Map (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption}) const}
+
+
+
+function to return the node\+Map 
+
+\begin{DoxyReturn}{Returns}
+node\+Map 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a3afc621123c6232274a883df378e4b72}\label{class_graph_a3afc621123c6232274a883df378e4b72}} 
+\index{Graph@{Graph}!get\+Node\+Path@{get\+Node\+Path}}
+\index{get\+Node\+Path@{get\+Node\+Path}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Node\+Path()}{getNodePath()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{class_node}{Node} $\ast$ $>$ Graph\+::get\+Node\+Path (\begin{DoxyParamCaption}\item[{const int \&}]{origin,  }\item[{const int \&}]{dest }\end{DoxyParamCaption})}
+
+
+
+returns the shortest path between the \hyperlink{class_node}{Node} origin and the \hyperlink{class_node}{Node} destiny through a vector of \hyperlink{class_node}{Node} pointers 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & source \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em dest} & destiny \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of \hyperlink{class_node}{Node} pointers which refers to the Nodes that the shortest path go through 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a85090885772616dc5865c500a9af81b6}\label{class_graph_a85090885772616dc5865c500a9af81b6}} 
+\index{Graph@{Graph}!get\+Path@{get\+Path}}
+\index{get\+Path@{get\+Path}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Path()}{getPath()}}
+{\footnotesize\ttfamily vector$<$ \hyperlink{struct_path_to}{Path\+To} $>$ Graph\+::get\+Path (\begin{DoxyParamCaption}\item[{const int \&}]{origin,  }\item[{const int \&}]{dest }\end{DoxyParamCaption})}
+
+
+
+returns the shortest path between the \hyperlink{class_node}{Node} origin and the \hyperlink{class_node}{Node} destiny through a vector of \hyperlink{struct_path_to}{Path\+To} 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & source \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em dest} & destiny \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of \hyperlink{struct_path_to}{Path\+To} which is a struct containing \hyperlink{class_node}{Node}\textquotesingle{}s path, dist and way\+To\+Get\+There 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a82d46b15dc3938a1f8b9baa465dda9d1}\label{class_graph_a82d46b15dc3938a1f8b9baa465dda9d1}} 
+\index{Graph@{Graph}!get\+Path\+For\+S\+P\+FA@{get\+Path\+For\+S\+P\+FA}}
+\index{get\+Path\+For\+S\+P\+FA@{get\+Path\+For\+S\+P\+FA}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Path\+For\+S\+P\+F\+A()}{getPathForSPFA()}}
+{\footnotesize\ttfamily vector$<$ int $>$ Graph\+::get\+Path\+For\+S\+P\+FA (\begin{DoxyParamCaption}\item[{const int \&}]{origin,  }\item[{const int \&}]{dest }\end{DoxyParamCaption})}
+
+
+
+returns the shortest path between the \hyperlink{class_node}{Node} origin and the \hyperlink{class_node}{Node} destiny through a vector of \hyperlink{class_node}{Node}\textquotesingle{}s ids 
+
+
+\begin{DoxyParams}{Parameters}
+{\em origin} & source \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em dest} & destiny \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+vector of \hyperlink{class_node}{Node}\textquotesingle{}s ids which refers to the Nodes that the shortest path go through 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a5256503fd14b7a56bce1da737ec223c1}\label{class_graph_a5256503fd14b7a56bce1da737ec223c1}} 
+\index{Graph@{Graph}!get\+Transport\+Line@{get\+Transport\+Line}}
+\index{get\+Transport\+Line@{get\+Transport\+Line}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{get\+Transport\+Line()}{getTransportLine()}}
+{\footnotesize\ttfamily \hyperlink{class_transport_line}{Transport\+Line} $\ast$ Graph\+::get\+Transport\+Line (\begin{DoxyParamCaption}\item[{const int \&}]{id }\end{DoxyParamCaption}) const}
+
+
+
+returns a \hyperlink{class_transport_line}{Transport\+Line} pointer of the transportation\+Lines unorded set specified by its id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & \hyperlink{class_transport_line}{Transport\+Line}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+\hyperlink{class_transport_line}{Transport\+Line} pointer to the pretended transportation\+Line 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a7a5c1d9d236c0adb8bb3a97dfde7e0bb}\label{class_graph_a7a5c1d9d236c0adb8bb3a97dfde7e0bb}} 
+\index{Graph@{Graph}!remove\+Edge@{remove\+Edge}}
+\index{remove\+Edge@{remove\+Edge}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{remove\+Edge()}{removeEdge()}}
+{\footnotesize\ttfamily bool Graph\+::remove\+Edge (\begin{DoxyParamCaption}\item[{const int \&}]{sourc,  }\item[{const int \&}]{dest }\end{DoxyParamCaption})}
+
+
+
+removes the \hyperlink{class_edge}{Edge} that links the nodes passed by argument through theirs id\textquotesingle{}s 
+
+
+\begin{DoxyParams}{Parameters}
+{\em sourc} & source \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+{\em dest} & destiny \hyperlink{class_node}{Node}\textquotesingle{}s id \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if the \hyperlink{class_edge}{Edge} does not exist 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_a93055dfe99fb1bb404035db6b47a3041}\label{class_graph_a93055dfe99fb1bb404035db6b47a3041}} 
+\index{Graph@{Graph}!remove\+Node@{remove\+Node}}
+\index{remove\+Node@{remove\+Node}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{remove\+Node()}{removeNode()}}
+{\footnotesize\ttfamily bool Graph\+::remove\+Node (\begin{DoxyParamCaption}\item[{const int \&}]{in }\end{DoxyParamCaption})}
+
+
+
+removes the node specified by its id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em in} & \hyperlink{class_node}{Node}\textquotesingle{}s id to remove \\
+\hline
+\end{DoxyParams}
+\begin{DoxyReturn}{Returns}
+false if the \hyperlink{class_node}{Node} does not exist 
+\end{DoxyReturn}
+\mbox{\Hypertarget{class_graph_abce5f69b8757a18b52f17505b2b87b0e}\label{class_graph_abce5f69b8757a18b52f17505b2b87b0e}} 
+\index{Graph@{Graph}!set\+Edge\+Map@{set\+Edge\+Map}}
+\index{set\+Edge\+Map@{set\+Edge\+Map}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+Edge\+Map()}{setEdgeMap()}}
+{\footnotesize\ttfamily void Graph\+::set\+Edge\+Map (\begin{DoxyParamCaption}\item[{hash\+Edges}]{map }\end{DoxyParamCaption})}
+
+
+
+initializes edge\+Map with map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & hash\+Nodes containing the Edges to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_ab52ab0dd69a65e534ef447af5efadb7e}\label{class_graph_ab52ab0dd69a65e534ef447af5efadb7e}} 
+\index{Graph@{Graph}!set\+Highest\+Edge\+Id@{set\+Highest\+Edge\+Id}}
+\index{set\+Highest\+Edge\+Id@{set\+Highest\+Edge\+Id}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+Highest\+Edge\+Id()}{setHighestEdgeId()}}
+{\footnotesize\ttfamily void Graph\+::set\+Highest\+Edge\+Id (\begin{DoxyParamCaption}\item[{int}]{id }\end{DoxyParamCaption})}
+
+
+
+initializes highest\+Edge\+Id that represents the highest \hyperlink{class_edge}{Edge} id 
+
+
+\begin{DoxyParams}{Parameters}
+{\em id} & highest \hyperlink{class_edge}{Edge} id \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a4e0ee1d777ad38c4664ce9ee3da550a4}\label{class_graph_a4e0ee1d777ad38c4664ce9ee3da550a4}} 
+\index{Graph@{Graph}!set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X@{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X}}
+\index{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X@{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+\+X()}{setMETER\_PER\_PIXEL\_X()}}
+{\footnotesize\ttfamily void Graph\+::set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X (\begin{DoxyParamCaption}\item[{double}]{d }\end{DoxyParamCaption})}
+
+
+
+intitalizes M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X that defines the number of meters which a pixel corresponds to 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & value to initialize M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+X \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a50555f842e74cb9983db26cfff9bff19}\label{class_graph_a50555f842e74cb9983db26cfff9bff19}} 
+\index{Graph@{Graph}!set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y@{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y}}
+\index{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y@{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+\+Y()}{setMETER\_PER\_PIXEL\_Y()}}
+{\footnotesize\ttfamily void Graph\+::set\+M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y (\begin{DoxyParamCaption}\item[{double}]{d }\end{DoxyParamCaption})}
+
+
+
+intitalizes M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y that defines the number of meters which a pixel corresponds to 
+
+
+\begin{DoxyParams}{Parameters}
+{\em d} & value to initialize M\+E\+T\+E\+R\+\_\+\+P\+E\+R\+\_\+\+P\+I\+X\+E\+L\+\_\+Y \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_a342c1bc740c82046683166667588899d}\label{class_graph_a342c1bc740c82046683166667588899d}} 
+\index{Graph@{Graph}!set\+Node\+Map@{set\+Node\+Map}}
+\index{set\+Node\+Map@{set\+Node\+Map}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+Node\+Map()}{setNodeMap()}}
+{\footnotesize\ttfamily void Graph\+::set\+Node\+Map (\begin{DoxyParamCaption}\item[{hash\+Nodes $\ast$}]{map }\end{DoxyParamCaption})}
+
+
+
+initializes node\+Map with map 
+
+
+\begin{DoxyParams}{Parameters}
+{\em map} & hash\+Nodes containing the Nodes to set \\
+\hline
+\end{DoxyParams}
+\mbox{\Hypertarget{class_graph_abfb876ce751334f9d07ee4b8b6bd5370}\label{class_graph_abfb876ce751334f9d07ee4b8b6bd5370}} 
+\index{Graph@{Graph}!set\+Transportation\+Lines@{set\+Transportation\+Lines}}
+\index{set\+Transportation\+Lines@{set\+Transportation\+Lines}!Graph@{Graph}}
+\subsubsection{\texorpdfstring{set\+Transportation\+Lines()}{setTransportationLines()}}
+{\footnotesize\ttfamily void Graph\+::set\+Transportation\+Lines (\begin{DoxyParamCaption}\item[{const hash\+TL \&}]{tl\+Map }\end{DoxyParamCaption})}
+
+
+
+initializes transportation\+Lines with the unorded set passed by argument 
+
+
+\begin{DoxyParams}{Parameters}
+{\em tl\+Map} & unorded set with the transportations lines \\
+\hline
+\end{DoxyParams}
+
+
+The documentation for this class was generated from the following files\+:\begin{DoxyCompactItemize}
+\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/graph.\+hpp\item 
+C\+:/\+Users/\+João/\+Documents/\+Git\+Hub/\+C\+A\+L-\/\+F\+E\+U\+P/project/\+Source Files/graph.\+cpp\end{DoxyCompactItemize}
