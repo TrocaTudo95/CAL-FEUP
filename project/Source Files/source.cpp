@@ -627,7 +627,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 
 
 			// time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-			cout << "Dijkstra Shortest Distance Calculated In: " << microseconds << " microseconds.\n";
+			cout << "Searched the word in: " << microseconds << " microseconds.\n";
 				
 			int option_count = 1;
 			if (topStreets.size() == 0){
@@ -660,7 +660,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 				initialVertex = graph.getEdgeById(temp)->getDest();
 			}
 
-			cout << TAB_SPACE << "Selecione o Nó de Destino" << endl;
+			cout << TAB_SPACE << "Selecione a rua de Destino" << endl;
 			cin.ignore();
 			getline(cin, streetName);
 			while (streetName.size() == 0)
@@ -681,7 +681,7 @@ void searchVertexByName(Graph &graph, GraphViewer *gv, thread &T){
 			
 			 
 			// time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-			cout << "Dijkstra Shortest Distance Calculated In: " << microseconds << " microseconds.\n";
+			cout << "Searched the word in: " << microseconds << " microseconds.\n";
 			option_count = 1;
 			
 			for (vector<Street *>::iterator it = topStreets.begin(); it != topStreets.end(); it++)
