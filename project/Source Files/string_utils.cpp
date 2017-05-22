@@ -14,7 +14,8 @@ vector<string> splitSentence(string sentence) {
 	vector<string> tokens{ istream_iterator<string>{iss},
 		istream_iterator<string>{} };
 
-	if (tokens.size() == 0) {
+	if (tokens.size() == 0)
+	{
 		tokens.push_back("");
 	}
 	return tokens;
@@ -28,45 +29,52 @@ string to_lower(string &text) {
 	return text;
 }
 
-void eliminateRedudantWords(vector<string> &text){
-	for (auto it = text.begin(); it!=text.end();it++){
+void eliminateRedudantWords(vector<string> &text) {
+	for (auto it = text.begin(); it != text.end(); it++)
+	{
 		string current = (*it);
-		if (current == "Rua" || current == "Avenida" || current == "Praca" || current == "Largo" || current == "Patio" || current == "Beco" || current == "Tunel"){
+		if (current == "Rua" || current == "Avenida" || current == "Praca" || current == "Largo" || current == "Patio" || current == "Beco" || current == "Tunel")
+		{
 			text.erase(it);
 			it--;
 		}
-		else if (current == "de" || current == "do" || current == "da" || current == "dos" || current == "das"){
+		else if (current == "de" || current == "do" || current == "da" || current == "dos" || current == "das")
+		{
 			text.erase(it);
 			it--;
 		}
 	}
 }
 
-int aproximate_matching(string pattern,string text){
+int aproximate_matching(string pattern, string text) {
 
 	int totalEditDistance = 0;
-  int currentEditDistance;
+	int currentEditDistance;
 	int currentTotalDistance = 0;
-  vector<string> textSplitted = splitSentence(text);
-  vector<string> patternSplitted = splitSentence(pattern);
-	if (textSplitted.size() != patternSplitted.size()){
+	vector<string> textSplitted = splitSentence(text);
+	vector<string> patternSplitted = splitSentence(pattern);
+	if (textSplitted.size() != patternSplitted.size())
+	{
 		totalEditDistance += abs((int)(textSplitted.size() - patternSplitted.size()));
 	}
 	eliminateRedudantWords(textSplitted);
 	eliminateRedudantWords(patternSplitted);
-  for (vector<string>::iterator itP = patternSplitted.begin(); itP != patternSplitted.end(); itP++){
-    for (vector<string>::iterator itT = textSplitted.begin(); itT != textSplitted.end(); itT++ ){
-      currentEditDistance = editDistance(*itP,*itT);
-			if (currentEditDistance == 0){
-				currentTotalDistance = currentTotalDistance/2;
+	for (vector<string>::iterator itP = patternSplitted.begin(); itP != patternSplitted.end(); itP++)
+	{
+		for (vector<string>::iterator itT = textSplitted.begin(); itT != textSplitted.end(); itT++)
+		{
+			currentEditDistance = editDistance(*itP, *itT);
+			if (currentEditDistance == 0)
+			{
+				currentTotalDistance = currentTotalDistance / 2;
 				break;
 			}
 			currentTotalDistance += currentEditDistance;
-    }
-		totalEditDistance+=currentTotalDistance;
-  }
+		}
+		totalEditDistance += currentTotalDistance;
+	}
 
-  return totalEditDistance;
+	return totalEditDistance;
 }
 
 
@@ -133,7 +141,7 @@ void pre_kmp(string pattern, vector<int> & prefix) {
 	}
 }
 
-int kmp(string text, string pattern,const vector<int> &prefix) {
+int kmp(string text, string pattern, const vector<int> &prefix) {
 	int num = 0;
 	int m = pattern.length();
 	int n = text.length();
@@ -167,8 +175,9 @@ vector<Street*> exata(const StreetCleaned &streets, const string &nameStreet) {
 	for (StreetCleaned::const_iterator it = streets.begin(); it != streets.end(); it++)
 	{
 
-		foundMatch = kmp(to_lower((*it)->getName()),userInput,prefix);
-		if (foundMatch){
+		foundMatch = kmp(to_lower((*it)->getName()), userInput, prefix);
+		if (foundMatch)
+		{
 			topToReturn.push_back((*it));
 		}
 	}
